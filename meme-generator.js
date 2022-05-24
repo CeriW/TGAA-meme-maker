@@ -21,12 +21,13 @@ let paths ={
 }
 
 const locations = [
-  ['221B Baker Street', 'baker-street-221b'],
-  ['Crystal Tower base', 'crystal-tower-base'],
-  ['The Garridebs\' room', 'garridebs-room'],
-  ['Naruhodo\'s Legal Consultancy', 'naruhodos-legal-consultancy'],
-  ['Sholmes\' Suite', 'sholmes-suite']
+  {name: '221B Baker Street', id:'baker-street-221b'},
+  {name:'Crystal Tower base', id:'crystal-tower-base'},
+  {name: 'The Garridebs\' room', id:'garridebs-room'},
+  {name: 'Naruhodo\'s Legal Consultancy', id:'naruhodos-legal-consultancy'},
+  {name: 'Sholmes\' Suite', id:'sholmes-suite'}
 ]
+
 
 const characters = [
   {name: 'Herlock Sholmes', id:'sholmes-herlock'},
@@ -39,8 +40,8 @@ const characters = [
 function generateLocations(){
   locations.forEach(function(location){
     let newOption = document.createElement('option')
-    newOption.textContent = location[0]
-    newOption.setAttribute('value', paths.location + location[1] + '.png')
+    newOption.textContent = location.name
+    newOption.setAttribute('value', paths.location + location.id + '.png')
     backgroundSelector.appendChild(newOption)
   })
 }
@@ -92,8 +93,6 @@ function generatePanel(){
 
 function generateCharacterInterface(){
   characters.forEach(function(character){
-
-
     let icon = generateLabelledIcon('character', character)
     characterPreview.appendChild(icon)
 
@@ -104,6 +103,14 @@ function generateCharacterInterface(){
     })
   })
 }
+
+function generateLocationInterface(){
+  locations.forEach(function(location){
+    console.log(location)
+  })
+}
+
+generateLocationInterface()
 
 function generateLabelledIcon(type, object){
   let icon = document.createElement('div')
