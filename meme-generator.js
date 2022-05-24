@@ -33,7 +33,7 @@ function generatePanel(){
   // It shouldn't be necessary to delay this by 1ms but it is...
   window.setTimeout(function(){
     addImage('character')
-  },1)
+  },100)
 
 
   
@@ -56,6 +56,12 @@ characterSelector.addEventListener('change', generatePoses)
 //The name of the character you want, in surname-forename format.
 // Hyphens should be used for multi-word names e.g. van-zieks-barok
 function generatePoses(e){
+
+  // Reset the character if we're choosing a new one
+  characterImg.src=""
+  generatePanel()
+
+
   poseSelector.innerHTML = null
   let character = e.target.value
 
