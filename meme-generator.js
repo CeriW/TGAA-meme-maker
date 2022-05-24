@@ -1,4 +1,6 @@
 
+let canvas = document.querySelector('#myCanvas')
+
 
 let backgroundImg = document.querySelector('#background')
 let backgroundSelector = document.querySelector('#background-selector')
@@ -53,21 +55,34 @@ function generatePanel(){
   // It shouldn't be necessary to delay this by 1ms but it is...
   window.setTimeout(function(){
     addImage('character')
+  },50)
+
+  window.setTimeout(function(){
+    addImage('speech-box')
+  },50)
+
+  window.setTimeout(function(){
+    var ctx = canvas.getContext("2d");
+    ctx.font = "50px Georgia";
+    ctx.fillStyle = "#fff";
+    ctx.fillText("Hello World!", 370, 890);
   },100)
+
 
 
   
   // Adds a new layer to the canvas.
-  //Acceptable parameter values: background, character
+  //Acceptable parameter values: background, character, speech-box
   function addImage(type){
 
-    var c = document.getElementById("myCanvas");
-    var ctx = c.getContext("2d");
+    var ctx = canvas.getContext("2d");
     var img = document.querySelector("#" + type);
     ctx.drawImage(img, 0, 0);
   }
 
 }
+
+
 
 
 
@@ -114,7 +129,7 @@ function selectPose(e){
 
 function download() {
   downloadButton.download = 'ace-attorney-meme-generator.png';
-  downloadButton.href = document.getElementById("myCanvas").toDataURL()
+  downloadButton.href = canvas.toDataURL()
 }
 
 download()

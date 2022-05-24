@@ -1,5 +1,6 @@
 #background,
-#character
+#character,
+#speech-box
 {
   display: none;
 }
@@ -18,4 +19,9 @@ canvas{
   background-repeat: no-repeat;
   border: 1px solid red;
   display: block;
+}
+
+#text{
+  background:  url('assets/game-elements/speech-box.png') center no-repeat;
+  background-size: contain;
 }
