@@ -20,7 +20,7 @@ let paths ={
   location: 'assets/locations/'
 }
 
-let locations = [
+const locations = [
   ['221B Baker Street', 'baker-street-221b'],
   ['Crystal Tower base', 'crystal-tower-base'],
   ['The Garridebs\' room', 'garridebs-room'],
@@ -29,9 +29,12 @@ let locations = [
 ]
 
 const characters = [
-  {name: 'Sholmes', id:'sholmes-herlock'},
-  {name: 'Iris', id:'wilson-iris'}
+  {name: 'Herlock Sholmes', id:'sholmes-herlock'},
+  {name: 'Iris Wilson', id:'wilson-iris'}
 ]
+
+
+
 
 function generateLocations(){
   locations.forEach(function(location){
@@ -43,6 +46,7 @@ function generateLocations(){
 }
 
 generateLocations()
+
 
 generatePanel()
 backgroundSelector.addEventListener('change', generatePanel)
@@ -84,6 +88,8 @@ function generatePanel(){
 
 }
 
+
+
 function generateCharacterInterface(){
   characters.forEach(function(character){
     console.log(character)
@@ -103,9 +109,8 @@ function generateCharacterInterface(){
     icon.appendChild(label)
 
     icon.addEventListener('click', function(e){
-      //node.
-      console.log(e.target)
       characterSelector.value = e.target.getAttribute('value')
+      togglePanel(characterPreview)
       generatePoses()
     })
   })
@@ -194,7 +199,16 @@ download()
 downloadButton.addEventListener('click', download);
 
 
+;[].forEach.call(document.querySelectorAll('.toggle-heading'), function(node){
+  node.addEventListener('click', function(e){
+    let associate = document.querySelector('#' + e.target.getAttribute('associated-panel'))
+    togglePanel(associate)
+  })
+})
 
+function togglePanel(associate){
+  associate.classList.toggle('hidden')
+}
 
 
 

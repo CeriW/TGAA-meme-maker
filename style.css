@@ -1,3 +1,7 @@
+:root{
+  --gold: #9E9150;
+}
+
 body{
   background: #0D1725;
   color: #fff;
@@ -50,7 +54,7 @@ canvas,
 }
 
 #pose-selector label[selected]{
-  background-color: #9E9150;
+  background-color: var(--gold);
 }
 
 #text{
@@ -91,6 +95,7 @@ select{
   font-size: 20px;
 }
 
+.toggle-heading,
 #download{
   background: #9E9150;
   color: #fff;
@@ -99,8 +104,10 @@ select{
   font-size: 20px;
   transition: 0.4s;
   display: inline-block;
+  cursor: pointer;
 }
 
+.toggle-heading:hover,
 #download:hover{
   background: #756b37;
 }
@@ -123,4 +130,13 @@ select{
   #text-overlay{
     font-size: 2.4vw;
   }
+}
+
+.hidden{
+  height: 0;
+  overflow: hidden;
+}
+
+.toggle-heading{
+  background: var(--gold)
 }
