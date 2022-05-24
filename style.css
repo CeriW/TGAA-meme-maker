@@ -1,5 +1,6 @@
 #background,
-#character{
+#character
+{
   display: none;
 }
 
@@ -7,4 +8,14 @@ canvas{
   display: block;
   width: 100%;
   max-width: 800px;
+}
+
+#pose-selector label{
+  width: 100px;
+  height: 100px;
+  background-position: center bottom;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  border: 1px solid red;
+  display: block;
 }
