@@ -92,21 +92,10 @@ function generatePanel(){
 
 function generateCharacterInterface(){
   characters.forEach(function(character){
-    console.log(character)
 
 
-    let icon = document.createElement('div')
-    icon.classList.add('character-icon')
-    icon.setAttribute('value', character.id)
-    
-    icon.style.backgroundImage = 'url("assets/characters/' + character.id + '/1.png")'
-  
-
-    let label = document.createElement('div')
-    label.textContent += character.name
-
+    let icon = generateLabelledIcon('character', character)
     characterPreview.appendChild(icon)
-    icon.appendChild(label)
 
     icon.addEventListener('click', function(e){
       characterSelector.value = e.target.getAttribute('value')
@@ -114,6 +103,20 @@ function generateCharacterInterface(){
       generatePoses()
     })
   })
+}
+
+function generateLabelledIcon(type, object){
+  let icon = document.createElement('div')
+  icon.classList.add(type + '-icon')
+  icon.setAttribute('value', object.id)
+  icon.style.backgroundImage = 'url("assets/characters/' + object.id + '/1.png")'
+
+
+  let label = document.createElement('div')
+  label.textContent += object.name
+
+  icon.appendChild(label)
+  return icon
 }
 
 generateCharacterInterface()
