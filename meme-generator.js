@@ -90,6 +90,7 @@ function generatePoses(e){
 
   // Reset the character if we're choosing a new one
   characterImg.src = paths.character + e.target.value + '/1.png'
+
   generatePanel()
 
 
@@ -113,14 +114,32 @@ function generatePoses(e){
     newLabel.style.backgroundImage = 'url("assets/characters/' + character + '/' + i +'.png")'
     poseSelector.appendChild(newLabel)
   }
+
+  poseSelector.querySelector('label').setAttribute('selected', '')
+
 }
 
 function selectPose(e){
+  console.log(e.target)
   let url = e.target.getAttribute('character')
   characterImg.setAttribute('src', paths.character + url + '/' + e.target.value + '.png')
   generatePanel()
+
+  selectItem(e)
+
 }
 
+function selectItem(e){
+  let label = e.target.nextElementSibling
+  console.log(label)
+
+  let siblings = e.target.parentNode.querySelectorAll('label')
+  siblings.forEach(function(sibling){
+    sibling.removeAttribute('selected')
+  })
+
+  e.target.nextElementSibling.setAttribute('selected', '')
+}
 
 
 function download() {
@@ -130,7 +149,6 @@ function download() {
   ctx.font = "50px Georgia";
   ctx.fillStyle = "#fff";
   ctx.fillText(textOverlay.value, 370, 890);
-  console.log(textOverlay.value)
   
 
   downloadButton.download = 'ace-attorney-meme-generator.png';

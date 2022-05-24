@@ -32,14 +32,18 @@ canvas,
   background-position: center bottom;
   background-size: auto 100%;
   background-repeat: no-repeat;
-  //border: 1px solid red;
+  border: 3px solid transparent;
   display: block;
-  transition: 0.4s;
+  transition: 0.3s;
   margin: 10px 0 0;
 }
 
 #pose-selector label:hover{
-  background-color: rgba(255,255,255,0.3);
+  background-color: rgba(255,255,255,0.1);
+}
+
+#pose-selector label[selected]{
+  border: 3px solid #9E9150;
 }
 
 #text{
