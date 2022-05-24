@@ -7,6 +7,7 @@ let backgroundSelector = document.querySelector('#background-selector')
 
 let characterImg = document.querySelector('#character')
 let characterSelector = document.querySelector('#character-selector')
+let characterPreview = document.querySelector('#character-selector-preview')
 
 let poseSelector = document.querySelector('#pose-selector')
 
@@ -25,6 +26,11 @@ let locations = [
   ['The Garridebs\' room', 'garridebs-room'],
   ['Naruhodo\'s Legal Consultancy', 'naruhodos-legal-consultancy'],
   ['Sholmes\' Suite', 'sholmes-suite']
+]
+
+const characters = [
+  {name: 'Sholmes', id:'sholmes-herlock'},
+  {name: 'Iris', id:'wilson-iris'}
 ]
 
 function generateLocations(){
@@ -78,8 +84,34 @@ function generatePanel(){
 
 }
 
+function generateCharacterInterface(){
+  characters.forEach(function(character){
+    console.log(character)
 
 
+    let icon = document.createElement('div')
+    icon.classList.add('character-icon')
+    icon.setAttribute('value', character.id)
+    
+    icon.style.backgroundImage = 'url("assets/characters/' + character.id + '/1.png")'
+  
+
+    let label = document.createElement('div')
+    label.textContent += character.name
+
+    characterPreview.appendChild(icon)
+    icon.appendChild(label)
+
+    icon.addEventListener('click', function(e){
+      //node.
+      console.log(e.target)
+      characterSelector.value = e.target.getAttribute('value')
+      generatePoses()
+    })
+  })
+}
+
+generateCharacterInterface()
 
 
 characterSelector.addEventListener('change', generatePoses)
@@ -88,14 +120,17 @@ characterSelector.addEventListener('change', generatePoses)
 // Hyphens should be used for multi-word names e.g. van-zieks-barok
 function generatePoses(e){
 
+  let chosenCharacter = e ? e.target.value : characterSelector.value
+
+
   // Reset the character if we're choosing a new one
-  characterImg.src = paths.character + e.target.value + '/1.png'
+  characterImg.src = paths.character + chosenCharacter + '/1.png'
 
   generatePanel()
 
 
   poseSelector.innerHTML = null
-  let character = e.target.value
+  let character = chosenCharacter
 
   for (let i=1; i <=4; i++){
 
@@ -103,7 +138,7 @@ function generatePoses(e){
     newRadio.setAttribute('type', 'radio')
     newRadio.setAttribute('id', i)
     newRadio.setAttribute('name', 'pose')
-    newRadio.setAttribute('character', character)
+    newRadio.setAttribute('character', chosenCharacter)
     newRadio.value = i
     newRadio.addEventListener('change', selectPose)
     poseSelector.appendChild(newRadio)
@@ -111,7 +146,7 @@ function generatePoses(e){
     let newLabel = document.createElement('label')
     newLabel.setAttribute('for', i)
     //newLabel.textContent = character + '-' + i
-    newLabel.style.backgroundImage = 'url("assets/characters/' + character + '/' + i +'.png")'
+    newLabel.style.backgroundImage = 'url("assets/characters/' + chosenCharacter + '/' + i +'.png")'
     poseSelector.appendChild(newLabel)
   }
 

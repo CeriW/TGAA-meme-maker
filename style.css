@@ -1,12 +1,14 @@
 body{
   background: #0D1725;
   color: #fff;
+  font-family: Georgia, serif;
 }
 
 
 #background,
 #character,
 #speech-box,
+#character-selector,
 input[type="radio"]
 {
   display: none;
@@ -26,6 +28,7 @@ canvas,
   max-width: 800px;
 }
 
+.character-icon,
 #pose-selector label{
   width: 150px;
   height: 150px;
@@ -38,8 +41,10 @@ canvas,
   margin: 10px 0 0;
   background-color: rgba(255,255,255,0.05);
   border-radius: 50%;
+  cursor: pointer;
 }
 
+.character-icon:hover,
 #pose-selector label:hover{
   background-color: rgba(255,255,255,0.1);
 }
@@ -70,13 +75,49 @@ canvas,
   border: none;
 }
 
-#pose-selector{
+#pose-selector,
+#character-selector-preview{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
 
+select{
+  border: 2px solid #9E9150;
+  background: #0D1725;
+  color: #fff;
+  font-family: inherit;
+  padding: 10px;
+  font-size: 20px;
+}
 
+#download{
+  background: #9E9150;
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  font-size: 20px;
+  transition: 0.4s;
+  display: inline-block;
+}
+
+#download:hover{
+  background: #756b37;
+}
+
+.character-icon{
+
+  margin-bottom: 50px;
+  position: relative;
+}
+
+.character-icon > div{
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  right: 0;
+  text-align: center;
+}
 
 @media (max-width: 799px){
   #text-overlay{
