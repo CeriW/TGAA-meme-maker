@@ -4,6 +4,7 @@ let canvas = document.querySelector('#myCanvas')
 
 let backgroundImg = document.querySelector('#background')
 let backgroundSelector = document.querySelector('#background-selector')
+let backgroundPreview = document.querySelector('#background-selector-preview')
 
 let characterImg = document.querySelector('#character')
 let characterSelector = document.querySelector('#character-selector')
@@ -14,6 +15,7 @@ let poseSelector = document.querySelector('#pose-selector')
 let textOverlay = document.querySelector('#text-overlay')
 
 let downloadButton = document.querySelector('#download')
+
 
 let paths ={
   character: 'assets/characters/',
@@ -31,7 +33,8 @@ const locations = [
 
 const characters = [
   {name: 'Herlock Sholmes', id:'sholmes-herlock'},
-  {name: 'Iris Wilson', id:'wilson-iris'}
+  {name: 'Iris Wilson', id:'wilson-iris'},
+  {name: 'Gina Lestrade', id:'lestrade-gina'}
 ]
 
 
@@ -41,7 +44,7 @@ function generateLocations(){
   locations.forEach(function(location){
     let newOption = document.createElement('option')
     newOption.textContent = location.name
-    newOption.setAttribute('value', paths.location + location.id + '.png')
+    newOption.setAttribute('value', location.id)
     backgroundSelector.appendChild(newOption)
   })
 }
@@ -55,7 +58,7 @@ characterSelector.addEventListener('change', generatePanel)
 
 
 function generatePanel(){
-  backgroundImg.setAttribute('src', backgroundSelector.value)
+  backgroundImg.setAttribute('src', paths.location + backgroundSelector.value + '.png')
   
   //console.log(paths.character + characterSelector.value + '.png')
   
@@ -107,6 +110,16 @@ function generateCharacterInterface(){
 function generateLocationInterface(){
   locations.forEach(function(location){
     console.log(location)
+    let icon = generateLabelledIcon('location', location)
+    backgroundPreview.appendChild(icon)
+
+
+    icon.addEventListener('click', function(e){
+      backgroundSelector.value = e.target.getAttribute('value')
+      togglePanel(backgroundPreview)
+      generatePanel()
+    })
+
   })
 }
 
@@ -116,7 +129,21 @@ function generateLabelledIcon(type, object){
   let icon = document.createElement('div')
   icon.classList.add(type + '-icon')
   icon.setAttribute('value', object.id)
-  icon.style.backgroundImage = 'url("assets/characters/' + object.id + '/1.png")'
+
+  let iconURL = ''
+
+  switch(type) {
+    case 'character':
+      iconURL = 'url("assets/characters/' + object.id + '/1.png")'
+      break
+    case 'location':
+      iconURL = 'url("assets/locations/' + object.id + '.png")'
+      break;
+    default:
+      // code block
+  }
+  
+  icon.style.backgroundImage = iconURL
 
 
   let label = document.createElement('div')

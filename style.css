@@ -13,6 +13,7 @@ body{
 #character,
 #speech-box,
 #character-selector,
+#background-selector,
 input[type="radio"]
 {
   display: none;
@@ -32,6 +33,7 @@ canvas,
   max-width: 800px;
 }
 
+.location-icon,
 .character-icon,
 #pose-selector label{
   width: 150px;
@@ -79,6 +81,7 @@ canvas,
   border: none;
 }
 
+#background-selector-preview,
 #pose-selector,
 #character-selector-preview{
   display: flex;
@@ -112,12 +115,13 @@ select{
   background: #756b37;
 }
 
+.location-icon,
 .character-icon{
-
   margin-bottom: 50px;
   position: relative;
 }
 
+.location-icon > div,
 .character-icon > div{
   position: absolute;
   top: calc(100% + 10px);
@@ -131,6 +135,8 @@ select{
     font-size: 2.4vw;
   }
 }
+
+
 
 .hidden{
   height: 0;
