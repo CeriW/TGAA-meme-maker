@@ -89,14 +89,14 @@ characterSelector.addEventListener('change', generatePoses)
 function generatePoses(e){
 
   // Reset the character if we're choosing a new one
-  characterImg.src=""
+  characterImg.src = paths.character + e.target.value + '/1.png'
   generatePanel()
 
 
   poseSelector.innerHTML = null
   let character = e.target.value
 
-  for (let i=1; i <=20; i++){
+  for (let i=1; i <=4; i++){
 
     let newRadio = document.createElement('input')
     newRadio.setAttribute('type', 'radio')
