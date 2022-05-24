@@ -5,7 +5,7 @@
   display: none;
 }
 
-canvas{
+#canvas-container, canvas{
   display: block;
   width: 100%;
   max-width: 800px;
@@ -24,4 +24,21 @@ canvas{
 #text{
   background:  url('assets/game-elements/speech-box.png') center no-repeat;
   background-size: contain;
+}
+
+#canvas-container{
+  position: relative;
+}
+
+#text-overlay{
+  position: absolute;
+  top: 77.5%;
+  bottom: 10%;
+  right: 19%;
+  left: 19%;
+  color: #fff;
+  font-size: 120%;
+  font-family: Georgia, serif;
+  background: #0D1725;
+  border: none;
 }

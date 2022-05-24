@@ -10,6 +10,8 @@ let characterSelector = document.querySelector('#character-selector')
 
 let poseSelector = document.querySelector('#pose-selector')
 
+let textOverlay = document.querySelector('#text-overlay')
+
 let downloadButton = document.querySelector('#download')
 
 let paths ={
@@ -61,12 +63,6 @@ function generatePanel(){
     addImage('speech-box')
   },50)
 
-  window.setTimeout(function(){
-    var ctx = canvas.getContext("2d");
-    ctx.font = "50px Georgia";
-    ctx.fillStyle = "#fff";
-    ctx.fillText("Hello World!", 370, 890);
-  },100)
 
 
 
@@ -128,6 +124,15 @@ function selectPose(e){
 
 
 function download() {
+
+  // Render the text
+  var ctx = canvas.getContext("2d");
+  ctx.font = "50px Georgia";
+  ctx.fillStyle = "#fff";
+  ctx.fillText(textOverlay.value, 370, 890);
+  console.log(textOverlay.value)
+  
+
   downloadButton.download = 'ace-attorney-meme-generator.png';
   downloadButton.href = canvas.toDataURL()
 }
