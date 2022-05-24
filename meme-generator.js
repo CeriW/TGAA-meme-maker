@@ -14,6 +14,25 @@ let paths ={
   location: 'assets/locations/'
 }
 
+let locations = [
+  ['221B Baker Street', 'baker-street-221b'],
+  ['Crystal Tower base', 'crystal-tower-base'],
+  ['The Garridebs\' room', 'garridebs-room'],
+  ['Naruhodo\'s Legal Consultancy', 'naruhodos-legal-consultancy'],
+  ['Sholmes\' Suite', 'sholmes-suite']
+]
+
+function generateLocations(){
+  locations.forEach(function(location){
+    let newOption = document.createElement('option')
+    newOption.textContent = location[0]
+    newOption.setAttribute('value', paths.location + location[1] + '.png')
+    backgroundSelector.appendChild(newOption)
+  })
+}
+
+generateLocations()
+
 generatePanel()
 backgroundSelector.addEventListener('change', generatePanel)
 characterSelector.addEventListener('change', generatePanel)
