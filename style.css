@@ -1,24 +1,45 @@
+body{
+  background: #0D1725;
+  color: #fff;
+}
+
+
 #background,
 #character,
-#speech-box
+#speech-box,
+input[type="radio"]
 {
   display: none;
 }
 
-#canvas-container, canvas{
+#canvas-container,
+#pose-selector{
+  float: none;
+  margin: 0 auto;
+}
+
+#canvas-container,
+canvas,
+#pose-selector{
   display: block;
   width: 100%;
   max-width: 800px;
 }
 
 #pose-selector label{
-  width: 100px;
-  height: 100px;
+  width: 170px;
+  height: 130px;
   background-position: center bottom;
   background-size: auto 100%;
   background-repeat: no-repeat;
-  border: 1px solid red;
+  //border: 1px solid red;
   display: block;
+  transition: 0.4s;
+  margin: 10px 0 0;
+}
+
+#pose-selector label:hover{
+  background-color: rgba(255,255,255,0.3);
 }
 
 #text{
@@ -41,4 +62,18 @@
   font-family: Georgia, serif;
   background: #0D1725;
   border: none;
+}
+
+#pose-selector{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+
+
+@media (max-width: 799px){
+  #text-overlay{
+    font-size: 2.4vw;
+  }
 }

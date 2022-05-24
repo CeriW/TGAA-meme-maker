@@ -96,7 +96,7 @@ function generatePoses(e){
   poseSelector.innerHTML = null
   let character = e.target.value
 
-  for (let i=1; i <=3; i++){
+  for (let i=1; i <=20; i++){
 
     let newRadio = document.createElement('input')
     newRadio.setAttribute('type', 'radio')
