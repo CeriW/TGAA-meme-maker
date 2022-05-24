@@ -8,6 +8,7 @@ let characterSelector = document.querySelector('#character-selector')
 
 let poseSelector = document.querySelector('#pose-selector')
 
+let downloadButton = document.querySelector('#download')
 
 let paths ={
   character: 'assets/characters/',
@@ -109,6 +110,15 @@ function selectPose(e){
   generatePanel()
 }
 
+
+
+function download() {
+  downloadButton.download = 'ace-attorney-meme-generator.png';
+  downloadButton.href = document.getElementById("myCanvas").toDataURL()
+}
+
+download()
+downloadButton.addEventListener('click', download);
 
 
 
