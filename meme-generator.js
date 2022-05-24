@@ -110,7 +110,7 @@ function generatePoses(e){
 
     let newLabel = document.createElement('label')
     newLabel.setAttribute('for', i)
-    newLabel.textContent = character + '-' + i
+    //newLabel.textContent = character + '-' + i
     newLabel.style.backgroundImage = 'url("assets/characters/' + character + '/' + i +'.png")'
     poseSelector.appendChild(newLabel)
   }
