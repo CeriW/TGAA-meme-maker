@@ -11,8 +11,6 @@ body{
   padding: 30px;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap');
-
 #background,
 #character,
 #speech-box,
@@ -36,25 +34,22 @@ canvas{
   max-width: 800px;
 }
 
-.location-icon,
-.character-icon,
+div[class*="icon"],
 #pose-selector label{
   width: 140px;
   height: 140px;
   background-position: center bottom;
   background-size: auto 100%;
   background-repeat: no-repeat;
-  //border: 3px solid transparent;
   display: block;
   transition: 0.3s;
-  margin: 10px 0 0;
   background-color: rgba(255,255,255,0.05);
   border-radius: 50%;
   cursor: pointer;
-  margin: 15px;
+  margin: 15px 15px 70px;
 }
 
-.character-icon:hover,
+div[class*="icon"]:hover,
 #pose-selector label:hover{
   background-color: rgba(255,255,255,0.1);
 }
@@ -95,11 +90,17 @@ canvas{
   transition: 0.6s;
 }
 
-#character-selector-preview:not(.hidden) ~ #pose-heading,
+
 #character-selector-preview:not(.hidden) ~ #pose-selector{
   max-height: 0;
   overflow: hidden;
 }
+
+#character-selector-preview:not(.hidden) + #pose-heading{
+  display: none;
+}
+
+
 
 
 select{
@@ -166,6 +167,14 @@ select{
   position: relative;
 }
 
+.location-icon{
+  outline: 3px solid transparent;
+}
+
+.location-icon:hover{
+  outline-color: var(--gold);
+}
+
 .location-icon > div,
 .character-icon > div{
   position: absolute;
@@ -215,11 +224,51 @@ body{
   display: grid; 
   grid-template-columns: 800px auto; 
   grid-template-rows: 1fr; 
-  gap: 0px 0px; 
   grid-template-areas: 
     "canvas options"; 
-  gap: 0px 30px; 
+  gap: 20px 30px; 
 }
 
 #canvas-grid-item { grid-area: canvas; }
 .options { grid-area: options; }
+
+@media (max-width:1450px){
+  body{
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas:
+    "canvas" 
+    "options";
+  }
+
+
+
+}
+
+@media (max-width: 1000px){
+  .toggle-heading,
+  #pose-heading{
+    font-size: 16px;
+    padding: 5px 20px;
+  }
+
+  div[class*="icon"] > div{
+    font-size: 12px;
+  }
+
+  div[class*="icon"],
+  #pose-selector label{
+    max-width: 100px;
+    max-height: 100px;
+  }
+
+  #pose-selector label{
+    margin-bottom: 15px;
+  }
+}
+
+@media (max-width: 600px){
+  body{
+    padding: 10px;
+  }
+}
