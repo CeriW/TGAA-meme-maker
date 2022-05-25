@@ -13,9 +13,11 @@
 
       
 
-      <div id="canvas-container">
-        <canvas id="myCanvas" width="1920" height="1080"></canvas>
-        <textarea id="text-overlay">Type your text here...</textarea>
+      <div id="canvas-grid-item">
+        <div id="canvas-container">
+          <canvas id="myCanvas" width="1920" height="1080"></canvas>
+          <textarea id="text-overlay">Type your text here...</textarea>
+        </div>
       </div>
       
       
@@ -24,24 +26,29 @@
       <img id="speech-box" src="assets/game-elements/speech-box.png">
 
 
-      <span class="toggle-heading" associated-panel="background-selector-preview">Select your location</span>
-      <select name="background-selector" id="background-selector"></select>
-      <div id="background-selector-preview"></div>
-      
+      <div id="options">
+
+        <div class="toggle-heading" associated-panel="background-selector-preview">Select your location</div>
+        <select name="background-selector" id="background-selector"></select>
+        <div id="background-selector-preview"></div>
+        
 
 
 
-      <div>
-        <span class="toggle-heading" associated-panel="character-selector-preview">Select your character</span>
-        <select name="character-selector" id="character-selector"></select>
+        <div>
+          <div class="toggle-heading" associated-panel="character-selector-preview">Select your character</div>
+          <select name="character-selector" id="character-selector"></select>
 
-        <div id="character-selector-preview"></div>
+          <div id="character-selector-preview"></div>
 
-        <div id="pose-selector">
+          <div id="pose-selector">
+          </div>
         </div>
+
+        <a id="download">Download</button>
+      
       </div>
 
-      <a id="download">Download</button>
 
     </body>
 

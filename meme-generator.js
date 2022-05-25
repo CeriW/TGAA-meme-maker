@@ -258,6 +258,8 @@ downloadButton.addEventListener('click', download);
   node.addEventListener('click', function(e){
     let associate = document.querySelector('#' + e.target.getAttribute('associated-panel'))
     togglePanel(associate)
+
+    //node.classList.toggle('closed')
   })
 })
 
