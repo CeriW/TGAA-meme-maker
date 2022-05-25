@@ -26,8 +26,7 @@ input[type="radio"]
 }
 
 #canvas-container,
-canvas,
-#pose-selector{
+canvas{
   display: block;
   width: 100%;
   max-width: 800px;
@@ -48,6 +47,7 @@ canvas,
   background-color: rgba(255,255,255,0.05);
   border-radius: 50%;
   cursor: pointer;
+  margin: 15px;
 }
 
 .character-icon:hover,
@@ -86,8 +86,10 @@ canvas,
 #character-selector-preview{
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: center;
 }
+
+
 
 select{
   border: 2px solid #9E9150;

@@ -32,9 +32,12 @@ const locations = [
 
 
 const characters = [
-  {name: 'Herlock Sholmes', id:'sholmes-herlock'},
-  {name: 'Iris Wilson', id:'wilson-iris'},
-  {name: 'Gina Lestrade', id:'lestrade-gina'}
+  {name: 'Herlock Sholmes', id:'sholmes-herlock', images: 4},
+  {name: 'Iris Wilson', id:'wilson-iris', images: 4},
+  {name: 'Gina Lestrade', id:'lestrade-gina', images: 4},
+  {name: 'Susato Mikotoba', id:'mikotoba-susato', images: 12},
+  {name: 'Enoch Drebber', id:'drebber-enoch', images: 4},
+  {name: 'Barok van Zieks', id:'van-zieks-barok', images: 6}
 ]
 
 
@@ -96,6 +99,11 @@ function generatePanel(){
 
 function generateCharacterInterface(){
   characters.forEach(function(character){
+
+    let newOption = document.createElement('option')
+    newOption.value = character.id
+    characterSelector.appendChild(newOption)
+
     let icon = generateLabelledIcon('character', character)
     characterPreview.appendChild(icon)
 
@@ -163,6 +171,7 @@ characterSelector.addEventListener('change', generatePoses)
 function generatePoses(e){
 
   let chosenCharacter = e ? e.target.value : characterSelector.value
+  console.log(chosenCharacter)
 
 
   // Reset the character if we're choosing a new one
@@ -170,11 +179,20 @@ function generatePoses(e){
 
   generatePanel()
 
+  let imageAmount = 1
+
+  characters.forEach(function(character){
+    if (chosenCharacter == character.id){
+      imageAmount =  character.images
+    }
+  })
+
+  console.log(imageAmount)
+
 
   poseSelector.innerHTML = null
-  let character = chosenCharacter
 
-  for (let i=1; i <=4; i++){
+  for (let i=1; i <= imageAmount; i++){
 
     let newRadio = document.createElement('input')
     newRadio.setAttribute('type', 'radio')
