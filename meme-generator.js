@@ -80,9 +80,9 @@ function generatePanel(){
     addImage('speech-box')
   },50)
 
-
-
-
+  window.setTimeout(function(){
+    addImage('speech-tag')
+  },50)
   
   // Adds a new layer to the canvas.
   //Acceptable parameter values: background, character, speech-box

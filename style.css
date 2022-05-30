@@ -16,6 +16,7 @@ body{
 #speech-box,
 #character-selector,
 #background-selector,
+#speech-tag,
 input[type="radio"]
 {
   display: none;
@@ -47,6 +48,10 @@ div[class*="icon"],
   border-radius: 50%;
   cursor: pointer;
   margin: 15px 15px 70px;
+}
+
+#pose-selector label{
+  margin: 15px;
 }
 
 div[class*="icon"]:hover,
@@ -150,9 +155,9 @@ select{
 }
 
 #character-selector-preview,
-#background-selector-preview{
+#background-selector-preview,
+#pose-selector{
   outline: 2px solid rgba(255,255,255,0.2);
-  outline-top: none;
   margin-bottom: 20px;
 }
 
@@ -260,10 +265,6 @@ body{
   #pose-selector label{
     max-width: 100px;
     max-height: 100px;
-  }
-
-  #pose-selector label{
-    margin-bottom: 15px;
   }
 }
 
