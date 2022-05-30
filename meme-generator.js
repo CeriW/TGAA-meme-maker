@@ -273,10 +273,13 @@ function selectItem(e){
 function download() {
 
   // Render the text
-  var ctx = canvas.getContext("2d");
+  let ctx = canvas.getContext("2d");
   ctx.font = "50px Georgia";
   ctx.fillStyle = "#fff";
   ctx.fillText(textOverlay.value, 370, 890);
+
+  let credits = document.querySelector("#credits");
+  ctx.drawImage(credits, 0, 0);
   
 
   downloadButton.download = 'ace-attorney-meme-generator.png';

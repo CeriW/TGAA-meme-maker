@@ -17,6 +17,7 @@ body{
 #character-selector,
 #background-selector,
 #speech-tag,
+#credits,
 input[type="radio"]
 {
   display: none;
