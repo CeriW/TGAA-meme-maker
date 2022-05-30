@@ -184,7 +184,8 @@ select{
   outline: 3px solid transparent;
 }
 
-.location-icon:hover{
+.location-icon:hover,
+.location-icon[selected="true"]{
   outline-color: var(--gold);
 }
 

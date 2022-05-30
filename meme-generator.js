@@ -150,6 +150,11 @@ function generateLocationInterface(){
       backgroundSelector.value = e.target.getAttribute('value')
       togglePanel(backgroundPreview)
       generatePanel()
+
+      ;[].forEach.call(document.querySelectorAll('.location-icon'), function(node){
+        node.setAttribute('selected', false)
+      })
+      e.target.setAttribute('selected', true)
     })
 
   })
