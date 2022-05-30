@@ -16,6 +16,8 @@ let textOverlay = document.querySelector('#text-overlay')
 
 let downloadButton = document.querySelector('#download')
 
+let tag = document.querySelector('#speech-tag')
+
 
 let paths ={
   character: 'assets/characters/',
@@ -62,6 +64,8 @@ characterSelector.addEventListener('change', generatePanel)
 
 function generatePanel(){
   backgroundImg.setAttribute('src', paths.location + backgroundSelector.value + '.png')
+  tag.setAttribute('src', paths.character + characterSelector.value + '/tag.png')
+
   
   //console.log(paths.character + characterSelector.value + '.png')
   
@@ -77,12 +81,14 @@ function generatePanel(){
   },50)
 
   window.setTimeout(function(){
-    addImage('speech-box')
+    addImage('speech-tag')
   },50)
 
   window.setTimeout(function(){
-    addImage('speech-tag')
+    addImage('speech-box')
   },50)
+
+
   
   // Adds a new layer to the canvas.
   //Acceptable parameter values: background, character, speech-box
