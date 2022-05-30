@@ -141,7 +141,6 @@ function generateCharacterInterface(){
 
 function generateLocationInterface(){
   locations.forEach(function(location){
-    console.log(location)
     let icon = generateLabelledIcon('location', location)
     backgroundPreview.appendChild(icon)
 
@@ -156,8 +155,11 @@ function generateLocationInterface(){
       })
       e.target.setAttribute('selected', true)
     })
-
   })
+
+  // Set the first one as default selected. This only styles it and doesn't
+  // do any actual functionality.
+  document.querySelector('.location-icon').setAttribute('selected', true)
 }
 
 generateLocationInterface()
