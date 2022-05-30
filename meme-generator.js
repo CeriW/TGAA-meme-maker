@@ -125,6 +125,13 @@ function generateCharacterInterface(){
     characterPreview.appendChild(icon)
 
     icon.addEventListener('click', function(e){
+      console.log(e.target)
+
+      ;[].forEach.call(document.querySelectorAll('.character-icon'), function(node){
+        node.setAttribute('selected', false)
+      })
+      e.target.setAttribute('selected', true)
+
       characterSelector.value = e.target.getAttribute('value')
       togglePanel(characterPreview)
       generatePoses()
