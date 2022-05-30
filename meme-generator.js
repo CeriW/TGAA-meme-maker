@@ -31,10 +31,18 @@ let paths ={
 
 const locations = [
   {name: '221B Baker Street', id:'baker-street-221b'},
+  {name: '221B Baker Street (night)', id:'baker-street-221b-night'},
   {name:'Crystal Tower base', id:'crystal-tower-base'},
   {name: 'The Garridebs\' room', id:'garridebs-room'},
   {name: 'Naruhodo\'s Legal Consultancy', id:'naruhodos-legal-consultancy'},
-  {name: 'Sholmes\' Suite', id:'sholmes-suite'}
+  {name: 'Sholmes\' Suite', id:'sholmes-suite'},
+  {name: 'Defendant\'s Antechamber - The Old Bailey', id:'defendants-antechamber-the-old-bailey-left'},
+  {name: 'Natsume\'s Room', id:'natsumes-room'},
+  {name: 'Prison cell', id:'prison-cell'},
+  {name: 'Prosecutor\'s Office (left)', id:'prosecutors-office-left'},
+  {name: 'Sholmes\' Suite - Iris\' side', id:'sholmes-suite-iris'},
+  {name: 'Sholmes\' Suite - Herlock\'s side', id:'sholmes-suite-sholmes'},
+
 ]
 
 

@@ -1,0 +1,7 @@
+- Multi character view
+- Characters IN the prison cell
+- Add panels
+
+- GIF support?
+- Search
+- Filtering

@@ -165,8 +165,14 @@ select{
 #character-selector-preview,
 #background-selector-preview,
 #pose-selector{
-  outline: 2px solid rgba(255,255,255,0.2);
+  border: 2px solid rgba(255,255,255,0.2);
+  border-right: none;
   margin-bottom: 20px;
+  max-height: 450px;
+  overflow-y: scroll;
+  width: calc(100% + 2px);
+  position: relative;
+  left: -2px;
 }
 
 .toggle-heading:hover,
@@ -274,10 +280,40 @@ body{
     max-width: 100px;
     max-height: 100px;
   }
+
+  #character-selector-preview,
+  #background-selector-preview,
+  #pose-selector{
+    max-height: 370px;
+  }
 }
 
 @media (max-width: 600px){
   body{
     padding: 10px;
   }
+}
+
+
+
+/* Scrollbar styling ------------------- */
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #080f1a; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--gold); 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
 }
