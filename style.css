@@ -52,7 +52,7 @@ div[class*="icon"],
 }
 
 div[class*="icon"][selected="true"]{
-  background-color: var(--gold);
+  background-color: var(--gold) !important;
 }
 
 #pose-selector label{
@@ -88,7 +88,10 @@ div[class*="icon"]:hover,
   font-family: 'Libre Baskerville', Georgia, serif;
   background: #0D1725;
   border: none;
+  outline: none !important;
 }
+
+
 
 #background-selector-preview,
 #pose-selector,
@@ -104,7 +107,7 @@ div[class*="icon"]:hover,
 #character-selector-preview:not(.hidden) ~ #pose-selector{
   max-height: 0;
   overflow: hidden;
-  outline: none;
+  border: none;
   margin-bottom: 0;
 }
 
@@ -216,6 +219,7 @@ select{
 .hidden{
   max-height: 0 !important;
   overflow: hidden;
+  border: none !important;
 }
 
 
@@ -316,4 +320,14 @@ body{
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #555; 
+}
+
+
+
+.material-icons{
+  position: relative;
+  top: 3px;
+  text-shadow: none;
+  padding-right: 10px;
+  font-size: 21px !important;
 }

@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
 
     </head>
@@ -33,25 +34,31 @@
 
       <div id="options">
 
-        <div class="toggle-heading" associated-panel="background-selector-preview">Select your location</div>
+        <div class="toggle-heading" associated-panel="background-selector-preview">
+          <span class="material-icons">edit_location</span>
+          Select your location</div>
         <select name="background-selector" id="background-selector"></select>
         <div id="background-selector-preview"></div>
         
 
-
-
         <div>
-          <div class="toggle-heading" associated-panel="character-selector-preview">Select your character</div>
+          <div class="toggle-heading" associated-panel="character-selector-preview">
+            <span class="material-icons">person_add</span>
+            Select your character</div>
           <select name="character-selector" id="character-selector"></select>
 
           <div id="character-selector-preview"></div>
 
-          <div id="pose-heading">Select your pose</div>
+          <div id="pose-heading">
+            <span class="material-icons">
+              sentiment_very_satisfied
+              </span>
+            Select your pose</div>
           <div id="pose-selector">
           </div>
         </div>
 
-        <a id="download">Download</a>
+        <a id="download"><span class="material-icons">download</span>Download</a>
       
       </div>
 

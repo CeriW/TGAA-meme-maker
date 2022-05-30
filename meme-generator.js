@@ -47,12 +47,12 @@ const locations = [
 
 
 const characters = [
-  {name: 'Herlock Sholmes', id:'sholmes-herlock', images: 4},
-  {name: 'Iris Wilson', id:'wilson-iris', images: 4},
-  {name: 'Gina Lestrade', id:'lestrade-gina', images: 4},
-  {name: 'Susato Mikotoba', id:'mikotoba-susato', images: 12},
-  {name: 'Enoch Drebber', id:'drebber-enoch', images: 4},
-  {name: 'Barok van Zieks', id:'van-zieks-barok', images: 6}
+  {name: 'Herlock Sholmes',     id:'sholmes-herlock',     gender: 'M',     images: 4},
+  {name: 'Iris Wilson',         id:'wilson-iris',         gender: 'F',     images: 4},
+  {name: 'Gina Lestrade',       id:'lestrade-gina',       gender: 'F',     images: 4},
+  {name: 'Susato Mikotoba',     id:'mikotoba-susato',     gender: 'F',     images: 12},
+  {name: 'Enoch Drebber',       id:'drebber-enoch',       gender: 'M',     images: 4},
+  {name: 'Barok van Zieks',     id:'van-zieks-barok',     gender: 'M',     images: 6}
 ]
 
 
@@ -130,6 +130,8 @@ function generateCharacterInterface(){
     characterSelector.appendChild(newOption)
 
     let icon = generateLabelledIcon('character', character)
+    icon.setAttribute('gender', character.gender)
+
     characterPreview.appendChild(icon)
 
     icon.addEventListener('click', function(e){
