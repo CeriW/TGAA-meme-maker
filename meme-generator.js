@@ -19,6 +19,11 @@ let downloadButton = document.querySelector('#download')
 let tag = document.querySelector('#speech-tag')
 
 
+// Store whether the user has deliberately chosen a character yet.
+// This will prevent the default character tag being generated while selecting
+// a location
+let characterSelected = false
+
 let paths ={
   character: 'assets/characters/',
   location: 'assets/locations/'
@@ -64,7 +69,11 @@ characterSelector.addEventListener('change', generatePanel)
 
 function generatePanel(){
   backgroundImg.setAttribute('src', paths.location + backgroundSelector.value + '.png')
-  tag.setAttribute('src', paths.character + characterSelector.value + '/tag.png')
+
+  if (characterSelected){
+    tag.setAttribute('src', paths.character + characterSelector.value + '/tag.png')
+  }
+
 
   
   //console.log(paths.character + characterSelector.value + '.png')
@@ -84,9 +93,11 @@ function generatePanel(){
     addImage('speech-tag')
   },50)
 
+
   window.setTimeout(function(){
     addImage('speech-box')
   },50)
+
 
 
   
@@ -175,6 +186,8 @@ characterSelector.addEventListener('change', generatePoses)
 //The name of the character you want, in surname-forename format.
 // Hyphens should be used for multi-word names e.g. van-zieks-barok
 function generatePoses(e){
+
+  characterSelected = true
 
   let chosenCharacter = e ? e.target.value : characterSelector.value
   console.log(chosenCharacter)
