@@ -336,19 +336,47 @@ function selectItem(e){
 
 function download() {
 
-  // Render the text
-  let ctx = canvas.getContext("2d");
-  ctx.font = "50px Georgia";
-  ctx.fillStyle = "#fff";
-  ctx.fillText(canvas.nextElementSibling.value, 370, 890);
-  console.log(canvas)
+  let tempCanvas = document.createElement('canvas')
+  tempCanvas.classList.add('temp-canvas')
+  tempCanvas.setAttribute('width', 1920)
+  tempCanvas.setAttribute('height', 1080)
+  document.body.appendChild(tempCanvas)
+
+  let allCanvases = document.querySelectorAll('canvas:not(.temp-canvas)')
+  tempCanvas.setAttribute('height', 1080 * allCanvases.length + 1)
+
+
+  let tempCanvasContext = tempCanvas.getContext("2d")
+
+
+  for (i=0; i < allCanvases.length; i++){
+    // Render the text
+    let ctx = allCanvases[i].getContext("2d");
+    ctx.font = "50px Georgia";
+    ctx.fillStyle = "#fff";
+    ctx.fillText(allCanvases[i].nextElementSibling.value, 370, 890);
+
+
+    tempCanvasContext.drawImage(allCanvases[i], 0, [i * 1080])
+
+    /*var ctx = canvas.getContext("2d");
+    var img = document.querySelector("#" + type);
+    ctx.drawImage(img, 0, 0);*/
+
+
+  }
 
   let credits = document.querySelector("#credits");
-  ctx.drawImage(credits, 0, 0);
+  tempCanvasContext.drawImage(credits, 0, (allCanvases.length) - 1 * 1080);
+
+
   
 
   downloadButton.download = 'ace-attorney-meme-generator.png';
-  downloadButton.href = canvas.toDataURL()
+  downloadButton.href = tempCanvas.toDataURL()
+
+  tempCanvas.parentNode.removeChild(tempCanvas)
+
 }
 
 download()
