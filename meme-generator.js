@@ -50,17 +50,18 @@ const locations = [
 
 // A list of the available characters
 // name - a user-readable name that will display on the page
-// id - the name of the image to go alongside it. Usually surname-forename format, with hyphens also for multiple word surnames or forenames e.g van-zieks-barok
+// id - the name of the image to go alongside it. Usually surname-forename-variant format, with hyphens also for multiple word surnames or forenames e.g van-zieks-barok
 // gender - the gender of the character, for filtering purposes
 // images - the number of images in the folder to go with this character. The code depends on them being named sequentially beginning at 1 and can't work if there are any numbers missing.
 const characters = [
-  {name: 'Herlock Sholmes',     id:'sholmes-herlock',     gender: 'M',     images: 4},
-  {name: 'Iris Wilson',         id:'wilson-iris',         gender: 'F',     images: 4},
-  {name: 'Gina Lestrade',       id:'lestrade-gina',       gender: 'F',     images: 4},
-  {name: 'Susato Mikotoba',     id:'mikotoba-susato',     gender: 'F',     images: 12},
-  {name: 'Enoch Drebber',       id:'drebber-enoch',       gender: 'M',     images: 4},
-  {name: 'Barok van Zieks',     id:'van-zieks-barok',     gender: 'M',     images: 6},
-  {name: 'Soseki Natsume',      id:'natsume-soseki',      gender: 'M',     images: 9}
+  {name: 'Herlock Sholmes - default outfit',      id:'sholmes-herlock-default',     gender: 'M',     images: 12},
+  {name: 'Herlock Sholmes - casual outfit',       id:'sholmes-herlock-casual',      gender: 'M',     images: 9},
+  {name: 'Iris Wilson',                           id:'wilson-iris',                 gender: 'F',     images: 4},
+  {name: 'Gina Lestrade',                         id:'lestrade-gina',               gender: 'F',     images: 4},
+  {name: 'Susato Mikotoba',                       id:'mikotoba-susato',             gender: 'F',     images: 12},
+  {name: 'Enoch Drebber',                         id:'drebber-enoch',               gender: 'M',     images: 4},
+  {name: 'Barok van Zieks',                       id:'van-zieks-barok',             gender: 'M',     images: 6},
+  {name: 'Soseki Natsume',                        id:'natsume-soseki',              gender: 'M',     images: 9}
 ]
 
 // ---------------------------------------------------------------------------//
