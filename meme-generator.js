@@ -129,7 +129,7 @@ function generatePanel(){
 
 function generateCanvas(){
   let newCanvas = document.createElement('div')
-  newCanvas.setAttribute('id', 'canvas-' + panels)
+  //newCanvas.setAttribute('id', 'canvas-' + panels)
   panels++
   newCanvas.classList.add('canvas-container')
   newCanvas.innerHTML = 
@@ -141,9 +141,32 @@ function generateCanvas(){
   deleteButton.addEventListener('click', removeCanvas)
   newCanvas.appendChild(deleteButton)
 
+  newCanvas.addEventListener('click', function(){
+    changeActiveCanvas(newCanvas.querySelector('canvas'))
+  })
+
+
+
   document.querySelector('#canvas-grid-item > div').appendChild(newCanvas)
-  canvas = newCanvas.querySelector('canvas')
+  //canvas = newCanvas.querySelector('canvas')
+  changeActiveCanvas(newCanvas.querySelector('canvas'))
   generatePanel(newCanvas)
+}
+
+function changeActiveCanvas(activeCanvas){
+  
+  canvas = activeCanvas
+  
+  let allCanvases = document.querySelectorAll('canvas')
+  allCanvases.forEach(function(node){
+    if (node == activeCanvas){
+      node.parentNode.classList.add('active-canvas')
+    } else{
+      node.parentNode.classList.remove('active-canvas')
+    }
+  })
+
+
 }
 
 function removeCanvas(e){
