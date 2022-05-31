@@ -75,9 +75,6 @@ div[class*="icon"]:hover,
   background-size: contain;
 }
 
-canvas{
-  border: 1px solid red;
-}
 
 .canvas-container,
 .canvas-container-2{
@@ -152,15 +149,22 @@ select{
   text-shadow: -1px -1px 0 rgba(0,0,0,0.3), 1px -1px 0 rgba(0,0,0,0.3), -1px 1px 0 rgba(0,0,0,0.3), 1px 1px 0 rgba(0,0,0,0.3);
 }
 
-#add-panel{
+#add-panel,
+.delete-panel{
   background: linear-gradient(to bottom, #65592d, #9E9150);
   position: absolute;
   right: 0;
   bottom: 0;
   padding: 5px;
   z-index: 2;
-  border: 2px solid var(--blue);
   cursor: pointer;
+}
+
+
+.delete-panel{
+  right: unset;
+  left: 0;
+  bottom: 0;
 }
 
 #pose-heading{
@@ -275,6 +279,7 @@ body{
 
 #canvas-grid-item > div{
   position: relative;
+  padding-bottom: 31px;
 }
 .options { grid-area: options; }
 
@@ -353,3 +358,13 @@ body{
 }
 
 .material-icons.md-17 { font-size: 17px !important; }
+
+
+@keyframes grow{
+  from{max-height: 0;}
+  to{max-height: 1080px;}
+}
+
+.canvas-container{
+  animation: grow 0.5s both;
+}

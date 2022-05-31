@@ -134,12 +134,22 @@ function generateCanvas(){
   newCanvas.classList.add('canvas-container')
   newCanvas.innerHTML = 
   '<canvas class="myCanvas" width="1920" height="1080"></canvas><textarea class="text-overlay">Type your text here...</textarea>'
+  
+  let deleteButton = document.createElement('div')
+  deleteButton.classList.add('delete-panel')
+  deleteButton.innerHTML = '<span class="material-icons md-17">delete</span>Delete panel'
+  deleteButton.addEventListener('click', removeCanvas)
+  newCanvas.appendChild(deleteButton)
+
   document.querySelector('#canvas-grid-item > div').appendChild(newCanvas)
   canvas = newCanvas.querySelector('canvas')
   generatePanel(newCanvas)
 }
 
-
+function removeCanvas(e){
+  let canvas = e.target.parentNode
+  canvas.parentNode.removeChild(canvas)
+}
 
 function generateCharacterInterface(){
   characters.forEach(function(character){
@@ -336,50 +346,58 @@ function selectItem(e){
 
 function download() {
 
-  let tempCanvas = document.createElement('canvas')
-  tempCanvas.classList.add('temp-canvas')
-  tempCanvas.setAttribute('width', 1920)
-  tempCanvas.setAttribute('height', 1080)
-  document.body.appendChild(tempCanvas)
-
-  let allCanvases = document.querySelectorAll('canvas:not(.temp-canvas)')
-  tempCanvas.setAttribute('height', 1080 * allCanvases.length + 1)
-
-
-  let tempCanvasContext = tempCanvas.getContext("2d")
-
-
-  for (i=0; i < allCanvases.length; i++){
-    // Render the text
-    let ctx = allCanvases[i].getContext("2d");
-    ctx.font = "50px Georgia";
-    ctx.fillStyle = "#fff";
-    ctx.fillText(allCanvases[i].nextElementSibling.value, 370, 890);
-
-
-    tempCanvasContext.drawImage(allCanvases[i], 0, [i * 1080])
-
-    /*var ctx = canvas.getContext("2d");
-    var img = document.querySelector("#" + type);
-    ctx.drawImage(img, 0, 0);*/
-
-
-  }
-
-  let credits = document.querySelector("#credits");
-  tempCanvasContext.drawImage(credits, 0, (allCanvases.length) - 1 * 1080);
-
-
+  let allCanvases = document.querySelectorAll('canvas')
   
-
-  downloadButton.download = 'ace-attorney-meme-generator.png';
-  downloadButton.href = tempCanvas.toDataURL()
-
-  tempCanvas.parentNode.removeChild(tempCanvas)
+  if (allCanvases.length){
+    let tempCanvas = document.createElement('canvas')
+    tempCanvas.classList.add('temp-canvas')
+    tempCanvas.setAttribute('width', 1920)
+    tempCanvas.setAttribute('height', 1080)
+    document.body.appendChild(tempCanvas)
+  
+    let allCanvases = document.querySelectorAll('canvas:not(.temp-canvas)')
+    tempCanvas.setAttribute('height', 1080 * allCanvases.length + 1)
+  
+  
+    let tempCanvasContext = tempCanvas.getContext("2d")
+  
+  
+  
+    for (i=0; i < allCanvases.length; i++){
+      // Render the text
+      let ctx = allCanvases[i].getContext("2d");
+      ctx.font = "50px Georgia";
+      ctx.fillStyle = "#fff";
+      ctx.fillText(allCanvases[i].nextElementSibling.value, 370, 890);
+  
+  
+      tempCanvasContext.drawImage(allCanvases[i], 0, [i * 1080])
+  
+      /*var ctx = canvas.getContext("2d");
+      var img = document.querySelector("#" + type);
+      ctx.drawImage(img, 0, 0);*/
+  
+  
+    }
+  
+    let credits = document.querySelector("#credits");
+    tempCanvasContext.drawImage(credits, 0, (allCanvases.length - 1) * 1080);
+  
+  
+    
+  
+    downloadButton.download = 'ace-attorney-meme-generator.png';
+    downloadButton.href = tempCanvas.toDataURL()
+  
+    tempCanvas.parentNode.removeChild(tempCanvas)
+  
+  } else{
+    alert ('Your meme currently has no panels.')
+  }
 
 }
 
-download()
+
 downloadButton.addEventListener('click', download);
 
 
