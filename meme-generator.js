@@ -76,6 +76,8 @@ backgroundSelector.addEventListener('change', generatePanel)
 characterSelector.addEventListener('change', generatePanel)
 
 
+document.querySelector('#add-panel').addEventListener('click', generateCanvas)
+
 function generatePanel(){
   backgroundImg.setAttribute('src', paths.location + backgroundSelector.value + '.png')
 
@@ -84,8 +86,6 @@ function generatePanel(){
   }
 
 
-  
-  //console.log(paths.character + characterSelector.value + '.png')
   
   // Wait for the image to load before we attempt to add it to the canvas
   backgroundImg.addEventListener('load', function(){
@@ -119,6 +119,14 @@ function generatePanel(){
     ctx.drawImage(img, 0, 0);
   }
 
+}
+
+function generateCanvas(){
+  let newCanvas = document.createElement('canvas')
+  newCanvas.classList.add('canvas-container')
+  newCanvas.innerHTML = 
+  '<canvas id="myCanvas" width="1920" height="1080"></canvas><textarea class="text-overlay">Type your text here...</textarea>'
+  document.body.appendChild(newCanvas)
 }
 
 
