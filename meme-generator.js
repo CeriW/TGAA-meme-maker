@@ -1,5 +1,5 @@
 
-let canvas = document.querySelector('#myCanvas')
+let canvas = null
 
 
 let backgroundImg = document.querySelector('#background')
@@ -12,13 +12,14 @@ let characterPreview = document.querySelector('#character-selector-preview')
 
 let poseSelector = document.querySelector('#pose-selector')
 
-let textOverlay = document.querySelector('#text-overlay')
+let textOverlay = document.querySelector('.text-overlay')
 
 let downloadButton = document.querySelector('#download')
 
 let tag = document.querySelector('#speech-tag')
 
-
+// We'll iterate this each time we make a new panel to give each one a unique ID
+let panels = 1
 
 // Store whether the user has deliberately chosen a character yet.
 // This will prevent the default character tag being generated while selecting
@@ -56,7 +57,8 @@ const characters = [
   {name: 'Barok van Zieks',     id:'van-zieks-barok',     gender: 'M',     images: 6}
 ]
 
-
+generateCanvas()
+canvas = document.querySelector('canvas')
 
 
 function generateLocations(){
@@ -71,10 +73,16 @@ function generateLocations(){
 generateLocations()
 
 
+
+
 generatePanel()
 backgroundSelector.addEventListener('change', generatePanel)
 characterSelector.addEventListener('change', generatePanel)
 
+
+
+
+document.querySelector('#add-panel').addEventListener('click', generateCanvas)
 
 function generatePanel(){
   backgroundImg.setAttribute('src', paths.location + backgroundSelector.value + '.png')
@@ -84,8 +92,6 @@ function generatePanel(){
   }
 
 
-  
-  //console.log(paths.character + characterSelector.value + '.png')
   
   // Wait for the image to load before we attempt to add it to the canvas
   backgroundImg.addEventListener('load', function(){
@@ -121,7 +127,78 @@ function generatePanel(){
 
 }
 
+function generateCanvas(){
+  let newCanvas = document.createElement('div')
+  //newCanvas.setAttribute('id', 'canvas-' + panels)
+  panels++
+  newCanvas.classList.add('canvas-container')
+  newCanvas.innerHTML = 
+  '<canvas class="myCanvas" width="1920" height="1080"></canvas><textarea class="text-overlay">Type your text here...</textarea>'
+  
+  let deleteButton = document.createElement('div')
+  deleteButton.classList.add('delete-panel')
+  deleteButton.innerHTML = '<span class="material-icons md-17">delete</span>Delete panel'
+  deleteButton.addEventListener('click', removeCanvas)
+  newCanvas.appendChild(deleteButton)
 
+  newCanvas.addEventListener('click', function(){
+    changeActiveCanvas(newCanvas.querySelector('canvas'))
+  })
+
+
+
+  document.querySelector('#canvas-grid-item > div').appendChild(newCanvas)
+  //canvas = newCanvas.querySelector('canvas')
+  changeActiveCanvas(newCanvas.querySelector('canvas'))
+  generatePanel(newCanvas)
+}
+
+function changeActiveCanvas(activeCanvas){
+
+
+  
+  canvas = activeCanvas
+  console.log(activeCanvas)
+
+
+  
+  let allCanvases = document.querySelectorAll('canvas')
+  allCanvases.forEach(function(node){
+    if (node === activeCanvas){
+      node.parentNode.classList.add('active-canvas')
+    } else{
+      node.parentNode.classList.remove('active-canvas')
+    }
+  })
+
+
+}
+
+function removeCanvas(e){
+  e.stopPropagation()
+  let deadCanvas = e.target.closest('.canvas-container')
+
+
+  
+  console.log(deadCanvas.previousElementSibling)
+  if (deadCanvas.previousElementSibling){
+    changeActiveCanvas(deadCanvas.previousElementSibling.querySelector('canvas'))
+    console.log('no previous')
+  } else if (deadCanvas.nextElementSibling){
+    changeActiveCanvas(deadCanvas.nextElementSibling.querySelector('canvas'))
+  } else{
+    generateCanvas()
+  }
+  
+
+  deadCanvas.style.animation = 'shrink 0.5s both'
+  window.setTimeout(function(){
+    deadCanvas.parentNode.removeChild(deadCanvas)
+  },500)
+
+
+
+}
 
 function generateCharacterInterface(){
   characters.forEach(function(character){
@@ -318,21 +395,58 @@ function selectItem(e){
 
 function download() {
 
-  // Render the text
-  let ctx = canvas.getContext("2d");
-  ctx.font = "50px Georgia";
-  ctx.fillStyle = "#fff";
-  ctx.fillText(textOverlay.value, 370, 890);
-
-  let credits = document.querySelector("#credits");
-  ctx.drawImage(credits, 0, 0);
+  let allCanvases = document.querySelectorAll('canvas')
   
+  if (allCanvases.length){
+    let tempCanvas = document.createElement('canvas')
+    tempCanvas.classList.add('temp-canvas')
+    tempCanvas.setAttribute('width', 1920)
+    tempCanvas.setAttribute('height', 1080)
+    document.body.appendChild(tempCanvas)
+  
+    let allCanvases = document.querySelectorAll('canvas:not(.temp-canvas)')
+    tempCanvas.setAttribute('height', 1080 * allCanvases.length + 1)
+  
+  
+    let tempCanvasContext = tempCanvas.getContext("2d")
+  
+  
+  
+    for (i=0; i < allCanvases.length; i++){
+      // Render the text
+      let ctx = allCanvases[i].getContext("2d");
+      ctx.font = "50px Georgia";
+      ctx.fillStyle = "#fff";
+      ctx.fillText(allCanvases[i].nextElementSibling.value, 370, 890);
+  
+  
+      tempCanvasContext.drawImage(allCanvases[i], 0, [i * 1080])
+  
+      /*var ctx = canvas.getContext("2d");
+      var img = document.querySelector("#" + type);
+      ctx.drawImage(img, 0, 0);*/
+  
+  
+    }
+  
+    let credits = document.querySelector("#credits");
+    tempCanvasContext.drawImage(credits, 0, (allCanvases.length - 1) * 1080);
+  
+  
+    
+  
+    downloadButton.download = 'ace-attorney-meme-generator.png';
+    downloadButton.href = tempCanvas.toDataURL()
+  
+    tempCanvas.parentNode.removeChild(tempCanvas)
+  
+  } else{
+    alert ('Your meme currently has no panels.')
+  }
 
-  downloadButton.download = 'ace-attorney-meme-generator.png';
-  downloadButton.href = canvas.toDataURL()
 }
 
-download()
+
 downloadButton.addEventListener('click', download);
 
 
@@ -348,6 +462,8 @@ downloadButton.addEventListener('click', download);
 function togglePanel(associate){
   associate.classList.toggle('hidden')
 }
+
+
 
 
 
