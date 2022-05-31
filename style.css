@@ -9,8 +9,56 @@ body{
   font-family: 'Libre Baskerville', Georgia, serif;
   font-size: 15px;
   padding: 30px;
+  display: grid; 
+  grid-template-columns: 800px auto; 
+  grid-template-rows: 1fr; 
+  grid-template-areas: 
+    "canvas options"; 
+  gap: 20px 30px; 
 }
 
+
+#canvas-grid-item {
+  grid-area: canvas;
+  min-height: 100px;
+}
+
+
+
+.options { grid-area: options; }
+
+
+/* Shared bits -------------------------------------------------------------*/
+
+#canvas-grid-item > div,
+.canvas-container,
+.active-canvas,
+#character-selector-preview,
+#background-selector-preview,
+#pose-selector,
+.location-icon,
+.character-icon,
+.material-icons,
+.toggle-heading,
+#pose-heading,
+#download{
+  position: relative;
+}
+
+
+.canvas-container,
+canvas,
+div[class*="icon"],
+#pose-selector label,
+.toggle-heading,
+#pose-heading,
+#download,
+#add-panel,
+.delete-panel{
+  cursor: pointer;
+}
+
+/* Bits to hide ------------------------------------------------------------- */
 #background,
 #character,
 #speech-box,
@@ -18,11 +66,13 @@ body{
 #background-selector,
 #speech-tag,
 #credits,
-input[type="radio"]
-{
+input[type="radio"],
+#character-selector-preview:not(.hidden) + #pose-heading{
   display: none;
 }
 
+
+/* Canvas bits  ------------------------------------------------------------- */
 
 .canvas-container,
 #pose-selector{
@@ -35,8 +85,84 @@ canvas{
   display: block;
   width: 100%;
   max-width: 800px;
-  cursor: pointer;
 }
+
+
+
+.canvas-container{
+  animation: grow 0.5s both;
+  overflow: hidden;
+}
+
+@keyframes grow{
+  from{
+    max-height: 0;}
+  to{
+    max-height: 1080px;}
+}
+
+@keyframes shrink{
+  from{
+    max-height: 1080px;
+    overflow: hidden;}
+  to{
+    max-height: 0;}
+}
+
+
+
+
+.active-canvas:before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border: 8px solid var(--gold);
+  pointer-events: none;
+  box-shadow: inset 0 0 30px black;
+}
+
+/* Selector styling ----------------------------------------------------------*/
+
+#background-selector-preview,
+#pose-selector,
+#character-selector-preview{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  max-height: 1000px;
+  transition: 0.6s;
+}
+
+#character-selector-preview:not(.hidden) ~ #pose-selector{
+  max-height: 0;
+  overflow: hidden;
+  border: none;
+  margin-bottom: 0;
+}
+
+#character-selector-preview,
+#background-selector-preview,
+#pose-selector{
+  border: 2px solid rgba(255,255,255,0.2);
+  border-right: none;
+  margin-bottom: 20px;
+  max-height: 450px;
+  overflow-y: scroll;
+  width: calc(100% + 2px);
+  left: -2px;
+}
+
+.hidden{
+  max-height: 0 !important;
+  overflow: hidden;
+  border: none !important;
+}
+
+
+/* Icon styling --------------------------------------------------------------*/
 
 div[class*="icon"],
 #pose-selector label{
@@ -49,7 +175,6 @@ div[class*="icon"],
   transition: 0.3s;
   background-color: rgba(255,255,255,0.05);
   border-radius: 50%;
-  cursor: pointer;
   margin: 15px 15px 70px;
 }
 
@@ -70,19 +195,41 @@ div[class*="icon"]:hover,
   background-color: var(--gold);
 }
 
-#text{
-  background:  url('assets/game-elements/speech-box.png') center no-repeat;
-  background-size: contain;
+.location-icon,
+.character-icon{
+  margin-bottom: 50px;
 }
 
-
-.canvas-container,
-.canvas-container-2{
-  position: relative;
+.location-icon{
+  outline: 3px solid transparent;
 }
 
-.text-overlay,
-.text-overlay-2{
+.location-icon:hover,
+.location-icon[selected="true"]{
+  outline-color: var(--gold);
+}
+
+.location-icon > div,
+.character-icon > div{
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.material-icons{
+  top: 3px;
+  text-shadow: none;
+  padding-right: 10px;
+  font-size: 21px !important;
+}
+
+.material-icons.md-17 { font-size: 17px !important; }
+
+/* Text boxes ----------------------------------------------------------------*/
+
+.text-overlay{
   position: absolute;
   top: 77.5%;
   bottom: 10%;
@@ -96,41 +243,20 @@ div[class*="icon"]:hover,
   outline: none !important;
 }
 
-
-
-#background-selector-preview,
-#pose-selector,
-#character-selector-preview{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  max-height: 1000px;
-  transition: 0.6s;
+#text{
+  background:  url('assets/game-elements/speech-box.png') center no-repeat;
+  background-size: contain;
 }
 
 
-#character-selector-preview:not(.hidden) ~ #pose-selector{
-  max-height: 0;
-  overflow: hidden;
-  border: none;
-  margin-bottom: 0;
-}
-
-#character-selector-preview:not(.hidden) + #pose-heading{
-  display: none;
+@media (max-width: 799px){
+  .text-overlay{
+    font-size: 2.4vw;
+  }
 }
 
 
-
-
-select{
-  border: 2px solid #9E9150;
-  background: #0D1725;
-  color: #fff;
-  font-family: inherit;
-  padding: 10px;
-  font-size: 20px;
-}
+/* Headings ------------------------------------------------------------------*/
 
 .toggle-heading,
 #pose-heading,
@@ -141,38 +267,10 @@ select{
   text-decoration: none;
   font-size: 20px;
   transition: 0.4s;
-  cursor: pointer;
-  position: relative;
   display: block;
   border: 2px solid var(--blue);
   outline: 2px solid var(--gold);
   text-shadow: -1px -1px 0 rgba(0,0,0,0.3), 1px -1px 0 rgba(0,0,0,0.3), -1px 1px 0 rgba(0,0,0,0.3), 1px 1px 0 rgba(0,0,0,0.3);
-}
-
-#add-panel,
-.delete-panel{
-  background: linear-gradient(to bottom, #65592d, #9E9150);
-  padding: 5px;
-  cursor: pointer;
-  transition: 0.5s;
-}
-
-#add-panel{
-  float: right;
-}
-
-
-.delete-panel{
-  right: unset;
-  left: 0;
-  bottom: 0;
-  position: absolute;
-  z-index: 2;
-}
-
-#add-panel:hover,
-.delete-panel:hover{
-  color: var(--blue);
 }
 
 #pose-heading{
@@ -196,105 +294,40 @@ select{
   transform: rotate(0);
 }
 
-#character-selector-preview,
-#background-selector-preview,
-#pose-selector{
-  border: 2px solid rgba(255,255,255,0.2);
-  border-right: none;
-  margin-bottom: 20px;
-  max-height: 450px;
-  overflow-y: scroll;
-  width: calc(100% + 2px);
-  position: relative;
-  left: -2px;
-}
-
 .toggle-heading:hover,
 #download:hover{
   color: var(--blue);
   text-shadow: none;
 }
 
-.location-icon,
-.character-icon{
-  margin-bottom: 50px;
-  position: relative;
+/* Buttons -------------------------------------------------------------------*/
+
+#add-panel,
+.delete-panel{
+  background: linear-gradient(to bottom, #65592d, #9E9150);
+  padding: 5px;
+  transition: 0.5s;
 }
 
-.location-icon{
-  outline: 3px solid transparent;
+#add-panel{
+  float: right;
 }
 
-.location-icon:hover,
-.location-icon[selected="true"]{
-  outline-color: var(--gold);
-}
-
-.location-icon > div,
-.character-icon > div{
-  position: absolute;
-  top: calc(100% + 10px);
+.delete-panel{
+  right: unset;
   left: 0;
-  right: 0;
-  text-align: center;
+  bottom: 0;
+  position: absolute;
+  z-index: 2;
 }
 
-@media (max-width: 799px){
-  .text-overlay{
-    font-size: 2.4vw;
-  }
-}
-
-
-
-.hidden{
-  max-height: 0 !important;
-  overflow: hidden;
-  border: none !important;
+#add-panel:hover,
+.delete-panel:hover{
+  color: var(--blue);
 }
 
 
-
-/*
-#options {
-  display: grid; 
-  grid-template-columns: auto auto; 
-  grid-template-rows: auto auto auto auto; 
-  gap: 0px 10px; 
-  grid-template-areas: 
-    "select-location select-character"
-    "location-preview location-preview"
-    "character-preview character-preview"
-    "character-poses character-poses"; 
-}
-.toggle-heading[associated-panel="background-selector-preview"] { grid-area: select-location; }
-.toggle-heading[associated-panel="character-selector-preview"] { grid-area: select-location; }
-#background-selector-preview { grid-area: location-preview; }
-#character-selector-preview { grid-area: character-preview; }
-#pose-selector { grid-area: character-poses; }
-*/
-
-body{
-  display: grid; 
-  grid-template-columns: 800px auto; 
-  grid-template-rows: 1fr; 
-  grid-template-areas: 
-    "canvas options"; 
-  gap: 20px 30px; 
-}
-
-#canvas-grid-item {
-  grid-area: canvas;
-  min-height: 100px;
-}
-
-  
-
-#canvas-grid-item > div{
-  position: relative;
-}
-
-.options { grid-area: options; }
+/* Make it responsive --------------------------------------------------------*/
 
 @media (max-width:1450px){
   body{
@@ -347,75 +380,23 @@ body{
 /* Scrollbar styling ------------------- */
 
 /* width */
-::-webkit-scrollbar {
-  width: 10px;
-}
+::-webkit-scrollbar {width: 10px;}
 
 /* Track */
-::-webkit-scrollbar-track {
-  background: #080f1a; 
-}
+::-webkit-scrollbar-track {background: #080f1a; }
  
 /* Handle */
-::-webkit-scrollbar-thumb {
-  background: var(--gold); 
-}
+::-webkit-scrollbar-thumb {background: var(--gold);}
 
 /* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555; 
-}
-
-
-
-.material-icons{
-  position: relative;
-  top: 3px;
-  text-shadow: none;
-  padding-right: 10px;
-  font-size: 21px !important;
-}
-
-.material-icons.md-17 { font-size: 17px !important; }
+::-webkit-scrollbar-thumb:hover {background: #555;}
 
 
 
 
 
 
-.canvas-container{
-  animation: grow 0.5s both;
-  overflow: hidden;
-}
-
-@keyframes grow{
-  from{
-    max-height: 0;}
-  to{
-    max-height: 1080px;}
-}
-
-@keyframes shrink{
-  from{
-    max-height: 1080px;
-    overflow: hidden;}
-  to{
-    max-height: 0;}
-}
 
 
-.active-canvas{
-  position: relative;
-}
 
-.active-canvas:before{
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  border: 8px solid var(--gold);
-  pointer-events: none;
-  box-shadow: inset 0 0 30px black;
-}
+
