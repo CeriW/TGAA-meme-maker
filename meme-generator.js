@@ -50,7 +50,7 @@ const locations = [
 
 // A list of the available characters
 // name - a user-readable name that will display on the page
-// id - the name of the image to go alongside it
+// id - the name of the image to go alongside it. Usually surname-forename format, with hyphens also for multiple word surnames or forenames e.g van-zieks-barok
 // gender - the gender of the character, for filtering purposes
 // images - the number of images in the folder to go with this character. The code depends on them being named sequentially beginning at 1 and can't work if there are any numbers missing.
 const characters = [
@@ -59,7 +59,8 @@ const characters = [
   {name: 'Gina Lestrade',       id:'lestrade-gina',       gender: 'F',     images: 4},
   {name: 'Susato Mikotoba',     id:'mikotoba-susato',     gender: 'F',     images: 12},
   {name: 'Enoch Drebber',       id:'drebber-enoch',       gender: 'M',     images: 4},
-  {name: 'Barok van Zieks',     id:'van-zieks-barok',     gender: 'M',     images: 6}
+  {name: 'Barok van Zieks',     id:'van-zieks-barok',     gender: 'M',     images: 6},
+  {name: 'Soseki Natsume',      id:'natsume-soseki',      gender: 'M',     images: 9}
 ]
 
 // ---------------------------------------------------------------------------//
@@ -91,8 +92,12 @@ downloadButton.addEventListener('click', download);
 
 let toggleHeadings = document.querySelectorAll('.toggle-heading')
 toggleHeadings.forEach(function(node){
-  let associate = document.querySelector('#' + e.target.getAttribute('associated-panel'))
-  associate.classList.toggle('hidden')
+  
+  node.addEventListener('click', function(e){
+    let associate = document.querySelector('#' + e.target.getAttribute('associated-panel'))
+    togglePanel(associate)
+  })
+
 })
 
 // ---------------------------------------------------------------------------//
@@ -156,7 +161,7 @@ function generateCanvas(){
   let newCanvas = document.createElement('div')
   newCanvas.classList.add('canvas-container')
   newCanvas.innerHTML = 
-  '<canvas class="myCanvas" width="1920" height="1080"></canvas><textarea class="text-overlay">Type your text here...</textarea>'
+  '<canvas width="1920" height="1080"></canvas><textarea class="text-overlay">Type your text here...</textarea>'
   
   // Generate the delete button and have it run removeCanvas on click.
   let deleteButton = document.createElement('div')
