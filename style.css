@@ -23,13 +23,15 @@ input[type="radio"]
   display: none;
 }
 
-#canvas-container,
+.canvas-container,
+.canvas-container-2,
 #pose-selector{
   float: none;
   margin: 0 auto;
 }
 
-#canvas-container,
+.canvas-container,
+.canvas-container-2,
 canvas{
   display: block;
   width: 100%;
@@ -73,11 +75,13 @@ div[class*="icon"]:hover,
   background-size: contain;
 }
 
-#canvas-container{
+.canvas-container,
+.canvas-container-2{
   position: relative;
 }
 
-#text-overlay{
+.text-overlay,
+.text-overlay-2{
   position: absolute;
   top: 77.5%;
   bottom: 10%;
@@ -209,7 +213,7 @@ select{
 }
 
 @media (max-width: 799px){
-  #text-overlay{
+  .text-overlay{
     font-size: 2.4vw;
   }
 }

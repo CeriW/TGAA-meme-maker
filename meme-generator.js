@@ -12,7 +12,7 @@ let characterPreview = document.querySelector('#character-selector-preview')
 
 let poseSelector = document.querySelector('#pose-selector')
 
-let textOverlay = document.querySelector('#text-overlay')
+let textOverlay = document.querySelector('.text-overlay')
 
 let downloadButton = document.querySelector('#download')
 
