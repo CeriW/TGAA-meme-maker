@@ -148,7 +148,11 @@ function generateCanvas(){
 
 function removeCanvas(e){
   let canvas = e.target.parentNode
-  canvas.parentNode.removeChild(canvas)
+
+  canvas.style.animation = 'shrink 0.5s both'
+  window.setTimeout(function(){
+    canvas.parentNode.removeChild(canvas)
+  },500)
 }
 
 function generateCharacterInterface(){

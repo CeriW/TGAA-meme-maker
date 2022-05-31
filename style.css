@@ -23,15 +23,14 @@ input[type="radio"]
   display: none;
 }
 
+
 .canvas-container,
-.canvas-container-2,
 #pose-selector{
   float: none;
   margin: 0 auto;
 }
 
 .canvas-container,
-.canvas-container-2,
 canvas{
   display: block;
   width: 100%;
@@ -360,11 +359,26 @@ body{
 .material-icons.md-17 { font-size: 17px !important; }
 
 
-@keyframes grow{
-  from{max-height: 0;}
-  to{max-height: 1080px;}
-}
+
+
+
 
 .canvas-container{
   animation: grow 0.5s both;
+  overflow: hidden;
+}
+
+@keyframes grow{
+  from{
+    max-height: 0;}
+  to{
+    max-height: 1080px;}
+}
+
+@keyframes shrink{
+  from{
+    max-height: 1080px;
+    overflow: hidden;}
+  to{
+    max-height: 0;}
 }
