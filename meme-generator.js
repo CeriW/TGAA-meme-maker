@@ -46,6 +46,7 @@ const locations = [
   {name: 'Prosecutor\'s Office (left)', id:'prosecutors-office-left'},
   {name: 'Sholmes\' Suite - Iris\' side', id:'sholmes-suite-iris'},
   {name: 'Sholmes\' Suite - Herlock\'s side', id:'sholmes-suite-sholmes'},
+  {name: 'Windibank\'s Pawnbrokery', id:'windibanks'},
 ]
 
 // A list of the available characters
