@@ -1,9 +1,6 @@
 - Multi character view
 - Characters IN the prison cell
-- Add panels
 - Labels for poses
-- Multiple panels
-- Make the meme sticky when scrolling
 
 - GIF support for character animations
 - GIF support for locations

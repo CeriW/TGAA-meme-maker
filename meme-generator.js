@@ -1,36 +1,38 @@
 
-let canvas = null
+// The current canvas the user is working on. We'll initialise to null and then
+// set it to the first panel the code generates.
+let currentCanvas = null
 
-
+// Canvas generating elements
+// Elements we can add various backgrounds to that we'll draw onto the canvas
 let backgroundImg = document.querySelector('#background')
+let characterImg = document.querySelector('#character')
+let tag = document.querySelector('#speech-tag')
+let credits = document.querySelector("#credits")
+
+// Interface elements
 let backgroundSelector = document.querySelector('#background-selector')
 let backgroundPreview = document.querySelector('#background-selector-preview')
-
-let characterImg = document.querySelector('#character')
 let characterSelector = document.querySelector('#character-selector')
 let characterPreview = document.querySelector('#character-selector-preview')
-
 let poseSelector = document.querySelector('#pose-selector')
-
-let textOverlay = document.querySelector('.text-overlay')
-
 let downloadButton = document.querySelector('#download')
 
-let tag = document.querySelector('#speech-tag')
-
-// We'll iterate this each time we make a new panel to give each one a unique ID
-let panels = 1
 
 // Store whether the user has deliberately chosen a character yet.
-// This will prevent the default character tag being generated while selecting
-// a location
+// This will prevent the default character tag being generated
+// while selecting a location
 let characterSelected = false
 
+// The locations to find certain visual elements
 let paths ={
   character: 'assets/characters/',
   location: 'assets/locations/'
 }
 
+// A list of the locations
+// name - a user-readable name that will display on the page
+// id - the name of the image to go alongside it
 const locations = [
   {name: '221B Baker Street', id:'baker-street-221b'},
   {name: '221B Baker Street (night)', id:'baker-street-221b-night'},
@@ -44,10 +46,13 @@ const locations = [
   {name: 'Prosecutor\'s Office (left)', id:'prosecutors-office-left'},
   {name: 'Sholmes\' Suite - Iris\' side', id:'sholmes-suite-iris'},
   {name: 'Sholmes\' Suite - Herlock\'s side', id:'sholmes-suite-sholmes'},
-
 ]
 
-
+// A list of the available characters
+// name - a user-readable name that will display on the page
+// id - the name of the image to go alongside it
+// gender - the gender of the character, for filtering purposes
+// images - the number of images in the folder to go with this character. The code depends on them being named sequentially beginning at 1 and can't work if there are any numbers missing.
 const characters = [
   {name: 'Herlock Sholmes',     id:'sholmes-herlock',     gender: 'M',     images: 4},
   {name: 'Iris Wilson',         id:'wilson-iris',         gender: 'F',     images: 4},
@@ -57,9 +62,40 @@ const characters = [
   {name: 'Barok van Zieks',     id:'van-zieks-barok',     gender: 'M',     images: 6}
 ]
 
-generateCanvas()
-canvas = document.querySelector('canvas')
+// ---------------------------------------------------------------------------//
 
+// Create our first canvas, and set it as the selected one.
+generateCanvas()
+currentCanvas = document.querySelector('canvas')
+
+// Generate the locations selector panel.
+generateLocations()
+generateLocationInterface()
+
+// Generates the first panel in our meme, and also tells it to update if anything new is chosen from the background or character panels.
+generatePanelArtwork()
+backgroundSelector.addEventListener('change', generatePanelArtwork)
+characterSelector.addEventListener('change', generatePanelArtwork)
+
+// Tell the 'add panel' button to listen for clicks, and generate a new canvas if so.
+document.querySelector('#add-panel').addEventListener('click', generateCanvas)
+
+// Generate the characters dropdown. When the icons are clicked, generate the 
+// poses to go with the matching character.
+generateCharacterInterface()
+characterSelector.addEventListener('change', generatePoses)
+
+// Make the download button download the meme when clicked.
+downloadButton.addEventListener('click', download);
+
+
+let toggleHeadings = document.querySelectorAll('.toggle-heading')
+toggleHeadings.forEach(function(node){
+  let associate = document.querySelector('#' + e.target.getAttribute('associated-panel'))
+  associate.classList.toggle('hidden')
+})
+
+// ---------------------------------------------------------------------------//
 
 function generateLocations(){
   locations.forEach(function(location){
@@ -70,34 +106,22 @@ function generateLocations(){
   })
 }
 
-generateLocations()
 
-
-
-
-generatePanel()
-backgroundSelector.addEventListener('change', generatePanel)
-characterSelector.addEventListener('change', generatePanel)
-
-
-
-
-document.querySelector('#add-panel').addEventListener('click', generateCanvas)
-
-function generatePanel(){
+// Generates our canvas with the chosen backgrounds, characters and text
+function generatePanelArtwork(){
+  // Set the background image
   backgroundImg.setAttribute('src', paths.location + backgroundSelector.value + '.png')
 
+  // If a character has been purposely selected previously then set the character image
   if (characterSelected){
     tag.setAttribute('src', paths.character + characterSelector.value + '/tag.png')
   }
 
 
-  
   // Wait for the image to load before we attempt to add it to the canvas
   backgroundImg.addEventListener('load', function(){
     addImage('background')
   })
-
 
   // It shouldn't be necessary to delay this by 1ms but it is...
   window.setTimeout(function(){
@@ -114,53 +138,49 @@ function generatePanel(){
   },50)
 
 
-
   
   // Adds a new layer to the canvas.
   //Acceptable parameter values: background, character, speech-box
   function addImage(type){
-
-    var ctx = canvas.getContext("2d");
-    var img = document.querySelector("#" + type);
-    ctx.drawImage(img, 0, 0);
+    let context = currentCanvas.getContext("2d");
+    let img = document.querySelector("#" + type);
+    context.drawImage(img, 0, 0);
   }
 
 }
 
+// Creates a new canvas for us, including delete button and event listeners.
 function generateCanvas(){
+
+  // Create the new canvas
   let newCanvas = document.createElement('div')
-  //newCanvas.setAttribute('id', 'canvas-' + panels)
-  panels++
   newCanvas.classList.add('canvas-container')
   newCanvas.innerHTML = 
   '<canvas class="myCanvas" width="1920" height="1080"></canvas><textarea class="text-overlay">Type your text here...</textarea>'
   
+  // Generate the delete button and have it run removeCanvas on click.
   let deleteButton = document.createElement('div')
   deleteButton.classList.add('delete-panel')
   deleteButton.innerHTML = '<span class="material-icons md-17">delete</span>Delete panel'
   deleteButton.addEventListener('click', removeCanvas)
   newCanvas.appendChild(deleteButton)
 
+  // When the canvas is clicked, make it the active one.
   newCanvas.addEventListener('click', function(){
     changeActiveCanvas(newCanvas.querySelector('canvas'))
   })
 
-
-
+  // Add the canvas onto the page, make it the active one and put artwork in it.
   document.querySelector('#canvas-grid-item > div').appendChild(newCanvas)
-  //canvas = newCanvas.querySelector('canvas')
   changeActiveCanvas(newCanvas.querySelector('canvas'))
-  generatePanel(newCanvas)
+  generatePanelArtwork(newCanvas)
 }
 
+// Make the specified canvas/panel the active one. This could be the result of a click on a canvas, or deleting an adjacent canvas.
+// The activeCanvas parameter should be a <canvas> element and not a container.
 function changeActiveCanvas(activeCanvas){
 
-
-  
-  canvas = activeCanvas
-  console.log(activeCanvas)
-
-
+  currentCanvas = activeCanvas
   
   let allCanvases = document.querySelectorAll('canvas')
   allCanvases.forEach(function(node){
@@ -170,39 +190,37 @@ function changeActiveCanvas(activeCanvas){
       node.parentNode.classList.remove('active-canvas')
     }
   })
-
-
 }
 
+// Remove a canvas/panel from the page.
 function removeCanvas(e){
   e.stopPropagation()
   let deadCanvas = e.target.closest('.canvas-container')
 
-
   
-  console.log(deadCanvas.previousElementSibling)
-  if (deadCanvas.previousElementSibling){
+  if (deadCanvas.previousElementSibling){ // If the panel has one before it, make that the active one.
     changeActiveCanvas(deadCanvas.previousElementSibling.querySelector('canvas'))
-    console.log('no previous')
-  } else if (deadCanvas.nextElementSibling){
+  } else if (deadCanvas.nextElementSibling){ // If no previous one but there's a next one, make the next one the active one.
     changeActiveCanvas(deadCanvas.nextElementSibling.querySelector('canvas'))
-  } else{
+  } else{ // If this function results in there being no panel at all, generate a fresh one.
     generateCanvas()
   }
   
-
+  // Run a nice animation, then delete the panel.
   deadCanvas.style.animation = 'shrink 0.5s both'
   window.setTimeout(function(){
     deadCanvas.parentNode.removeChild(deadCanvas)
   },500)
-
-
-
 }
 
+// Generates the character selection window.
+// Note that character-selector is a <select> element
 function generateCharacterInterface(){
+
+  // Loop through each character and...
   characters.forEach(function(character){
 
+    // Generate the new option for this character.
     let newOption = document.createElement('option')
     newOption.value = character.id
     characterSelector.appendChild(newOption)
@@ -212,67 +230,47 @@ function generateCharacterInterface(){
 
     characterPreview.appendChild(icon)
 
+    // If this icon is clicked....
     icon.addEventListener('click', function(e){
-      console.log(e.target)
 
+      // Set an attribute on the icons to allow for selected styling.
       ;[].forEach.call(document.querySelectorAll('.character-icon'), function(node){
         node.setAttribute('selected', false)
       })
       e.target.setAttribute('selected', true)
 
+      // Set the value on the invisible dropdown
       characterSelector.value = e.target.getAttribute('value')
+
+      // Show the character preview panel, and fill it with the poses for the chosen character.
       togglePanel(characterPreview)
       generatePoses()
     })
   })
 }
 
-;[].forEach.call(document.querySelectorAll('.filter'), function(node){
 
-  node.addEventListener('click', function(e){
-    console.log(e.target)
-
-    let filter = e.target.getAttribute('filter')
-    console.log(filter)
-
-
-    let icons = node.parentNode.querySelectorAll('div[class*="icon"]')
-    icons.forEach(function(icon){
-      if (filter == 'male' && icon.getAttribute('gender') == 'M'){
-        console.log(icon)
-      } else if (filter == 'female' && icon.getAttribute('gender') == 'F'){
-        console.log(icon)
-
-      }
-
-    })
-
-    /*if (filter == 'male'){
-      let males = node.parentNode.querySelectorAll('[gender="M"]')
-      console.log(males)
-    } else if (filter == 'female'){
-      let females = node.parentNode.querySelectorAll('[gender="F"]')
-      console.log(females)
-    }*/
-
-
-  })
-
-})
-
-
-
+// Generate the interface for the location selection
 function generateLocationInterface(){
+
+  // Loop through all the specified locations and...
   locations.forEach(function(location){
+
+    // Generate an icon
     let icon = generateLabelledIcon('location', location)
     backgroundPreview.appendChild(icon)
 
-
+    // When the icon is clicked, set the value of the invisible dropdown to match,
+    // toggle the location panel off and regenerate our current panel so it can
+    // have the new location
     icon.addEventListener('click', function(e){
       backgroundSelector.value = e.target.getAttribute('value')
       togglePanel(backgroundPreview)
-      generatePanel()
+      generatePanelArtwork()
 
+      // Set appropriate attributes for selected styling. Although the selector
+      // toggles closed on click, this ensures you can tell which one is selected
+      // if you choose to reopen it.
       ;[].forEach.call(document.querySelectorAll('.location-icon'), function(node){
         node.setAttribute('selected', false)
       })
@@ -285,71 +283,63 @@ function generateLocationInterface(){
   document.querySelector('.location-icon').setAttribute('selected', true)
 }
 
-generateLocationInterface()
-
+// Generate a labelled icon. This is used by both the location and character interfaces.
+// type may be either 'character' or 'location'
+// object should be the object we're using from either the characters or locations array.
 function generateLabelledIcon(type, object){
   let icon = document.createElement('div')
   icon.classList.add(type + '-icon')
   icon.setAttribute('value', object.id)
 
+  // Figure out what the  image for the icon should be.
   let iconURL = ''
-
   switch(type) {
     case 'character':
+      // This is set to 1.png so it will use the first image of the character as the preview.
       iconURL = 'url("assets/characters/' + object.id + '/1.png")'
       break
     case 'location':
       iconURL = 'url("assets/locations/' + object.id + '.png")'
       break;
-    default:
-      // code block
-  }
-  
+  }  
   icon.style.backgroundImage = iconURL
-
 
   let label = document.createElement('div')
   label.textContent += object.name
-
   icon.appendChild(label)
+
   return icon
 }
 
-generateCharacterInterface()
 
-
-characterSelector.addEventListener('change', generatePoses)
-
-//The name of the character you want, in surname-forename format.
-// Hyphens should be used for multi-word names e.g. van-zieks-barok
+// Generate the poses for the desired character.
 function generatePoses(e){
 
+  // This initialises to false. We set this to true to confirm that the user
+  // has deliberately chose a character and we're okay to go ahead with it.
   characterSelected = true
 
+  // Figure out if this has been run from an icon click or elsewhere.
   let chosenCharacter = e ? e.target.value : characterSelector.value
-  console.log(chosenCharacter)
-
 
   // Reset the character if we're choosing a new one
   characterImg.src = paths.character + chosenCharacter + '/1.png'
 
-  generatePanel()
+  generatePanelArtwork()
 
+  // Figure out how many times we need to loop through to generate all the poses.
   let imageAmount = 1
-
   characters.forEach(function(character){
     if (chosenCharacter == character.id){
       imageAmount =  character.images
     }
   })
 
-  console.log(imageAmount)
-
-
+  // Clear the pose selector.
   poseSelector.innerHTML = null
 
+  // Generate each icon.
   for (let i=1; i <= imageAmount; i++){
-
     let newRadio = document.createElement('input')
     newRadio.setAttribute('type', 'radio')
     newRadio.setAttribute('id', i)
@@ -361,7 +351,6 @@ function generatePoses(e){
 
     let newLabel = document.createElement('label')
     newLabel.setAttribute('for', i)
-    //newLabel.textContent = character + '-' + i
     newLabel.style.backgroundImage = 'url("assets/characters/' + chosenCharacter + '/' + i +'.png")'
     poseSelector.appendChild(newLabel)
   }
@@ -370,20 +359,17 @@ function generatePoses(e){
 
 }
 
+// When a pose is clicked, put that onto the canvas and mark it as selected.
 function selectPose(e){
-  console.log(e.target)
   let url = e.target.getAttribute('character')
   characterImg.setAttribute('src', paths.character + url + '/' + e.target.value + '.png')
-  generatePanel()
-
+  generatePanelArtwork()
   selectItem(e)
-
 }
 
+// Put appropriate attributes on the specified event target and its siblings to
+// be able to apply styling in the CSS.
 function selectItem(e){
-  let label = e.target.nextElementSibling
-  console.log(label)
-
   let siblings = e.target.parentNode.querySelectorAll('label')
   siblings.forEach(function(sibling){
     sibling.removeAttribute('selected')
@@ -392,83 +378,42 @@ function selectItem(e){
   e.target.nextElementSibling.setAttribute('selected', '')
 }
 
-
+// Recreate the meme as an image file and download it.
 function download() {
+  // Generate a temporary canvas that we'll combine all of our individual canvases onto for download
+  let tempCanvas = document.createElement('canvas')
+  tempCanvas.classList.add('temp-canvas')
+  tempCanvas.setAttribute('width', 1920)
+  tempCanvas.setAttribute('height', 1080)
+  document.body.appendChild(tempCanvas)
 
-  let allCanvases = document.querySelectorAll('canvas')
-  
-  if (allCanvases.length){
-    let tempCanvas = document.createElement('canvas')
-    tempCanvas.classList.add('temp-canvas')
-    tempCanvas.setAttribute('width', 1920)
-    tempCanvas.setAttribute('height', 1080)
-    document.body.appendChild(tempCanvas)
-  
-    let allCanvases = document.querySelectorAll('canvas:not(.temp-canvas)')
-    tempCanvas.setAttribute('height', 1080 * allCanvases.length + 1)
-  
-  
-    let tempCanvasContext = tempCanvas.getContext("2d")
-  
-  
-  
-    for (i=0; i < allCanvases.length; i++){
-      // Render the text
-      let ctx = allCanvases[i].getContext("2d");
-      ctx.font = "50px Georgia";
-      ctx.fillStyle = "#fff";
-      ctx.fillText(allCanvases[i].nextElementSibling.value, 370, 890);
-  
-  
-      tempCanvasContext.drawImage(allCanvases[i], 0, [i * 1080])
-  
-      /*var ctx = canvas.getContext("2d");
-      var img = document.querySelector("#" + type);
-      ctx.drawImage(img, 0, 0);*/
-  
-  
-    }
-  
-    let credits = document.querySelector("#credits");
-    tempCanvasContext.drawImage(credits, 0, (allCanvases.length - 1) * 1080);
-  
-  
-    
-  
-    downloadButton.download = 'ace-attorney-meme-generator.png';
-    downloadButton.href = tempCanvas.toDataURL()
-  
-    tempCanvas.parentNode.removeChild(tempCanvas)
-  
-  } else{
-    alert ('Your meme currently has no panels.')
+  // Get a list of all the canvases, and set the height of our temporary one to their combined heights.
+  let allCanvases = document.querySelectorAll('canvas:not(.temp-canvas)')
+  tempCanvas.setAttribute('height', 1080 * allCanvases.length + 1)
+
+
+  // Render the text on each one of our individual canvases, and add it onto
+  // our temporary one.
+  let tempCanvasContext = tempCanvas.getContext("2d")
+  for (i=0; i < allCanvases.length; i++){
+    // Render the text
+    let context = allCanvases[i].getContext("2d");
+    context.font = "50px Georgia";
+    context.fillStyle = "#fff";
+    context.fillText(allCanvases[i].nextElementSibling.value, 370, 890);
+    tempCanvasContext.drawImage(allCanvases[i], 0, [i * 1080])
   }
 
+  // Add the credits onto the end.
+  tempCanvasContext.drawImage(credits, 0, (allCanvases.length - 1) * 1080);
+
+  // Download the image, then remove the temporary canvas.
+  downloadButton.download = 'ace-attorney-meme-generator.png';
+  downloadButton.href = tempCanvas.toDataURL()
+  tempCanvas.parentNode.removeChild(tempCanvas)
 }
 
-
-downloadButton.addEventListener('click', download);
-
-
-;[].forEach.call(document.querySelectorAll('.toggle-heading'), function(node){
-  node.addEventListener('click', function(e){
-    let associate = document.querySelector('#' + e.target.getAttribute('associated-panel'))
-    togglePanel(associate)
-
-    //node.classList.toggle('closed')
-  })
-})
-
+// Simply takes a panel and toggles a 'hidden' attribute.
 function togglePanel(associate){
   associate.classList.toggle('hidden')
 }
-
-
-
-
-
-
-
-
-
-
