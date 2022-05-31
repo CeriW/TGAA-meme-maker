@@ -152,6 +152,17 @@ select{
   text-shadow: -1px -1px 0 rgba(0,0,0,0.3), 1px -1px 0 rgba(0,0,0,0.3), -1px 1px 0 rgba(0,0,0,0.3), 1px 1px 0 rgba(0,0,0,0.3);
 }
 
+#add-panel{
+  background: linear-gradient(to bottom, #65592d, #9E9150);
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 5px;
+  z-index: 2;
+  border: 2px solid var(--blue);
+  cursor: pointer;
+}
+
 #pose-heading{
   cursor: default;
 }
@@ -260,7 +271,11 @@ body{
   gap: 20px 30px; 
 }
 
-#canvas-grid-item { grid-area: canvas; }
+#canvas-grid-item { grid-area: canvas;}
+
+#canvas-grid-item > div{
+  position: relative;
+}
 .options { grid-area: options; }
 
 @media (max-width:1450px){
@@ -271,9 +286,6 @@ body{
     "canvas" 
     "options";
   }
-
-
-
 }
 
 @media (max-width: 1000px){
@@ -339,3 +351,5 @@ body{
   padding-right: 10px;
   font-size: 21px !important;
 }
+
+.material-icons.md-17 { font-size: 17px !important; }

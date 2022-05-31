@@ -1,5 +1,5 @@
 
-let canvas = document.querySelector('#myCanvas')
+let canvas = null
 
 
 let backgroundImg = document.querySelector('#background')
@@ -57,7 +57,8 @@ const characters = [
   {name: 'Barok van Zieks',     id:'van-zieks-barok',     gender: 'M',     images: 6}
 ]
 
-
+generateCanvas()
+canvas = document.querySelector('canvas')
 
 
 function generateLocations(){
@@ -72,9 +73,13 @@ function generateLocations(){
 generateLocations()
 
 
+
+
 generatePanel()
 backgroundSelector.addEventListener('change', generatePanel)
 characterSelector.addEventListener('change', generatePanel)
+
+
 
 
 document.querySelector('#add-panel').addEventListener('click', generateCanvas)
@@ -129,7 +134,7 @@ function generateCanvas(){
   newCanvas.classList.add('canvas-container')
   newCanvas.innerHTML = 
   '<canvas class="myCanvas" width="1920" height="1080"></canvas><textarea class="text-overlay">Type your text here...</textarea>'
-  document.body.appendChild(newCanvas)
+  document.querySelector('#canvas-grid-item > div').appendChild(newCanvas)
   canvas = newCanvas.querySelector('canvas')
   generatePanel(newCanvas)
 }
@@ -335,7 +340,8 @@ function download() {
   let ctx = canvas.getContext("2d");
   ctx.font = "50px Georgia";
   ctx.fillStyle = "#fff";
-  ctx.fillText(textOverlay.value, 370, 890);
+  ctx.fillText(canvas.nextElementSibling.value, 370, 890);
+  console.log(canvas)
 
   let credits = document.querySelector("#credits");
   ctx.drawImage(credits, 0, 0);
@@ -361,6 +367,8 @@ downloadButton.addEventListener('click', download);
 function togglePanel(associate){
   associate.classList.toggle('hidden')
 }
+
+
 
 
 
