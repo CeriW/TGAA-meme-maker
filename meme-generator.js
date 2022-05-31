@@ -18,7 +18,8 @@ let downloadButton = document.querySelector('#download')
 
 let tag = document.querySelector('#speech-tag')
 
-
+// We'll iterate this each time we make a new panel to give each one a unique ID
+let panels = 1
 
 // Store whether the user has deliberately chosen a character yet.
 // This will prevent the default character tag being generated while selecting
@@ -122,11 +123,15 @@ function generatePanel(){
 }
 
 function generateCanvas(){
-  let newCanvas = document.createElement('canvas')
+  let newCanvas = document.createElement('div')
+  newCanvas.setAttribute('id', 'canvas-' + panels)
+  panels++
   newCanvas.classList.add('canvas-container')
   newCanvas.innerHTML = 
-  '<canvas id="myCanvas" width="1920" height="1080"></canvas><textarea class="text-overlay">Type your text here...</textarea>'
+  '<canvas class="myCanvas" width="1920" height="1080"></canvas><textarea class="text-overlay">Type your text here...</textarea>'
   document.body.appendChild(newCanvas)
+  canvas = newCanvas.querySelector('canvas')
+  generatePanel(newCanvas)
 }
 
 

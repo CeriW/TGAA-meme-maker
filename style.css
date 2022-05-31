@@ -75,6 +75,10 @@ div[class*="icon"]:hover,
   background-size: contain;
 }
 
+canvas{
+  border: 1px solid red;
+}
+
 .canvas-container,
 .canvas-container-2{
   position: relative;
