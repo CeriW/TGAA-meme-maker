@@ -10,6 +10,7 @@
 - Search
 - Filtering
 
+-JSON files for character and location lists
 
 
 <span class="material-icons">face</span>

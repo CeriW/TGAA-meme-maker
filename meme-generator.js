@@ -19,6 +19,7 @@ let downloadButton = document.querySelector('#download')
 let tag = document.querySelector('#speech-tag')
 
 
+
 // Store whether the user has deliberately chosen a character yet.
 // This will prevent the default character tag being generated while selecting
 // a location
@@ -35,7 +36,7 @@ const locations = [
   {name:'Crystal Tower base', id:'crystal-tower-base'},
   {name: 'The Garridebs\' room', id:'garridebs-room'},
   {name: 'Naruhodo\'s Legal Consultancy', id:'naruhodos-legal-consultancy'},
-  {name: 'Sholmes\' Suite', id:'sholmes-suite'},
+  {name: 'Sholmes\' Suite - fireplace', id:'sholmes-suite'},
   {name: 'Defendant\'s Antechamber - The Old Bailey', id:'defendants-antechamber-the-old-bailey-left'},
   {name: 'Natsume\'s Room', id:'natsumes-room'},
   {name: 'Prison cell', id:'prison-cell'},
@@ -148,6 +149,41 @@ function generateCharacterInterface(){
     })
   })
 }
+
+;[].forEach.call(document.querySelectorAll('.filter'), function(node){
+
+  node.addEventListener('click', function(e){
+    console.log(e.target)
+
+    let filter = e.target.getAttribute('filter')
+    console.log(filter)
+
+
+    let icons = node.parentNode.querySelectorAll('div[class*="icon"]')
+    icons.forEach(function(icon){
+      if (filter == 'male' && icon.getAttribute('gender') == 'M'){
+        console.log(icon)
+      } else if (filter == 'female' && icon.getAttribute('gender') == 'F'){
+        console.log(icon)
+
+      }
+
+    })
+
+    /*if (filter == 'male'){
+      let males = node.parentNode.querySelectorAll('[gender="M"]')
+      console.log(males)
+    } else if (filter == 'female'){
+      let females = node.parentNode.querySelectorAll('[gender="F"]')
+      console.log(females)
+    }*/
+
+
+  })
+
+})
+
+
 
 function generateLocationInterface(){
   locations.forEach(function(location){
