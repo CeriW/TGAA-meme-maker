@@ -154,12 +154,17 @@ function generateCanvas(){
 }
 
 function changeActiveCanvas(activeCanvas){
+
+
   
   canvas = activeCanvas
+  console.log(activeCanvas)
+
+
   
   let allCanvases = document.querySelectorAll('canvas')
   allCanvases.forEach(function(node){
-    if (node == activeCanvas){
+    if (node === activeCanvas){
       node.parentNode.classList.add('active-canvas')
     } else{
       node.parentNode.classList.remove('active-canvas')
@@ -170,12 +175,29 @@ function changeActiveCanvas(activeCanvas){
 }
 
 function removeCanvas(e){
-  let canvas = e.target.parentNode
+  e.stopPropagation()
+  let deadCanvas = e.target.closest('.canvas-container')
 
-  canvas.style.animation = 'shrink 0.5s both'
+
+  
+  console.log(deadCanvas.previousElementSibling)
+  if (deadCanvas.previousElementSibling){
+    changeActiveCanvas(deadCanvas.previousElementSibling.querySelector('canvas'))
+    console.log('no previous')
+  } else if (deadCanvas.nextElementSibling){
+    changeActiveCanvas(deadCanvas.nextElementSibling.querySelector('canvas'))
+  } else{
+    generateCanvas()
+  }
+  
+
+  deadCanvas.style.animation = 'shrink 0.5s both'
   window.setTimeout(function(){
-    canvas.parentNode.removeChild(canvas)
+    deadCanvas.parentNode.removeChild(deadCanvas)
   },500)
+
+
+
 }
 
 function generateCharacterInterface(){
