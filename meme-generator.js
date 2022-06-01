@@ -306,7 +306,7 @@ function generateLabelledIcon(type, object){
       iconURL = 'url("assets/characters/' + object.id + '/thumbnails/1.png")'
       break
     case 'location':
-      iconURL = 'url("assets/locations/' + object.id + '.png")'
+      iconURL = 'url("assets/locations/thumbnails/' + object.id + '.png")'
       break;
   }  
   icon.style.backgroundImage = iconURL
