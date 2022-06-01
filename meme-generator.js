@@ -303,7 +303,7 @@ function generateLabelledIcon(type, object){
   switch(type) {
     case 'character':
       // This is set to 1.png so it will use the first image of the character as the preview.
-      iconURL = 'url("assets/characters/' + object.id + '/1.png")'
+      iconURL = 'url("assets/characters/' + object.id + '/thumbnails/1.png")'
       break
     case 'location':
       iconURL = 'url("assets/locations/' + object.id + '.png")'
@@ -358,7 +358,7 @@ function generatePoses(e){
 
     let newLabel = document.createElement('label')
     newLabel.setAttribute('for', i)
-    newLabel.style.backgroundImage = 'url("assets/characters/' + chosenCharacter + '/' + i +'.png")'
+    newLabel.style.backgroundImage = 'url("assets/characters/' + chosenCharacter + '/thumbnails/' + i +'.png")'
     poseSelector.appendChild(newLabel)
   }
 
