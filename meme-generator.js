@@ -236,7 +236,7 @@ function generateCharacterInterface(){
     characterSelector.appendChild(newOption)
 
     let icon = generateLabelledIcon('character', character)
-    icon.setAttribute('gender', character.gender)
+    icon.setAttribute('gender', 'gender-' + character.gender) // This is set like this since 'female' contains the string 'male'
     icon.setAttribute('nationality', character.nationality)
 
 
@@ -491,5 +491,71 @@ filterButtons.forEach(function(filter){
     }
 
 
+  })
+})
+
+
+document.querySelector('.apply-filter-button').addEventListener('click', filterItems)
+
+
+function filterItems(e){
+  
+  let panel = e.target.parentNode.parentNode
+
+  let chosenFilterNodes = e.target.parentNode.querySelectorAll('[checked="checked"]')
+
+  let acceptableGenders =[]
+  chosenFilterNodes.forEach(function(node){
+    if (node.getAttribute('checked') == 'checked' && node.getAttribute('filter-type') == 'gender'){
+      acceptableGenders.push(node.value)
+    }
+  })
+
+  let acceptableNationalities =[]
+  chosenFilterNodes.forEach(function(node){
+    if (node.getAttribute('checked') == 'checked' && node.getAttribute('filter-type') == 'nationality'){
+      acceptableNationalities.push(node.value)
+    }
+  })
+
+  let icons = panel.querySelectorAll('div[class*="icon"]')
+  icons.forEach(function(icon){
+    icon.setAttribute('toggled', 'false')
+
+    let genderMatch = false
+    let nationalityMatch = false
+
+    acceptableGenders.forEach(function(gender){
+      if (icon.outerHTML.indexOf(gender) > 0){
+        genderMatch = true
+      }
+    })
+
+    acceptableNationalities.forEach(function(nationality){
+      if (icon.outerHTML.indexOf(nationality) > 0){
+        nationalityMatch = true
+      }
+    })
+
+    if (genderMatch && nationalityMatch){
+      icon.setAttribute('toggled','on')
+    }
+
+  })
+
+
+
+}
+
+
+let checkboxes = document.querySelectorAll('input[type="checkbox"]')
+checkboxes.forEach(function(node){
+  node.addEventListener('click', function(e){
+    console.log(node)
+    if (e.target.getAttribute('checked') == "checked"){
+      e.target.setAttribute('checked', 'false')
+    } else{
+      e.target.setAttribute('checked', 'checked')
+    }
   })
 })

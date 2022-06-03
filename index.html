@@ -57,7 +57,63 @@
             <select name="character-selector" id="character-selector"></select>
 
             <div id="character-selector-preview">
-              <div class="filter">
+              
+
+
+
+              <div class="filter-form">
+                <div class="gender-checkbox">
+                    <label for="gender-checkbox">Gender</label>
+                    <div class="checkbox-group">
+                        <div class="formbuilder-checkbox">
+                            <input class="gender" name="gender-checkbox" filter-type="gender" id="gender-checkbox-male" value="gender-male" type="checkbox" checked="checked">
+                            <label for="gender-checkbox-male">Male</label>
+                        </div>
+                        <div class="formbuilder-checkbox">
+                            <input class="gender" name="gender-checkbox" filter-type="gender" id="gender-checkbox-female" value="gender-female" type="checkbox" checked="checked">
+                            <label for="gender-checkbox-female">Female</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="nationality-checkbox">
+                    <label for="nationality-checkbox" class="formbuilder-checkbox-group-label">Nationality</label>
+                    <div class="checkbox-group">
+                        <div class="formbuilder-checkbox">
+                            <input name="nationality-checkbox" filter-type="nationality" id="nationality-checkbox-british" value="british" type="checkbox" checked="checked">
+                            <label for="nationality-checkbox-british">British</label>
+                        </div>
+                        <div class="formbuilder-checkbox">
+                            <input name="nationality-checkbox" filter-type="nationality" id="nationality-checkbox-japanese" value="japanese" type="checkbox" checked="checked">
+                            <label for="nationality-checkbox-japanese">Japanese</label>
+                        </div>
+                        <div class="formbuilder-checkbox">
+                            <input name="nationality-checkbox" filter-type="nationality" id="nationality-checkbox-french" value="french" type="checkbox" checked="checked">
+                            <label for="nationality-checkbox-french">French</label>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="apply-filter-button">Filter</button>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              
+              
+              <!--<div class="filter">
                 Filter by:
                 <span class="material-icons" filter-type="gender" filter-value="male">male</span>
                 <span class="material-icons" filter-type="gender" filter-value="female">female</span>
@@ -69,7 +125,7 @@
 
                 <span filter-type="all" filter-value="all">Reset</span>
 
-              </div>
+              </div>-->
 
 
             </div>

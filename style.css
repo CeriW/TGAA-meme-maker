@@ -466,7 +466,7 @@ div[class*="icon"]:hover,
 
 
 
-.character-icon[toggled="off"]{
+.character-icon[toggled="false"]{
   opacity: 0.1;
 }
 
