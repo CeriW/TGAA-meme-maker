@@ -470,3 +470,10 @@ div[class*="icon"]:hover,
   display: none;
 }
 
+span[filter-type="all"]{
+  display: inline-block;
+  background: #fff;
+  color: var(--blue);
+  float: right;
+  padding: 5px;
+}

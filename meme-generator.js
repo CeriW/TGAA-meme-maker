@@ -57,16 +57,16 @@ const locations = [
 // gender - the gender of the character, for filtering purposes
 // images - the number of images in the folder to go with this character. The code depends on them being named sequentially beginning at 1 and can't work if there are any numbers missing.
 const characters = [
-  {name: 'Ryunosuke Naruhodo',                    id:'naruhodo-ryunosuke',          gender: 'male',       images: 7},
-  {name: 'Herlock Sholmes',                       id:'sholmes-herlock-default',     gender: 'male',       images: 12,      variant: 'default'},
-  {name: 'Herlock Sholmes',                       id:'sholmes-herlock-casual',      gender: 'male',       images: 9,       variant: 'casual'},
-  {name: 'Susato Mikotoba',                       id:'mikotoba-susato',             gender: 'female',     images: 12},
-  {name: 'Barok van Zieks',                       id:'van-zieks-barok',             gender: 'male',       images: 6},
-  {name: 'Iris Wilson',                           id:'wilson-iris',                 gender: 'female',     images: 4},
-  {name: 'Tobias Gregson',                        id:'gregson-tobias',              gender: 'male',       images: 4},
-  {name: 'Gina Lestrade',                         id:'lestrade-gina',               gender: 'female',     images: 4},
-  {name: 'Soseki Natsume',                        id:'natsume-soseki',              gender: 'male',       images: 9},
-  {name: 'Enoch Drebber',                         id:'drebber-enoch',               gender: 'male',       images: 4},
+  {name: 'Ryunosuke Naruhodo',                    id:'naruhodo-ryunosuke',          gender: 'male',       nationality: 'japanese',      images: 7},
+  {name: 'Herlock Sholmes',                       id:'sholmes-herlock-default',     gender: 'male',       nationality: 'british',       images: 12,      variant: 'default'},
+  {name: 'Herlock Sholmes',                       id:'sholmes-herlock-casual',      gender: 'male',       nationality: 'british',       images: 9,       variant: 'casual'},
+  {name: 'Susato Mikotoba',                       id:'mikotoba-susato',             gender: 'female',     nationality: 'japanese',      images: 12},
+  {name: 'Barok van Zieks',                       id:'van-zieks-barok',             gender: 'male',       nationality: 'british',       images: 6},
+  {name: 'Iris Wilson',                           id:'wilson-iris',                 gender: 'female',     nationality: 'british',       images: 4},
+  {name: 'Tobias Gregson',                        id:'gregson-tobias',              gender: 'male',       nationality: 'british',       images: 4},
+  {name: 'Gina Lestrade',                         id:'lestrade-gina',               gender: 'female',     nationality: 'british',       images: 4},
+  {name: 'Soseki Natsume',                        id:'natsume-soseki',              gender: 'male',       nationality: 'japanese',      images: 9},
+  {name: 'Enoch Drebber',                         id:'drebber-enoch',               gender: 'male',       nationality: 'british',       images: 4},
 ]
 
 // ---------------------------------------------------------------------------//
@@ -235,6 +235,8 @@ function generateCharacterInterface(){
 
     let icon = generateLabelledIcon('character', character)
     icon.setAttribute('gender', character.gender)
+    icon.setAttribute('nationality', character.nationality)
+
 
     characterPreview.appendChild(icon)
 
