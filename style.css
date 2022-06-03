@@ -74,7 +74,7 @@ input[type="radio"],
 
 /* Canvas bits  ------------------------------------------------------------- */
 
-.canvas-container,
+/*.canvas-container,*/
 #pose-selector{
   float: none;
   margin: 0 auto;
@@ -82,7 +82,7 @@ input[type="radio"],
 
 .canvas-container,
 canvas{
-  display: block;
+  display: inline-flex;
   width: 100%;
   max-width: 800px;
 }
@@ -100,7 +100,8 @@ canvas{
   bottom: 0;
   right: 0;
   pointer-events: none;
-  transition: 0.5s;
+  transition: box-shadow 0.5s;
+  z-index: 2;
 }
 
 .canvas-container:hover:before{
@@ -131,6 +132,10 @@ canvas{
     max-height: 0;}
 }
 
+.canvas-container + .canvas-container,
+#add-panel{
+  margin-top: -4px;
+}
 
 
 
@@ -409,4 +414,19 @@ div[class*="icon"]:hover,
 
 
 
+
+
+.canvas-container{
+  position: relative;
+}
+
+.canvas-container img:not(:first-child){
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.canvas-container img{
+  max-width: 100%;
+}
 

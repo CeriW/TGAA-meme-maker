@@ -8,6 +8,7 @@ let currentCanvas = null
 let backgroundImg = document.querySelector('#background')
 let characterImg = document.querySelector('#character')
 let tag = document.querySelector('#speech-tag')
+let speechbox = document.querySelector('#speech-box')
 let credits = document.querySelector("#credits")
 
 // Interface elements
@@ -69,7 +70,7 @@ const characters = [
 
 // Create our first canvas, and set it as the selected one.
 generateCanvas()
-currentCanvas = document.querySelector('canvas')
+currentCanvas = document.querySelector('canvas-container')
 
 // Generate the locations selector panel.
 generateLocations()
@@ -125,7 +126,7 @@ function generatePanelArtwork(){
   }
 
 
-  // Wait for the image to load before we attempt to add it to the canvas
+  /*// Wait for the image to load before we attempt to add it to the canvas
   backgroundImg.addEventListener('load', function(){
     addImage('background')
   })
@@ -142,16 +143,28 @@ function generatePanelArtwork(){
 
   window.setTimeout(function(){
     addImage('speech-box')
-  },50)
+  },50)*/
 
 
-  
+  /*addImage('background')
+  addImage('character')
+  addImage('speech-tag')
+  addImage('speech-box')
+  */
+
+
+
   // Adds a new layer to the canvas.
   //Acceptable parameter values: background, character, speech-box
   function addImage(type){
-    let context = currentCanvas.getContext("2d");
+    let context = currentCanvas.querySelector('canvas').getContext("2d");
     let img = document.querySelector("#" + type);
-    context.drawImage(img, 0, 0);
+    img.addEventListener('load', function(){
+      context.drawImage(img, 0, 0);
+      console.log(img)
+      console.log(img.complete)
+    })
+
   }
 
 }
@@ -162,8 +175,35 @@ function generateCanvas(){
   // Create the new canvas
   let newCanvas = document.createElement('div')
   newCanvas.classList.add('canvas-container')
-  newCanvas.innerHTML = 
-  '<canvas width="1920" height="1080"></canvas><textarea class="text-overlay">Type your text here...</textarea>'
+  
+
+  backgroundImg = document.createElement('img')
+  newCanvas.appendChild(backgroundImg)
+
+  characterImg = document.createElement('img')
+  newCanvas.appendChild(characterImg)
+
+  tag = document.createElement('img')
+  tag.src = ''
+  console.log(tag)
+  newCanvas.appendChild(tag)
+
+  newSpeechbox = document.createElement('img')
+  newSpeechbox.src = 'assets/game-elements/speech-box.png'
+  newCanvas.appendChild(newSpeechbox)
+
+  newTextBox = document.createElement('textarea')
+  newTextBox.classList.add('text-overlay')
+  newTextBox.innerHTML = 'Type your text here...'
+  newCanvas.appendChild(newTextBox)
+
+  /*speechbox = document.createElement('canvas')
+  speechbox.width = 1920
+  speechbox.height = 1080*/
+  //newCanvas.appendChild(speechbox)
+
+  /*newCanvas.innerHTML = 
+  '<canvas width="1920" height="1080"></canvas><textarea class="text-overlay">Type your text here...</textarea>'*/
   
   // Generate the delete button and have it run removeCanvas on click.
   let deleteButton = document.createElement('div')
@@ -174,13 +214,16 @@ function generateCanvas(){
 
   // When the canvas is clicked, make it the active one.
   newCanvas.addEventListener('click', function(){
-    changeActiveCanvas(newCanvas.querySelector('canvas'))
+    changeActiveCanvas(newCanvas)
+    console.log(newCanvas)
+
   })
 
   // Add the canvas onto the page, make it the active one and put artwork in it.
   document.querySelector('#canvas-grid-item > div').appendChild(newCanvas)
-  changeActiveCanvas(newCanvas.querySelector('canvas'))
+  changeActiveCanvas(newCanvas)
   generatePanelArtwork(newCanvas)
+  tag.src = ''
 }
 
 // Make the specified canvas/panel the active one. This could be the result of a click on a canvas, or deleting an adjacent canvas.
@@ -188,13 +231,19 @@ function generateCanvas(){
 function changeActiveCanvas(activeCanvas){
 
   currentCanvas = activeCanvas
+  console.log(activeCanvas)
+
+  backgroundImg = activeCanvas.querySelector('img:nth-child(1)')
+  characterImg = activeCanvas.querySelector('img:nth-child(2)')
+  tag = activeCanvas.querySelector('img:nth-child(3)')
+
   
-  let allCanvases = document.querySelectorAll('canvas')
+  let allCanvases = document.querySelectorAll('.canvas-container')
   allCanvases.forEach(function(node){
     if (node === activeCanvas){
-      node.parentNode.classList.add('active-canvas')
+      node.classList.add('active-canvas')
     } else{
-      node.parentNode.classList.remove('active-canvas')
+      node.classList.remove('active-canvas')
     }
   })
 }
@@ -206,9 +255,9 @@ function removeCanvas(e){
 
   
   if (deadCanvas.previousElementSibling){ // If the panel has one before it, make that the active one.
-    changeActiveCanvas(deadCanvas.previousElementSibling.querySelector('canvas'))
+    changeActiveCanvas(deadCanvas.previousElementSibling)
   } else if (deadCanvas.nextElementSibling){ // If no previous one but there's a next one, make the next one the active one.
-    changeActiveCanvas(deadCanvas.nextElementSibling.querySelector('canvas'))
+    changeActiveCanvas(deadCanvas.nextElementSibling)
   } else{ // If this function results in there being no panel at all, generate a fresh one.
     generateCanvas()
   }
@@ -369,7 +418,7 @@ function generatePoses(e){
 // When a pose is clicked, put that onto the canvas and mark it as selected.
 function selectPose(e){
   let url = e.target.getAttribute('character')
-  characterImg.setAttribute('src', paths.character + url + '/' + e.target.value + '.png')
+  characterImg.setAttribute('src', paths.character + url + '/' + e.target.value + '.png')  
   generatePanelArtwork()
   selectItem(e)
 }
