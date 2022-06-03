@@ -36,19 +36,19 @@ let paths ={
 // name - a user-readable name that will display on the page
 // id - the name of the image to go alongside it
 const locations = [
-  {name: '221B Baker Street', id:'baker-street-221b'},
-  {name: '221B Baker Street (night)', id:'baker-street-221b-night'},
-  {name:'Crystal Tower base', id:'crystal-tower-base'},
-  {name: 'The Garridebs\' room', id:'garridebs-room'},
-  {name: 'Naruhodo\'s Legal Consultancy', id:'naruhodos-legal-consultancy'},
-  {name: 'Sholmes\' Suite - fireplace', id:'sholmes-suite'},
-  {name: 'Defendant\'s Antechamber - The Old Bailey', id:'defendants-antechamber-the-old-bailey-left'},
-  {name: 'Natsume\'s Room', id:'natsumes-room'},
-  {name: 'Prison cell', id:'prison-cell'},
-  {name: 'Prosecutor\'s Office (left)', id:'prosecutors-office-left'},
-  {name: 'Sholmes\' Suite - Iris\' side', id:'sholmes-suite-iris'},
-  {name: 'Sholmes\' Suite - Herlock\'s side', id:'sholmes-suite-sholmes'},
-  {name: 'Windibank\'s Pawnbrokery', id:'windibanks'},
+  {name: "221B Baker Street",                     id:"baker-street-221b"},
+  {name: "221B Baker Street",                     id:"baker-street-221b-night", variant:"night"},
+  {name:"Crystal Tower base",                     id:"crystal-tower-base"},
+  {name: "The Garridebs' room",                   id:"garridebs-room"},
+  {name: "Naruhodo's Legal Consultancy",          id:"naruhodos-legal-consultancy"},
+  {name: "Sholmes' Suite",                        id:"sholmes-suite", variant: "Fireplace"},
+  {name: "Defendant's Antechamber", id:"defendants-antechamber-the-old-bailey-left", variant:'The Old Bailey'},
+  {name: "Natsume's Room", id:"natsumes-room"},
+  {name: "Prison cell", id:"prison-cell"},
+  {name: "Prosecutor's Office", id:"prosecutors-office-left"},
+  {name: "Sholmes' Suite", id:"sholmes-suite-iris", variant:"Iris' side"},
+  {name: "Sholmes' Suite", id:"sholmes-suite-sholmes"},
+  {name: "Windibank's Pawnbrokery", id:"windibanks"},
 ]
 
 // A list of the available characters
@@ -57,15 +57,15 @@ const locations = [
 // gender - the gender of the character, for filtering purposes
 // images - the number of images in the folder to go with this character. The code depends on them being named sequentially beginning at 1 and can't work if there are any numbers missing.
 const characters = [
-  {name: 'Herlock Sholmes - default outfit',      id:'sholmes-herlock-default',     gender: 'M',     images: 12},
-  {name: 'Herlock Sholmes - casual outfit',       id:'sholmes-herlock-casual',      gender: 'M',     images: 9},
-  {name: 'Iris Wilson',                           id:'wilson-iris',                 gender: 'F',     images: 4},
-  {name: 'Gina Lestrade',                         id:'lestrade-gina',               gender: 'F',     images: 4},
-  {name: 'Susato Mikotoba',                       id:'mikotoba-susato',             gender: 'F',     images: 12},
-  {name: 'Enoch Drebber',                         id:'drebber-enoch',               gender: 'M',     images: 4},
-  {name: 'Barok van Zieks',                       id:'van-zieks-barok',             gender: 'M',     images: 6},
-  {name: 'Soseki Natsume',                        id:'natsume-soseki',              gender: 'M',     images: 9},
-  {name: 'Tobias Gregson',                        id:'gregson-tobias',              gender: 'M',     images: 4}
+  {name: 'Herlock Sholmes',                       id:'sholmes-herlock-default',     variant: 'default',    gender: 'M',     images: 12},
+  {name: 'Herlock Sholmes',                       id:'sholmes-herlock-casual',      variant: 'casual',    gender: 'M',     images: 9},
+  {name: 'Iris Wilson',                           id:'wilson-iris',                 variant: null,    gender: 'F',     images: 4},
+  {name: 'Gina Lestrade',                         id:'lestrade-gina',               variant: null,    gender: 'F',     images: 4},
+  {name: 'Susato Mikotoba',                       id:'mikotoba-susato',             variant: null,    gender: 'F',     images: 12},
+  {name: 'Enoch Drebber',                         id:'drebber-enoch',               variant: null,    gender: 'M',     images: 4},
+  {name: 'Barok van Zieks',                       id:'van-zieks-barok',             variant: null,    gender: 'M',     images: 6},
+  {name: 'Soseki Natsume',                        id:'natsume-soseki',              variant: null,    gender: 'M',     images: 9},
+  {name: 'Tobias Gregson',                        id:'gregson-tobias',              variant: null,    gender: 'M',     images: 4}
 ]
 
 // ---------------------------------------------------------------------------//
@@ -314,6 +314,14 @@ function generateLabelledIcon(type, object){
 
   let label = document.createElement('div')
   label.textContent += object.name
+
+  if (object.variant){
+    console.log(object.variant)
+    let variantTag = document.createElement('div')
+    variantTag.classList.add('variant-tag')
+    variantTag.textContent = object.variant
+    label.appendChild(variantTag)
+  }
   icon.appendChild(label)
 
   return icon

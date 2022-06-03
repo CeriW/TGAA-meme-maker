@@ -273,7 +273,11 @@ div[class*="icon"]:hover,
 
 .material-icons.md-17 { font-size: 17px !important; }
 
-
+.variant-tag{
+  font-size: 0.9em;
+  font-style: italic;
+  color: var(--gold)
+}
 
 /* Text boxes ----------------------------------------------------------------*/
 
