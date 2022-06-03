@@ -8,7 +8,11 @@ body{
   color: #fff;
   font-family: 'Libre Baskerville', Georgia, serif; /* Yes, I chose 'Libre Baskerville' on purpose. Congrats, you found an easter egg */
   font-size: 15px;
-  padding: 30px;
+  padding: 0 30px 30px;
+  margin: 0;
+}
+
+main{
   display: grid; 
   grid-template-columns: 800px auto; 
   grid-template-rows: 1fr; 
@@ -23,13 +27,23 @@ body{
   min-height: 100px;
 }
 
+header{
+  text-align: center;
+}
+
+#banner{
+  width: 650px;
+  max-width: 100%;
+}
 
 
 .options { grid-area: options; }
 
 
+
 /* Shared bits -------------------------------------------------------------*/
 
+#canvas-grid-item,
 #canvas-grid-item > div,
 .canvas-container,
 .active-canvas,
@@ -70,7 +84,9 @@ div[class*="icon"],
 #speech-tag,
 #credits,
 input[type="radio"],
-#character-selector-preview:not(.hidden) + #pose-heading{
+#character-selector-preview:not(.hidden) + #pose-heading,
+body[character-selected="false"] #pose-heading,
+body[character-selected="false"] #pose-selector{
   display: none;
 }
 
@@ -257,7 +273,11 @@ div[class*="icon"]:hover,
 
 .material-icons.md-17 { font-size: 17px !important; }
 
-
+.variant-tag{
+  font-size: 0.9em;
+  font-style: italic;
+  color: var(--gold)
+}
 
 /* Text boxes ----------------------------------------------------------------*/
 
@@ -291,11 +311,10 @@ div[class*="icon"]:hover,
 /* Headings ------------------------------------------------------------------*/
 
 .toggle-heading,
-#pose-heading,
-#download{
+#pose-heading{
   background: linear-gradient(to bottom, #65592d, #9E9150);
   color: #fff;
-  padding: 10px 20px;
+  padding: 10px 10px 10px 20px;
   text-decoration: none;
   font-size: 20px;
   transition: 0.4s;
@@ -309,27 +328,15 @@ div[class*="icon"]:hover,
   cursor: default;
 }
 
-.toggle-heading:after{
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 10px;
-  bottom: 0;
-  width: 20px;
-  background: url('assets/icons/down-arrow.svg') center no-repeat;
-  background-size: contain;
-  transform: rotate(-90deg);
-  transition: inherit;
-}
-
-.toggle-heading:not(.closed):after{
-  transform: rotate(0);
-}
 
 .toggle-heading:hover,
 #download:hover{
   color: var(--blue);
   text-shadow: none;
+}
+
+.down-arrow{
+  float: right;
 }
 
 /* Buttons -------------------------------------------------------------------*/
@@ -362,7 +369,7 @@ div[class*="icon"]:hover,
 /* Make it responsive --------------------------------------------------------*/
 
 @media (max-width:1450px){
-  body{
+  main{
     grid-template-columns: auto;
     grid-template-rows: auto auto auto auto;
     grid-template-areas:
@@ -403,7 +410,12 @@ div[class*="icon"]:hover,
 
 @media (max-width: 600px){
   body{
-    padding: 10px;
+    padding: 20px;
+  }
+
+  #download{
+    width: 170px;
+    left: -24px !important;
   }
 }
 
@@ -425,13 +437,11 @@ div[class*="icon"]:hover,
 
 
 
-
-
-
-
-
-
-
-
+#download{
+  position: absolute;
+  top: 0;
+  left: -35px;
+  z-index: 4;
+}
 
 
