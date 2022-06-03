@@ -117,12 +117,16 @@ function generateLocations(){
 
 // Generates our canvas with the chosen backgrounds, characters and text
 function generatePanelArtwork(){
+  
   // Set the background image
-  backgroundImg.setAttribute('src', paths.location + backgroundSelector.value + '.png')
+  let backgrounds = document.querySelectorAll('.canvas-container img:first-child')
+  backgrounds.forEach(function(background){
+    background.src = paths.location + backgroundSelector.value + '.png'
+  })
 
   // If a character has been purposely selected previously then set the character image
   if (characterSelected){
-    tag.setAttribute('src', paths.character + characterSelector.value + '/tag.png')
+    tag.src = paths.character + characterSelector.value + '/tag.png'
   }
 }
 

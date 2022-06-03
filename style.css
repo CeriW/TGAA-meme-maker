@@ -8,7 +8,11 @@ body{
   color: #fff;
   font-family: 'Libre Baskerville', Georgia, serif; /* Yes, I chose 'Libre Baskerville' on purpose. Congrats, you found an easter egg */
   font-size: 15px;
-  padding: 30px;
+  padding: 0 30px 30px;
+  margin: 0;
+}
+
+main{
   display: grid; 
   grid-template-columns: 800px auto; 
   grid-template-rows: 1fr; 
@@ -23,13 +27,23 @@ body{
   min-height: 100px;
 }
 
+header{
+  text-align: center;
+}
+
+#banner{
+  width: 650px;
+  max-width: 100%;
+}
 
 
 .options { grid-area: options; }
 
 
+
 /* Shared bits -------------------------------------------------------------*/
 
+#canvas-grid-item,
 #canvas-grid-item > div,
 .canvas-container,
 .active-canvas,
@@ -291,8 +305,7 @@ div[class*="icon"]:hover,
 /* Headings ------------------------------------------------------------------*/
 
 .toggle-heading,
-#pose-heading,
-#download{
+#pose-heading{
   background: linear-gradient(to bottom, #65592d, #9E9150);
   color: #fff;
   padding: 10px 20px;
@@ -425,13 +438,11 @@ div[class*="icon"]:hover,
 
 
 
-
-
-
-
-
-
-
-
+#download{
+  position: absolute;
+  top: 0;
+  left: -35px;
+  z-index: 4;
+}
 
 

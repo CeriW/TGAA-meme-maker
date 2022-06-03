@@ -15,61 +15,67 @@
 
     <body>
 
-      
+      <header>
+        <img id="banner" src="assets/misc/banner.png">
+      </header>
 
-      <div id="canvas-grid-item">
-        <div></div>
-        <span id="add-panel"><span class="material-icons md-17">add</span>Add panel</span>
-      </div>
-      
+      <main>
+        <div id="canvas-grid-item">
 
-      
-      <!--<img id="character" src="">
-      <img id="background" src="">
-      <img id="speech-tag" src="assets/game-elements/speech-box-tag.png">-->
-      <img id="speech-box" src="assets/game-elements/speech-box.png">
-      <img id="credits" src="assets/misc/credits.png">
+          <div></div>
+          <span id="add-panel"><span class="material-icons md-17">add</span>Add panel</span>
 
 
-      <div id="options">
+          <a id="download"><img src="assets/misc/download.png"></a>
 
-        <div class="toggle-heading" associated-panel="background-selector-preview">
-          <span class="material-icons">edit_location</span>
-          Select your location</div>
-        <select name="background-selector" id="background-selector"></select>
-        <div id="background-selector-preview"></div>
-        
+        </div>
+            
+        <!--<img id="character" src="">
+        <img id="background" src="">
+        <img id="speech-tag" src="assets/game-elements/speech-box-tag.png">-->
+        <img id="speech-box" src="assets/game-elements/speech-box.png">
+        <img id="credits" src="assets/misc/credits.png">
 
-        <div>
-          <div class="toggle-heading" associated-panel="character-selector-preview">
-            <span class="material-icons">person_add</span>
-            Select your character</div>
-          <select name="character-selector" id="character-selector"></select>
 
-          <div id="character-selector-preview">
-            <!--<div class="filter">
-              Filter by:
-              <span class="material-icons" filter="male">male</span>
-              <span class="material-icons" filter="female">female</span>
-            -->
+        <div id="options">
+
+          <div class="toggle-heading" associated-panel="background-selector-preview">
+            <span class="material-icons">edit_location</span>
+            Select your location</div>
+          <select name="background-selector" id="background-selector"></select>
+          <div id="background-selector-preview"></div>
+          
+
+          <div>
+            <div class="toggle-heading" associated-panel="character-selector-preview">
+              <span class="material-icons">person_add</span>
+              Select your character</div>
+            <select name="character-selector" id="character-selector"></select>
+
+            <div id="character-selector-preview">
+              <!--<div class="filter">
+                Filter by:
+                <span class="material-icons" filter="male">male</span>
+                <span class="material-icons" filter="female">female</span>
+              -->
+              </div>
+
+
             </div>
 
-
+            <div id="pose-heading">
+              <span class="material-icons">
+                sentiment_very_satisfied
+                </span>
+              Select your pose</div>
+            <div id="pose-selector">
+            </div>
           </div>
 
-          <div id="pose-heading">
-            <span class="material-icons">
-              sentiment_very_satisfied
-              </span>
-            Select your pose</div>
-          <div id="pose-selector">
-          </div>
+        
         </div>
 
-        <a id="download"><span class="material-icons">download</span>Download</a>
-      
-      </div>
-
+      </main>
 
     </body>
 
