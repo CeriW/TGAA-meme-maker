@@ -151,11 +151,6 @@ canvas{
   pointer-events: none;
 }
 
-/* We go from 10% to cover the millisecond or so that the new image is visible before it fades in.*/
-@keyframes fadeIn{
-  10%{opacity: 0;}
-  100%{opacity: 1;}
-}
 
 
 /* Selector styling ----------------------------------------------------------*/
