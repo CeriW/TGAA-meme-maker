@@ -117,7 +117,7 @@ function generateLocations(){
 
 
 // Generates our canvas with the chosen backgrounds, characters and text
-function generatePanelArtwork(){
+function generatePanelArtwork(e){
   
   // Set the background image
   let backgrounds = document.querySelectorAll('.canvas-container img:first-child')
@@ -142,12 +142,10 @@ function generateCanvas(){
   backgroundImg = document.createElement('img')
   newCanvas.appendChild(backgroundImg)
 
-  characterImg = document.createElement('img')
+  characterImg = characterImg ? characterImg.cloneNode() : document.createElement('img')
   newCanvas.appendChild(characterImg)
 
-  tag = document.createElement('img')
-  tag.src = ''
-  console.log(tag)
+  tag = tag ? tag.cloneNode() : document.createElement('img')
   newCanvas.appendChild(tag)
 
   newSpeechbox = document.createElement('img')
@@ -159,14 +157,6 @@ function generateCanvas(){
   newTextBox.innerHTML = 'Type your text here...'
   newCanvas.appendChild(newTextBox)
 
-  /*speechbox = document.createElement('canvas')
-  speechbox.width = 1920
-  speechbox.height = 1080*/
-  //newCanvas.appendChild(speechbox)
-
-  /*newCanvas.innerHTML = 
-  '<canvas width="1920" height="1080"></canvas><textarea class="text-overlay">Type your text here...</textarea>'*/
-  
   // Generate the delete button and have it run removeCanvas on click.
   let deleteButton = document.createElement('div')
   deleteButton.classList.add('delete-panel')
@@ -177,15 +167,13 @@ function generateCanvas(){
   // When the canvas is clicked, make it the active one.
   newCanvas.addEventListener('click', function(){
     changeActiveCanvas(newCanvas)
-    console.log(newCanvas)
-
   })
 
   // Add the canvas onto the page, make it the active one and put artwork in it.
   document.querySelector('#canvas-grid-item > div').appendChild(newCanvas)
   changeActiveCanvas(newCanvas)
   generatePanelArtwork(newCanvas)
-  tag.src = ''
+  //tag.src = ''
 }
 
 // Make the specified canvas/panel the active one. This could be the result of a click on a canvas, or deleting an adjacent canvas.
@@ -259,6 +247,7 @@ function generateCharacterInterface(){
 
       // Set the value on the invisible dropdown
       characterSelector.value = e.target.getAttribute('value')
+
 
       // Show the character preview panel, and fill it with the poses for the chosen character.
       togglePanel(characterPreview)
@@ -364,7 +353,7 @@ function generatePoses(e){
     newRadio.setAttribute('name', 'pose')
     newRadio.setAttribute('character', chosenCharacter)
     newRadio.value = i
-    newRadio.addEventListener('change', selectPose)
+    newRadio.addEventListener('click', selectPose)
     poseSelector.appendChild(newRadio)
 
     let newLabel = document.createElement('label')
@@ -380,11 +369,7 @@ function generatePoses(e){
 // When a pose is clicked, put that onto the canvas and mark it as selected.
 function selectPose(e){
   let url = e.target.getAttribute('character')
-  characterImg.setAttribute('src', paths.character + url + '/' + e.target.value + '.png') 
-  window.setTimeout(function(){
-    characterImg.style.animation = null
-  },500)
-  
+  characterImg.setAttribute('src', paths.character + url + '/' + e.target.value + '.png')   
   generatePanelArtwork()
   selectItem(e)
 }
