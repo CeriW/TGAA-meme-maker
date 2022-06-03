@@ -64,7 +64,8 @@ const characters = [
   {name: 'Susato Mikotoba',                       id:'mikotoba-susato',             gender: 'F',     images: 12},
   {name: 'Enoch Drebber',                         id:'drebber-enoch',               gender: 'M',     images: 4},
   {name: 'Barok van Zieks',                       id:'van-zieks-barok',             gender: 'M',     images: 6},
-  {name: 'Soseki Natsume',                        id:'natsume-soseki',              gender: 'M',     images: 9}
+  {name: 'Soseki Natsume',                        id:'natsume-soseki',              gender: 'M',     images: 9},
+  {name: 'Tobias Gregson',                        id:'gregson-tobias',              gender: 'M',     images: 4}
 ]
 
 // ---------------------------------------------------------------------------//
