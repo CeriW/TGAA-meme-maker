@@ -57,15 +57,16 @@ const locations = [
 // gender - the gender of the character, for filtering purposes
 // images - the number of images in the folder to go with this character. The code depends on them being named sequentially beginning at 1 and can't work if there are any numbers missing.
 const characters = [
-  {name: 'Herlock Sholmes',                       id:'sholmes-herlock-default',     variant: 'default',    gender: 'M',     images: 12},
-  {name: 'Herlock Sholmes',                       id:'sholmes-herlock-casual',      variant: 'casual',    gender: 'M',     images: 9},
-  {name: 'Iris Wilson',                           id:'wilson-iris',                 variant: null,    gender: 'F',     images: 4},
-  {name: 'Gina Lestrade',                         id:'lestrade-gina',               variant: null,    gender: 'F',     images: 4},
-  {name: 'Susato Mikotoba',                       id:'mikotoba-susato',             variant: null,    gender: 'F',     images: 12},
-  {name: 'Enoch Drebber',                         id:'drebber-enoch',               variant: null,    gender: 'M',     images: 4},
-  {name: 'Barok van Zieks',                       id:'van-zieks-barok',             variant: null,    gender: 'M',     images: 6},
-  {name: 'Soseki Natsume',                        id:'natsume-soseki',              variant: null,    gender: 'M',     images: 9},
-  {name: 'Tobias Gregson',                        id:'gregson-tobias',              variant: null,    gender: 'M',     images: 4}
+  {name: 'Ryunosuke Naruhodo',                    id:'naruhodo-ryunosuke',          gender: 'M',     images: 7},
+  {name: 'Herlock Sholmes',                       id:'sholmes-herlock-default',     gender: 'M',     images: 12,      variant: 'default'},
+  {name: 'Herlock Sholmes',                       id:'sholmes-herlock-casual',      gender: 'M',     images: 9,       variant: 'casual'},
+  {name: 'Susato Mikotoba',                       id:'mikotoba-susato',             gender: 'F',     images: 12},
+  {name: 'Barok van Zieks',                       id:'van-zieks-barok',             gender: 'M',     images: 6},
+  {name: 'Iris Wilson',                           id:'wilson-iris',                 gender: 'F',     images: 4},
+  {name: 'Tobias Gregson',                        id:'gregson-tobias',              gender: 'M',     images: 4},
+  {name: 'Gina Lestrade',                         id:'lestrade-gina',               gender: 'F',     images: 4},
+  {name: 'Soseki Natsume',                        id:'natsume-soseki',              gender: 'M',     images: 9},
+  {name: 'Enoch Drebber',                         id:'drebber-enoch',               gender: 'M',     images: 4},
 ]
 
 // ---------------------------------------------------------------------------//
