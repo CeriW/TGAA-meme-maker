@@ -58,6 +58,9 @@ div[class*="icon"],
   cursor: pointer;
 }
 
+
+
+
 /* Bits to hide ------------------------------------------------------------- */
 #background,
 #character,
@@ -74,7 +77,7 @@ input[type="radio"],
 
 /* Canvas bits  ------------------------------------------------------------- */
 
-.canvas-container,
+/*.canvas-container,*/
 #pose-selector{
   float: none;
   margin: 0 auto;
@@ -82,7 +85,7 @@ input[type="radio"],
 
 .canvas-container,
 canvas{
-  display: block;
+  display: inline-flex;
   width: 100%;
   max-width: 800px;
 }
@@ -100,7 +103,8 @@ canvas{
   bottom: 0;
   right: 0;
   pointer-events: none;
-  transition: 0.5s;
+  transition: box-shadow 0.5s;
+  z-index: 2;
 }
 
 .canvas-container:hover:before{
@@ -131,7 +135,27 @@ canvas{
     max-height: 0;}
 }
 
+.canvas-container + .canvas-container,
+#add-panel{
+  margin-top: -4px;
+}
 
+.canvas-container img:not(:first-child){
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.canvas-container img{
+  max-width: 100%;
+  pointer-events: none;
+}
+
+/* We go from 10% to cover the millisecond or so that the new image is visible before it fades in.*/
+@keyframes fadeIn{
+  10%{opacity: 0;}
+  100%{opacity: 1;}
+}
 
 
 /* Selector styling ----------------------------------------------------------*/
@@ -233,9 +257,12 @@ div[class*="icon"]:hover,
   text-shadow: none;
   padding-right: 10px;
   font-size: 21px !important;
+  pointer-events: none;
 }
 
 .material-icons.md-17 { font-size: 17px !important; }
+
+
 
 /* Text boxes ----------------------------------------------------------------*/
 
@@ -400,6 +427,9 @@ div[class*="icon"]:hover,
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {background: #555;}
+
+
+
 
 
 

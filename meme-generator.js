@@ -5,9 +5,10 @@ let currentCanvas = null
 
 // Canvas generating elements
 // Elements we can add various backgrounds to that we'll draw onto the canvas
-let backgroundImg = document.querySelector('#background')
-let characterImg = document.querySelector('#character')
-let tag = document.querySelector('#speech-tag')
+let backgroundImg
+let characterImg
+let tag
+let speechbox = document.querySelector('#speech-box')
 let credits = document.querySelector("#credits")
 
 // Interface elements
@@ -69,7 +70,7 @@ const characters = [
 
 // Create our first canvas, and set it as the selected one.
 generateCanvas()
-currentCanvas = document.querySelector('canvas')
+currentCanvas = document.querySelector('canvas-container')
 
 // Generate the locations selector panel.
 generateLocations()
@@ -118,42 +119,12 @@ function generateLocations(){
 function generatePanelArtwork(){
   // Set the background image
   backgroundImg.setAttribute('src', paths.location + backgroundSelector.value + '.png')
+  //animateItem(backgroundImg)
 
   // If a character has been purposely selected previously then set the character image
   if (characterSelected){
     tag.setAttribute('src', paths.character + characterSelector.value + '/tag.png')
   }
-
-
-  // Wait for the image to load before we attempt to add it to the canvas
-  backgroundImg.addEventListener('load', function(){
-    addImage('background')
-  })
-
-  // It shouldn't be necessary to delay this by 1ms but it is...
-  window.setTimeout(function(){
-    addImage('character')
-  },50)
-
-  window.setTimeout(function(){
-    addImage('speech-tag')
-  },50)
-
-
-  window.setTimeout(function(){
-    addImage('speech-box')
-  },50)
-
-
-  
-  // Adds a new layer to the canvas.
-  //Acceptable parameter values: background, character, speech-box
-  function addImage(type){
-    let context = currentCanvas.getContext("2d");
-    let img = document.querySelector("#" + type);
-    context.drawImage(img, 0, 0);
-  }
-
 }
 
 // Creates a new canvas for us, including delete button and event listeners.
@@ -162,8 +133,35 @@ function generateCanvas(){
   // Create the new canvas
   let newCanvas = document.createElement('div')
   newCanvas.classList.add('canvas-container')
-  newCanvas.innerHTML = 
-  '<canvas width="1920" height="1080"></canvas><textarea class="text-overlay">Type your text here...</textarea>'
+  
+
+  backgroundImg = document.createElement('img')
+  newCanvas.appendChild(backgroundImg)
+
+  characterImg = document.createElement('img')
+  newCanvas.appendChild(characterImg)
+
+  tag = document.createElement('img')
+  tag.src = ''
+  console.log(tag)
+  newCanvas.appendChild(tag)
+
+  newSpeechbox = document.createElement('img')
+  newSpeechbox.src = 'assets/game-elements/speech-box.png'
+  newCanvas.appendChild(newSpeechbox)
+
+  newTextBox = document.createElement('textarea')
+  newTextBox.classList.add('text-overlay')
+  newTextBox.innerHTML = 'Type your text here...'
+  newCanvas.appendChild(newTextBox)
+
+  /*speechbox = document.createElement('canvas')
+  speechbox.width = 1920
+  speechbox.height = 1080*/
+  //newCanvas.appendChild(speechbox)
+
+  /*newCanvas.innerHTML = 
+  '<canvas width="1920" height="1080"></canvas><textarea class="text-overlay">Type your text here...</textarea>'*/
   
   // Generate the delete button and have it run removeCanvas on click.
   let deleteButton = document.createElement('div')
@@ -174,13 +172,16 @@ function generateCanvas(){
 
   // When the canvas is clicked, make it the active one.
   newCanvas.addEventListener('click', function(){
-    changeActiveCanvas(newCanvas.querySelector('canvas'))
+    changeActiveCanvas(newCanvas)
+    console.log(newCanvas)
+
   })
 
   // Add the canvas onto the page, make it the active one and put artwork in it.
   document.querySelector('#canvas-grid-item > div').appendChild(newCanvas)
-  changeActiveCanvas(newCanvas.querySelector('canvas'))
+  changeActiveCanvas(newCanvas)
   generatePanelArtwork(newCanvas)
+  tag.src = ''
 }
 
 // Make the specified canvas/panel the active one. This could be the result of a click on a canvas, or deleting an adjacent canvas.
@@ -188,13 +189,19 @@ function generateCanvas(){
 function changeActiveCanvas(activeCanvas){
 
   currentCanvas = activeCanvas
+  console.log(activeCanvas)
+
+  backgroundImg = activeCanvas.querySelector('img:nth-child(1)')
+  characterImg = activeCanvas.querySelector('img:nth-child(2)')
+  tag = activeCanvas.querySelector('img:nth-child(3)')
+
   
-  let allCanvases = document.querySelectorAll('canvas')
+  let allCanvases = document.querySelectorAll('.canvas-container')
   allCanvases.forEach(function(node){
     if (node === activeCanvas){
-      node.parentNode.classList.add('active-canvas')
+      node.classList.add('active-canvas')
     } else{
-      node.parentNode.classList.remove('active-canvas')
+      node.classList.remove('active-canvas')
     }
   })
 }
@@ -206,9 +213,9 @@ function removeCanvas(e){
 
   
   if (deadCanvas.previousElementSibling){ // If the panel has one before it, make that the active one.
-    changeActiveCanvas(deadCanvas.previousElementSibling.querySelector('canvas'))
+    changeActiveCanvas(deadCanvas.previousElementSibling)
   } else if (deadCanvas.nextElementSibling){ // If no previous one but there's a next one, make the next one the active one.
-    changeActiveCanvas(deadCanvas.nextElementSibling.querySelector('canvas'))
+    changeActiveCanvas(deadCanvas.nextElementSibling)
   } else{ // If this function results in there being no panel at all, generate a fresh one.
     generateCanvas()
   }
@@ -216,7 +223,7 @@ function removeCanvas(e){
   // Run a nice animation, then delete the panel.
   deadCanvas.style.animation = 'shrink 0.5s both'
   window.setTimeout(function(){
-    deadCanvas.parentNode.removeChild(deadCanvas)
+    deadCanvas.remove()
   },500)
 }
 
@@ -331,7 +338,8 @@ function generatePoses(e){
 
   // Reset the character if we're choosing a new one
   characterImg.src = paths.character + chosenCharacter + '/1.png'
-
+  animateItem(characterImg)
+  animateItem(tag)
   generatePanelArtwork()
 
   // Figure out how many times we need to loop through to generate all the poses.
@@ -369,9 +377,25 @@ function generatePoses(e){
 // When a pose is clicked, put that onto the canvas and mark it as selected.
 function selectPose(e){
   let url = e.target.getAttribute('character')
-  characterImg.setAttribute('src', paths.character + url + '/' + e.target.value + '.png')
+  animateItem(characterImg)
+  characterImg.setAttribute('src', paths.character + url + '/' + e.target.value + '.png') 
+  window.setTimeout(function(){
+    characterImg.style.animation = null
+  },500)
+  
   generatePanelArtwork()
   selectItem(e)
+}
+
+// Animate the selected item.
+function animateItem(node,direction){
+  
+  // Start off with making it null so we kill any other animation it might be in the middle of.
+  node.style.animation = null
+  node.style.animation = 'fadeIn 0.4s both' 
+  window.setTimeout(function(){
+    node.style.animation = null
+  },400)
 }
 
 // Put appropriate attributes on the specified event target and its siblings to
@@ -388,36 +412,53 @@ function selectItem(e){
 // Recreate the meme as an image file and download it.
 function download() {
   // Generate a temporary canvas that we'll combine all of our individual canvases onto for download
-  let tempCanvas = document.createElement('canvas')
-  tempCanvas.classList.add('temp-canvas')
-  tempCanvas.setAttribute('width', 1920)
-  tempCanvas.setAttribute('height', 1080)
-  document.body.appendChild(tempCanvas)
+  let downloadableCanvas = document.createElement('canvas')
+  downloadableCanvas.classList.add('temp-canvas')
+  downloadableCanvas.setAttribute('width', 1920)
+  downloadableCanvas.setAttribute('height', 1080)
+  document.body.appendChild(downloadableCanvas)
 
   // Get a list of all the canvases, and set the height of our temporary one to their combined heights.
-  let allCanvases = document.querySelectorAll('canvas:not(.temp-canvas)')
-  tempCanvas.setAttribute('height', 1080 * allCanvases.length + 1)
+  //let allCanvases = document.querySelectorAll('canvas:not(.temp-canvas)')
+  let allCanvases = document.querySelectorAll('.canvas-container')
+  console.log(allCanvases)
+  downloadableCanvas.setAttribute('height', 1080 * allCanvases.length + 1)
 
 
   // Render the text on each one of our individual canvases, and add it onto
   // our temporary one.
-  let tempCanvasContext = tempCanvas.getContext("2d")
+  let downloadableCanvasContext = downloadableCanvas.getContext("2d")
   for (i=0; i < allCanvases.length; i++){
+
+    console.log(allCanvases[i])
+
+    let tempCanvas = document.createElement('canvas')
+    tempCanvas.width = 1920
+    tempCanvas.height = 1080
+    //document.body.appendChild(tempCanvas)
+    let tempCanvasContext = tempCanvas.getContext("2d");
+
+    for (j = 1; j < 5; j++){
+      console.log(allCanvases[i].querySelector('img:nth-child(' + j + ')'))
+      let imgToDraw = allCanvases[i].querySelector('img:nth-child(' + j + ')')
+      tempCanvasContext.drawImage(imgToDraw, 0, 0)
+    }
+
     // Render the text
-    let context = allCanvases[i].getContext("2d");
-    context.font = "50px Georgia";
-    context.fillStyle = "#fff";
-    context.fillText(allCanvases[i].nextElementSibling.value, 370, 890);
-    tempCanvasContext.drawImage(allCanvases[i], 0, [i * 1080])
+    tempCanvasContext.font = "50px Georgia";
+    tempCanvasContext.fillStyle = "#fff";
+    tempCanvasContext.fillText(allCanvases[i].querySelector('textarea').value, 370, 890);
+    downloadableCanvasContext.drawImage(tempCanvas, 0, [i * 1080] )
   }
 
+
   // Add the credits onto the end.
-  tempCanvasContext.drawImage(credits, 0, (allCanvases.length - 1) * 1080);
+  downloadableCanvasContext.drawImage(credits, 0, (allCanvases.length - 1) * 1080);
 
   // Download the image, then remove the temporary canvas.
   downloadButton.download = 'ace-attorney-meme-generator.png';
-  downloadButton.href = tempCanvas.toDataURL()
-  tempCanvas.parentNode.removeChild(tempCanvas)
+  downloadButton.href = downloadableCanvas.toDataURL()
+  downloadableCanvas.remove()
 }
 
 // Simply takes a panel and toggles a 'hidden' attribute.
