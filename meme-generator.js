@@ -57,16 +57,16 @@ const locations = [
 // gender - the gender of the character, for filtering purposes
 // images - the number of images in the folder to go with this character. The code depends on them being named sequentially beginning at 1 and can't work if there are any numbers missing.
 const characters = [
-  {name: 'Ryunosuke Naruhodo',                    id:'naruhodo-ryunosuke',          gender: 'M',     images: 7},
-  {name: 'Herlock Sholmes',                       id:'sholmes-herlock-default',     gender: 'M',     images: 12,      variant: 'default'},
-  {name: 'Herlock Sholmes',                       id:'sholmes-herlock-casual',      gender: 'M',     images: 9,       variant: 'casual'},
-  {name: 'Susato Mikotoba',                       id:'mikotoba-susato',             gender: 'F',     images: 12},
-  {name: 'Barok van Zieks',                       id:'van-zieks-barok',             gender: 'M',     images: 6},
-  {name: 'Iris Wilson',                           id:'wilson-iris',                 gender: 'F',     images: 4},
-  {name: 'Tobias Gregson',                        id:'gregson-tobias',              gender: 'M',     images: 4},
-  {name: 'Gina Lestrade',                         id:'lestrade-gina',               gender: 'F',     images: 4},
-  {name: 'Soseki Natsume',                        id:'natsume-soseki',              gender: 'M',     images: 9},
-  {name: 'Enoch Drebber',                         id:'drebber-enoch',               gender: 'M',     images: 4},
+  {name: 'Ryunosuke Naruhodo',                    id:'naruhodo-ryunosuke',          gender: 'male',       images: 7},
+  {name: 'Herlock Sholmes',                       id:'sholmes-herlock-default',     gender: 'male',       images: 12,      variant: 'default'},
+  {name: 'Herlock Sholmes',                       id:'sholmes-herlock-casual',      gender: 'male',       images: 9,       variant: 'casual'},
+  {name: 'Susato Mikotoba',                       id:'mikotoba-susato',             gender: 'female',     images: 12},
+  {name: 'Barok van Zieks',                       id:'van-zieks-barok',             gender: 'male',       images: 6},
+  {name: 'Iris Wilson',                           id:'wilson-iris',                 gender: 'female',     images: 4},
+  {name: 'Tobias Gregson',                        id:'gregson-tobias',              gender: 'male',       images: 4},
+  {name: 'Gina Lestrade',                         id:'lestrade-gina',               gender: 'female',     images: 4},
+  {name: 'Soseki Natsume',                        id:'natsume-soseki',              gender: 'male',       images: 9},
+  {name: 'Enoch Drebber',                         id:'drebber-enoch',               gender: 'male',       images: 4},
 ]
 
 // ---------------------------------------------------------------------------//
@@ -452,3 +452,40 @@ function download() {
 function togglePanel(associate){
   associate.classList.toggle('hidden')
 }
+
+
+
+
+let filterButtons = document.querySelectorAll('.filter')
+filterButtons.forEach(function(filter){
+
+
+  filter.addEventListener('click', function(e){
+    console.log(e)
+    console.log(e.target.getAttribute('filter-value'))
+
+    let filterType = e.target.getAttribute('filter-type')
+    let filterValue = e.target.getAttribute('filter-value')
+    let panel = e.target.closest('div[id*="selector"]')
+    let icons = panel.querySelectorAll('div[class*="icon"]')
+
+
+
+    if (filterType && filterValue !== 'all'){
+      icons.forEach(function(icon){
+        //icon.classList.remove('toggled-off')
+        if (icon.getAttribute(filterType) == filterValue){
+          icon.setAttribute('toggled', 'on')
+        } else{
+          icon.setAttribute('toggled', 'off')
+        }
+      })
+    } else if (filterValue == 'all'){
+      icons.forEach(function(icon){
+        icon.setAttribute('toggled', 'on')
+      })
+    }
+
+
+  })
+})

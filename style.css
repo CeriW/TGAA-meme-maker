@@ -194,7 +194,7 @@ canvas{
   border: 2px solid rgba(255,255,255,0.2);
   border-right: none;
   margin-bottom: 20px;
-  max-height: 450px;
+  max-height: 485px;
   overflow-y: scroll;
   width: calc(100% + 2px);
   left: -2px;
@@ -444,4 +444,29 @@ div[class*="icon"]:hover,
   z-index: 4;
 }
 
+
+
+.filter{
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  width: 100%;
+  padding: 5px;
+}
+
+.filter span{
+  pointer-events: all;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.filter span.toggled,
+.filter span:hover{
+  color: var(--gold);
+}
+
+
+
+.character-icon[toggled="off"]{
+  display: none;
+}
 
