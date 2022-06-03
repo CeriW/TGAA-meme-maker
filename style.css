@@ -467,7 +467,7 @@ div[class*="icon"]:hover,
 
 
 .character-icon[toggled="off"]{
-  display: none;
+  opacity: 0.1;
 }
 
 span[filter-type="all"]{

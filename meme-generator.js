@@ -67,6 +67,8 @@ const characters = [
   {name: 'Gina Lestrade',                         id:'lestrade-gina',               gender: 'female',     nationality: 'british',       images: 4},
   {name: 'Soseki Natsume',                        id:'natsume-soseki',              gender: 'male',       nationality: 'japanese',      images: 9},
   {name: 'Enoch Drebber',                         id:'drebber-enoch',               gender: 'male',       nationality: 'british',       images: 4},
+  {name: 'Madame Tusspells',                      id:'tusspells-esmerelda',          gender: 'female',    nationality: 'french',        images: 1},
+
 ]
 
 // ---------------------------------------------------------------------------//
