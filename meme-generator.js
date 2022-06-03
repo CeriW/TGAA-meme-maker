@@ -119,7 +119,6 @@ function generateLocations(){
 function generatePanelArtwork(){
   // Set the background image
   backgroundImg.setAttribute('src', paths.location + backgroundSelector.value + '.png')
-  //animateItem(backgroundImg)
 
   // If a character has been purposely selected previously then set the character image
   if (characterSelected){
@@ -338,8 +337,6 @@ function generatePoses(e){
 
   // Reset the character if we're choosing a new one
   characterImg.src = paths.character + chosenCharacter + '/1.png'
-  animateItem(characterImg)
-  animateItem(tag)
   generatePanelArtwork()
 
   // Figure out how many times we need to loop through to generate all the poses.
@@ -377,7 +374,6 @@ function generatePoses(e){
 // When a pose is clicked, put that onto the canvas and mark it as selected.
 function selectPose(e){
   let url = e.target.getAttribute('character')
-  animateItem(characterImg)
   characterImg.setAttribute('src', paths.character + url + '/' + e.target.value + '.png') 
   window.setTimeout(function(){
     characterImg.style.animation = null
@@ -387,16 +383,6 @@ function selectPose(e){
   selectItem(e)
 }
 
-// Animate the selected item.
-function animateItem(node,direction){
-  
-  // Start off with making it null so we kill any other animation it might be in the middle of.
-  node.style.animation = null
-  node.style.animation = 'fadeIn 0.4s both' 
-  window.setTimeout(function(){
-    node.style.animation = null
-  },400)
-}
 
 // Put appropriate attributes on the specified event target and its siblings to
 // be able to apply styling in the CSS.
