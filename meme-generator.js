@@ -337,8 +337,14 @@ function generatePoses(e){
   let chosenCharacter = e ? e.target.value : characterSelector.value
 
   // Reset the character if we're choosing a new one
+  characterImg.style.display = 'none'
   characterImg.src = paths.character + chosenCharacter + '/1.png'
-  animateItem(characterImg)
+  characterImg.addEventListener('load', function(){
+    //console.log(characterImg.complete)
+    characterImg.style.display = 'block'
+    animateItem(characterImg)
+  })
+
   animateItem(tag)
   generatePanelArtwork()
 
