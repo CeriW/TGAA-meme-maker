@@ -84,7 +84,9 @@ div[class*="icon"],
 #speech-tag,
 #credits,
 input[type="radio"],
-#character-selector-preview:not(.hidden) + #pose-heading{
+#character-selector-preview:not(.hidden) + #pose-heading,
+body[character-selected="false"] #pose-heading,
+body[character-selected="false"] #pose-selector{
   display: none;
 }
 
@@ -308,7 +310,7 @@ div[class*="icon"]:hover,
 #pose-heading{
   background: linear-gradient(to bottom, #65592d, #9E9150);
   color: #fff;
-  padding: 10px 20px;
+  padding: 10px 10px 10px 20px;
   text-decoration: none;
   font-size: 20px;
   transition: 0.4s;
@@ -322,27 +324,15 @@ div[class*="icon"]:hover,
   cursor: default;
 }
 
-.toggle-heading:after{
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 10px;
-  bottom: 0;
-  width: 20px;
-  background: url('assets/icons/down-arrow.svg') center no-repeat;
-  background-size: contain;
-  transform: rotate(-90deg);
-  transition: inherit;
-}
-
-.toggle-heading:not(.closed):after{
-  transform: rotate(0);
-}
 
 .toggle-heading:hover,
 #download:hover{
   color: var(--blue);
   text-shadow: none;
+}
+
+.down-arrow{
+  float: right;
 }
 
 /* Buttons -------------------------------------------------------------------*/
@@ -375,7 +365,7 @@ div[class*="icon"]:hover,
 /* Make it responsive --------------------------------------------------------*/
 
 @media (max-width:1450px){
-  body{
+  main{
     grid-template-columns: auto;
     grid-template-rows: auto auto auto auto;
     grid-template-areas:
@@ -416,7 +406,12 @@ div[class*="icon"]:hover,
 
 @media (max-width: 600px){
   body{
-    padding: 10px;
+    padding: 20px;
+  }
+
+  #download{
+    width: 170px;
+    left: -24px !important;
   }
 }
 

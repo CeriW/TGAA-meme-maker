@@ -24,6 +24,7 @@ let downloadButton = document.querySelector('#download')
 // This will prevent the default character tag being generated
 // while selecting a location
 let characterSelected = false
+document.body.setAttribute('character-selected', characterSelected)
 
 // The locations to find certain visual elements
 let paths ={
@@ -335,6 +336,7 @@ function generatePoses(e){
   // This initialises to false. We set this to true to confirm that the user
   // has deliberately chose a character and we're okay to go ahead with it.
   characterSelected = true
+  document.body.setAttribute('character-selected', characterSelected)
 
   // Figure out if this has been run from an icon click or elsewhere.
   let chosenCharacter = e ? e.target.value : characterSelector.value
