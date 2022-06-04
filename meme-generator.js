@@ -55,18 +55,23 @@ const locations = [
 // name - a user-readable name that will display on the page
 // id - the name of the image to go alongside it. Usually surname-forename-variant format, with hyphens also for multiple word surnames or forenames e.g van-zieks-barok
 // gender - the gender of the character, for filtering purposes
+// nationality - for filtering purposes
+// appearsin - for filtering purposes. For those unfamiliar with TGAA, the game is split into two parts, each part being split up into 5 individual cases making 10 in total. This array is made up of ten values containing true or false to indicate whether this character was present in that case.
+//             Cases are commonly referred to the fans by the number of the game they appear in, then the order of that case. For example, case 9 is usually called 2-4 because it's the 4th part of the 2nd game.
 // images - the number of images in the folder to go with this character. The code depends on them being named sequentially beginning at 1 and can't work if there are any numbers missing.
 const characters = [
-  {name: 'Ryunosuke Naruhodo',                    id:'naruhodo-ryunosuke',          gender: 'M',     images: 7},
-  {name: 'Herlock Sholmes',                       id:'sholmes-herlock-default',     gender: 'M',     images: 12,      variant: 'default'},
-  {name: 'Herlock Sholmes',                       id:'sholmes-herlock-casual',      gender: 'M',     images: 9,       variant: 'casual'},
-  {name: 'Susato Mikotoba',                       id:'mikotoba-susato',             gender: 'F',     images: 12},
-  {name: 'Barok van Zieks',                       id:'van-zieks-barok',             gender: 'M',     images: 6},
-  {name: 'Iris Wilson',                           id:'wilson-iris',                 gender: 'F',     images: 4},
-  {name: 'Tobias Gregson',                        id:'gregson-tobias',              gender: 'M',     images: 4},
-  {name: 'Gina Lestrade',                         id:'lestrade-gina',               gender: 'F',     images: 4},
-  {name: 'Soseki Natsume',                        id:'natsume-soseki',              gender: 'M',     images: 9},
-  {name: 'Enoch Drebber',                         id:'drebber-enoch',               gender: 'M',     images: 4},
+  {name: 'Ryunosuke Naruhodo',                    id:'naruhodo-ryunosuke',          gender: 'male',       nationality: 'japanese',      appearsin: [true,true,true,true,true,false,true,true,true,true],          images: 7},
+  {name: 'Herlock Sholmes',                       id:'sholmes-herlock-default',     gender: 'male',       nationality: 'british',       appearsin: [false,true,true,true,true,false,true,true,true,true],         images: 12,      variant: 'default outfit'},
+  {name: 'Herlock Sholmes',                       id:'sholmes-herlock-casual',      gender: 'male',       nationality: 'british',       appearsin: [false,true,true,true,true,false,true,true,true,true],         images: 9,       variant: 'casual outfit'},
+  {name: 'Susato Mikotoba',                       id:'mikotoba-susato',             gender: 'female',     nationality: 'japanese',      appearsin: [true,true,true,true,true,true,true,true,true,true],           images: 12},
+  {name: 'Barok van Zieks',                       id:'van-zieks-barok',             gender: 'male',       nationality: 'british',       appearsin: [false,false,true,true,true,false,true,true,true,true],        images: 6},
+  {name: 'Iris Wilson',                           id:'wilson-iris',                 gender: 'female',     nationality: 'british',       appearsin: [false,false,true,true,true,false,true,true,true,true],        images: 4},
+  {name: 'Tobias Gregson',                        id:'gregson-tobias',              gender: 'male',       nationality: 'british',       appearsin: [false,false,true,true,true,false,true,true,true,true],        images: 4},
+  {name: 'Gina Lestrade',                         id:'lestrade-gina',               gender: 'female',     nationality: 'british',       appearsin: [false,false,true,false,true,false,false,true,true,true],      images: 4},
+  {name: 'Soseki Natsume',                        id:'natsume-soseki',              gender: 'male',       nationality: 'japanese',      appearsin: [false,false,false,true,false,true,true,false,false,false],    images: 9},
+  {name: 'Enoch Drebber',                         id:'drebber-enoch',               gender: 'male',       nationality: 'british',       appearsin: [false,false,false,false,false,false,false,true,false,false],  images: 4},
+  {name: 'Madame Tusspells',                      id:'tusspells-esmerelda',         gender: 'female',     nationality: 'french',        appearsin: [false,false,false,false,false,false,false,true,false,false],   images: 1}
+
 ]
 
 // ---------------------------------------------------------------------------//
@@ -183,8 +188,6 @@ function generateCanvas(){
 function changeActiveCanvas(activeCanvas){
 
   currentCanvas = activeCanvas
-  console.log(activeCanvas)
-
   backgroundImg = activeCanvas.querySelector('img:nth-child(1)')
   characterImg = activeCanvas.querySelector('img:nth-child(2)')
   tag = activeCanvas.querySelector('img:nth-child(3)')
@@ -234,7 +237,13 @@ function generateCharacterInterface(){
     characterSelector.appendChild(newOption)
 
     let icon = generateLabelledIcon('character', character)
-    icon.setAttribute('gender', character.gender)
+    icon.setAttribute('gender', 'gender-' + character.gender) // This is set like this since 'female' contains the string 'male'
+    icon.setAttribute('nationality', character.nationality)
+
+    for (i = 0; i < 10; i++){
+      icon.setAttribute('present-in-case-' + i, character.appearsin[i])
+    }
+
 
     characterPreview.appendChild(icon)
 
@@ -306,6 +315,19 @@ function generateLabelledIcon(type, object){
     case 'character':
       // This is set to 1.png so it will use the first image of the character as the preview.
       iconURL = 'url("assets/characters/' + object.id + '/thumbnails/1.png")'
+
+      let genderIcon = document.createElement('span')
+      genderIcon.classList.add('character-icon-gender-tag')
+      genderIcon.setAttribute('gender', object.gender)
+      genderIcon.innerHTML = '<span class="gender-icon material-icons">' + object.gender + '</span>'
+      icon.appendChild(genderIcon)
+
+      let nationalityIcon = document.createElement('span')
+      nationalityIcon.classList.add('character-icon-nationality-tag')
+      nationalityIcon.style.backgroundImage = 'url("assets/icons/flags/' + object.nationality + '.svg")'
+      console.log('assets/icons/flags/' + object.nationality + '.svg')
+      icon.appendChild(nationalityIcon)
+
       break
     case 'location':
       iconURL = 'url("assets/locations/thumbnails/' + object.id + '.png")'
@@ -317,7 +339,6 @@ function generateLabelledIcon(type, object){
   label.textContent += object.name
 
   if (object.variant){
-    console.log(object.variant)
     let variantTag = document.createElement('div')
     variantTag.classList.add('variant-tag')
     variantTag.textContent = object.variant
@@ -452,3 +473,136 @@ function download() {
 function togglePanel(associate){
   associate.classList.toggle('hidden')
 }
+
+
+
+
+let filterButtons = document.querySelectorAll('.filter')
+filterButtons.forEach(function(filter){
+
+
+  filter.addEventListener('click', function(e){
+    console.log(e)
+    console.log(e.target.getAttribute('filter-value'))
+
+    let filterType = e.target.getAttribute('filter-type')
+    let filterValue = e.target.getAttribute('filter-value')
+    let panel = e.target.closest('div[id*="selector"]')
+    let icons = panel.querySelectorAll('div[class*="icon"]')
+
+
+
+    if (filterType && filterValue !== 'all'){
+      icons.forEach(function(icon){
+        //icon.classList.remove('toggled-off')
+        if (icon.getAttribute(filterType) == filterValue){
+          icon.setAttribute('toggled', 'on')
+        } else{
+          icon.setAttribute('toggled', 'off')
+        }
+      })
+    } else if (filterValue == 'all'){
+      icons.forEach(function(icon){
+        icon.setAttribute('toggled', 'on')
+      })
+    }
+
+
+  })
+})
+
+
+document.querySelector('.filter-form').addEventListener('click', filterItems)
+
+
+function filterItems(e){
+  
+  let panel = e.target.closest('.filter-form')
+
+  let chosenFilterNodes = panel.querySelectorAll('[checked="checked"]')
+
+  let acceptableGenders =[]
+  chosenFilterNodes.forEach(function(node){
+    if (node.getAttribute('checked') == 'checked' && node.getAttribute('filter-type') == 'gender'){
+      acceptableGenders.push(node.value)
+    }
+  })
+
+  let acceptableNationalities =[]
+  chosenFilterNodes.forEach(function(node){
+    if (node.getAttribute('checked') == 'checked' && node.getAttribute('filter-type') == 'nationality'){
+      acceptableNationalities.push(node.value)
+    }
+  })
+
+  let acceptableCases =[]
+
+  chosenFilterNodes.forEach(function(node){
+    if (node.getAttribute('checked') == 'checked' && node.getAttribute('filter-type') == 'present-in'){
+      acceptableCases.push(node.value)
+    }
+  })
+
+
+  let icons = panel.parentNode.querySelectorAll('div[class*="icon"]')
+  icons.forEach(function(icon){
+    icon.setAttribute('toggled', 'false')
+
+    let genderMatch = false
+    let nationalityMatch = false
+    let caseMatch = false
+
+
+    acceptableGenders.forEach(function(gender){
+      if (icon.outerHTML.indexOf(gender) > 0){
+        genderMatch = true
+      }
+    })
+
+    acceptableNationalities.forEach(function(nationality){
+
+      if (nationality == 'other' && icon.outerHTML.indexOf('british') < 0 && icon.outerHTML.indexOf('japanese') < 0){
+        nationalityMatch = true
+      }
+      
+      if (icon.outerHTML.indexOf(nationality) > 0){
+        nationalityMatch = true
+      }
+    })
+
+    acceptableCases.forEach(function(gamecase){
+      if (icon.outerHTML.indexOf('present-in-case-' + gamecase + '="true"') > 0){
+        caseMatch = true
+      }
+    })
+
+    if (genderMatch && nationalityMatch && caseMatch){
+      icon.setAttribute('toggled','on')
+    }
+
+  })
+}
+
+document.querySelector('.reset-filters').addEventListener('click', function(e){
+  e.stopPropagation()
+  let checkboxes = e.target.closest('.filter-form').querySelectorAll('input[type="checkbox"]')
+
+  checkboxes.forEach(function(checkbox){
+    console.log(checkbox)
+    checkbox.setAttribute('checked', 'checked')
+    checkbox.checked = true
+  })
+  filterItems(e)
+})
+
+
+let checkboxes = document.querySelectorAll('input[type="checkbox"]')
+checkboxes.forEach(function(node){
+  node.addEventListener('click', function(e){
+    if (e.target.getAttribute('checked') == "checked"){
+      e.target.setAttribute('checked', 'false')
+    } else{
+      e.target.setAttribute('checked', 'checked')
+    }
+  })
+})
