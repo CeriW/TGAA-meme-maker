@@ -61,15 +61,15 @@ const locations = [
 // images - the number of images in the folder to go with this character. The code depends on them being named sequentially beginning at 1 and can't work if there are any numbers missing.
 const characters = [
   {name: 'Ryunosuke Naruhodo',                    id:'naruhodo-ryunosuke',          gender: 'male',       nationality: 'japanese',      appearsin: [true,true,true,true,true,false,true,true,true,true],          images: 7},
-  {name: 'Herlock Sholmes',                       id:'sholmes-herlock-default',     gender: 'male',       nationality: 'british',       appearsin: [false,true,true,true,true,false,true,true,true,true],         images: 12,      variant: 'default outfit'},
-  {name: 'Herlock Sholmes',                       id:'sholmes-herlock-casual',      gender: 'male',       nationality: 'british',       appearsin: [false,true,true,true,true,false,true,true,true,true],         images: 9,       variant: 'casual outfit'},
+  {name: 'Herlock Sholmes',                       id:'sholmes-herlock-default',     gender: 'male',       nationality: 'english',       appearsin: [false,true,true,true,true,false,true,true,true,true],         images: 12,      variant: 'default outfit'},
+  {name: 'Herlock Sholmes',                       id:'sholmes-herlock-casual',      gender: 'male',       nationality: 'english',       appearsin: [false,true,true,true,true,false,true,true,true,true],         images: 9,       variant: 'casual outfit'},
   {name: 'Susato Mikotoba',                       id:'mikotoba-susato',             gender: 'female',     nationality: 'japanese',      appearsin: [true,true,true,true,true,true,true,true,true,true],           images: 12},
-  {name: 'Barok van Zieks',                       id:'van-zieks-barok',             gender: 'male',       nationality: 'british',       appearsin: [false,false,true,true,true,false,true,true,true,true],        images: 6},
-  {name: 'Iris Wilson',                           id:'wilson-iris',                 gender: 'female',     nationality: 'british',       appearsin: [false,false,true,true,true,false,true,true,true,true],        images: 4},
-  {name: 'Tobias Gregson',                        id:'gregson-tobias',              gender: 'male',       nationality: 'british',       appearsin: [false,false,true,true,true,false,true,true,true,true],        images: 4},
-  {name: 'Gina Lestrade',                         id:'lestrade-gina',               gender: 'female',     nationality: 'british',       appearsin: [false,false,true,false,true,false,false,true,true,true],      images: 4},
+  {name: 'Barok van Zieks',                       id:'van-zieks-barok',             gender: 'male',       nationality: 'english',       appearsin: [false,false,true,true,true,false,true,true,true,true],        images: 6},
+  {name: 'Iris Wilson',                           id:'wilson-iris',                 gender: 'female',     nationality: 'english',       appearsin: [false,false,true,true,true,false,true,true,true,true],        images: 4},
+  {name: 'Tobias Gregson',                        id:'gregson-tobias',              gender: 'male',       nationality: 'english',       appearsin: [false,false,true,true,true,false,true,true,true,true],        images: 4},
+  {name: 'Gina Lestrade',                         id:'lestrade-gina',               gender: 'female',     nationality: 'english',       appearsin: [false,false,true,false,true,false,false,true,true,true],      images: 4},
   {name: 'Soseki Natsume',                        id:'natsume-soseki',              gender: 'male',       nationality: 'japanese',      appearsin: [false,false,false,true,false,true,true,false,false,false],    images: 9},
-  {name: 'Enoch Drebber',                         id:'drebber-enoch',               gender: 'male',       nationality: 'british',       appearsin: [false,false,false,false,false,false,false,true,false,false],  images: 4},
+  {name: 'Enoch Drebber',                         id:'drebber-enoch',               gender: 'male',       nationality: 'english',       appearsin: [false,false,false,false,false,false,false,true,false,false],  images: 4},
   {name: 'Madame Tusspells',                      id:'tusspells-esmerelda',         gender: 'female',     nationality: 'french',        appearsin: [false,false,false,false,false,false,false,true,false,false],   images: 1}
 
 ]

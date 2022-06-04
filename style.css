@@ -481,6 +481,7 @@ span[filter-type="all"]{
 
 .filter-form{
   display: flex;
+  justify-content: space-between;
   padding: 5px;
   background: rgba(255,255,255,0.1);
   width: 100%;
@@ -489,4 +490,61 @@ span[filter-type="all"]{
 
 .filter-form > *{
   padding: 5px 10px;
+}
+
+.filter-form > div > label{
+  color: var(--gold);
+  font-weight: bold;
+  display: block;
+  padding-bottom: 7px;
+}
+
+
+.case-presence-checkbox .checkbox-group {
+  display: grid; 
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; 
+  grid-template-rows: 1fr 1fr; 
+  gap: 10px 5px; 
+  grid-template-areas: 
+    ". . . . . . . . . ."
+    ". . . . . . . . . ."; 
+}
+
+.nationality-checkbox .flag-icon{
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  border-radius: 50%;
+  background-size: auto 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-right: 10px;
+  position: relative;
+}
+
+.nationality-checkbox-container,
+.nationality-checkbox-container label{
+  display: flex;
+  align-items: center;
+}
+
+.nationality-checkbox-container{
+  margin-bottom: 8px;
+}
+
+.nationality-checkbox *{
+  cursor: pointer;
+}
+
+.nationality-checkbox-container [checked] + label{
+  transition: 0.3s;
+  opacity: 1;
+}
+
+.nationality-checkbox-container :not([checked="checked"]) + label{
+  opacity: 0.2;
+}
+
+input[filter-type="nationality"]{
+  display: none;
 }
