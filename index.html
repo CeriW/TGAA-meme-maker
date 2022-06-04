@@ -57,12 +57,206 @@
             <select name="character-selector" id="character-selector"></select>
 
             <div id="character-selector-preview">
+              
+
+
+
+              <div class="filter-form">
+                <div class="gender-checkbox">
+                    <label for="gender-checkbox">Gender</label>
+                    <div class="checkbox-group">
+                        <div class="gender-checkbox-container">
+                            <input class="gender" name="gender-checkbox" filter-type="gender" id="gender-checkbox-male" value="gender-male" type="checkbox" checked="checked">
+                            <label for="gender-checkbox-male"><span class="gender-icon material-icons">male</span>Male</label>
+                        </div>
+                        <div class="gender-checkbox-container">
+                            <input class="gender" name="gender-checkbox" filter-type="gender" id="gender-checkbox-female" value="gender-female" type="checkbox" checked="checked">
+                            <label for="gender-checkbox-female"><span class="gender-icon material-icons">female</span>Female</label>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="nationality-checkbox">
+                    <label for="nationality-checkbox" class="formbuilder-checkbox-group-label">Nationality</label>
+                    <div class="checkbox-group">
+                        
+
+                      <div class="nationality-checkbox-container">  
+                        <input name="nationality-checkbox" filter-type="nationality" id="nationality-checkbox-british" value="british" type="checkbox" checked="checked">
+                          <label for="nationality-checkbox-british">
+                            <span class="flag-icon" style="background-image:url('assets/icons/flags/british.svg')"></span>
+                            British
+                          </label>
+                        </div>
+
+                        <div class="nationality-checkbox-container">
+                          <input name="nationality-checkbox" filter-type="nationality" id="nationality-checkbox-japanese" value="japanese" type="checkbox" checked="checked">
+                          <label for="nationality-checkbox-japanese">
+                            <span class="flag-icon" style="background-image:url('assets/icons/flags/japanese.svg')"></span>
+                            Japanese
+                          </label>
+                        </div>
+
+
+                        <div class="nationality-checkbox-container">  
+                          <input name="nationality-checkbox" filter-type="nationality" id="nationality-checkbox-other" value="other" type="checkbox" checked="checked">
+                            <label for="nationality-checkbox-other">
+                              <span class="flag-icon" style="background-image:url('assets/icons/flags/world.svg')"></span>
+                              Other
+                            </label>
+                          </div>
+  
+
+                        <!--<div class="nationality-checkbox-container">
+                            <input name="nationality-checkbox" filter-type="nationality" id="nationality-checkbox-english" value="english" type="checkbox" checked="checked">
+                          <label for="nationality-checkbox-english">
+                            <span class="flag-icon" style="background-image:url('assets/icons/flags/english.svg')"></span>
+                            English
+                          </label>
+                        </div>
+
+                        <div class="nationality-checkbox-container">
+                            <input name="nationality-checkbox" filter-type="nationality" id="nationality-checkbox-scottish" value="english" type="checkbox" checked="checked">
+                          <label for="nationality-checkbox-scottish">
+                            <span class="flag-icon" style="background-image:url('assets/icons/flags/scottish.svg')"></span>
+                            Scottish
+                          </label>
+                        </div>
+
+
+                        
+                        <div class="nationality-checkbox-container">
+                            <input name="nationality-checkbox" filter-type="nationality" id="nationality-checkbox-french" value="french" type="checkbox" checked="checked">
+                          <label for="nationality-checkbox-french">
+                            <span class="flag-icon" style="background-image:url('assets/icons/flags/french.svg')"></span>
+                            French
+                          </label>
+                        </div>
+
+                        <div class="nationality-checkbox-container">
+                            <input name="nationality-checkbox" filter-type="nationality" id="nationality-checkbox-russian" value="russian" type="checkbox" checked="checked">
+                          <label for="nationality-checkbox-russian">
+                            <span class="flag-icon" style="background-image:url('assets/icons/flags/russian.svg')"></span>
+                            Russian
+                          </label>
+                        </div>
+
+                        <div class="nationality-checkbox-container">
+                            <input name="nationality-checkbox" filter-type="nationality" id="nationality-checkbox-irish" value="french" type="checkbox" checked="checked">
+                          <label for="nationality-checkbox-irish">
+                            <span class="flag-icon" style="background-image:url('assets/icons/flags/irish.svg')"></span>
+                            Irish
+                          </label>
+                        </div>
+
+                        <div class="nationality-checkbox-container">
+                            <input name="nationality-checkbox" filter-type="nationality" id="nationality-checkbox-bohemian" value="bohemian" type="checkbox" checked="checked">
+                          <label for="nationality-checkbox-bohemian">
+                            <span class="flag-icon" style="background-image:url('assets/icons/flags/bohemian.svg')"></span>
+                            Bohemian
+                          </label>
+                        </div>
+
+                        <div class="nationality-checkbox-container">
+                            <input name="nationality-checkbox" filter-type="nationality" id="nationality-checkbox-italian" value="italian" type="checkbox" checked="checked">
+                          <label for="nationality-checkbox-italian">
+                            <span class="flag-icon" style="background-image:url('assets/icons/flags/italian.svg')"></span>
+                            Italian
+                          </label>
+                        </div>-->
+
+                    </div>
+                </div>
+
+                <div class="case-presence-checkbox">
+                  <label for="case-presence-checkbox" class="formbuilder-checkbox-group-label">Present in</label>
+                  <div class="checkbox-group">
+                      
+                    <div class="present-in-checkbox-container">
+                      <input name="present-in-checkbox" filter-type="present-in" id="present-in-0" value="0" type="checkbox" checked="checked">
+                      <label for="present-in-0">1-1</label>
+                    </div> 
+                    <div class="present-in-checkbox-container">
+                      <input name="present-in-checkbox" filter-type="present-in" id="present-in-1" value="1" type="checkbox" checked="checked">
+                      <label for="present-in-1">1-2</label>
+                    </div>
+                    <div class="present-in-checkbox-container">
+                      <input name="present-in-checkbox" filter-type="present-in" id="present-in-2" value="2" type="checkbox" checked="checked">
+                      <label for="present-in-2">1-3</label>
+                    </div>
+                    <div class="present-in-checkbox-container">
+                      <input name="present-in-checkbox" filter-type="present-in" id="present-in-3" value="3" type="checkbox" checked="checked">
+                      <label for="present-in-3">1-4</label>
+                    </div>
+                    <div class="present-in-checkbox-container">
+                      <input name="present-in-checkbox" filter-type="present-in" id="present-in-4" value="4" type="checkbox" checked="checked">
+                      <label for="present-in-4">1-5</label>
+                    </div>
+
+
+                    <div class="present-in-checkbox-container">
+                      <input name="present-in-checkbox" filter-type="present-in" id="present-in-5" value="5" type="checkbox" checked="checked">
+                      <label for="present-in-5">2-1</label>
+                    </div>
+                    <div class="present-in-checkbox-container">
+                      <input name="present-in-checkbox" filter-type="present-in" id="present-in-6" value="6" type="checkbox" checked="checked">
+                      <label for="present-in-6">2-2</label>
+                    </div>
+                    <div class="present-in-checkbox-container">
+                      <input name="present-in-checkbox" filter-type="present-in" id="present-in-7" value="7" type="checkbox" checked="checked">
+                      <label for="present-in-7">2-3</label>
+                    </div>
+                    <div class="present-in-checkbox-container">
+                      <input name="present-in-checkbox" filter-type="present-in" id="present-in-8" value="8" type="checkbox" checked="checked">
+                      <label for="present-in-8">2-4</label>
+                    </div>
+                    <div class="present-in-checkbox-container">
+                      <input name="present-in-checkbox" filter-type="present-in" id="present-in-9" value="9" type="checkbox" checked="checked">
+                      <label for="present-in-9">2-5</label>
+                    </div>
+
+
+                  </div>
+              </div>
+
+                <button class="reset-filters">
+                  <span class="material-icons">restart_alt</span>Reset filters
+                </button>
+                <!--<button class="apply-filter-button">Filter</button>-->
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              
+              
               <!--<div class="filter">
                 Filter by:
-                <span class="material-icons" filter="male">male</span>
-                <span class="material-icons" filter="female">female</span>
-              -->
-              </div>
+                <span class="material-icons" filter-type="gender" filter-value="male">male</span>
+                <span class="material-icons" filter-type="gender" filter-value="female">female</span>
+
+
+                <span filter-type="nationality" filter-value="british">British</span>
+                <span filter-type="nationality" filter-value="japanese">Japanese</span>
+                
+
+                <span filter-type="all" filter-value="all">Reset</span>
+
+              </div>-->
 
 
             </div>
