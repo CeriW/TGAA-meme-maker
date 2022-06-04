@@ -505,12 +505,12 @@ span[filter-type="all"]{
 
 .case-presence-checkbox .checkbox-group {
   display: grid; 
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; 
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr; 
   gap: 10px 5px; 
   grid-template-areas: 
-    ". . . . . . . . . ."
-    ". . . . . . . . . ."; 
+    ". . . . ."
+    ". . . . ."; 
 }
 
 .gender-checkbox-container .gender-icon,
@@ -537,27 +537,32 @@ span[filter-type="all"]{
   align-items: center;
 }
 
+.present-in-checkbox-container,
 .gender-checkbox-container,
 .nationality-checkbox-container{
   margin-bottom: 8px;
 }
 
+.present-in-checkbox-container *,
 .gender-checkbox-container *,
 .nationality-checkbox *{
   cursor: pointer;
 }
 
+.present-in-checkbox-container [checked] + label,
 .gender-checkbox-container [checked] + label,
 .nationality-checkbox-container [checked] + label{
   transition: 0.3s;
   opacity: 1;
 }
 
+.present-in-checkbox-container :not([checked="checked"]) + label,
 .gender-checkbox-container :not([checked="checked"]) + label,
 .nationality-checkbox-container :not([checked="checked"]) + label{
   opacity: 0.2;
 }
 
+input[filter-type="present-in"],
 input[filter-type="gender"],
 input[filter-type="nationality"]{
   display: none;
@@ -577,4 +582,19 @@ input[filter-type="nationality"]{
   font-weight: bold;
   position: relative;
   top: -1px;
+}
+
+.case-presence-checkbox input + label{
+  background: #fff;
+  color: var(--blue);
+  padding: 6px 1px;
+  border-radius: 50%;
+  text-align: center;
+  font-weight: bold;
+}
+
+.present-in-checkbox-container label{
+  min-width: 29px;
+  text-align: center;
+  display: block;
 }
