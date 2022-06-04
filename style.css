@@ -477,3 +477,16 @@ span[filter-type="all"]{
   float: right;
   padding: 5px;
 }
+
+
+.filter-form{
+  display: flex;
+  padding: 5px;
+  background: rgba(255,255,255,0.1);
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.filter-form > *{
+  padding: 5px 10px;
+}

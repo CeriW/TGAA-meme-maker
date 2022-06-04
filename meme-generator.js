@@ -499,14 +499,14 @@ filterButtons.forEach(function(filter){
 })
 
 
-document.querySelector('.apply-filter-button').addEventListener('click', filterItems)
+document.querySelector('.filter-form').addEventListener('click', filterItems)
 
 
 function filterItems(e){
   
-  let panel = e.target.parentNode.parentNode
+  let panel = e.target.closest('.filter-form')
 
-  let chosenFilterNodes = e.target.parentNode.querySelectorAll('[checked="checked"]')
+  let chosenFilterNodes = panel.querySelectorAll('[checked="checked"]')
 
   let acceptableGenders =[]
   chosenFilterNodes.forEach(function(node){
@@ -523,16 +523,15 @@ function filterItems(e){
   })
 
   let acceptableCases =[]
-  console.log(chosenFilterNodes)
+
   chosenFilterNodes.forEach(function(node){
     if (node.getAttribute('checked') == 'checked' && node.getAttribute('filter-type') == 'present-in'){
       acceptableCases.push(node.value)
     }
   })
 
-  console.log(acceptableCases)
 
-  let icons = panel.querySelectorAll('div[class*="icon"]')
+  let icons = panel.parentNode.querySelectorAll('div[class*="icon"]')
   icons.forEach(function(icon){
     icon.setAttribute('toggled', 'false')
 
@@ -564,10 +563,19 @@ function filterItems(e){
     }
 
   })
-
-
-
 }
+
+document.querySelector('.reset-filters').addEventListener('click', function(e){
+  e.stopPropagation()
+  let checkboxes = e.target.closest('.filter-form').querySelectorAll('input[type="checkbox"]')
+
+  checkboxes.forEach(function(checkbox){
+    console.log(checkbox)
+    checkbox.setAttribute('checked', 'checked')
+    checkbox.checked = true
+  })
+  filterItems(e)
+})
 
 
 let checkboxes = document.querySelectorAll('input[type="checkbox"]')
