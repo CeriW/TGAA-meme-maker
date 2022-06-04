@@ -478,7 +478,6 @@ span[filter-type="all"]{
   padding: 5px;
 }
 
-
 .filter-form{
   display: flex;
   justify-content: space-between;
@@ -499,6 +498,10 @@ span[filter-type="all"]{
   padding-bottom: 7px;
 }
 
+.filter-form > .gender-checkbox > label{
+  padding-bottom: 10px;
+}
+
 
 .case-presence-checkbox .checkbox-group {
   display: grid; 
@@ -510,41 +513,68 @@ span[filter-type="all"]{
     ". . . . . . . . . ."; 
 }
 
+.gender-checkbox-container .gender-icon,
 .nationality-checkbox .flag-icon{
   width: 25px;
   height: 25px;
-  display: inline-block;
   border-radius: 50%;
   background-size: auto 100%;
   background-position: center;
   background-repeat: no-repeat;
   margin-right: 10px;
   position: relative;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+.gender-checkbox-container,
+.gender-checkbox-container label,
 .nationality-checkbox-container,
 .nationality-checkbox-container label{
   display: flex;
   align-items: center;
 }
 
+.gender-checkbox-container,
 .nationality-checkbox-container{
   margin-bottom: 8px;
 }
 
+.gender-checkbox-container *,
 .nationality-checkbox *{
   cursor: pointer;
 }
 
+.gender-checkbox-container [checked] + label,
 .nationality-checkbox-container [checked] + label{
   transition: 0.3s;
   opacity: 1;
 }
 
+.gender-checkbox-container :not([checked="checked"]) + label,
 .nationality-checkbox-container :not([checked="checked"]) + label{
   opacity: 0.2;
 }
 
+input[filter-type="gender"],
 input[filter-type="nationality"]{
   display: none;
+}
+
+#gender-checkbox-female + label span{
+  background: pink;
+  color: var(--blue);
+  font-weight: bold;
+  position: relative;
+  top: -1px;
+}
+
+#gender-checkbox-male + label span{
+  background: #75D2EF;
+  color: var(--blue);
+  font-weight: bold;
+  position: relative;
+  top: -1px;
 }
