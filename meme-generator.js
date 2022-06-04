@@ -315,6 +315,19 @@ function generateLabelledIcon(type, object){
     case 'character':
       // This is set to 1.png so it will use the first image of the character as the preview.
       iconURL = 'url("assets/characters/' + object.id + '/thumbnails/1.png")'
+
+      let genderIcon = document.createElement('span')
+      genderIcon.classList.add('character-icon-gender-tag')
+      genderIcon.setAttribute('gender', object.gender)
+      genderIcon.innerHTML = '<span class="gender-icon material-icons">' + object.gender + '</span>'
+      icon.appendChild(genderIcon)
+
+      let nationalityIcon = document.createElement('span')
+      nationalityIcon.classList.add('character-icon-nationality-tag')
+      nationalityIcon.style.backgroundImage = 'url("assets/icons/flags/' + object.nationality + '.svg")'
+      console.log('assets/icons/flags/' + object.nationality + '.svg')
+      icon.appendChild(nationalityIcon)
+
       break
     case 'location':
       iconURL = 'url("assets/locations/thumbnails/' + object.id + '.png")'
@@ -556,8 +569,6 @@ function filterItems(e){
         nationalityMatch = true
       }
     })
-
-    console.log(acceptableNationalities)
 
     acceptableCases.forEach(function(gamecase){
       if (icon.outerHTML.indexOf('present-in-case-' + gamecase + '="true"') > 0){
