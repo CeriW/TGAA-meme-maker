@@ -31,13 +31,19 @@ header{
   text-align: center;
 }
 
-#banner{
+#banner,
+#spoiler-warning > *{
   width: 650px;
   max-width: 100%;
 }
 
+#options{
+  position: relative;
+}
 
-.options { grid-area: options; }
+.options {
+  grid-area: options;
+}
 
 
 
@@ -317,7 +323,8 @@ div[class*="icon"]:hover,
 /* Headings ------------------------------------------------------------------*/
 
 .toggle-heading,
-#pose-heading{
+#pose-heading,
+#spoiler-warning{
   background: linear-gradient(to bottom, #65592d, #9E9150);
   color: #fff;
   padding: 10px 10px 10px 20px;
@@ -370,7 +377,6 @@ div[class*="icon"]:hover,
 .delete-panel:hover{
   color: var(--blue);
 }
-
 
 /* Make it responsive --------------------------------------------------------*/
 
@@ -656,3 +662,34 @@ input[filter-type="nationality"]{
   opacity: 1;
 }
 
+/* Spoiler warning ---------------------------------------------------------- */
+
+#spoiler-warning{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  text-align: center;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#spoilers-okay{
+  background: var(--blue);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 10px;
+  transition: 0.2s;
+  margin-top: 20px;
+}
+
+#spoilers-okay:hover{
+  background: #fff;
+  color:  var(--blue);
+}

@@ -566,3 +566,10 @@ checkboxes.forEach(function(node){
     }
   })
 })
+
+
+
+document.querySelector('#spoilers-okay').addEventListener('click', () => {
+  
+  document.querySelector('#spoiler-warning').remove()
+})

@@ -176,6 +176,14 @@ const characters = [
   images: 1
 },
 
+{
+  name: 'Kazuma Asogi',
+  id:'asogi-kazuma',
+  gender: 'male',
+  nationality: 'japanese',
+  appearsin: [true,false,false,false,false,false,false,true,true,true],
+  images: 5
+},
 
 
 ]
