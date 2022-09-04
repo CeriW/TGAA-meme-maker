@@ -5,9 +5,10 @@
 - GIF support for character animations
 - GIF support for locations
 - Search
-- Filtering
 
--JSON files for character and location lists
+- Spoiler alert
+
+- Make sure all the characters have speech box tags
 
 
 <span class="material-icons">face</span>
