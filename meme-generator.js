@@ -40,6 +40,11 @@ let paths ={
 generateCanvas()
 currentCanvas = document.querySelector('canvas-container')
 
+// Check whether the user is okay with spoilers or not, either by bringing up
+// the spoiler window or checking whether they've already okayed spoilers
+document.querySelector('#spoilers-okay').addEventListener('click', checkSpoilers)
+checkSpoilers()
+
 // Generate the locations selector panel.
 generateLocations()
 generateLocationInterface()
@@ -285,7 +290,6 @@ function generateLabelledIcon(type, object){
       let nationalityIcon = document.createElement('span')
       nationalityIcon.classList.add('character-icon-nationality-tag')
       nationalityIcon.style.backgroundImage = 'url("assets/icons/flags/' + object.nationality + '.svg")'
-      console.log('assets/icons/flags/' + object.nationality + '.svg')
       icon.appendChild(nationalityIcon)
 
       break
@@ -568,8 +572,9 @@ checkboxes.forEach(function(node){
 })
 
 
-
-document.querySelector('#spoilers-okay').addEventListener('click', () => {
-  
-  document.querySelector('#spoiler-warning').remove()
-})
+function checkSpoilers(){
+  if (document.querySelector('#remember-spoilers-okay').checked || window.localStorage.getItem('reveal-spoilers')){
+    localStorage.setItem('reveal-spoilers', true)
+    document.querySelector('#spoiler-warning').remove()
+  }
+}

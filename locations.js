@@ -19,7 +19,5 @@ const locations = [
   {name: "Windibank's Pawnbrokery",               id:"windibanks"},
   {name: "Forensics Laboratory",                  id:"forensics-laboratory-courtney",                   variant:"Courtney's version"},
   {name: "Forensics Laboratory",                  id:"forensics-laboratory-maria",                      variant:"Maria's version"},
-  {name: "Forensics Laboratory",                  id:"forensics-laboratory-maria",                      variant:"Maria's version"},
   {name: "Room on Fresno Street",                 id:"room-on-fresno-street"},
-
 ]
