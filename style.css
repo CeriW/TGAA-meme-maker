@@ -687,9 +687,20 @@ input[filter-type="nationality"]{
   padding: 10px;
   transition: 0.2s;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 #spoilers-okay:hover{
   background: #fff;
   color:  var(--blue);
 }
+
+#remember-spoilers-container *{
+  cursor: pointer;
+}
+
+#remember-spoilers-okay{
+  position: relative;
+  margin-right: 10px;
+}
+

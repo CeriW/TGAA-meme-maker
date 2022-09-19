@@ -32,9 +32,6 @@
 
         </div>
             
-        <!--<img id="character" src="">
-        <img id="background" src="">
-        <img id="speech-tag" src="assets/game-elements/speech-box-tag.png">-->
         <img id="speech-box" src="assets/game-elements/speech-box.png">
         <img id="credits" src="assets/misc/credits.png">
 
@@ -44,8 +41,16 @@
           <div id="spoiler-warning">
             <h2>Spoiler warning</h2>
             <p>The content within contains spoilers for the entirety of The&nbsp;Great Ace Attorney Chronicles</p>
-            <button id="spoilers-okay">I'm okay with this, take me to the meme generator</button>
-            <input id="remember-spoilers-okay" type="checkbox">Remember my choice</input>
+            <button id="spoilers-okay">
+              <span style="font-weight: bold; font-size: 1.1em;">I'm okay with this,</span>
+              <br>take me to the meme generator
+            </button>
+
+            <div id="remember-spoilers-container">
+              <input name="remember-spoilers-okay" id="remember-spoilers-okay" type="checkbox"></input>
+              <label for="remember-spoilers-okay">Remember my choice</label>
+            </div>
+            
           </div>
 
           <div class="toggle-heading" associated-panel="background-selector-preview">
@@ -118,63 +123,6 @@
                           </div>
   
 
-                        <!--<div class="nationality-checkbox-container">
-                            <input name="nationality-checkbox" filter-type="nationality" id="nationality-checkbox-english" value="english" type="checkbox" checked="checked">
-                          <label for="nationality-checkbox-english">
-                            <span class="flag-icon" style="background-image:url('assets/icons/flags/english.svg')"></span>
-                            English
-                          </label>
-                        </div>
-
-                        <div class="nationality-checkbox-container">
-                            <input name="nationality-checkbox" filter-type="nationality" id="nationality-checkbox-scottish" value="english" type="checkbox" checked="checked">
-                          <label for="nationality-checkbox-scottish">
-                            <span class="flag-icon" style="background-image:url('assets/icons/flags/scottish.svg')"></span>
-                            Scottish
-                          </label>
-                        </div>
-
-
-                        
-                        <div class="nationality-checkbox-container">
-                            <input name="nationality-checkbox" filter-type="nationality" id="nationality-checkbox-french" value="french" type="checkbox" checked="checked">
-                          <label for="nationality-checkbox-french">
-                            <span class="flag-icon" style="background-image:url('assets/icons/flags/french.svg')"></span>
-                            French
-                          </label>
-                        </div>
-
-                        <div class="nationality-checkbox-container">
-                            <input name="nationality-checkbox" filter-type="nationality" id="nationality-checkbox-russian" value="russian" type="checkbox" checked="checked">
-                          <label for="nationality-checkbox-russian">
-                            <span class="flag-icon" style="background-image:url('assets/icons/flags/russian.svg')"></span>
-                            Russian
-                          </label>
-                        </div>
-
-                        <div class="nationality-checkbox-container">
-                            <input name="nationality-checkbox" filter-type="nationality" id="nationality-checkbox-irish" value="french" type="checkbox" checked="checked">
-                          <label for="nationality-checkbox-irish">
-                            <span class="flag-icon" style="background-image:url('assets/icons/flags/irish.svg')"></span>
-                            Irish
-                          </label>
-                        </div>
-
-                        <div class="nationality-checkbox-container">
-                            <input name="nationality-checkbox" filter-type="nationality" id="nationality-checkbox-bohemian" value="bohemian" type="checkbox" checked="checked">
-                          <label for="nationality-checkbox-bohemian">
-                            <span class="flag-icon" style="background-image:url('assets/icons/flags/bohemian.svg')"></span>
-                            Bohemian
-                          </label>
-                        </div>
-
-                        <div class="nationality-checkbox-container">
-                            <input name="nationality-checkbox" filter-type="nationality" id="nationality-checkbox-italian" value="italian" type="checkbox" checked="checked">
-                          <label for="nationality-checkbox-italian">
-                            <span class="flag-icon" style="background-image:url('assets/icons/flags/italian.svg')"></span>
-                            Italian
-                          </label>
-                        </div>-->
 
                     </div>
                 </div>
@@ -233,40 +181,7 @@
                 <button class="reset-filters">
                   <span class="material-icons">restart_alt</span>Reset filters
                 </button>
-                <!--<button class="apply-filter-button">Filter</button>-->
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-              
-              
-              <!--<div class="filter">
-                Filter by:
-                <span class="material-icons" filter-type="gender" filter-value="male">male</span>
-                <span class="material-icons" filter-type="gender" filter-value="female">female</span>
-
-
-                <span filter-type="nationality" filter-value="british">British</span>
-                <span filter-type="nationality" filter-value="japanese">Japanese</span>
-                
-
-                <span filter-type="all" filter-value="all">Reset</span>
-
-              </div>-->
-
 
             </div>
 

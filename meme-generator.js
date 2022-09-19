@@ -42,7 +42,9 @@ currentCanvas = document.querySelector('canvas-container')
 
 // Check whether the user is okay with spoilers or not, either by bringing up
 // the spoiler window or checking whether they've already okayed spoilers
-document.querySelector('#spoilers-okay').addEventListener('click', checkSpoilers)
+document.querySelector('#spoilers-okay').addEventListener('click', (e) => {
+  checkSpoilers(e)
+})
 checkSpoilers()
 
 // Generate the locations selector panel.
@@ -572,9 +574,18 @@ checkboxes.forEach(function(node){
 })
 
 
-function checkSpoilers(){
+function checkSpoilers(e){
+
+  let spoilerWarning = document.querySelector('#spoiler-warning')
+
   if (document.querySelector('#remember-spoilers-okay').checked || window.localStorage.getItem('reveal-spoilers')){
     localStorage.setItem('reveal-spoilers', true)
-    document.querySelector('#spoiler-warning').remove()
+    spoilerWarning.remove()
+  }
+
+  // If this is running as the result of an event, it means that the okay
+  // button has been clicked, therefore close the spoiler window.
+  if (e && spoilerWarning){
+    spoilerWarning.remove()
   }
 }
