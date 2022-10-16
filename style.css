@@ -3,11 +3,16 @@
   --blue: #0D1725;
 }
 
+@font-face {
+  font-family: Toplar;
+  src: url(assets/fonts/Toplar.woff);
+}
+
 body{
   background: #0D1725;
   color: #fff;
-  font-family: 'Libre Baskerville', Georgia, serif; /* Yes, I chose 'Libre Baskerville' on purpose. Congrats, you found an easter egg */
-  font-size: 15px;
+  font-family: Toplar, 'Libre Baskerville', Georgia, serif; /* Yes, I chose 'Libre Baskerville' on purpose. Congrats, you found an easter egg */
+  font-size: 18px;
   padding: 0 30px 30px;
   margin: 0;
 }
@@ -35,6 +40,10 @@ header{
 #spoiler-warning > *{
   width: 650px;
   max-width: 100%;
+}
+
+#spoiler-warning > *{
+  width: 440px;
 }
 
 #options{
@@ -300,8 +309,8 @@ div[class*="icon"]:hover,
   right: 19%;
   left: 19%;
   color: #fff;
-  font-size: 120%;
-  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 114%;
+  font-family: Toplar, 'Libre Baskerville', Georgia, serif;
   background: #0D1725;
   border: none;
   outline: none !important;
@@ -619,6 +628,7 @@ input[filter-type="nationality"]{
   font-family: inherit;
   border: none;
   transition: 0.3s;
+  font-size: 18px;
 }
 
 .reset-filters:hover{
@@ -688,6 +698,7 @@ input[filter-type="nationality"]{
   transition: 0.2s;
   margin-top: 20px;
   margin-bottom: 20px;
+  font-size: 0.9em;
 }
 
 #spoilers-okay:hover{
@@ -701,6 +712,19 @@ input[filter-type="nationality"]{
 
 #remember-spoilers-okay{
   position: relative;
-  margin-right: 10px;
+  margin-right: 20px;
 }
 
+#remember-spoilers-okay:before{
+  content: '';
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  position: absolute;
+  top: -6px;
+  border: 1px solid var(--blue);
+}
+
+#remember-spoilers-okay:checked:before{
+  background: #fff url('/assets/icons/check.svg') center / 90% no-repeat;
+}

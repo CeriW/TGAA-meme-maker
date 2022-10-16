@@ -395,7 +395,6 @@ function download() {
   // Get a list of all the canvases, and set the height of our temporary one to their combined heights.
   //let allCanvases = document.querySelectorAll('canvas:not(.temp-canvas)')
   let allCanvases = document.querySelectorAll('.canvas-container')
-  console.log(allCanvases)
   downloadableCanvas.setAttribute('height', 1080 * allCanvases.length + 1)
 
 
@@ -418,11 +417,23 @@ function download() {
       tempCanvasContext.drawImage(imgToDraw, 0, 0)
     }
 
+    var myFont = new FontFace('Toplar', 'url("assets/fonts/Toplar.woff")');
+
     // Render the text
-    tempCanvasContext.font = "50px Georgia";
+
+    let textBoxText = allCanvases[i].querySelector('textarea').value
+
+    myFont.load().then(function(font){
+      document.fonts.add(font);
+      console.log('Font loaded');
+    })
+
+    tempCanvasContext.font = "50px Toplar";
     tempCanvasContext.fillStyle = "#fff";
-    tempCanvasContext.fillText(allCanvases[i].querySelector('textarea').value, 370, 890);
+    tempCanvasContext.fillText(textBoxText, 365, 885, 800);
     downloadableCanvasContext.drawImage(tempCanvas, 0, [i * 1080] )
+
+
   }
 
 
