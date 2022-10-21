@@ -1,5 +1,6 @@
 :root{
   --gold: #9E9150;
+  --lightgold: #dfd7af;
   --blue: #0D1725;
 }
 
@@ -728,4 +729,29 @@ input[filter-type="nationality"]{
 
 #remember-spoilers-okay:checked:before{
   background: #fff url('/assets/icons/check.svg') center / 90% no-repeat;
+}
+
+
+/* ---------------------------------------------------------------------------*/
+
+#about h1,
+#about h2,
+#about h3,
+#about h4{
+  color: var(--gold);
+}
+
+#about a{
+  color: var(--lightgold);
+}
+
+#about > div{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 35px 100px;
+}
+
+#about > div > div{
+  flex-basis: 400px;
+  flex-grow: 1;
 }
