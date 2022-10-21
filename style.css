@@ -8,11 +8,14 @@
   src: url(assets/fonts/Toplar.woff);
 }
 
+html{
+  font-size: 18px;
+}
+
 body{
   background: #0D1725;
   color: #fff;
   font-family: Toplar, 'Libre Baskerville', Georgia, serif; /* Yes, I chose 'Libre Baskerville' on purpose. Congrats, you found an easter egg */
-  font-size: 18px;
   padding: 0 30px 30px;
   margin: 0;
 }
@@ -339,7 +342,7 @@ div[class*="icon"]:hover,
   color: #fff;
   padding: 10px 10px 10px 20px;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 1.2em;
   transition: 0.4s;
   display: block;
   border: 2px solid var(--blue);
@@ -409,13 +412,10 @@ div[class*="icon"]:hover,
 @media (max-width: 1000px){
   .toggle-heading,
   #pose-heading{
-    font-size: 16px;
+    font-size: 1rem;
     padding: 5px 20px;
   }
 
-  div[class*="icon"] > div{
-    font-size: 12px;
-  }
 
   div[class*="icon"],
   #pose-selector label{
@@ -629,7 +629,7 @@ input[filter-type="nationality"]{
   font-family: inherit;
   border: none;
   transition: 0.3s;
-  font-size: 18px;
+  font-size: 1rem;
 }
 
 .reset-filters:hover{
