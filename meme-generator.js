@@ -403,16 +403,12 @@ function download() {
   let downloadableCanvasContext = downloadableCanvas.getContext("2d")
   for (i=0; i < allCanvases.length; i++){
 
-    console.log(allCanvases[i])
-
     let tempCanvas = document.createElement('canvas')
     tempCanvas.width = 1920
     tempCanvas.height = 1080
-    //document.body.appendChild(tempCanvas)
     let tempCanvasContext = tempCanvas.getContext("2d");
 
     for (j = 1; j < 5; j++){
-      console.log(allCanvases[i].querySelector('img:nth-child(' + j + ')'))
       let imgToDraw = allCanvases[i].querySelector('img:nth-child(' + j + ')')
       tempCanvasContext.drawImage(imgToDraw, 0, 0)
     }
@@ -425,14 +421,35 @@ function download() {
 
     myFont.load().then(function(font){
       document.fonts.add(font);
-      console.log('Font loaded');
     })
 
-    tempCanvasContext.font = "50px Toplar";
+    let fontSize = 50
+
+    tempCanvasContext.font = `${fontSize}px Toplar`;
     tempCanvasContext.fillStyle = "#fff";
-    tempCanvasContext.fillText(textBoxText, 365, 885, 800);
+    wrapText(tempCanvasContext, textBoxText, 365, 882, 1200)
     downloadableCanvasContext.drawImage(tempCanvas, 0, [i * 1080] )
 
+
+    function wrapText(context, text, x, y, maxWidth) {
+      var words = text.split(' ');
+      var line = '';
+
+      for(var n = 0; n < words.length; n++) {
+        var testLine = line + words[n] + ' ';
+        var metrics = context.measureText(testLine);
+        var testWidth = metrics.width;
+        if (testWidth > maxWidth && n > 0) {
+          context.fillText(line, x, y);
+          line = words[n] + ' ';
+          y += fontSize * 1.25
+        }
+        else {
+          line = testLine;
+        }
+      }
+      context.fillText(line, x, y);
+    }
 
   }
 
@@ -459,8 +476,6 @@ filterButtons.forEach(function(filter){
 
 
   filter.addEventListener('click', function(e){
-    console.log(e)
-    console.log(e.target.getAttribute('filter-value'))
 
     let filterType = e.target.getAttribute('filter-type')
     let filterValue = e.target.getAttribute('filter-value')
@@ -565,7 +580,6 @@ document.querySelector('.reset-filters').addEventListener('click', function(e){
   let checkboxes = e.target.closest('.filter-form').querySelectorAll('input[type="checkbox"]')
 
   checkboxes.forEach(function(checkbox){
-    console.log(checkbox)
     checkbox.setAttribute('checked', 'checked')
     checkbox.checked = true
   })
