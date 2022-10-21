@@ -314,6 +314,7 @@ div[class*="icon"]:hover,
   background: #0D1725;
   border: none;
   outline: none !important;
+  resize: none;
 }
 
 #text{

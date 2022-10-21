@@ -129,6 +129,7 @@ function generateCanvas(){
   newTextBox = document.createElement('textarea')
   newTextBox.classList.add('text-overlay')
   newTextBox.innerHTML = 'Type your text here...'
+  newTextBox.setAttribute('maxlength', 120)
   newCanvas.appendChild(newTextBox)
 
   // Generate the delete button and have it run removeCanvas on click.
@@ -427,18 +428,19 @@ function download() {
 
     tempCanvasContext.font = `${fontSize}px Toplar`;
     tempCanvasContext.fillStyle = "#fff";
+    console.log(tempCanvasContext.measureText(textBoxText))
     wrapText(tempCanvasContext, textBoxText, 365, 882, 1200)
     downloadableCanvasContext.drawImage(tempCanvas, 0, [i * 1080] )
 
 
     function wrapText(context, text, x, y, maxWidth) {
-      var words = text.split(' ');
-      var line = '';
+      let words = text.split(' ');
+      let line = '';
 
-      for(var n = 0; n < words.length; n++) {
-        var testLine = line + words[n] + ' ';
-        var metrics = context.measureText(testLine);
-        var testWidth = metrics.width;
+      for(let n = 0; n < words.length; n++) {
+        let testLine = line + words[n] + ' ';
+        let metrics = context.measureText(testLine);
+        let testWidth = metrics.width;
         if (testWidth > maxWidth && n > 0) {
           context.fillText(line, x, y);
           line = words[n] + ' ';
