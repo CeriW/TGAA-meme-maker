@@ -616,3 +616,74 @@ function checkSpoilers(e){
     spoilerWarning.remove()
   }
 }
+
+
+async function displayWeather(city){
+  const weatherAPIkey = '05b8bf4b22e67da44ad9672eef66e607'
+  const timeAPIkey = 'AIzaSyAgMz4wy14zlCrshm3hWUZrVMWtVyFxKb0'
+
+  
+  let query
+  switch (city){
+    case 'London, Great Britain':
+      query = `https://api.openweathermap.org/data/2.5/weather?units=metric&lat=51.5200&lon=-0.1566&appid=${weatherAPIkey}`
+      break
+    case 'Tokyo, Japan':
+      query = `https://api.openweathermap.org/data/2.5/weather?units=metric&lat=35.6762&lon=-139.6503&appid=${weatherAPIkey}`
+  }
+
+
+  fetch(query)
+  .then(response => response.json())
+  .then(data => {
+    // do stuff with the data
+    console.log(data)
+    displayData(city, data)
+  })
+  .catch(() => {
+    console.log('problem')
+  });
+
+
+  fetch(`https://maps.googleapis.com/maps/api/timezone/json?location=49.283436, -123.130429&timestamp=1478880000&key=${timeAPIkey}`)
+    .then(response => response.json())
+    .then((data) => {
+      console.log(data)
+    })
+    .catch('oh no')
+
+
+
+  function displayData(city, data){
+    let weatherArea = document.querySelector('#weather-bar')
+    
+    let weatherPanel = document.createElement('div')
+    weatherPanel.textContent = city + data.weather[0].description + Math.round(data.main.temp)
+    
+    
+
+    weatherPanel.innerHTML = `
+      <img src="assets/icons/flags/${city === 'London, Great Britain' ? 'british' : 'japanese'}.svg" width=32>
+      <div>
+        ${city}<br>
+        ${Math.round(data.main.temp)}&deg;C - 
+        ${data.weather[0].description}
+        
+      </div>
+      <img src="http://openweathermap.org/img/wn/${data.weather[0].icon}.png">
+    `
+    
+    console.log(data.weather[0].id)
+    console.log(Math.floor(data.weather[0].id / 100))
+
+
+
+
+    weatherArea.appendChild(weatherPanel)
+  }
+
+
+}
+
+displayWeather('London, Great Britain')
+displayWeather('Tokyo, Japan')

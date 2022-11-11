@@ -40,6 +40,9 @@ header{
   text-align: center;
 }
 
+
+
+
 #banner,
 #spoiler-warning > *{
   width: 650px;
@@ -56,6 +59,30 @@ header{
 
 .options {
   grid-area: options;
+}
+
+#weather-bar{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: var(--blue);
+  color: #fff;
+  border-top: 3px solid var(--gold);
+
+  display: flex;
+  align-items: space-between;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+#weather-bar > div{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: nowrap;
+  padding: 0 10px;
 }
 
 
@@ -439,6 +466,10 @@ div[class*="icon"]:hover,
   #download{
     width: 170px;
     left: -24px !important;
+  }
+
+  #weather-bar{
+    display: none;
   }
 }
 
