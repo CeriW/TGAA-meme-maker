@@ -734,24 +734,25 @@ input[filter-type="nationality"]{
 
 /* ---------------------------------------------------------------------------*/
 
-#about h1,
-#about h2,
-#about h3,
-#about h4{
+aside h1,
+aside h2,
+aside h3,
+aside h4{
   color: var(--gold);
 }
 
-#about a{
+aside a{
   color: var(--lightgold);
 }
 
-#about > div{
+aside > div{
   display: flex;
   flex-wrap: wrap;
   gap: 35px 100px;
 }
 
-#about > div > div{
+aside > div > div{
   flex-basis: 400px;
   flex-grow: 1;
 }
+
