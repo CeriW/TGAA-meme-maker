@@ -790,12 +790,14 @@ input[filter-type="nationality"]{
 
 #about-button{
   position: absolute;
-  right: 20px;
-  top: 20px;
+  right: 0;
+  top: 0;
   z-index: 101;
   cursor: pointer;
   background: var(--blue);
   border: 2px solid var(--gold);
+  border-top: none;
+  border-right: none;
   color: #fff;
   font-family: inherit;
   display: flex;
@@ -808,6 +810,17 @@ input[filter-type="nationality"]{
 
 #about-button .material-icons{
   top: 0;
+}
+
+@media (max-width: 500px){
+
+  .about-button-text{
+    display: none;
+  }
+
+  #about-button .material-icons{
+    padding-right: 0;
+  }
 }
 
 #about{
