@@ -40,6 +40,9 @@ header{
   text-align: center;
 }
 
+
+
+
 #banner,
 #spoiler-warning > *{
   width: 650px;
@@ -58,7 +61,52 @@ header{
   grid-area: options;
 }
 
+/* Weather bar -------------------------------------------------------------- */
 
+#weather-bar{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: var(--blue);
+  color: #fff;
+  border-top: 3px solid var(--gold);
+
+  display: flex;
+  align-items: space-between;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+
+#weather-bar > div{
+  display: grid;
+  grid-template:
+    "flag details icon time" min-content
+    / 32px auto 50px auto;
+    gap: 0 25px;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.weather-bar-time{
+  grid-area: time;
+  text-align: center;
+  margin-top: -10px;
+}
+
+.weather-bar-flag{
+  grid-area: flag;
+}
+
+.weather-bar-details{
+  grid-area: details;
+}
+
+.weather-bar-details > span{
+  margin-right: 10px;
+}
 
 /* Shared bits -------------------------------------------------------------*/
 
@@ -440,6 +488,10 @@ div[class*="icon"]:hover,
     width: 170px;
     left: -24px !important;
   }
+
+  #weather-bar{
+    display: none;
+  }
 }
 
 
@@ -734,24 +786,24 @@ input[filter-type="nationality"]{
 
 /* ---------------------------------------------------------------------------*/
 
-aside h1,
-aside h2,
-aside h3,
-aside h4{
+#about h1,
+#about h2,
+#about h3,
+#about h4{
   color: var(--gold);
 }
 
-aside a{
+#about a{
   color: var(--lightgold);
 }
 
-aside > div{
+#about > div{
   display: flex;
   flex-wrap: wrap;
   gap: 35px 100px;
 }
 
-aside > div > div{
+#about > div > div{
   flex-basis: 400px;
   flex-grow: 1;
 }
