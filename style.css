@@ -108,6 +108,12 @@ header{
   margin-right: 10px;
 }
 
+@media (max-width: 730px){
+  #weather-bar{
+    display: none;
+  }
+}
+
 /* Shared bits -------------------------------------------------------------*/
 
 #canvas-grid-item,
@@ -481,16 +487,12 @@ div[class*="icon"]:hover,
 
 @media (max-width: 600px){
   body{
-    padding: 20px;
+    padding: 0 20px 20px;
   }
 
   #download{
     width: 170px;
     left: -24px !important;
-  }
-
-  #weather-bar{
-    display: none;
   }
 }
 
@@ -786,25 +788,83 @@ input[filter-type="nationality"]{
 
 /* ---------------------------------------------------------------------------*/
 
+#about-button{
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  z-index: 101;
+  cursor: pointer;
+  background: var(--blue);
+  border: 2px solid var(--gold);
+  color: #fff;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  font-size: initial;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+}
+
+#about-button .material-icons{
+  top: 0;
+}
+
+#about{
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  background: var(--blue);
+  padding: 30px;
+  transition: 0.3s;
+  opacity: 1;
+  overflow-y: scroll;
+}
+
+body.show-about{
+  height: 100vh;
+  overflow: hidden;
+}
+
+body:not(.show-about) #about{
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+
 #about h1,
 #about h2,
 #about h3,
 #about h4{
   color: var(--gold);
+  margin: 50px 0 10px;
 }
 
 #about a{
   color: var(--lightgold);
 }
 
-#about > div{
+#about > div > div{
   display: flex;
   flex-wrap: wrap;
   gap: 35px 100px;
 }
 
-#about > div > div{
+#about div > div > div{
   flex-basis: 400px;
   flex-grow: 1;
+}
+
+details{
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+details summary{
+  margin-bottom: 10px;
 }
 

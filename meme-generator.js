@@ -17,6 +17,7 @@ let characterSelector = document.querySelector("#character-selector");
 let characterPreview = document.querySelector("#character-selector-preview");
 let poseSelector = document.querySelector("#pose-selector");
 let downloadButton = document.querySelector("#download");
+let aboutButton = document.querySelector('#about-button')
 
 // Store whether the user has deliberately chosen a character yet.
 // This will prevent the default character tag being generated
@@ -682,3 +683,10 @@ async function displayWeather() {
 
 displayWeather();
 window.setInterval(displayWeather, 10000);
+
+
+/* About section -------------------------------------------------------------*/
+
+aboutButton.addEventListener('click', () => {
+  document.body.classList.toggle('show-about')
+})
