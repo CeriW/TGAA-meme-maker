@@ -678,8 +678,8 @@ async function displayWeather() {
         if (localTime.getMinutes() === 0){
           getNewTime()
         } else{
-          britishTimeDisplay.textContent = britishTimeDisplay.textContent.slice(0, 2) + ':' + localTime.getMinutes()
-          japaneseTimeDisplay.textContent = japaneseTimeDisplay.textContent.slice(0, 2) + ':' + localTime.getMinutes()
+          britishTimeDisplay.textContent = britishTimeDisplay.textContent.slice(0, 2) + ':' + localTime.getMinutes().toString().padStart(2, '0')
+          japaneseTimeDisplay.textContent = japaneseTimeDisplay.textContent.slice(0, 2) + ':' + localTime.getMinutes().toString().padStart(2, '0')
         }
       }
 
