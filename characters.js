@@ -98,7 +98,7 @@ const characters = [
   id:'mikotoba-yujin-london',
   gender: 'male',
   nationality: 'japanese',
-  appearsin: [true,false,false,false,false,true,false,false,true,true],
+  appearsin: [false,false,false,false,false,false,false,false,true,true],
   images: 5,
   variant: 'London outfit'
 },
