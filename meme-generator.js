@@ -648,9 +648,69 @@ async function displayWeather() {
     
     // Update the time every 5 seconds. This is a tradeoff between wanting to
     // keep the time up to date, but not having to keep checking too often
-    window.setInterval(updateTime, 5000)
+    let updateTimeInterval = window.setInterval(updateTime, 5000)
 
   });
+
+  async function updateTime() {
+
+    const localTime = new Date()
+    const britishTimeDisplay = document.querySelector('.british-time')
+    const japaneseTimeDisplay = document.querySelector('.japanese-time')
+    const displayedMinutes = britishTimeDisplay.textContent.slice(3,5)
+
+    if (britishTimeDisplay.textContent === ''){
+      // The time may be blank as a result of a previous failed API call.
+      //  If so, we'll try again
+      callTime()
+
+      // If the minutes we're displaying aren't the same as the real life minutes past the hour
+    } else if (localTime.getMinutes().toString() !== displayedMinutes){
+  
+      // If we're in a new hour, get a new time from the API. This will ensure we
+      // are displaying the correct time if daylight savings is happening, rather
+      // than us just incrementing the hour.
+      if (localTime.getMinutes() === 0){
+        callTime()
+      } else{
+        britishTimeDisplay.textContent = britishTimeDisplay.textContent.slice(0, 2) + ':' + localTime.getMinutes()
+        japaneseTimeDisplay.textContent = japaneseTimeDisplay.textContent.slice(0, 2) + ':' + localTime.getMinutes()
+      }
+    }
+
+    // If the minutes are the same, we don't need to update anything.
+
+
+
+    async function callTime(){
+      let myPromises = [
+        fetch(
+          "http://worldtimeapi.org/api/timezone/Europe/London"
+        ), // London time
+        fetch(
+          "http://worldtimeapi.org/api/timezone/Asia/Tokyo"
+        ), // Tokyo time
+      ]
+
+      const responses = await Promise.all(myPromises)
+      .catch(failure => {
+          console.log('failed to update time')
+          console.log(failure)
+
+          britishTimeDisplay.textContent = ''
+          japaneseTimeDisplay.textContent = ''
+        }
+      )
+
+      const jsonResponsePromises = responses.map(r => r.json()) // make the responses into promises with their json values inside
+    
+      // make those promises into their inner object values
+      const jsonResponses = await Promise.all(jsonResponsePromises).then((data) => {
+        britishTimeDisplay.textContent = data[0].datetime.slice(11,16)
+        japaneseTimeDisplay.textContent = data[1].datetime.slice(11,16)
+      })
+    }
+  }
   
 
   function displayData(data){
@@ -684,44 +744,7 @@ async function displayWeather() {
   }
 }
 
-async function updateTime() {
 
-  const localTime = new Date()
-  const britishTimeDisplay = document.querySelector('.british-time')
-  const japaneseTimeDisplay = document.querySelector('.japanese-time')
-  const displayedMinutes = britishTimeDisplay.textContent.slice(3,5)
-
-  if (localTime.getMinutes().toString() !== displayedMinutes){
-
-    // If we're in a new hour, get a new time from the API. This will ensure we
-    // are displaying the correct time if daylight savings is happening, rather
-    // than just incrementing the hour.
-    if (localTime.getMinutes() !== 0){
-      let myPromises = [
-        fetch(
-          "http://worldtimeapi.org/api/timezone/Europe/London"
-        ), // London time
-        fetch(
-          "http://worldtimeapi.org/api/timezone/Asia/Tokyo"
-        ), // Tokyo time
-      ]
-
-      const responses = await Promise.all(myPromises)
-      .catch(failure => console.log(failure)) // array of responses
-      const jsonResponsePromises = responses.map(r => r.json()) // make the responses into promises with their json values inside
-    
-      // make those promises into their inner object values
-      const jsonResponses = await Promise.all(jsonResponsePromises).then((data) => {
-        britishTimeDisplay.textContent = data[0].datetime.slice(11,16)
-        japaneseTimeDisplay.textContent = data[1].datetime.slice(11,16)
-      })
-
-    } else{
-      britishTimeDisplay.textContent = britishTimeDisplay.textContent.slice(0, 2) + ':' + localTime.getMinutes()
-      japaneseTimeDisplay.textContent = japaneseTimeDisplay.textContent.slice(0, 2) + ':' + localTime.getMinutes()
-    }
-  }
-}
 
 displayWeather();
 
