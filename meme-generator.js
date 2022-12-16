@@ -126,7 +126,7 @@ function generateCanvas() {
 
   newTextBox = document.createElement("textarea");
   newTextBox.classList.add("text-overlay");
-  newTextBox.innerHTML = "Type your text here...";
+  newTextBox.setAttribute('placeholder', "Type your text here...");
   newTextBox.setAttribute("maxlength", 110);
   newCanvas.appendChild(newTextBox);
 
