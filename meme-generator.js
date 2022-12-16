@@ -144,10 +144,12 @@ function generateCanvas() {
   });
 
   // Add the canvas onto the page, make it the active one and put artwork in it.
-  document.querySelector("#canvas-grid-item > div").appendChild(newCanvas);
+  document.querySelector("#canvas-grid-item > div > div").appendChild(newCanvas);
   changeActiveCanvas(newCanvas);
   generatePanelArtwork(newCanvas);
-  //tag.src = ''
+
+  // Check whether we still want the canvas to be sticky, based on the height of the canvases total
+  determineStickyCanvas()
 }
 
 // Make the specified canvas/panel the active one. This could be the result of a click on a canvas, or deleting an adjacent canvas.
@@ -188,8 +190,22 @@ function removeCanvas(e) {
   deadCanvas.style.animation = "shrink 0.5s both";
   window.setTimeout(function () {
     deadCanvas.remove();
+    // Check whether we still want the canvas to be sticky, based on the height of the canvases total
+    determineStickyCanvas();
+
   }, 500);
 }
+
+function determineStickyCanvas () {
+  if (window.innerWidth > 1450 && document.querySelector("#canvas-grid-item > div").offsetHeight < window.innerHeight - 100){
+    document.querySelector("#canvases-container").classList.add('sticky-canvas')
+  } else{
+    document.querySelector("#canvases-container").classList.remove('sticky-canvas')
+  }
+}
+
+determineStickyCanvas()
+window.addEventListener('resize', determineStickyCanvas)
 
 // Generates the character selection window.
 // Note that character-selector is a <select> element

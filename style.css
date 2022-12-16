@@ -17,7 +17,7 @@ body{
   background: #0D1725;
   color: #fff;
   font-family: Toplar, 'Libre Baskerville', Georgia, serif; /* Yes, I chose 'Libre Baskerville' on purpose. Congrats, you found an easter egg */
-  padding: 0 30px 30px;
+  padding: 0 30px 100px;
   margin: 0;
 }
 
@@ -35,6 +35,12 @@ main{
   grid-area: canvas;
   min-height: 100px;
 }
+
+.sticky-canvas{
+  position: sticky;
+  top: 20px;
+}
+
 
 header{
   text-align: center;
@@ -117,7 +123,7 @@ header{
 /* Shared bits -------------------------------------------------------------*/
 
 #canvas-grid-item,
-#canvas-grid-item > div,
+#canvas-grid-item > div > div,
 .canvas-container,
 .active-canvas,
 #character-selector-preview,
@@ -449,6 +455,11 @@ div[class*="icon"]:hover,
 /* Make it responsive --------------------------------------------------------*/
 
 @media (max-width:1450px){
+
+  body{
+    padding-bottom: 30px;
+  }
+
   main{
     grid-template-columns: auto;
     grid-template-rows: auto auto auto auto;
