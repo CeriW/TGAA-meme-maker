@@ -10,6 +10,7 @@ const locations = [
   {name: "Sholmes' Suite",                        id:"sholmes-suite-iris",                              variant:"Iris' side"},
   {name: "Sholmes' Suite",                        id:"sholmes-suite-sholmes",                           variant:"Herlock's side"},
   {name: "Crystal Tower base",                    id:"crystal-tower-base"},
+  {name: "Drebber's workshop",                    id:"drebbers-workshop"},
   {name: "The Garridebs' room",                   id:"garridebs-room"},
   {name: "Naruhodo's Legal Consultancy",          id:"naruhodos-legal-consultancy"},
   {name: "Defendant's Antechamber",               id:"defendants-antechamber-the-old-bailey-left",      variant:'The Old Bailey'},
