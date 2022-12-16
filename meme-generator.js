@@ -426,7 +426,12 @@ function download() {
     tempCanvas.height = 1080;
     let tempCanvasContext = tempCanvas.getContext("2d");
 
-    for (j = 1; j < 5; j++) {
+
+    // If there is no text in the textarea, we don't render the final two layers
+    // of the canvas, which display the text box artwork
+    let layersToRender = allCanvases[i].querySelector("textarea").value.length === 0 ? 3 : 5
+
+    for (j = 1; j < layersToRender; j++) {
       let imgToDraw = allCanvases[i].querySelector("img:nth-child(" + j + ")");
       tempCanvasContext.drawImage(imgToDraw, 0, 0);
     }
@@ -445,7 +450,6 @@ function download() {
 
     tempCanvasContext.font = `${fontSize}px Toplar`;
     tempCanvasContext.fillStyle = "#fff";
-    console.log(tempCanvasContext.measureText(textBoxText));
     wrapText(tempCanvasContext, textBoxText, 365, 882, 1200);
     downloadableCanvasContext.drawImage(tempCanvas, 0, [i * 1080]);
 
