@@ -127,7 +127,7 @@ function generateCanvas() {
   newTextBox = document.createElement("textarea");
   newTextBox.classList.add("text-overlay");
   newTextBox.innerHTML = "Type your text here...";
-  newTextBox.setAttribute("maxlength", 120);
+  newTextBox.setAttribute("maxlength", 110);
   newCanvas.appendChild(newTextBox);
 
   // Generate the delete button and have it run removeCanvas on click.
