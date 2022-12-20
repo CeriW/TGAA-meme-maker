@@ -848,32 +848,9 @@ function pasteQuote(type){
 }
 
 
-document.querySelector('.quote-button[type="kanye"]').addEventListener('click', () => {
-  pasteQuote('kanye')
+['kanye', 'dadJoke', 'ronSwanson'].forEach((type) => {
+  document.querySelector(`.quote-button[type="${type}"]`).addEventListener('click', () => {
+    pasteQuote(type)
+  })
 })
 
-document.querySelector('.quote-button[type="dadJoke"]').addEventListener('click', () => {
-  pasteQuote('dadJoke')
-})
-
-document.querySelector('.quote-button[type="ronSwanson"]').addEventListener('click', () => {
-  pasteQuote('ronSwanson')
-})
-
-document.querySelector('.quote-button[type="animeQuote"]').addEventListener('click', () => {
-  pasteQuote('animeQuote')
-})
-
-// // pasteQuote('trump')
-
-// const options = {
-// 	method: 'GET',
-// 	headers: {
-// 		'X-RapidAPI-Key': '8404ffe8d7mshf01c3dbcd541505p159383jsnbf3ae47aa493',
-// 		'X-RapidAPI-Host': 'random-cat-fact.p.rapidapi.com'
-// 	}
-// };
-
-// fetch("https://animechan.vercel.app/api/random")
-//           .then((response) => response.json())
-//           .then((quote) => console.log(quote));
