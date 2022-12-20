@@ -780,3 +780,32 @@ displayWeather();
 aboutButton.addEventListener('click', () => {
   document.body.classList.toggle('show-about')
 })
+
+
+/* Random quotes -------------------------------------------------------------*/
+
+function pasteQuote(quote){
+  document.querySelector('.active-canvas textarea').value = quote
+}
+
+function getKanyeQuote(){
+  fetch('https://api.kanye.rest/')
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data.quote)
+      pasteQuote(data.quote)
+    })
+
+    .catch((error) => {
+      console.log(error)
+    })
+}
+
+// getKanyeQuote()
+
+
+document.querySelector('.quote-button[type="kanye"]').addEventListener('click', getKanyeQuote)
+
+
+// console.log(fetch('https://api.kanye.rest/'))
+

@@ -69,9 +69,9 @@ header{
   grid-area: options;
 }
 
-/* Weather bar -------------------------------------------------------------- */
+/* Info bar ------------------------------------------------------------------*/
 
-#weather-bar{
+#info-bar{
   position: fixed;
   bottom: 0;
   left: 0;
@@ -80,7 +80,36 @@ header{
   background: var(--blue);
   color: #fff;
   border-top: 3px solid var(--gold);
+}
 
+#inspiration-bar{
+  background: linear-gradient(to bottom, #65592d, #9E9150);
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+#inspiration-bar span{
+  color: var(--blue);
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.quote-button{
+  background: var(--blue);
+  color: #fff;
+  border: 1px solid #fff;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 5px 20px;
+  cursor: pointer;
+}
+
+/* Weather bar -------------------------------------------------------------- */
+
+#weather-bar{
   display: flex;
   align-items: space-between;
   justify-content: space-between;
