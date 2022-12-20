@@ -807,7 +807,8 @@ const quoteData = {
   },
   animeQuote:{
     url: 'https://animechan.vercel.app/api/random',
-    propName: 'quote'
+    propName: 'quote',
+    timeout: 4500
   }
 }
 
@@ -826,13 +827,22 @@ function pasteQuote(type){
       if (text.length > 110){
         pasteQuote(type)
       } else{
-        console.log(data)
+        // console.log(data)
         document.querySelector('.active-canvas textarea').value = text
       }
     })
-
-    .catch((error) => {
-      console.log(error)
+    .catch(failure => {
+      console.log(failure)
+    }
+  )
+    .finally(() => {
+      if (quoteData[type].timeout){
+        const quoteButton = document.querySelector('.quote-button[type="' + type + '"]')
+        quoteButton.classList.add('disabled')
+        window.setTimeout(() => {
+          quoteButton.classList.remove('disabled')
+        }, quoteData[type].timeout)
+      }
     })
 
 }
@@ -854,16 +864,16 @@ document.querySelector('.quote-button[type="animeQuote"]').addEventListener('cli
   pasteQuote('animeQuote')
 })
 
-// pasteQuote('trump')
+// // pasteQuote('trump')
 
-const options = {
-	method: 'GET',
-	headers: {
-		'X-RapidAPI-Key': '8404ffe8d7mshf01c3dbcd541505p159383jsnbf3ae47aa493',
-		'X-RapidAPI-Host': 'random-cat-fact.p.rapidapi.com'
-	}
-};
+// const options = {
+// 	method: 'GET',
+// 	headers: {
+// 		'X-RapidAPI-Key': '8404ffe8d7mshf01c3dbcd541505p159383jsnbf3ae47aa493',
+// 		'X-RapidAPI-Host': 'random-cat-fact.p.rapidapi.com'
+// 	}
+// };
 
-fetch("https://animechan.vercel.app/api/random")
-          .then((response) => response.json())
-          .then((quote) => console.log(quote));
+// fetch("https://animechan.vercel.app/api/random")
+//           .then((response) => response.json())
+//           .then((quote) => console.log(quote));
