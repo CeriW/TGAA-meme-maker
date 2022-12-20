@@ -805,10 +805,10 @@ const quoteData = {
     url: 'https://ron-swanson-quotes.herokuapp.com/v2/quotes',
     propName: 'array'
   },
-  animeQuote:{
-    url: 'https://animechan.vercel.app/api/random',
-    propName: 'quote',
-    timeout: 4500
+  advice: {
+    url: 'https://api.adviceslip.com/advice',
+    propName: 'slip',
+    innerPropName: 'advice'
   }
 }
 
@@ -819,15 +819,25 @@ function pasteQuote(type){
     .then((response) => response.json())
     .then((data) => {
       let property = quoteData[type].propName
+      let innerProperty = quoteData[type].innerPropName
 
-      let text = property === 'array' ? data[0] : data[property]
+      let text
+
+      if (property === 'array'){
+        text = data[0]
+      } else if (innerProperty){
+        text = data[property][innerProperty]
+      } else{
+        text = data[property]
+      }
+
 
       // If the quote is too long, get a new one.
       // Otherwise go ahead and use it.
       if (text.length > 110){
         pasteQuote(type)
       } else{
-        // console.log(data)
+        console.log(data)
         document.querySelector('.active-canvas textarea').value = text
       }
     })
@@ -848,9 +858,29 @@ function pasteQuote(type){
 }
 
 
-['kanye', 'dadJoke', 'ronSwanson'].forEach((type) => {
+
+['kanye', 'dadJoke', 'ronSwanson', 'advice'].forEach((type) => {
   document.querySelector(`.quote-button[type="${type}"]`).addEventListener('click', () => {
     pasteQuote(type)
   })
 })
 
+// pasteQuote('advice')
+
+
+// const url = 'https://api.adviceslip.com/advice'
+// const options = {
+//   // headers: {
+//   //   'Accept': 'application/json'
+//   // }
+// }
+
+
+// fetch(url, options)
+//   .then((response) => response.json())
+//   .then((data) => {
+//     console.log(data)
+//   })
+//   .catch((err) => {
+//     console.log(err)
+//   })
