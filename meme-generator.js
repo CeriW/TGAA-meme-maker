@@ -481,7 +481,7 @@ function download() {
   );
 
   // Download the image, then remove the temporary canvas.
-  downloadButton.download = "ace-attorney-meme-maker.png";
+  downloadButton.download = "ace-attorney-meme-generator.png";
   downloadButton.href = downloadableCanvas.toDataURL();
   downloadableCanvas.remove();
 }
