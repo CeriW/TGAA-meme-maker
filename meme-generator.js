@@ -826,6 +826,10 @@ const quoteData = {
       }
     },
     propName: 'joke'
+  },
+  ronSwanson:{
+    url: 'https://ron-swanson-quotes.herokuapp.com/v2/quotes',
+    propName: 'array'
   }
 }
 
@@ -836,7 +840,15 @@ function pasteQuote(type){
     .then((data) => {
       let property = quoteData[type].propName
       console.log(data[property])
-      document.querySelector('.active-canvas textarea').value = data[property]
+      console.log(data[0])
+
+      if (property === 'array'){
+        document.querySelector('.active-canvas textarea').value = data[0]
+
+      } else{
+        document.querySelector('.active-canvas textarea').value = data[property]
+
+      }
     })
 
     .catch((error) => {
@@ -855,4 +867,6 @@ document.querySelector('.quote-button[type="dadJoke"]').addEventListener('click'
   pasteQuote('dadJoke')
 })
 
-
+document.querySelector('.quote-button[type="ronSwanson"]').addEventListener('click', () => {
+  pasteQuote('ronSwanson')
+})
