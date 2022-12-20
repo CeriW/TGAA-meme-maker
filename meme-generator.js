@@ -784,35 +784,9 @@ aboutButton.addEventListener('click', () => {
 
 /* Random quotes -------------------------------------------------------------*/
 
-// function pasteQuote(quote){
-//   document.querySelector('.active-canvas textarea').value = quote
-// }
-
-// function getKanyeQuote(){
-
-//   fetch('https://api.kanye.rest/')
-//     .then((response) => response.json())
-//     .then((data) => {
-//       pasteQuote(data.quote)
-//     })
-
-//     .catch((error) => {
-//       console.log(error)
-//     })
-// }
-
-// function getDadJoke(){
-
-//   const url = 'https://icanhazdadjoke.com/'
-//   const options = {
-//     headers: {
-//       Accept: "application/json"
-//     }
-//   };
-
-//   pasteQuote(url, options)
-// }
-
+// url is the address to fetch
+// assuming the response returns a json object, the propName is the property we are looking to use.
+// If the response is expected to be an array, we put 'array' as the propName
 const quoteData = {
   kanye: {
     url: 'https://api.kanye.rest/',
@@ -830,8 +804,13 @@ const quoteData = {
   ronSwanson:{
     url: 'https://ron-swanson-quotes.herokuapp.com/v2/quotes',
     propName: 'array'
+  },
+  animeQuote:{
+    url: 'https://animechan.vercel.app/api/random',
+    propName: 'quote'
   }
 }
+
 
 function pasteQuote(type){
 
@@ -847,6 +826,7 @@ function pasteQuote(type){
       if (text.length > 110){
         pasteQuote(type)
       } else{
+        console.log(data)
         document.querySelector('.active-canvas textarea').value = text
       }
     })
@@ -869,3 +849,21 @@ document.querySelector('.quote-button[type="dadJoke"]').addEventListener('click'
 document.querySelector('.quote-button[type="ronSwanson"]').addEventListener('click', () => {
   pasteQuote('ronSwanson')
 })
+
+document.querySelector('.quote-button[type="animeQuote"]').addEventListener('click', () => {
+  pasteQuote('animeQuote')
+})
+
+// pasteQuote('trump')
+
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': '8404ffe8d7mshf01c3dbcd541505p159383jsnbf3ae47aa493',
+		'X-RapidAPI-Host': 'random-cat-fact.p.rapidapi.com'
+	}
+};
+
+fetch("https://animechan.vercel.app/api/random")
+          .then((response) => response.json())
+          .then((quote) => console.log(quote));
