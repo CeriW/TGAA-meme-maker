@@ -839,15 +839,15 @@ function pasteQuote(type){
     .then((response) => response.json())
     .then((data) => {
       let property = quoteData[type].propName
-      console.log(data[property])
-      console.log(data[0])
 
-      if (property === 'array'){
-        document.querySelector('.active-canvas textarea').value = data[0]
+      let text = property === 'array' ? data[0] : data[property]
 
+      // If the quote is too long, get a new one.
+      // Otherwise go ahead and use it.
+      if (text.length > 110){
+        pasteQuote(type)
       } else{
-        document.querySelector('.active-canvas textarea').value = data[property]
-
+        document.querySelector('.active-canvas textarea').value = text
       }
     })
 
@@ -855,7 +855,6 @@ function pasteQuote(type){
       console.log(error)
     })
 
-  // document.querySelector('.active-canvas textarea').value = quote
 }
 
 
