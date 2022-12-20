@@ -784,28 +784,75 @@ aboutButton.addEventListener('click', () => {
 
 /* Random quotes -------------------------------------------------------------*/
 
-function pasteQuote(quote){
-  document.querySelector('.active-canvas textarea').value = quote
+// function pasteQuote(quote){
+//   document.querySelector('.active-canvas textarea').value = quote
+// }
+
+// function getKanyeQuote(){
+
+//   fetch('https://api.kanye.rest/')
+//     .then((response) => response.json())
+//     .then((data) => {
+//       pasteQuote(data.quote)
+//     })
+
+//     .catch((error) => {
+//       console.log(error)
+//     })
+// }
+
+// function getDadJoke(){
+
+//   const url = 'https://icanhazdadjoke.com/'
+//   const options = {
+//     headers: {
+//       Accept: "application/json"
+//     }
+//   };
+
+//   pasteQuote(url, options)
+// }
+
+const quoteData = {
+  kanye: {
+    url: 'https://api.kanye.rest/',
+    propName: 'quote',
+  },
+  dadJoke: {
+    url: 'https://icanhazdadjoke.com/',
+    options: {
+      headers: {
+        Accept: "application/json"
+      }
+    },
+    propName: 'joke'
+  }
 }
 
-function getKanyeQuote(){
-  fetch('https://api.kanye.rest/')
+function pasteQuote(type){
+
+  fetch(quoteData[type].url, quoteData[type].options)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data.quote)
-      pasteQuote(data.quote)
+      let property = quoteData[type].propName
+      console.log(data[property])
+      document.querySelector('.active-canvas textarea').value = data[property]
     })
 
     .catch((error) => {
       console.log(error)
     })
+
+  // document.querySelector('.active-canvas textarea').value = quote
 }
 
-// getKanyeQuote()
 
+document.querySelector('.quote-button[type="kanye"]').addEventListener('click', () => {
+  pasteQuote('kanye')
+})
 
-document.querySelector('.quote-button[type="kanye"]').addEventListener('click', getKanyeQuote)
+document.querySelector('.quote-button[type="dadJoke"]').addEventListener('click', () => {
+  pasteQuote('dadJoke')
+})
 
-
-// console.log(fetch('https://api.kanye.rest/'))
 
