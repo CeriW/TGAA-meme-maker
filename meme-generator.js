@@ -680,36 +680,33 @@ async function displayWeather() {
   });
 
   async function updateTime() {
-
-    // The weather/time bar doesn't display on smaller screens than this.
-    if (window.innerWidth > 730){
-
-      const localTime = new Date()
-      const britishTimeDisplay = document.querySelector('.british-time')
-      const japaneseTimeDisplay = document.querySelector('.japanese-time')
-      const displayedMinutes = britishTimeDisplay.textContent.slice(3,5)
-
-      if (britishTimeDisplay?.textContent === ''){
-        // The time may be blank as a result of a previous failed API call.
-        //  If so, we'll try again
-        getNewTime()
-
-        // If the minutes we're displaying aren't the same as the real life minutes past the hour
-      } else if (localTime.getMinutes().toString() !== displayedMinutes){
     
-        // If we're in a new hour, get a new time from the API. This will ensure we
-        // are displaying the correct time if daylight savings is happening, rather
-        // than us just incrementing the hour.
-        if (localTime.getMinutes() === 0){
-          getNewTime()
-        } else{
-          britishTimeDisplay.textContent = britishTimeDisplay.textContent.slice(0, 2) + ':' + localTime.getMinutes().toString().padStart(2, '0')
-          japaneseTimeDisplay.textContent = japaneseTimeDisplay.textContent.slice(0, 2) + ':' + localTime.getMinutes().toString().padStart(2, '0')
-        }
-      }
+    const localTime = new Date()
+    const britishTimeDisplay = document.querySelector('.british-time')
+    const japaneseTimeDisplay = document.querySelector('.japanese-time')
+    const displayedMinutes = britishTimeDisplay.textContent.slice(3,5)
 
-      // If the minutes are the same, we don't need to update anything.
+    if (britishTimeDisplay?.textContent === ''){
+      // The time may be blank as a result of a previous failed API call.
+      //  If so, we'll try again
+      getNewTime()
+
+      // If the minutes we're displaying aren't the same as the real life minutes past the hour
+    } else if (localTime.getMinutes().toString() !== displayedMinutes){
+  
+      // If we're in a new hour, get a new time from the API. This will ensure we
+      // are displaying the correct time if daylight savings is happening, rather
+      // than us just incrementing the hour.
+      if (localTime.getMinutes() === 0){
+        getNewTime()
+      } else{
+        britishTimeDisplay.textContent = britishTimeDisplay.textContent.slice(0, 2) + ':' + localTime.getMinutes().toString().padStart(2, '0')
+        japaneseTimeDisplay.textContent = japaneseTimeDisplay.textContent.slice(0, 2) + ':' + localTime.getMinutes().toString().padStart(2, '0')
+      }
     }
+
+    // If the minutes are the same, we don't need to update anything.
+
 
 
 

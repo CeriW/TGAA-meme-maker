@@ -136,8 +136,8 @@ header{
 #weather-bar > div{
   display: grid;
   grid-template:
-    "flag details icon time" min-content
-    / 32px auto 50px auto;
+    "flag details icon" min-content
+    / 32px auto 50px;
     gap: 0 25px;
     align-items: center;
     padding: 0 10px;
@@ -159,13 +159,9 @@ header{
 
 .weather-bar-details > span{
   margin-right: 10px;
+  white-space: nowrap;
 }
 
-@media (max-width: 775px){
-  #weather-bar{
-    display: none;
-  }
-}
 
 /* Shared bits -------------------------------------------------------------*/
 
@@ -436,7 +432,7 @@ div[class*="icon"]:hover,
 
 @media (max-width: 799px){
   .text-overlay{
-    font-size: 2.4vw;
+    font-size: 2.3vw;
   }
 }
 
@@ -540,6 +536,40 @@ div[class*="icon"]:hover,
   #background-selector-preview,
   #pose-selector{
     max-height: 370px;
+  }
+}
+
+@media (max-width: 775px){
+  #info-bar{
+    position: initial;
+    border: none;
+  }
+
+  #inspiration-bar{
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .quote-button{
+    flex-basis: 100%;
+  }
+
+  #weather-bar{
+    display: initial;
+    padding-top: 20px;
+  }
+
+  #weather-bar > div{
+    padding: 10px 0;
+  }
+
+  #weather-bar > div:not(:first-child){
+    border-top: 1px solid var(--gold);
+  }
+
+  #inspiration-bar > span{
+    min-width: initial;
+    padding-top: 5px;
   }
 }
 
@@ -938,4 +968,9 @@ details{
 details summary{
   margin-bottom: 10px;
 }
+
+
+
+
+
 
