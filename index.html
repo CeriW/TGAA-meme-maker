@@ -3,12 +3,14 @@
 <!doctype html>
 <html>
   <head>
-    <title>TGAA meme generator</title>
+    <title>TGAA meme maker</title>
     <link rel="stylesheet" type="text/css" href="style.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script type="text/javascript" src="characters.js"></script>
+    <script type="text/javascript" src="locations.js"></script>
     
 
     </head>
@@ -22,22 +24,35 @@
       <main>
         <div id="canvas-grid-item">
 
-          <div></div>
-          <span id="add-panel"><span class="material-icons md-17">add</span>Add panel</span>
-
-
-          <a id="download"><img width="100%" src="assets/misc/download.png"></a>
+          <div id="canvases-container">
+            <div></div>
+            <span id="add-panel"><span class="material-icons md-17">add</span>Add panel</span>
+            <a id="download"><img width="100%" src="assets/misc/download.png"></a>
+          </div>
+         
 
         </div>
             
-        <!--<img id="character" src="">
-        <img id="background" src="">
-        <img id="speech-tag" src="assets/game-elements/speech-box-tag.png">-->
         <img id="speech-box" src="assets/game-elements/speech-box.png">
         <img id="credits" src="assets/misc/credits.png">
 
 
         <div id="options">
+
+          <div id="spoiler-warning">
+            <h2>Spoiler warning</h2>
+            <p>The content within contains spoilers for the entirety of The Great Ace Attorney Chronicles</p>
+            <button id="spoilers-okay">
+              <span style="font-weight: bold;">I'm okay with this,</span>
+              <br>take me to the meme generator
+            </button>
+
+            <div id="remember-spoilers-container">
+              <input name="remember-spoilers-okay" id="remember-spoilers-okay" type="checkbox"></input>
+              <label for="remember-spoilers-okay">Remember my choice</label>
+            </div>
+            
+          </div>
 
           <div class="toggle-heading" associated-panel="background-selector-preview">
             <span class="material-icons">edit_location</span>
@@ -109,63 +124,6 @@
                           </div>
   
 
-                        <!--<div class="nationality-checkbox-container">
-                            <input name="nationality-checkbox" filter-type="nationality" id="nationality-checkbox-english" value="english" type="checkbox" checked="checked">
-                          <label for="nationality-checkbox-english">
-                            <span class="flag-icon" style="background-image:url('assets/icons/flags/english.svg')"></span>
-                            English
-                          </label>
-                        </div>
-
-                        <div class="nationality-checkbox-container">
-                            <input name="nationality-checkbox" filter-type="nationality" id="nationality-checkbox-scottish" value="english" type="checkbox" checked="checked">
-                          <label for="nationality-checkbox-scottish">
-                            <span class="flag-icon" style="background-image:url('assets/icons/flags/scottish.svg')"></span>
-                            Scottish
-                          </label>
-                        </div>
-
-
-                        
-                        <div class="nationality-checkbox-container">
-                            <input name="nationality-checkbox" filter-type="nationality" id="nationality-checkbox-french" value="french" type="checkbox" checked="checked">
-                          <label for="nationality-checkbox-french">
-                            <span class="flag-icon" style="background-image:url('assets/icons/flags/french.svg')"></span>
-                            French
-                          </label>
-                        </div>
-
-                        <div class="nationality-checkbox-container">
-                            <input name="nationality-checkbox" filter-type="nationality" id="nationality-checkbox-russian" value="russian" type="checkbox" checked="checked">
-                          <label for="nationality-checkbox-russian">
-                            <span class="flag-icon" style="background-image:url('assets/icons/flags/russian.svg')"></span>
-                            Russian
-                          </label>
-                        </div>
-
-                        <div class="nationality-checkbox-container">
-                            <input name="nationality-checkbox" filter-type="nationality" id="nationality-checkbox-irish" value="french" type="checkbox" checked="checked">
-                          <label for="nationality-checkbox-irish">
-                            <span class="flag-icon" style="background-image:url('assets/icons/flags/irish.svg')"></span>
-                            Irish
-                          </label>
-                        </div>
-
-                        <div class="nationality-checkbox-container">
-                            <input name="nationality-checkbox" filter-type="nationality" id="nationality-checkbox-bohemian" value="bohemian" type="checkbox" checked="checked">
-                          <label for="nationality-checkbox-bohemian">
-                            <span class="flag-icon" style="background-image:url('assets/icons/flags/bohemian.svg')"></span>
-                            Bohemian
-                          </label>
-                        </div>
-
-                        <div class="nationality-checkbox-container">
-                            <input name="nationality-checkbox" filter-type="nationality" id="nationality-checkbox-italian" value="italian" type="checkbox" checked="checked">
-                          <label for="nationality-checkbox-italian">
-                            <span class="flag-icon" style="background-image:url('assets/icons/flags/italian.svg')"></span>
-                            Italian
-                          </label>
-                        </div>-->
 
                     </div>
                 </div>
@@ -224,40 +182,7 @@
                 <button class="reset-filters">
                   <span class="material-icons">restart_alt</span>Reset filters
                 </button>
-                <!--<button class="apply-filter-button">Filter</button>-->
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-              
-              
-              <!--<div class="filter">
-                Filter by:
-                <span class="material-icons" filter-type="gender" filter-value="male">male</span>
-                <span class="material-icons" filter-type="gender" filter-value="female">female</span>
-
-
-                <span filter-type="nationality" filter-value="british">British</span>
-                <span filter-type="nationality" filter-value="japanese">Japanese</span>
-                
-
-                <span filter-type="all" filter-value="all">Reset</span>
-
-              </div>-->
-
 
             </div>
 
@@ -273,6 +198,117 @@
         </div>
 
       </main>
+
+      <aside id="info-bar">
+        <div id="inspiration-bar">
+          <span>Need inspiration?</span>
+          <div class="button-bar">
+            <button class="quote-button" type="kanye">Add a random Kanye quote</button>
+            <button class="quote-button" type="dadJoke">Add a random dad joke</button>
+            <button class="quote-button" type="ronSwanson">Add a random Ron Swanson quote</button>
+            <button class="quote-button" type="advice">Add a random piece of advice</button>
+            <!-- <button class="quote-button" type="animeQuote">Add a random anime quote<span class="material-icons">autorenew</span>
+              </span></button> -->
+          </div>
+
+
+        </div>
+        <div id="weather-bar"></div>
+      </aside>
+
+      <div id="function-buttons">
+        <div id="share-buttons">
+          <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&layout=button&size=small&width=67&height=20&appId" width="67" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowfullscreen="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"></iframe>
+          <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="Check out the TGAA meme maker!" data-hashtags="tgaaMemeMaker" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+        
+        <button id="about-button"> <span class="material-icons">help</span><span class="about-button-text">ABOUT</button>
+      </div>
+
+
+      <aside id="about">
+
+          <h2>About</h2>
+            <details>
+              <summary>About me</summary>
+              <p>I am Ceri, a software engineer in Devon, UK, although many people in the TGAA community will know me as CherryLestrade on Youtube, Twitter and Reddit. I am OBSESSED with The Great Ace Attorney Chronicles.</p>
+              <p>At the time I started this project I was a web designer and front end developer. I got to do little fun bits like this here and there but never anything on this scale. I started this project both as a way to build my skills and portfolio in the hope that I would land myself a job doing this kind of thing, and fuel my TGAA addiction while I was at it. I am pleased to report that:</p>
+              <ul>
+                <li>It worked! I have a new job doing this kind of thing. I even included this project on my CV.</li>
+                <li>The addiction is still going strong.</li>
+              </ul>
+              <p>The takeaway here is that TGAA made my life better, and it can make your life better too!</p>
+              <p>I would sincerely love to see any memes you create with this. Do tag me on Reddit or Twitter if you share them!</p>
+            </details>
+
+
+            <details>
+              <summary>Technical details</summary>
+              <p>This project was built using HTML, CSS and old-school Javascript, which was all I knew at the time I started this project. Since then I've grown in knowledge and skills, as well has having become familiar with React, Handlebars, Typescript and more. The urge to do a massive rewrite is strong. However, I've decided to leave it as it is to show that in this age of endless libraries and frameworks, you can still achieve it all in vanilla JS. </p>
+              <p>This project is hosted on Github Pages, which I'd not used before but highly recommend. </p>
+              <ul>
+                <li>Weather information from <a href="https://openweathermap.org/" target="_blank">openweathermap.org</a></li>
+                <li>Time information from <a href="https://worldtimeapi.org/" target="_blank">worldtimeapi.org</a></li>
+                <li>Kanye West quotes from <a href="https://kanye.rest/" target="_blank">kanye.rest</a></li>
+                <li>Dad jokes from <a href="https://icanhazdadjoke.com/" target="_blank">icanhazdadjoke.com</a></li>
+                <li>Ron Swanson quotes from <a href="https://github.com/jamesseanwright/ron-swanson-quotes" target="_blank">jamesseanwright on Github</a></li>
+                <li>Random advice from <a href="https://adviceslip.com/" target="_blank">adviceslip.com</a></li>
+
+                
+                <!-- <li>Anime quotes from <a href="https://animechan.vercel.app/" target="_blank">animechan.vercel.app</a></li> -->
+
+                
+
+               
+
+                
+              </ul>
+              
+            </details>
+
+            <details>
+              <summary>More about 'The Great Ace Attorney Chronicles'</summary>
+              <p>'The Great Ace Attorney Chronicles' is a two part visual novel game by Capcom, who own the rights to all character, location and interface artwork on this page. It is honestly the best game I have ever played and I am obsessed with it despite the fact I finished it over a year ago.</p>
+              <ul>
+                <li>The Great Ace Attorney on <a href="https://www.ace-attorney.com/great1-2/" target="_blank">Capcom's website</a></li>
+                <li>The Great Ace Attorney on <a href="https://store.steampowered.com/app/1158850/The_Great_Ace_Attorney_Chronicles/" target="_blank">Steam</a></li>
+              </ul>
+            </details>
+
+
+              <h2>Useful links</h3>
+              
+              <details>
+                <summary>Fun stuff</summary>
+                <li>Find me on my dedicated TGAA Youtube channel - <a href="https://www.youtube.com/channel/UCvipAZa7cTAKBmPaNmdbJZw/">CherryLestrade</a></li>
+                <li>Find me on my dedicated TGAA Twitter - <a href="https://twitter.com/c_lestrade">@c_lestrade</a></li>
+                <li>Find me on Reddit - <a href="https://www.reddit.com/user/CherryLestrade">u/cherrylestrade</a></li>
+              </details>
+              
+              <details>
+                <summary>Professional stuff</summary>
+                <li>Find me on <a href="https://github.com/CeriW">Github</a></li>
+                <li>Find me on <a href="https://codepen.io/Ceri">Codepen</a></li>
+              </details>
+
+            </div>
+
+
+          <h2>Contribute</h2>
+            <details>
+              <summary>Content</summary>
+              <p>All of the character and location graphics are ones I have gathered along my long journey with my Youtube channel, and I am aware that there is a lot that's missing. I wish I had the talent to extract them all from the game, but alas I'm not. If YOU do, I'd love to hear from you!</p>
+              <p>Even help with just adding a little bit would be greatly appreciated.</p>
+            </details>
+            
+            <details>
+              <summary>Keep this site running</summary>
+              <p>As well as this website, I also regularly produce content on my Youtube and Twitter. Believe it or not, I spend actual money on the tools I use to create these, as well as the running costs to keep this online.</p>
+              <p>If you would like to help keep this project online, you can make a small donation on my <a href="https://ko-fi.com/cherrylestrade">Ko-fi page</a></p>
+            </details>
+        </div>
+
+    </aside>
 
     </body>
 

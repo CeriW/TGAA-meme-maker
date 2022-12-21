@@ -1,14 +1,23 @@
 :root{
   --gold: #9E9150;
+  --lightgold: #dfd7af;
   --blue: #0D1725;
+}
+
+@font-face {
+  font-family: Toplar;
+  src: url(assets/fonts/Toplar.woff);
+}
+
+html{
+  font-size: 18px;
 }
 
 body{
   background: #0D1725;
   color: #fff;
-  font-family: 'Libre Baskerville', Georgia, serif; /* Yes, I chose 'Libre Baskerville' on purpose. Congrats, you found an easter egg */
-  font-size: 15px;
-  padding: 0 30px 30px;
+  font-family: Toplar, 'Libre Baskerville', Georgia, serif; /* Yes, I chose 'Libre Baskerville' on purpose. Congrats, you found an easter egg */
+  padding: 0 30px 100px;
   margin: 0;
 }
 
@@ -27,24 +36,138 @@ main{
   min-height: 100px;
 }
 
+.sticky-canvas{
+  position: sticky;
+  top: 20px;
+}
+
+
 header{
   text-align: center;
 }
 
-#banner{
+::placeholder{
+  color: rgba(255,255,255,0.5);
+  font-style: italic;
+}
+
+#banner,
+#spoiler-warning > *{
   width: 650px;
   max-width: 100%;
 }
 
+#spoiler-warning > *{
+  width: 440px;
+}
 
-.options { grid-area: options; }
+#options{
+  position: relative;
+}
 
+.options {
+  grid-area: options;
+}
+
+/* Info bar ------------------------------------------------------------------*/
+
+#info-bar{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: var(--blue);
+  color: #fff;
+  border-top: 3px solid var(--gold);
+}
+
+#inspiration-bar{
+  background: linear-gradient(to bottom, #65592d, #9E9150);
+  padding: 4px 10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+#inspiration-bar > span{
+  color: var(--blue);
+  font-weight: bold;
+  font-size: 20px;
+  min-width: 300px;
+}
+
+.quote-button{
+  background: var(--blue);
+  color: #fff;
+  border: 1px solid #fff;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 5px 40px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s;
+  flex-grow: 1;
+}
+
+
+.button-bar{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+
+
+
+/* Weather bar -------------------------------------------------------------- */
+
+#weather-bar{
+  display: flex;
+  align-items: space-between;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+
+#weather-bar > div{
+  display: grid;
+  grid-template:
+    "flag details icon" min-content
+    / 32px auto 50px;
+    gap: 0 25px;
+    align-items: center;
+    padding: 0 10px;
+}
+
+.weather-bar-time{
+  grid-area: time;
+  text-align: center;
+  margin-top: -10px;
+}
+
+.weather-bar-flag{
+  grid-area: flag;
+}
+
+.weather-bar-details{
+  grid-area: details;
+}
+
+.weather-bar-details > span{
+  margin-right: 10px;
+  white-space: nowrap;
+}
 
 
 /* Shared bits -------------------------------------------------------------*/
 
 #canvas-grid-item,
-#canvas-grid-item > div,
+#canvas-grid-item > div > div,
 .canvas-container,
 .active-canvas,
 #character-selector-preview,
@@ -294,11 +417,12 @@ div[class*="icon"]:hover,
   right: 19%;
   left: 19%;
   color: #fff;
-  font-size: 120%;
-  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 114%;
+  font-family: Toplar, 'Libre Baskerville', Georgia, serif;
   background: #0D1725;
   border: none;
   outline: none !important;
+  resize: none;
 }
 
 #text{
@@ -309,7 +433,7 @@ div[class*="icon"]:hover,
 
 @media (max-width: 799px){
   .text-overlay{
-    font-size: 2.4vw;
+    font-size: 2.3vw;
   }
 }
 
@@ -317,12 +441,13 @@ div[class*="icon"]:hover,
 /* Headings ------------------------------------------------------------------*/
 
 .toggle-heading,
-#pose-heading{
+#pose-heading,
+#spoiler-warning{
   background: linear-gradient(to bottom, #65592d, #9E9150);
   color: #fff;
   padding: 10px 10px 10px 20px;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 1.2em;
   transition: 0.4s;
   display: block;
   border: 2px solid var(--blue);
@@ -370,62 +495,6 @@ div[class*="icon"]:hover,
 .delete-panel:hover{
   color: var(--blue);
 }
-
-
-/* Make it responsive --------------------------------------------------------*/
-
-@media (max-width:1450px){
-  main{
-    grid-template-columns: auto;
-    grid-template-rows: auto auto auto auto;
-    grid-template-areas:
-    "canvas" 
-    "options";
-  }
-
-  #canvas-grid-item{
-    max-width: 800px;
-    float: none;
-    margin: 0 auto;
-  }
-}
-
-@media (max-width: 1000px){
-  .toggle-heading,
-  #pose-heading{
-    font-size: 16px;
-    padding: 5px 20px;
-  }
-
-  div[class*="icon"] > div{
-    font-size: 12px;
-  }
-
-  div[class*="icon"],
-  #pose-selector label{
-    max-width: 100px;
-    max-height: 100px;
-  }
-
-  #character-selector-preview,
-  #background-selector-preview,
-  #pose-selector{
-    max-height: 370px;
-  }
-}
-
-@media (max-width: 600px){
-  body{
-    padding: 20px;
-  }
-
-  #download{
-    width: 170px;
-    left: -24px !important;
-  }
-}
-
-
 
 /* Scrollbar styling ------------------- */
 
@@ -613,6 +682,7 @@ input[filter-type="nationality"]{
   font-family: inherit;
   border: none;
   transition: 0.3s;
+  font-size: 1rem;
 }
 
 .reset-filters:hover{
@@ -654,5 +724,291 @@ input[filter-type="nationality"]{
 .filter-form:hover ~ .character-icon .character-icon-nationality-tag,
 .filter-form:hover ~ .character-icon .character-icon-gender-tag{
   opacity: 1;
+}
+
+/* Spoiler warning ---------------------------------------------------------- */
+
+#spoiler-warning{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  text-align: center;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#spoilers-okay{
+  background: var(--blue);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 10px;
+  transition: 0.2s;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 0.9em;
+}
+
+#spoilers-okay:hover{
+  background: #fff;
+  color:  var(--blue);
+}
+
+#remember-spoilers-container *{
+  cursor: pointer;
+}
+
+#remember-spoilers-okay{
+  position: relative;
+  margin-right: 20px;
+}
+
+#remember-spoilers-okay:before{
+  content: '';
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  position: absolute;
+  top: -6px;
+  border: 1px solid var(--blue);
+}
+
+#remember-spoilers-okay:checked:before{
+  background: #fff url('/assets/icons/check.svg') center / 90% no-repeat;
+}
+
+
+/* ---------------------------------------------------------------------------*/
+
+#about-button{
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 101;
+  cursor: pointer;
+  background: var(--blue);
+  border: 2px solid var(--gold);
+  border-top: none;
+  border-right: none;
+  color: #fff;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  font-size: initial;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+}
+
+#about-button .material-icons{
+  top: 0;
+}
+
+@media (max-width: 500px){
+
+  .about-button-text{
+    display: none;
+  }
+
+  #about-button .material-icons{
+    padding-right: 0;
+  }
+}
+
+#about{
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  background: var(--blue);
+  padding: 30px;
+  transition: 0.3s;
+  opacity: 1;
+  overflow-y: scroll;
+}
+
+body.show-about{
+  height: 100vh;
+  overflow: hidden;
+}
+
+body:not(.show-about) #about{
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+
+#about h1,
+#about h2,
+#about h3,
+#about h4{
+  color: var(--gold);
+  margin: 50px 0 10px;
+}
+
+#about a{
+  color: var(--lightgold);
+}
+
+#about > div > div{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 35px 100px;
+}
+
+#about div > div > div{
+  flex-basis: 400px;
+  flex-grow: 1;
+}
+
+details{
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+details summary{
+  margin-bottom: 10px;
+}
+
+/* -------------------------------------------------------------------------- */
+
+#share-buttons{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  padding: 5px 5px 2px 5px;
+  border: 2px solid var(--gold);
+  background-color: var(--blue);
+  border-top: none;
+  border-left: none;
+}
+
+#function-buttons{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+
+/* Make it responsive --------------------------------------------------------*/
+
+@media (max-width:1450px){
+
+  body{
+    padding-bottom: 30px;
+  }
+
+  main{
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas:
+    "canvas" 
+    "options";
+  }
+
+  #canvas-grid-item{
+    max-width: 800px;
+    float: none;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 1000px){
+  .toggle-heading,
+  #pose-heading{
+    font-size: 1rem;
+    padding: 5px 20px;
+  }
+
+
+  div[class*="icon"],
+  #pose-selector label{
+    max-width: 100px;
+    max-height: 100px;
+  }
+
+  #character-selector-preview,
+  #background-selector-preview,
+  #pose-selector{
+    max-height: 370px;
+  }
+}
+
+@media (max-width: 775px){
+  #info-bar{
+    position: initial;
+    border: none;
+  }
+
+  #inspiration-bar{
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .quote-button{
+    flex-basis: 100%;
+  }
+
+  #weather-bar{
+    display: initial;
+    padding-top: 20px;
+  }
+
+  #weather-bar > div{
+    padding: 10px 0;
+  }
+
+  #weather-bar > div:not(:first-child){
+    border-top: 1px solid var(--gold);
+  }
+
+  #inspiration-bar > span{
+    min-width: initial;
+    padding-top: 5px;
+  }
+
+  #share-buttons, #about-button{
+    position: unset;
+  }
+
+  #about-button{
+    border-right: 2px solid var(--gold);
+    border-top: 2px solid var(--gold);
+  }
+
+  .show-about #about-button{
+    position: fixed;
+  }
+
+  #share-buttons{
+    border: none;
+    padding: 6px 0 0;
+  }
+
+  #function-buttons{
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 600px){
+  body{
+    padding: 0 20px 20px;
+  }
+
+  #download{
+    width: 170px;
+    left: -24px !important;
+  }
 }
 
