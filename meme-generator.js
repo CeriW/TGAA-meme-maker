@@ -668,16 +668,16 @@ async function displayWeather() {
     const jsonResponsePromises = responses.map(r => r.json()) // make the responses into promises with their json values inside
   
     // make those promises into their inner object values
-    Promise.all(jsonResponsePromises).then((data) => {
-    displayData(data)
-    
-    // Update the time every 5 seconds. This is a tradeoff between wanting to
-    // keep the time up to date, but not having to keep checking too often
-    let updateTimeInterval = window.setInterval(updateTime, 5000)
+    Promise.all(jsonResponsePromises)
+    .then((data) => {
+      displayData(data)
+      
+      // Update the time every 5 seconds. This is a tradeoff between wanting to
+      // keep the time up to date, but not having to keep checking too often
+      window.setInterval(updateTime, 5000)
 
-    window.addEventListener('resize', updateTime)
-
-  });
+      window.addEventListener('resize', updateTime)
+    });
 
   async function updateTime() {
     
@@ -721,22 +721,22 @@ async function displayWeather() {
       ]
 
       const responses = await Promise.all(myPromises)
-      .catch(failure => {
-          console.log('failed to update time')
-          console.log(failure)
+        .catch(failure => {
+            console.log('failed to update time')
+            console.log(failure)
 
-          britishTimeDisplay.textContent = ''
-          japaneseTimeDisplay.textContent = ''
-        }
-      )
+            britishTimeDisplay.textContent = ''
+            japaneseTimeDisplay.textContent = ''
+          }
+        )
+        .then((responses) => {
+          responses.map(r => r.json())
+        })
+        .then((data) => {
+          britishTimeDisplay.textContent = data[0].datetime.slice(11,16)
+          japaneseTimeDisplay.textContent = data[1].datetime.slice(11,16)
+        })
 
-      const jsonResponsePromises = responses.map(r => r.json()) // make the responses into promises with their json values inside
-    
-      // make those promises into their inner object values
-      const jsonResponses = await Promise.all(jsonResponsePromises).then((data) => {
-        britishTimeDisplay.textContent = data[0].datetime.slice(11,16)
-        japaneseTimeDisplay.textContent = data[1].datetime.slice(11,16)
-      })
     }
   }
   
