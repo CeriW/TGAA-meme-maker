@@ -689,7 +689,7 @@ async function displayWeather() {
       const japaneseTimeDisplay = document.querySelector('.japanese-time')
       const displayedMinutes = britishTimeDisplay.textContent.slice(3,5)
 
-      if (britishTimeDisplay.textContent === ''){
+      if (britishTimeDisplay?.textContent === ''){
         // The time may be blank as a result of a previous failed API call.
         //  If so, we'll try again
         getNewTime()
