@@ -6,9 +6,4 @@
 - GIF support for locations
 - Search
 
-- Checkbox on spoiler alert to save preferences
-
-- Make sure all the characters have speech box tags
-
-
 <span class="material-icons">face</span>

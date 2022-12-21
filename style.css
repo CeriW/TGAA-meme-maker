@@ -109,6 +109,7 @@ header{
   cursor: pointer;
   position: relative;
   transition: 0.2s;
+  flex-grow: 1;
 }
 
 
@@ -495,97 +496,6 @@ div[class*="icon"]:hover,
   color: var(--blue);
 }
 
-/* Make it responsive --------------------------------------------------------*/
-
-@media (max-width:1450px){
-
-  body{
-    padding-bottom: 30px;
-  }
-
-  main{
-    grid-template-columns: auto;
-    grid-template-rows: auto auto auto auto;
-    grid-template-areas:
-    "canvas" 
-    "options";
-  }
-
-  #canvas-grid-item{
-    max-width: 800px;
-    float: none;
-    margin: 0 auto;
-  }
-}
-
-@media (max-width: 1000px){
-  .toggle-heading,
-  #pose-heading{
-    font-size: 1rem;
-    padding: 5px 20px;
-  }
-
-
-  div[class*="icon"],
-  #pose-selector label{
-    max-width: 100px;
-    max-height: 100px;
-  }
-
-  #character-selector-preview,
-  #background-selector-preview,
-  #pose-selector{
-    max-height: 370px;
-  }
-}
-
-@media (max-width: 775px){
-  #info-bar{
-    position: initial;
-    border: none;
-  }
-
-  #inspiration-bar{
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-
-  .quote-button{
-    flex-basis: 100%;
-  }
-
-  #weather-bar{
-    display: initial;
-    padding-top: 20px;
-  }
-
-  #weather-bar > div{
-    padding: 10px 0;
-  }
-
-  #weather-bar > div:not(:first-child){
-    border-top: 1px solid var(--gold);
-  }
-
-  #inspiration-bar > span{
-    min-width: initial;
-    padding-top: 5px;
-  }
-}
-
-@media (max-width: 600px){
-  body{
-    padding: 0 20px 20px;
-  }
-
-  #download{
-    width: 170px;
-    left: -24px !important;
-  }
-}
-
-
-
 /* Scrollbar styling ------------------- */
 
 /* width */
@@ -969,8 +879,136 @@ details summary{
   margin-bottom: 10px;
 }
 
+/* -------------------------------------------------------------------------- */
+
+#share-buttons{
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  padding: 5px 5px 2px 5px;
+  border: 2px solid var(--gold);
+  background-color: var(--blue);
+  border-top: none;
+  border-left: none;
+}
+
+#function-buttons{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
 
 
+/* Make it responsive --------------------------------------------------------*/
 
+@media (max-width:1450px){
+
+  body{
+    padding-bottom: 30px;
+  }
+
+  main{
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas:
+    "canvas" 
+    "options";
+  }
+
+  #canvas-grid-item{
+    max-width: 800px;
+    float: none;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 1000px){
+  .toggle-heading,
+  #pose-heading{
+    font-size: 1rem;
+    padding: 5px 20px;
+  }
+
+
+  div[class*="icon"],
+  #pose-selector label{
+    max-width: 100px;
+    max-height: 100px;
+  }
+
+  #character-selector-preview,
+  #background-selector-preview,
+  #pose-selector{
+    max-height: 370px;
+  }
+}
+
+@media (max-width: 775px){
+  #info-bar{
+    position: initial;
+    border: none;
+  }
+
+  #inspiration-bar{
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .quote-button{
+    flex-basis: 100%;
+  }
+
+  #weather-bar{
+    display: initial;
+    padding-top: 20px;
+  }
+
+  #weather-bar > div{
+    padding: 10px 0;
+  }
+
+  #weather-bar > div:not(:first-child){
+    border-top: 1px solid var(--gold);
+  }
+
+  #inspiration-bar > span{
+    min-width: initial;
+    padding-top: 5px;
+  }
+
+  #share-buttons, #about-button{
+    position: unset;
+  }
+
+  #about-button{
+    border-right: 2px solid var(--gold);
+    border-top: 2px solid var(--gold);
+  }
+
+  .show-about #about-button{
+    position: fixed;
+  }
+
+  #share-buttons{
+    border: none;
+    padding: 6px 0 0;
+  }
+
+  #function-buttons{
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 600px){
+  body{
+    padding: 0 20px 20px;
+  }
+
+  #download{
+    width: 170px;
+    left: -24px !important;
+  }
+}
 
