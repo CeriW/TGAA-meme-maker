@@ -481,7 +481,12 @@ function download() {
   );
 
   // Download the image, then remove the temporary canvas.
-  downloadButton.download = "ace-attorney-meme-generator.png";
+
+  let date = new Date()
+  let formattedDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " +  date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+
+
+  downloadButton.download = `tgaa-meme-maker-${formattedDate}.png`;
   downloadButton.href = downloadableCanvas.toDataURL();
   downloadableCanvas.remove();
 }
