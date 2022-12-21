@@ -668,7 +668,7 @@ async function displayWeather() {
     const jsonResponsePromises = responses.map(r => r.json()) // make the responses into promises with their json values inside
   
     // make those promises into their inner object values
-    const jsonResponses = await Promise.all(jsonResponsePromises).then((data) => {
+    Promise.all(jsonResponsePromises).then((data) => {
     displayData(data)
     
     // Update the time every 5 seconds. This is a tradeoff between wanting to
