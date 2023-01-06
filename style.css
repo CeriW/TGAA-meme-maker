@@ -853,16 +853,6 @@ body:not(.show-about) #about-button div[state="opened"]{
   display: none;
 }
 
-@media (max-width: 500px){
-
-  .about-button-text{
-    display: none;
-  }
-
-  #about-button .material-icons{
-    padding-right: 0;
-  }
-}
 
 #about{
   position: fixed;
