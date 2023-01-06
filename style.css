@@ -96,7 +96,6 @@ header{
   color: var(--blue);
   font-weight: bold;
   font-size: 20px;
-  min-width: 300px;
 }
 
 .quote-button{
@@ -114,12 +113,32 @@ header{
 
 
 .button-bar{
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: auto auto auto auto;
   gap: 5px;
-  flex-grow: 1;
-  justify-content: space-between;
 }
+
+@media (max-width: 1315px){
+  .button-bar{
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+  }
+}
+
+@media (max-width: 820px){
+  .button-bar{
+    width: 100%;
+  }
+}
+
+@media(max-width: 740px){
+  .button-bar{
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+  }
+}
+
+
 
 
 
@@ -1013,6 +1032,10 @@ details summary{
 
   #function-buttons{
     margin-top: 20px;
+  }
+
+  #about-button{
+    border: 2px solid var(--gold);
   }
 }
 
