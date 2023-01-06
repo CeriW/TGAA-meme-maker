@@ -665,24 +665,24 @@ async function displayWeather() {
 
 
   Promise.all(myPromises)
-    .catch(failure => console.log(failure)) // array of responses
-    .then((responses) => {
-      const jsonResponsePromises = responses.map(r => r.json()) // make the responses into promises with their json values inside
-      return jsonResponsePromises;
+  .then((responses) => {
+    const jsonResponsePromises = responses.map(r => r.json()) // make the responses into promises with their json values inside
+    return jsonResponsePromises;
+  })
+  .then((data) => {
+    
+    Promise.all(data)
+    .then((info) => {
+      displayData(info)
+      
+      // Update the time every 5 seconds. This is a tradeoff between wanting to
+      // keep the time up to date, but not having to keep checking too often
+      window.setInterval(updateTime, 5000)
+      
+      window.addEventListener('resize', updateTime)
     })
-    .then((data) => {
-
-      Promise.all(data)
-        .then((info) => {
-          displayData(info)
-          
-          // Update the time every 5 seconds. This is a tradeoff between wanting to
-          // keep the time up to date, but not having to keep checking too often
-          window.setInterval(updateTime, 5000)
-
-          window.addEventListener('resize', updateTime)
-        })
-    })
+  })
+  .catch(failure => console.log(failure)) // array of responses
 
 
   async function updateTime() {
