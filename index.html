@@ -229,7 +229,16 @@
           <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="Check out the TGAA meme maker!" data-hashtags="tgaaMemeMaker" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
         
-        <button id="about-button"> <span class="material-icons">help</span><span class="about-button-text">ABOUT</button>
+        <button id="about-button">
+          <div state="unopened">
+            <span class="material-icons">help</span>
+            <span class="about-button-text">ABOUT</span>
+          </div>
+          <div state="opened">
+            <span class="material-icons">close</span>
+            <span class="about-button-text">CLOSE</span>
+          </div>
+        </button>
       </div>
 
 

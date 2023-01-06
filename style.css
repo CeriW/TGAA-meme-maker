@@ -798,16 +798,34 @@ input[filter-type="nationality"]{
   border-right: none;
   color: #fff;
   font-family: inherit;
-  display: flex;
-  align-items: center;
   font-size: initial;
+  padding: 5px 10px;
+}
+
+#about-button > div{
   display: flex;
   align-items: center;
-  padding: 5px 10px;
 }
 
 #about-button .material-icons{
   top: 0;
+}
+
+
+.show-about #about-button{
+  position: fixed;
+}
+
+[state="unopened"]{
+  display: none;
+}
+
+.show-about #about-button div[state="unopened"]{
+  display: none;
+}
+
+body:not(.show-about) #about-button div[state="opened"]{
+  display: none;
 }
 
 @media (max-width: 500px){
@@ -980,15 +998,6 @@ details summary{
 
   #share-buttons, #about-button{
     position: unset;
-  }
-
-  #about-button{
-    border-right: 2px solid var(--gold);
-    border-top: 2px solid var(--gold);
-  }
-
-  .show-about #about-button{
-    position: fixed;
   }
 
   #share-buttons{
