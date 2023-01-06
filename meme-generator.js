@@ -209,7 +209,7 @@ window.addEventListener('resize', determineStickyCanvas)
 
 function padBody(){
 
-  document.body.style.paddingBottom = window.innerWidth < 775
+  document.body.style.paddingBottom = window.innerWidth < 800
     ? '30px'
     : document.querySelector('#info-bar').offsetHeight + 'px'
 

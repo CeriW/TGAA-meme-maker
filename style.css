@@ -51,11 +51,16 @@ header{
   font-style: italic;
 }
 
-#banner,
+#banner{
+  width: 520px;
+  max-width: 100%;
+}
+
 #spoiler-warning > *{
   width: 650px;
   max-width: 100%;
 }
+
 
 #spoiler-warning > *{
   width: 440px;
@@ -978,7 +983,7 @@ details summary{
   }
 }
 
-@media (max-width: 775px){
+@media (max-width: 800px){
   #info-bar{
     position: initial;
     border: none;
