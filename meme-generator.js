@@ -207,6 +207,15 @@ function determineStickyCanvas () {
 determineStickyCanvas()
 window.addEventListener('resize', determineStickyCanvas)
 
+function padBody(){
+  document.body.style.marginBottom = document.querySelector('#info-bar').offsetHeight + 'px'
+}
+
+padBody()
+window.addEventListener('resize', padBody)
+
+
+
 // Generates the character selection window.
 // Note that character-selector is a <select> element
 function generateCharacterInterface() {

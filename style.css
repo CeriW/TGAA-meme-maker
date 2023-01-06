@@ -562,6 +562,12 @@ span[filter-type="all"]{
   flex-wrap: wrap;
 }
 
+@media (max-width: 650px){
+  .filter-form{
+    display: none;
+  }
+}
+
 .filter-form > *{
   padding: 5px 10px;
 }
