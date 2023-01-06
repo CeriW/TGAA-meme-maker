@@ -134,7 +134,7 @@ function generateCanvas() {
   let deleteButton = document.createElement("div");
   deleteButton.classList.add("delete-panel");
   deleteButton.innerHTML =
-    '<span class="material-icons md-17">delete</span>Delete panel';
+    '<span class="material-icons md-17">delete</span><span class="delete-panel-text">Delete panel</span>';
   deleteButton.addEventListener("click", removeCanvas);
   newCanvas.appendChild(deleteButton);
 

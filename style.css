@@ -520,6 +520,17 @@ div[class*="icon"]:hover,
   color: var(--blue);
 }
 
+@media (max-width: 550px){
+  .delete-panel-text{
+    display: none;
+  }
+
+  .delete-panel .material-icons{
+    padding-right: 0;
+    font-size: 24px !important;
+  }
+}
+
 /* Scrollbar styling ------------------- */
 
 /* width */
