@@ -734,10 +734,10 @@ async function displayWeather() {
     async function getNewTime(){
       let myPromises = [
         fetch(
-          "http://worldtimeapi.org/api/timezone/Europe/London"
+          "https://worldtimeapi.org/api/timezone/Europe/London"
         ), // London time
         fetch(
-          "http://worldtimeapi.org/api/timezone/Asia/Tokyo"
+          "https://worldtimeapi.org/api/timezone/Asia/Tokyo"
         ), // Tokyo time
       ]
 
