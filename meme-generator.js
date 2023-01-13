@@ -893,22 +893,3 @@ function pasteQuote(type){
   })
 })
 
-// pasteQuote('advice')
-
-
-// const url = 'https://api.adviceslip.com/advice'
-// const options = {
-//   // headers: {
-//   //   'Accept': 'application/json'
-//   // }
-// }
-
-
-// fetch(url, options)
-//   .then((response) => response.json())
-//   .then((data) => {
-//     console.log(data)
-//   })
-//   .catch((err) => {
-//     console.log(err)
-//   })
