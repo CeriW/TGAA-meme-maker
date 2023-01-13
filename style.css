@@ -152,7 +152,6 @@ header{
 
 #weather-bar{
   display: flex;
-  align-items: space-between;
   justify-content: space-between;
   flex-direction: row;
 }
@@ -162,7 +161,7 @@ header{
   display: grid;
   grid-template:
     "flag details icon" min-content
-    / 32px auto 50px;
+    / 32px 1fr 50px;
     gap: 0 25px;
     align-items: center;
     padding: 0 10px;
