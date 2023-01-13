@@ -211,12 +211,12 @@ function padBody(){
 
   document.body.style.paddingBottom = window.innerWidth < 800
     ? '30px'
-    : document.querySelector('#info-bar').offsetHeight + 'px'
+    : document.querySelector('#info-bar').offsetHeight + 10 + 'px'
 
   // document.body.style.marginBottom = document.querySelector('#info-bar').offsetHeight + 'px'
 }
 
-padBody()
+window.addEventListener('load', padBody)
 window.addEventListener('resize', padBody)
 
 
