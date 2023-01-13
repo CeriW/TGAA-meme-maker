@@ -381,7 +381,7 @@ div[class*="icon"],
   transition: 0.3s;
   background-color: rgba(255,255,255,0.05);
   border-radius: 50%;
-  margin: 15px 15px 70px;
+  margin: 15px 15px 90px;
 }
 
 div[class*="icon"][selected="true"]{

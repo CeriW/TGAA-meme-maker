@@ -14,6 +14,7 @@ const locations = [
   {name: "The Garridebs' room",                   id:"garridebs-room"},
   {name: "Naruhodo's Legal Consultancy",          id:"naruhodos-legal-consultancy"},
   {name: "Defendant's Antechamber",               id:"defendants-antechamber-the-old-bailey-left",      variant:'The Old Bailey'},
+  {name: "Defendant's Antechamber",               id:"defendants-antechamber-japan-right",              variant:'Japanese Court of Judicature'},
   {name: "Natsume's Room",                        id:"natsumes-room"},
   {name: "Prison cell",                           id:"prison-cell"},
   {name: "Prosecutor's Office",                   id:"prosecutors-office-left"},
@@ -21,4 +22,15 @@ const locations = [
   {name: "Forensics Laboratory",                  id:"forensics-laboratory-courtney",                   variant:"Courtney's version"},
   {name: "Forensics Laboratory",                  id:"forensics-laboratory-maria",                      variant:"Maria's version"},
   {name: "Room on Fresno Street",                 id:"room-on-fresno-street"},
+  {name: "SS Burya Corridor",                     id:"ss-burya-corridor-left"},
+  {name: "First Class Cabin no.1 ",               id:"ss-burya-cabin-1",                                variant: "Kazuma's room"},
+  {name: "First Class Cabin no.2 ",               id:"ss-burya-cabin-2",                                variant: "Nikolina's room"},
+  {name: "Lord Chief Justice's Office",           id:"lord-chief-justice-office",},
+  {name: "Briar Road",                            id:"briar-road"},
+  {name: "St. Bartholomew's Hospital",            id:"st-bartholomews"},
+  {name: "Shamspeare's Flat",                     id:"shamspeares-flat"},
+  {name: "Experimentation Stage",                 id:"experimentation-stage"},
+  {name: "Madame Tuspells' Museum of Waxworks",   id:"madame-tuspells"},
+  {name: "Drebber's room",                        id:"drebbers-room"},
+
 ]
