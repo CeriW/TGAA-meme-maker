@@ -466,7 +466,8 @@ div[class*="icon"]:hover,
 
 .toggle-heading,
 #pose-heading,
-#spoiler-warning{
+#spoiler-warning,
+#download div{
   background: linear-gradient(to bottom, #65592d, #9E9150);
   color: #fff;
   padding: 10px 10px 10px 20px;
@@ -552,6 +553,28 @@ div[class*="icon"]:hover,
   top: 0;
   left: -35px;
   z-index: 4;
+}
+
+@media (min-width: 451px){
+  #download div{
+    display: none;
+  }
+}
+
+@media (max-width: 450px){
+  
+  #download{
+    position: initial;
+  }
+  
+  #download img{
+    display: none;
+  }
+
+  #download div{
+    display: block;
+    margin-top: 50px;
+  }
 }
 
 
