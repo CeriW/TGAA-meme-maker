@@ -741,7 +741,21 @@ async function displayWeather() {
         ), // Tokyo time
       ]
 
-      const responses = await Promise.all(myPromises)
+      const newData = Promise.all(myPromises)
+
+      newData
+        .then((responses) => {
+          const jsonResponsePromises = responses.map(r => r.json()) // make the responses into promises with their json values inside
+          return jsonResponsePromises;
+        })
+        .then((data) => {
+          Promise.all(data)
+            .then(() => {
+                britishTimeDisplay.textContent = data[0].datetime.slice(11,16);
+                japaneseTimeDisplay.textContent = data[1].datetime.slice(11,16);
+              }
+            )
+        })
         .catch(failure => {
             console.log('failed to update time')
             console.log(failure)
@@ -750,13 +764,6 @@ async function displayWeather() {
             japaneseTimeDisplay.textContent = ''
           }
         )
-        .then((responses) => {
-          responses.map(r => r.json())
-        })
-        .then((data) => {
-          britishTimeDisplay.textContent = data[0].datetime.slice(11,16)
-          japaneseTimeDisplay.textContent = data[1].datetime.slice(11,16)
-        })
 
     }
   }
@@ -783,8 +790,6 @@ async function displayWeather() {
             <span>${weather.weather[0].description} <br></span>
           </div>
         <img src="http://openweathermap.org/img/wn/${weather.weather[0].icon}.png">
-
-        
       `
 
       weatherArea.appendChild(panel)
