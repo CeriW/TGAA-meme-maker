@@ -667,13 +667,13 @@ async function displayWeather() {
       'https://api.openweathermap.org/data/2.5/weather?units=metric&lat=51.5200&lon=-0.1566&appid=05b8bf4b22e67da44ad9672eef66e607'
     ), // London weather
     fetch(
-      "http://worldtimeapi.org/api/timezone/Europe/London"
+      "https://worldtimeapi.org/api/timezone/Europe/London"
     ), // London time
     fetch(
       'https://api.openweathermap.org/data/2.5/weather?units=metric&lat=35.6762&lon=-139.6503&appid=05b8bf4b22e67da44ad9672eef66e607'
     ), // Tokyo weather
     fetch(
-      "http://worldtimeapi.org/api/timezone/Asia/Tokyo"
+      "https://worldtimeapi.org/api/timezone/Asia/Tokyo"
     ), // Tokyo time
   ] // returns array of promises
 
