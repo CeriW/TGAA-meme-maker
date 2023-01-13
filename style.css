@@ -1027,8 +1027,8 @@ details summary{
 
   div[class*="icon"],
   #pose-selector label{
-    max-width: 100px;
-    max-height: 100px;
+    max-width: 120px;
+    max-height: 120px;
   }
 
   #character-selector-preview,
