@@ -348,7 +348,6 @@ canvas{
 #background-selector-preview,
 #pose-selector{
   border: 2px solid rgba(255,255,255,0.2);
-  border-right: none;
   margin-bottom: 20px;
   max-height: 485px;
   overflow-y: scroll;
