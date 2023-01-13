@@ -252,6 +252,7 @@ canvas{
   display: inline-flex;
   width: 100%;
   max-width: 800px;
+  flex-direction: column;
 }
 
 .canvas-container{
@@ -313,6 +314,13 @@ canvas{
 .canvas-container img{
   max-width: 100%;
   pointer-events: none;
+}
+
+@media (max-width: 500px){
+  .canvas-container img:nth-child(3),
+  .canvas-container img:nth-child(4){
+    opacity: 0;
+  }
 }
 
 
@@ -458,6 +466,18 @@ div[class*="icon"]:hover,
 @media (max-width: 799px){
   .text-overlay{
     font-size: 2.3vw;
+  }
+}
+
+@media (max-width: 500px){
+  .text-overlay{
+    left: 0;
+    right: 0;
+    padding: 5px 10px 5px 50px;
+    font-size: 19px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
   }
 }
 
