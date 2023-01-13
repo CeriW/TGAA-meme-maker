@@ -94,7 +94,7 @@ function generatePanelArtwork(e) {
     ".canvas-container img:first-child"
   );
   backgrounds.forEach(function (background) {
-    background.src = paths.location + backgroundSelector.value + ".png";
+    background.src = paths.location + backgroundSelector.value + ".jpg";
   });
 
   // If a character has been purposely selected previously then set the character image
