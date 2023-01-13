@@ -1033,8 +1033,9 @@ details summary{
   #character-selector-preview,
   #background-selector-preview,
   #pose-selector{
-    max-height: 370px;
+    max-height: 450px;
   }
+
 }
 
 @media (max-width: 800px){
