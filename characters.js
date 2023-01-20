@@ -182,7 +182,7 @@ const characters = [
   gender: 'male',
   nationality: 'japanese',
   appearsin: [true,false,false,false,false,false,false,true,true,true],
-  images: 5
+  images: 1
 },
 
 
