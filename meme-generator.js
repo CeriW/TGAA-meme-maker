@@ -501,8 +501,13 @@ function download() {
 
 
   downloadButton.download = `tgaa-meme-maker - ${formattedDate}.png`;
-  downloadButton.href = downloadableCanvas.toDataURL();
-  downloadableCanvas.remove();
+  
+  
+  downloadButton.href = downloadableCanvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");
+
+
+
+  // downloadableCanvas.remove();
 }
 
 // Simply takes a panel and toggles a 'hidden' attribute.
