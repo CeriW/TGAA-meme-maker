@@ -500,11 +500,14 @@ function download() {
   let formattedDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " +  date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 
   const generatedImage = document.createElement('img');
+
   generatedImage.src = downloadableCanvas.toDataURL();
   document.body.appendChild(generatedImage);
 
   downloadButton.download = `tgaa-meme-maker - ${formattedDate}.png`;
   downloadButton.href = generatedImage.src;
+  downloadButton.target = "_blank";
+  downloadButton.click();
 
   downloadableCanvas.remove();
   generatedImage.remove();
