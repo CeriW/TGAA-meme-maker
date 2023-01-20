@@ -169,6 +169,10 @@ header{
     flex-grow: 1;
 }
 
+#weather-bar > div:last-child{
+  justify-content: flex-end;
+}
+
 .weather-bar-time{
   grid-area: time;
   text-align: center;
