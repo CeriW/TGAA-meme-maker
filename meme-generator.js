@@ -499,15 +499,15 @@ function download() {
   let date = new Date()
   let formattedDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " +  date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 
+  const generatedImage = document.createElement('img');
+  generatedImage.src = downloadableCanvas.toDataURL();
+  document.body.appendChild(generatedImage);
 
   downloadButton.download = `tgaa-meme-maker - ${formattedDate}.png`;
-  
-  
-  downloadButton.href = downloadableCanvas.toDataURL("image/png", 1.0).replace("image/png", "image/octet-stream");
+  downloadButton.href = generatedImage.src;
 
-
-
-  // downloadableCanvas.remove();
+  downloadableCanvas.remove();
+  generatedImage.remove();
 }
 
 // Simply takes a panel and toggles a 'hidden' attribute.
