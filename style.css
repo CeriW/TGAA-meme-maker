@@ -851,21 +851,9 @@ input[filter-type="nationality"]{
 #remember-spoilers-okay{
   position: relative;
   margin-right: 20px;
+  transform: scale(1.5);
 }
 
-#remember-spoilers-okay:before{
-  content: '';
-  width: 20px;
-  height: 20px;
-  background: #fff;
-  position: absolute;
-  top: -6px;
-  border: 1px solid var(--blue);
-}
-
-#remember-spoilers-okay:checked:before{
-  background: #fff url('/assets/icons/check.svg') center / 90% no-repeat;
-}
 
 
 /* ---------------------------------------------------------------------------*/
