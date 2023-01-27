@@ -507,12 +507,13 @@ function download(e) {
     const newImg = document.createElement('img');
     const url = URL.createObjectURL(blob);
     const downloadLink = document.createElement('a')
-    downloadLink.download = `tgaa-meme-maker - ${formattedDate}.png`;
+    
 
     newImg.onload = () => {
       // no longer need to read the blob so it's revoked
       downloadLink.href = url;
       downloadLink.target = "_blank";
+      downloadLink.download = `tgaa-meme-maker - ${formattedDate}.png`;
       downloadLink.click();
       URL.revokeObjectURL(url);
     };
