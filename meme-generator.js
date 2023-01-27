@@ -418,7 +418,10 @@ function selectItem(e) {
 }
 
 // Recreate the meme as an image file and download it.
-function download() {
+function download(e) {
+
+  e.preventDefault();
+
   // Generate a temporary canvas that we'll combine all of our individual canvases onto for download
   let downloadableCanvas = document.createElement("canvas");
   downloadableCanvas.classList.add("temp-canvas");
@@ -499,28 +502,26 @@ function download() {
   let date = new Date()
   let formattedDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " +  date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 
-  downloadButton.download = `tgaa-meme-maker - ${formattedDate}.png`;
-  
-  // const myBlob = ;
-  // downloadButton.href = new Blob([toBlob(downloadableCanvas)], {type: 'image/png'});
-
 
   downloadableCanvas.toBlob((blob) => {
     const newImg = document.createElement('img');
     const url = URL.createObjectURL(blob);
-  
+    const downloadLink = document.createElement('a')
+    downloadLink.download = `tgaa-meme-maker - ${formattedDate}.png`;
+
     newImg.onload = () => {
       // no longer need to read the blob so it's revoked
+      downloadLink.href = url;
+      downloadLink.target = "_blank";
+      downloadLink.click();
       URL.revokeObjectURL(url);
     };
   
     newImg.src = url;
     document.body.appendChild(newImg);
+    document.body.appendChild(downloadLink);
 
-    downloadButton.href = url;
-    downloadButton.target = "_blank";
-    downloadButton.click();
-    // document.body.remove(newImg);
+    downloadLink.remove();
     newImg.remove();
     downloadableCanvas.remove();
   })
