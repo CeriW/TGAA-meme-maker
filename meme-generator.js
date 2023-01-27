@@ -526,13 +526,6 @@ function download(e) {
     newImg.remove();
     downloadableCanvas.remove();
   })
-  
-  // downloadButton.href = downloadableCanvas.toDataURL();
-  // downloadableCanvas.remove();
-
-
-
-
 }
 
 // Simply takes a panel and toggles a 'hidden' attribute.
