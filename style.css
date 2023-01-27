@@ -1059,7 +1059,9 @@ details summary{
 
   #weather-bar > div:not(:first-child){
     border-top: 1px solid var(--gold);
+    justify-content: flex-start;
   }
+
 
   #inspiration-bar > span{
     min-width: initial;
