@@ -519,6 +519,7 @@ function download(e) {
     };
   
     newImg.src = url;
+    newImg.style.display = 'none';
     document.body.appendChild(newImg);
     document.body.appendChild(downloadLink);
 
