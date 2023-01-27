@@ -500,8 +500,37 @@ function download() {
   let formattedDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " +  date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
 
   downloadButton.download = `tgaa-meme-maker - ${formattedDate}.png`;
-  downloadButton.href = downloadableCanvas.toDataURL();
-  downloadableCanvas.remove();
+  
+  // const myBlob = ;
+  // downloadButton.href = new Blob([toBlob(downloadableCanvas)], {type: 'image/png'});
+
+
+  downloadableCanvas.toBlob((blob) => {
+    const newImg = document.createElement('img');
+    const url = URL.createObjectURL(blob);
+  
+    newImg.onload = () => {
+      // no longer need to read the blob so it's revoked
+      URL.revokeObjectURL(url);
+    };
+  
+    newImg.src = url;
+    document.body.appendChild(newImg);
+
+    downloadButton.href = url;
+    downloadButton.target = "_blank";
+    downloadButton.click();
+    // document.body.remove(newImg);
+    newImg.remove();
+    downloadableCanvas.remove();
+  })
+  
+  // downloadButton.href = downloadableCanvas.toDataURL();
+  // downloadableCanvas.remove();
+
+
+
+
 }
 
 // Simply takes a panel and toggles a 'hidden' attribute.
