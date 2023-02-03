@@ -750,12 +750,14 @@ async function displayWeather() {
       }
     }
 
+
     // If the minutes are the same, we don't need to update anything.
 
 
 
 
     async function getNewTime(){
+
       let myPromises = [
         fetch(
           "https://worldtimeapi.org/api/timezone/Europe/London"
@@ -763,22 +765,25 @@ async function displayWeather() {
         fetch(
           "https://worldtimeapi.org/api/timezone/Asia/Tokyo"
         ), // Tokyo time
-      ]
+      ] // returns array of promises
 
-      const newData = Promise.all(myPromises)
+      const promiseData = Promise.all(myPromises)
 
-      newData
+      promiseData
         .then((responses) => {
           const jsonResponsePromises = responses.map(r => r.json()) // make the responses into promises with their json values inside
           return jsonResponsePromises;
         })
         .then((data) => {
+          
           Promise.all(data)
-            .then(() => {
-                britishTimeDisplay.textContent = data[0].datetime.slice(11,16);
-                japaneseTimeDisplay.textContent = data[1].datetime.slice(11,16);
-              }
-            )
+          .then((info) => {
+
+            console.log(info)
+            britishTimeDisplay.textContent = info[0].datetime.slice(11,16);
+            japaneseTimeDisplay.textContent = info[1].datetime.slice(11,16);
+
+          })
         })
         .catch(failure => {
             console.log('failed to update time')
@@ -788,6 +793,7 @@ async function displayWeather() {
             japaneseTimeDisplay.textContent = ''
           }
         )
+
 
     }
   }
