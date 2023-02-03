@@ -533,6 +533,8 @@ div[class*="icon"]:hover,
 
 #add-panel{
   float: right;
+  position: relative;
+  z-index: 2;
 }
 
 .delete-panel{
@@ -1109,9 +1111,6 @@ details summary{
 
 
 
-
-
-/* 
 #theme-music{
-  display: none;
-} */
+  margin-top: 40px;
+}
