@@ -360,14 +360,14 @@ function generatePoses(e) {
   
   
   
-  characterTheme = characters.find((character) => character.id === chosenCharacter)
-  document.querySelector('#theme-music').innerHTML = 
-    characterTheme.theme 
-    ? `<iframe style="border-radius:12px" src="
-    ${characterTheme.theme ?? ''}
-    &theme=0" width="100%" height="100" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    `
-    : '';
+  // characterTheme = characters.find((character) => character.id === chosenCharacter)
+  // document.querySelector('#theme-music').innerHTML = 
+  //   characterTheme.theme 
+  //   ? `<iframe style="border-radius:12px" src="
+  //   ${characterTheme.theme ?? ''}
+  //   &theme=0" width="100%" height="100" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+  //   `
+  //   : '';
   
 
   generatePanelArtwork();
