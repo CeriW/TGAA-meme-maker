@@ -27,8 +27,9 @@ const characters = [
   nationality: 'british',
   appearsin: [false,true,true,true,true,false,true,true,true,true],
   images: 12,
-  variant: 'default outfit'},
-
+  variant: 'default outfit',
+  theme: '<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/1QUX7xOPs80O5tiQb3MPqd?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>'
+},
 {
   name: 'Herlock Sholmes',
   id:'sholmes-herlock-casual',

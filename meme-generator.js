@@ -357,6 +357,12 @@ function generatePoses(e) {
 
   // Reset the character if we're choosing a new one
   characterImg.src = paths.character + chosenCharacter + "/1.png";
+  
+  
+  
+  characterTheme = characters.find((character) => character.id === chosenCharacter)
+  document.querySelector('#theme-music').innerHTML = characterTheme.theme ?? ''
+
   generatePanelArtwork();
 
   // Figure out how many times we need to loop through to generate all the poses.
