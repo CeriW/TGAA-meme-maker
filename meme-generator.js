@@ -427,7 +427,7 @@ function download(e) {
   downloadableCanvas.classList.add("temp-canvas");
   downloadableCanvas.setAttribute("width", 1920);
   downloadableCanvas.setAttribute("height", 1080);
-  document.body.appendChild(downloadableCanvas);
+  // document.body.appendChild(downloadableCanvas);
 
   // Get a list of all the canvases, and set the height of our temporary one to their combined heights.
   //let allCanvases = document.querySelectorAll('canvas:not(.temp-canvas)')
