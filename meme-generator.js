@@ -905,7 +905,7 @@ function pasteQuote(type){
 
       // If the quote is too long, get a new one.
       // Otherwise go ahead and use it.
-      if (text.length > 110){
+      if (text.length > 110 || text.indexOf('fuck') > -1){
         pasteQuote(type)
       } else{
         console.log(data)
