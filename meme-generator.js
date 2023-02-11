@@ -445,7 +445,7 @@ function download(e) {
   // Get a list of all the canvases, and set the height of our temporary one to their combined heights.
   //let allCanvases = document.querySelectorAll('canvas:not(.temp-canvas)')
   let allCanvases = document.querySelectorAll(".canvas-container");
-  downloadableCanvas.setAttribute("height", 1080 * allCanvases.length + 1);
+  downloadableCanvas.setAttribute("height", 1080 * allCanvases.length);
 
   // Render the text on each one of our individual canvases, and add it onto
   // our temporary one.
