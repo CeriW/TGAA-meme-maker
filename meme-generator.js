@@ -736,6 +736,8 @@ async function displayWeather() {
     })
     .catch(failure => console.log(failure)) // array of responses
 
+    padBody()
+
 
   async function updateTime() {
     
@@ -817,6 +819,7 @@ async function displayWeather() {
     weatherArea.innerHTML = '';
     displayPanel(data[0], data[1], 'London, Great Britain',)
     displayPanel(data[2], data[3], 'Tokyo, Japan')
+    padBody()
 
     function displayPanel(weather, time, city){
       let panel = document.createElement('div')
