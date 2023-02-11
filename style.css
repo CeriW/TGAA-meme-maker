@@ -371,6 +371,9 @@ canvas{
   max-height: 675px;
 }
 
+#pose-selector{
+  max-height: calc(100vh - 200px);
+}
 
 
 /* Icon styling --------------------------------------------------------------*/
