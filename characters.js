@@ -27,7 +27,7 @@ const characters = [
   gender: 'male',
   nationality: 'british',
   appearsin: [false,true,true,true,true,false,true,true,true,true],
-  images: 12,
+  images: 16,
   variant: 'default outfit',
   theme: 'https://open.spotify.com/embed/track/1QUX7xOPs80O5tiQb3MPqd?utm_source=generator'
 },
@@ -37,7 +37,7 @@ const characters = [
   gender: 'male',
   nationality: 'british',
   appearsin: [false,true,true,true,true,false,true,true,true,true],
-  images: 9,
+  images: 16,
   variant: 'casual outfit',
   theme: 'https://open.spotify.com/embed/track/5FQuOO8w56VPX1tJwaPKx8?utm_source=generator'
 },
@@ -68,7 +68,7 @@ const characters = [
   gender: 'female',
   nationality: 'british',
   appearsin: [false,false,true,true,true,false,true,true,true,true],
-  images: 5,
+  images: 9,
   theme: 'https://open.spotify.com/embed/track/3oCMdfOMvnlS9BBAZ2YBQ5?utm_source=generator'
 },
 
