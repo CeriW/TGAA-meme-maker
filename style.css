@@ -323,7 +323,7 @@ canvas{
   pointer-events: none;
 }
 
-@media (max-width: 500px){
+@media (max-width: 625px){
   .canvas-container img:nth-child(3),
   .canvas-container img:nth-child(4){
     opacity: 0;
@@ -380,6 +380,13 @@ canvas{
   position: absolute;
   top: calc(77.5% - 5px);
   right: calc(19% - 60px);
+}
+
+@media (max-width: 625px){
+  .text-colour-selector{
+    right: 20px;
+    top: calc(77.5% - 90px);
+  }
 }
 
 /* .text-colour-selector input[type="radio"]{
@@ -518,7 +525,7 @@ div[class*="icon"]:hover,
   }
 }
 
-@media (max-width: 500px){
+@media (max-width: 625px){
   .text-overlay{
     left: 0;
     right: 0;
@@ -594,7 +601,7 @@ div[class*="icon"]:hover,
   color: var(--blue);
 }
 
-@media (max-width: 550px){
+@media (max-width: 625px){
   .delete-panel-text{
     display: none;
   }
