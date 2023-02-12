@@ -133,13 +133,14 @@ function generateCanvas() {
 
   let textColourRadios = document.createElement('div')
   textColourRadios.classList = "text-colour-selector"
+  let groupCode = Date.now()
   textColourRadios.innerHTML = `
-    <input type="radio" name="default" id="default" value="default" checked></input>
-    <label for="default">
+    <input type="radio" name="group${groupCode}" id="default${groupCode}" value="default" checked></input>
+    <label for="default${groupCode}">
       <span class="material-symbols-sharp">done</span>
     </label>
-    <input type="radio" name="default" id="thought" value="thought"></input>
-    <label for="thought">
+    <input type="radio" name="group${groupCode}" id="thought${groupCode}" value="thought"></input>
+    <label for="thought${groupCode}">
       <span class="material-symbols-sharp">done</span>
     </label>
   `
@@ -148,7 +149,7 @@ function generateCanvas() {
   textColourRadios.addEventListener('click', (e) => {
     if (e.target.value){
       console.log(e.target.value)
-      newTextBox.setAttribute('type', e.target.value)
+      e.target.parentNode.previousElementSibling.setAttribute('type', e.target.value)
     }
   })
 

@@ -397,6 +397,7 @@ canvas{
   color: transparent;
   position: relative;
   top: 1px;
+  pointer-events: none;
 }
 
 .text-colour-selector input:checked + label span{
@@ -413,7 +414,7 @@ canvas{
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
-.text-colour-selector label[for="thought"]{
+.text-colour-selector label[for^="thought"]{
   background: var(--thought);
   margin-top: 10px;
 }
