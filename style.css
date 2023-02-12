@@ -2,6 +2,7 @@
   --gold: #9E9150;
   --lightgold: #dfd7af;
   --blue: #0D1725;
+  --thought: #07bff0;
 }
 
 @font-face {
@@ -322,7 +323,7 @@ canvas{
   pointer-events: none;
 }
 
-@media (max-width: 500px){
+@media (max-width: 625px){
   .canvas-container img:nth-child(3),
   .canvas-container img:nth-child(4){
     opacity: 0;
@@ -373,6 +374,59 @@ canvas{
 
 #pose-selector{
   max-height: calc(100vh - 200px);
+}
+
+.text-colour-selector{
+  position: absolute;
+  top: calc(77.5% - 5px);
+  right: calc(19% - 60px);
+}
+
+@media (max-width: 625px){
+  .text-colour-selector{
+    right: 20px;
+    top: calc(77.5% - 90px);
+  }
+}
+
+@media (max-width: 500px){
+  .text-colour-selector{
+    top: 20px;
+  }
+}
+
+/* .text-colour-selector input[type="radio"]{
+  display: block;
+} */
+
+.text-colour-selector label span{
+  color: transparent;
+  position: relative;
+  top: 1px;
+  pointer-events: none;
+}
+
+.text-colour-selector input:checked + label span{
+  color: var(--blue);
+}
+
+.text-colour-selector label{
+  background: #fff;
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  display: block;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.text-colour-selector label[for^="thought"]{
+  background: var(--thought);
+  margin-top: 10px;
+}
+
+.text-overlay[type="thought"]{
+  color: var(--thought);
 }
 
 
@@ -463,6 +517,7 @@ div[class*="icon"]:hover,
   border: none;
   outline: none !important;
   resize: none;
+  transition: color 0.2s;
 }
 
 #text{
@@ -477,7 +532,7 @@ div[class*="icon"]:hover,
   }
 }
 
-@media (max-width: 500px){
+@media (max-width: 625px){
   .text-overlay{
     left: 0;
     right: 0;
@@ -553,7 +608,7 @@ div[class*="icon"]:hover,
   color: var(--blue);
 }
 
-@media (max-width: 550px){
+@media (max-width: 625px){
   .delete-panel-text{
     display: none;
   }

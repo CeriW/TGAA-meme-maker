@@ -130,6 +130,29 @@ function generateCanvas() {
   newTextBox.setAttribute("maxlength", 110);
   newCanvas.appendChild(newTextBox);
 
+
+  let textColourRadios = document.createElement('div')
+  textColourRadios.classList = "text-colour-selector"
+  let groupCode = Date.now()
+  textColourRadios.innerHTML = `
+    <input type="radio" name="group${groupCode}" id="default${groupCode}" value="default" checked></input>
+    <label for="default${groupCode}">
+      <span class="material-symbols-sharp">done</span>
+    </label>
+    <input type="radio" name="group${groupCode}" id="thought${groupCode}" value="thought"></input>
+    <label for="thought${groupCode}">
+      <span class="material-symbols-sharp">done</span>
+    </label>
+  `
+  newCanvas.appendChild(textColourRadios)
+
+  textColourRadios.addEventListener('click', (e) => {
+    if (e.target.value){
+      e.target.parentNode.previousElementSibling.setAttribute('type', e.target.value)   // previousElementSibling should be the textarea
+    }
+  })
+
+
   // Generate the delete button and have it run removeCanvas on click.
   let deleteButton = document.createElement("div");
   deleteButton.classList.add("delete-panel");
@@ -175,7 +198,7 @@ function removeCanvas(e) {
   e.stopPropagation();
   let deadCanvas = e.target.closest(".canvas-container");
 
-  if (deadCanvas.previousElementSibling) {
+  if (deadCanvas.previousElementSibling && deadCanvas.previousElementSibling.id !== "download") {
     // If the panel has one before it, make that the active one.
     changeActiveCanvas(deadCanvas.previousElementSibling);
   } else if (deadCanvas.nextElementSibling) {
@@ -479,7 +502,7 @@ function download(e) {
     let fontSize = 50;
 
     tempCanvasContext.font = `${fontSize}px Toplar`;
-    tempCanvasContext.fillStyle = "#fff";
+    tempCanvasContext.fillStyle = allCanvases[i].querySelector("textarea").getAttribute('type') === "thought" ? "#07bff0" : "#fff";
     wrapText(tempCanvasContext, textBoxText, 365, 882, 1200);
     downloadableCanvasContext.drawImage(tempCanvas, 0, [i * 1080]);
 
