@@ -198,7 +198,7 @@ function removeCanvas(e) {
   e.stopPropagation();
   let deadCanvas = e.target.closest(".canvas-container");
 
-  if (deadCanvas.previousElementSibling) {
+  if (deadCanvas.previousElementSibling && deadCanvas.previousElementSibling.id !== "download") {
     // If the panel has one before it, make that the active one.
     changeActiveCanvas(deadCanvas.previousElementSibling);
   } else if (deadCanvas.nextElementSibling) {
