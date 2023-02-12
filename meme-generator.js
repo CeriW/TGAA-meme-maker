@@ -503,7 +503,7 @@ function download(e) {
     let fontSize = 50;
 
     tempCanvasContext.font = `${fontSize}px Toplar`;
-    tempCanvasContext.fillStyle = "#fff";
+    tempCanvasContext.fillStyle = allCanvases[i].querySelector("textarea").getAttribute('type') === "thought" ? "#07bff0" : "#fff";
     wrapText(tempCanvasContext, textBoxText, 365, 882, 1200);
     downloadableCanvasContext.drawImage(tempCanvas, 0, [i * 1080]);
 
