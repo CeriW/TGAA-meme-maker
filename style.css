@@ -389,6 +389,12 @@ canvas{
   }
 }
 
+@media (max-width: 500px){
+  .text-colour-selector{
+    top: 20px;
+  }
+}
+
 /* .text-colour-selector input[type="radio"]{
   display: block;
 } */
