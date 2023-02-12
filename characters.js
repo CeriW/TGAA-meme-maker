@@ -17,7 +17,7 @@ const characters = [
   gender: 'male',
   nationality: 'japanese',
   appearsin: [true,true,true,true,true,false,true,true,true,true],
-  images: 7,
+  images: 8,
   theme: 'https://open.spotify.com/embed/track/6t74To2T8PUd6k1dbSu10D?utm_source=generator'
 },
 
@@ -48,7 +48,7 @@ const characters = [
   gender: 'female',
   nationality: 'japanese',
   appearsin: [true,true,true,true,true,true,true,true,true,true],
-  images: 12,
+  images: 15,
   theme: 'https://open.spotify.com/embed/track/09pXZRySXfq6Z17YiVnOJC?utm_source=generator'
 },
 
