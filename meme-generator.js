@@ -130,6 +130,29 @@ function generateCanvas() {
   newTextBox.setAttribute("maxlength", 110);
   newCanvas.appendChild(newTextBox);
 
+
+  let textColourRadios = document.createElement('div')
+  textColourRadios.classList = "text-colour-selector"
+  textColourRadios.innerHTML = `
+    <input type="radio" name="default" id="default" value="default" checked></input>
+    <label for="default">
+      <span class="material-symbols-sharp">done</span>
+    </label>
+    <input type="radio" name="default" id="thought" value="thought"></input>
+    <label for="thought">
+      <span class="material-symbols-sharp">done</span>
+    </label>
+  `
+  newCanvas.appendChild(textColourRadios)
+
+  textColourRadios.addEventListener('click', (e) => {
+    if (e.target.value){
+      console.log(e.target.value)
+      newTextBox.setAttribute('type', e.target.value)
+    }
+  })
+
+
   // Generate the delete button and have it run removeCanvas on click.
   let deleteButton = document.createElement("div");
   deleteButton.classList.add("delete-panel");
