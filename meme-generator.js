@@ -148,8 +148,7 @@ function generateCanvas() {
 
   textColourRadios.addEventListener('click', (e) => {
     if (e.target.value){
-      console.log(e.target.value)
-      e.target.parentNode.previousElementSibling.setAttribute('type', e.target.value)
+      e.target.parentNode.previousElementSibling.setAttribute('type', e.target.value)   // previousElementSibling should be the textarea
     }
   })
 
