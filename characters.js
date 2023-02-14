@@ -78,7 +78,7 @@ const characters = [
   gender: 'male',
   nationality: 'british',
   appearsin: [false,false,true,true,true,false,true,true,true,true],
-  images: 4,
+  images: 5,
   theme: 'https://open.spotify.com/embed/track/657DqxHnOmnX3ZRJlbs9xZ?utm_source=generator'
 },
 
