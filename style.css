@@ -12,6 +12,7 @@
 
 html{
   font-size: 18px;
+  scroll-behavior: smooth;
 }
 
 body{
@@ -29,6 +30,7 @@ main{
   grid-template-areas: 
     "canvas options"; 
   gap: 20px 30px; 
+  padding: 20px;
 }
 
 
@@ -216,7 +218,7 @@ header{
 
 .canvas-container,
 canvas,
-div[class*="icon"],
+div[class*="icon"]:not(.tb__icon),
 #pose-selector label,
 .toggle-heading,
 #pose-heading,
@@ -432,7 +434,7 @@ canvas{
 
 /* Icon styling --------------------------------------------------------------*/
 
-div[class*="icon"],
+div[class*="icon"]:not(.tb__icon),
 #pose-selector label{
   width: 140px;
   height: 140px;
@@ -552,6 +554,7 @@ div[class*="icon"]:hover,
 .toggle-heading,
 #pose-heading,
 #spoiler-warning,
+#social-feed-heading,
 #download div{
   background: linear-gradient(to bottom, #65592d, #9E9150);
   color: #fff;
@@ -1067,6 +1070,7 @@ details summary{
   }
 
   main{
+    padding: 20px;
     grid-template-columns: auto;
     grid-template-rows: auto auto auto auto;
     grid-template-areas:
@@ -1171,4 +1175,90 @@ details summary{
 
 #theme-music{
   margin-top: 40px;
+}
+
+
+
+/* Twitter feed --------------------------------------------------------------*/
+
+body:not([accept-spoilers="true"]) .tb_mc_media_wrap img{
+  filter: blur(40px);
+}
+
+#social-feed{
+  position: relative;
+  z-index: 101;
+  background: var(--blue);
+  margin-top: 40px;
+  padding: 0 20px 20px;
+}
+
+#back-to-top{
+  color: #fff;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: -4px;
+  top: calc(100% + 4px);
+  background: var(--gold);
+  text-decoration: none;
+  padding: 3px 5px;
+  font-size: 0.8em;
+}
+
+
+
+#social-feed-heading{
+  position: sticky;
+  top: -3px;
+  z-index: 99;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+#social-feed-heading iframe{
+  margin-left: 30px;
+}
+
+#social-feed-spoiler-notice{
+  text-align: center;
+  font-size: 1.2em;
+  padding: 20px 0;
+}
+
+body[accept-spoilers] #social-feed-spoiler-notice{
+  display: none;
+}
+
+.tb_mc_content a.text_links_{
+  color: #fff !important;
+}
+
+.tb_mc_author, .tb_mc_author_wrapper{
+  height: 50px;
+}
+
+.tb_app_container{
+  overflow: hidden;
+}
+
+
+.tb_mc_media_wrap{
+  width: 100%;
+  overflow: hidden;
+  display: flex !important;
+  justify-content: center;
+}
+
+.tb_mc_image{
+  display: none !important;
+}
+
+.tb_mc_media_wrap img{
+  display: block !important;
+  height: auto;
 }

@@ -230,18 +230,6 @@ function determineStickyCanvas () {
 determineStickyCanvas()
 window.addEventListener('resize', determineStickyCanvas)
 
-function padBody(){
-
-  document.body.style.paddingBottom = window.innerWidth < 800
-    ? '30px'
-    : document.querySelector('#info-bar').offsetHeight + 10 + 'px'
-
-  // document.body.style.marginBottom = document.querySelector('#info-bar').offsetHeight + 'px'
-}
-
-window.addEventListener('load', padBody)
-window.addEventListener('resize', padBody)
-
 
 
 // Generates the character selection window.
@@ -710,12 +698,14 @@ function checkSpoilers(e) {
   ) {
     localStorage.setItem("reveal-spoilers", true);
     spoilerWarning.remove();
+    document.body.setAttribute('accept-spoilers', true)
   }
 
   // If this is running as the result of an event, it means that the okay
   // button has been clicked, therefore close the spoiler window.
   if (e && spoilerWarning) {
     spoilerWarning.remove();
+    document.body.setAttribute('accept-spoilers', true)
   }
 }
 
@@ -758,8 +748,6 @@ async function displayWeather() {
       })
     })
     .catch(failure => console.log(failure)) // array of responses
-
-    padBody()
 
 
   async function updateTime() {
@@ -842,7 +830,7 @@ async function displayWeather() {
     weatherArea.innerHTML = '';
     displayPanel(data[0], data[1], 'London, Great Britain',)
     displayPanel(data[2], data[3], 'Tokyo, Japan')
-    padBody()
+
 
     function displayPanel(weather, time, city){
       let panel = document.createElement('div')
