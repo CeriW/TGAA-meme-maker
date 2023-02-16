@@ -1111,6 +1111,7 @@ details summary{
   #info-bar{
     position: initial;
     border: none;
+    margin: 0 20px;
   }
 
   #inspiration-bar{
@@ -1152,7 +1153,7 @@ details summary{
   }
 
   #function-buttons{
-    margin-top: 20px;
+    margin: 20px 20px 0;
   }
 
   #about-button{
@@ -1206,8 +1207,6 @@ body:not([accept-spoilers="true"]) .tb_mc_media_wrap img{
   font-size: 0.8em;
 }
 
-
-
 #social-feed-heading{
   position: sticky;
   top: -3px;
@@ -1218,6 +1217,7 @@ body:not([accept-spoilers="true"]) .tb_mc_media_wrap img{
   justify-content: center;
   flex-wrap: wrap;
   margin-bottom: 10px;
+  gap: 10px;
 }
 
 #social-feed-heading iframe{
