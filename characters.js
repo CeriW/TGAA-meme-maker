@@ -201,5 +201,15 @@ const characters = [
   theme: 'https://open.spotify.com/embed/track/4qiFdo2jEF4AcZzj8LxPUP?utm_source=generator'
 },
 
+{
+  name: 'Rei Membami',
+  id:'membami-rei',
+  gender: 'female',
+  nationality: 'japanese',
+  appearsin: [false,false,false,false,false,true,false,false,false,false],
+  images: 3,
+  theme: 'https://open.spotify.com/embed/track/5OmhUtWkaW7czq8v42yjIg?utm_source=generator'
+},
+
 
 ]
