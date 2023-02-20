@@ -208,7 +208,6 @@ const characters = [
   nationality: 'japanese',
   appearsin: [false,false,false,false,false,true,false,false,false,false],
   images: 3,
-  theme: 'https://open.spotify.com/embed/track/5OmhUtWkaW7czq8v42yjIg?utm_source=generator'
 },
 
 
