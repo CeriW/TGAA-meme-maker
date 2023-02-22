@@ -1291,26 +1291,26 @@ body[accept-spoilers] #social-feed-spoiler-notice{
 
 
 
-body[theme="homumiko"][accept-spoilers="true"]{
+body[theme="homumiko"]{
   --blue: #302314;
   --scrollbar: #241a0f;
   --dark-accent: #241a0f;
 }
 
-body[theme="homumiko"][accept-spoilers="true"]{
+body[theme="homumiko"]{
   background-image: url('assets/misc/yujin-symbol.png'), url('assets/misc/herlock-symbol.png');
   background-position: -200px calc(100% + 150px), calc(100% + 150px) -150px;
   background-repeat: no-repeat, no-repeat;
   background-attachment: fixed, fixed;
 }
 
-body[theme="homumiko"][accept-spoilers="true"] #info-bar,
-body[theme="homumiko"][accept-spoilers="true"] #about-button,
-body[theme="homumiko"][accept-spoilers="true"] #share-buttons{
+body[theme="homumiko"] #info-bar,
+body[theme="homumiko"] #about-button,
+body[theme="homumiko"] #share-buttons{
   background: var(--dark-accent);
 }
 
-body[theme="homumiko"][accept-spoilers="true"] #banner:after{
+body[theme="homumiko"] #banner:after{
   content: '';
   position: absolute;
   top: 0;

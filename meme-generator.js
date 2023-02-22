@@ -1,3 +1,16 @@
+// THEME
+// let theme = null;
+let theme = "homumiko";
+// A string to set the theme with. If this is not null it will do some
+// rearranging of the data and add an attribute to the site class to match the theme. 
+
+let themeIsSpoiler = true;
+// Some themes will contain spoilers, so we shouldn't show the theme until the 
+// user has confirmed they're okay with this.
+
+// ---------------------------------------------------------------------------//
+
+
 // The current canvas the user is working on. We'll initialise to null and then
 // set it to the first panel the code generates.
 let currentCanvas = null;
@@ -31,15 +44,6 @@ let paths = {
   location: "assets/locations/",
 };
 
-
-
-// THEME
-let theme = null;
-// let theme = "homumiko";
-// A string to set the theme with. If this is not null it will do some
-// rearranging of the data to match the site theme. 
-
-
 // A very long list of characters and locations are pulled in from characters.js and locations.js
 
 // ---------------------------------------------------------------------------//
@@ -69,13 +73,17 @@ function sortItemsByTag(characters, tag) {
 }
 
 
-//Rearrange our characters and locations by tag. This is used during themed weeks
-// to prevent the need to manually rearrange things.
+// Rearrange our characters and locations by tag. This is used during themed 
+// periods to prevent the need to manually rearrange things.
 if (theme){
   characters = sortItemsByTag(characters, 'homumiko');
   locations = sortItemsByTag(locations, 'homumiko');
-}
+};
 
+// If the theme isn't a spoiler, change the theme immediately.
+if (theme && !themeIsSpoiler){
+  document.body.setAttribute('theme', theme);
+};
 
 
 // Generate the locations selector panel.
