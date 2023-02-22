@@ -31,6 +31,15 @@ let paths = {
   location: "assets/locations/",
 };
 
+
+
+// THEME
+let theme = null;
+// let theme = "homumiko";
+// A string to set the theme with. If this is not null it will do some
+// rearranging of the data to match the site theme. 
+
+
 // A very long list of characters and locations are pulled in from characters.js and locations.js
 
 // ---------------------------------------------------------------------------//
@@ -45,6 +54,29 @@ document.querySelector("#spoilers-okay").addEventListener("click", (e) => {
   checkSpoilers(e);
 });
 checkSpoilers();
+
+
+function sortItemsByTag(characters, tag) {
+  return characters.sort((a, b) => {
+    if (a?.tags.includes(tag) && !b?.tags.includes(tag)) {
+      return -1; // a should come before b
+    } else if (!a?.tags.includes(tag) && b?.tags.includes(tag)) {
+      return 1; // b should come before a
+    } else {
+      return 0; // no change to order
+    }
+  });
+}
+
+
+//Rearrange our characters and locations by tag. This is used during themed weeks
+// to prevent the need to manually rearrange things.
+if (theme){
+  characters = sortItemsByTag(characters, 'homumiko');
+  locations = sortItemsByTag(locations, 'homumiko');
+}
+
+
 
 // Generate the locations selector panel.
 generateLocations();
@@ -699,6 +731,7 @@ function checkSpoilers(e) {
     localStorage.setItem("reveal-spoilers", true);
     spoilerWarning.remove();
     document.body.setAttribute('accept-spoilers', true)
+    document.body.setAttribute('theme', theme)
   }
 
   // If this is running as the result of an event, it means that the okay
@@ -706,6 +739,7 @@ function checkSpoilers(e) {
   if (e && spoilerWarning) {
     spoilerWarning.remove();
     document.body.setAttribute('accept-spoilers', true)
+    document.body.setAttribute('theme', theme)
   }
 }
 

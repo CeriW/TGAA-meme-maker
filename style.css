@@ -1,8 +1,13 @@
 :root{
   --gold: #9E9150;
   --lightgold: #dfd7af;
-  --blue: #0D1725;
   --thought: #07bff0;
+
+  /* Default theme */
+  --blue: #0D1725;
+  --scrollbar: #080f1a;
+  --dark-accent: #0D1725;
+
 }
 
 @font-face {
@@ -16,11 +21,12 @@ html{
 }
 
 body{
-  background: #0D1725;
+  background: var(--blue);
   color: #fff;
   font-family: Toplar, 'Libre Baskerville', Georgia, serif; /* Yes, I chose 'Libre Baskerville' on purpose. Congrats, you found an easter egg */
   padding: 0 30px 100px;
   margin: 0;
+  transition: background-color 1s;
 }
 
 main{
@@ -57,6 +63,15 @@ header{
 #banner{
   width: 520px;
   max-width: 100%;
+  position: relative;
+  z-index: 3;
+  float: none;
+  margin: 0 auto;
+}
+
+#banner img{
+  max-width: 100%;
+  height: auto;
 }
 
 #spoiler-warning > *{
@@ -107,7 +122,7 @@ header{
 }
 
 .quote-button{
-  background: var(--blue);
+  background: var(--dark-accent);
   color: #fff;
   border: 1px solid #fff;
   font-family: inherit;
@@ -628,7 +643,7 @@ div[class*="icon"]:hover,
 ::-webkit-scrollbar {width: 10px;}
 
 /* Track */
-::-webkit-scrollbar-track {background: #080f1a; }
+::-webkit-scrollbar-track {background: var(--scrollbar); }
  
 /* Handle */
 ::-webkit-scrollbar-thumb {background: var(--gold);}
@@ -932,7 +947,7 @@ input[filter-type="nationality"]{
   position: absolute;
   right: 0;
   top: 0;
-  z-index: 101;
+  z-index: 105;
   cursor: pointer;
   background: var(--blue);
   border: 2px solid var(--gold);
@@ -1262,3 +1277,93 @@ body[accept-spoilers] #social-feed-spoiler-notice{
   display: block !important;
   height: auto;
 }
+
+
+.tb_mc_post_wrap_in{
+  border: none !important;
+}
+
+.tb_mc_post_in{
+  background-color: transparent !important;
+}
+
+
+
+
+
+body[theme="homumiko"][accept-spoilers="true"]{
+  --blue: #302314;
+  --scrollbar: #241a0f;
+  --dark-accent: #241a0f;
+}
+
+body[theme="homumiko"][accept-spoilers="true"]{
+  background-image: url('assets/misc/yujin-symbol.png'), url('assets/misc/herlock-symbol.png');
+  background-position: -200px calc(100% + 150px), calc(100% + 150px) -150px;
+  background-repeat: no-repeat, no-repeat;
+  background-attachment: fixed, fixed;
+}
+
+body[theme="homumiko"][accept-spoilers="true"] #info-bar,
+body[theme="homumiko"][accept-spoilers="true"] #about-button,
+body[theme="homumiko"][accept-spoilers="true"] #share-buttons{
+  background: var(--dark-accent);
+}
+
+body[theme="homumiko"][accept-spoilers="true"] #banner:after{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: -200px;
+  pointer-events: none;
+  background: url('assets/misc/banner-overlay-homumiko.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform-origin: right top;
+  
+  animation-name: bounceIn;
+  animation-duration: .75s;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-delay: 1.5s;
+}
+
+@keyframes zoomIn{
+  from{
+    transform: scale(0);
+  }
+
+  to{
+    transform: scale(1);
+  }
+}
+
+@keyframes bounceIn {
+  0%, 20%, 40%, 60%, 80%, 100% {
+  transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+  0% {
+  opacity: 0;
+  transform: scale3d(.3, .3, .3);
+  }
+  20% {
+  transform: scale3d(1.1, 1.1, 1.1);
+  }
+  40% {
+  -webkit-transform: scale3d(.9, .9, .9);
+  transform: scale3d(.9, .9, .9);
+  }
+  60% {
+  opacity: 1;
+  transform: scale3d(1.03, 1.03, 1.03);
+  }
+  80% {
+  transform: scale3d(.97, .97, .97);
+  }
+  100% {
+  opacity: 1;
+  transform: scale3d(1, 1, 1);
+  }
+  } 
