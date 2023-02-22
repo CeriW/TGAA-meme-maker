@@ -1,3 +1,16 @@
+// THEME
+let theme = null;
+// let theme = "homumiko";
+// A string to set the theme with. If this is not null it will do some
+// rearranging of the data and add an attribute to the site class to match the theme. 
+
+let themeIsSpoiler = true;
+// Some themes will contain spoilers, so we shouldn't show the theme until the 
+// user has confirmed they're okay with this.
+
+// ---------------------------------------------------------------------------//
+
+
 // The current canvas the user is working on. We'll initialise to null and then
 // set it to the first panel the code generates.
 let currentCanvas = null;
@@ -45,6 +58,33 @@ document.querySelector("#spoilers-okay").addEventListener("click", (e) => {
   checkSpoilers(e);
 });
 checkSpoilers();
+
+
+function sortItemsByTag(characters, tag) {
+  return characters.sort((a, b) => {
+    if (a?.tags.includes(tag) && !b?.tags.includes(tag)) {
+      return -1; // a should come before b
+    } else if (!a?.tags.includes(tag) && b?.tags.includes(tag)) {
+      return 1; // b should come before a
+    } else {
+      return 0; // no change to order
+    }
+  });
+}
+
+
+// Rearrange our characters and locations by tag. This is used during themed 
+// periods to prevent the need to manually rearrange things.
+if (theme){
+  characters = sortItemsByTag(characters, 'homumiko');
+  locations = sortItemsByTag(locations, 'homumiko');
+};
+
+// If the theme isn't a spoiler, change the theme immediately.
+if (theme && !themeIsSpoiler){
+  document.body.setAttribute('theme', theme);
+};
+
 
 // Generate the locations selector panel.
 generateLocations();
@@ -699,6 +739,7 @@ function checkSpoilers(e) {
     localStorage.setItem("reveal-spoilers", true);
     spoilerWarning.remove();
     document.body.setAttribute('accept-spoilers', true)
+    document.body.setAttribute('theme', theme)
   }
 
   // If this is running as the result of an event, it means that the okay
@@ -706,6 +747,7 @@ function checkSpoilers(e) {
   if (e && spoilerWarning) {
     spoilerWarning.remove();
     document.body.setAttribute('accept-spoilers', true)
+    document.body.setAttribute('theme', theme)
   }
 }
 
