@@ -2,6 +2,8 @@
 // A list of the locations
 // name - a user-readable name that will display on the page
 // id - the name of the image to go alongside it
+// variant - a user-readable label that will be placed alongside the name. Some locations have more than one version - e.g. the Forensics Lab has a Courtney version and a Maria version. Both the same place, but they look different.
+// tags - an array of tags which will be used to bump these locations to the top of the list during themed weeks. The tag needs to match the theme name.
 
 let locations = [
   {name   : "221B Baker Street",                     id:"baker-street-221b",                               tags: ['homumiko']},
