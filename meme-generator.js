@@ -1,12 +1,14 @@
 // THEME
-let theme = null;
-// let theme = "homumiko";
+
 // A string to set the theme with. If this is not null it will do some
 // rearranging of the data and add an attribute to the site class to match the theme. 
+let theme = null;
+// let theme = "homumiko";
 
-let themeIsSpoiler = true;
+
 // Some themes will contain spoilers, so we shouldn't show the theme until the 
 // user has confirmed they're okay with this.
+let themeIsSpoiler = true;
 
 // ---------------------------------------------------------------------------//
 
@@ -21,7 +23,6 @@ let backgroundImg;
 let characterImg;
 let tag;
 let characterOverlay;
-// let characterOverlayID = 'prison-cell-bars';
 let characterOverlayID = null;
 let speechbox = document.querySelector("#speech-box");
 let credits = document.querySelector("#credits");

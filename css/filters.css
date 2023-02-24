@@ -57,7 +57,7 @@ span[filter-type="all"]{
 }
 
 @media (max-width: 650px){
-  #filter-form{
+  #filter-toggle, #filter-form{
     display: none;
   }
 }
