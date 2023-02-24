@@ -64,6 +64,9 @@ document.querySelector("#spoilers-okay").addEventListener("click", (e) => {
 checkSpoilers();
 
 
+// A function to sort an array of objects by checking whether they contain a
+// certain tag in their tag property array. This is used during themed time
+// periods to bump the relevant characters and locations to the top of the list.
 function sortItemsByTag(characters, tag) {
   return characters.sort((a, b) => {
     if (a?.tags.includes(tag) && !b?.tags.includes(tag)) {
@@ -75,7 +78,6 @@ function sortItemsByTag(characters, tag) {
     }
   });
 }
-
 
 // Rearrange our characters and locations by tag. This is used during themed 
 // periods to prevent the need to manually rearrange things.
@@ -126,6 +128,7 @@ document.querySelector('#filter-toggle').addEventListener('click', () => {
 
 
 // ---------------------------------------------------------------------------//
+
 
 function generateLocations() {
   locations.forEach(function (location) {
@@ -550,29 +553,98 @@ function download(e) {
     let fontSize = 50;
 
     tempCanvasContext.font = `${fontSize}px Toplar`;
-    tempCanvasContext.fillStyle = allCanvases[i].querySelector("textarea").getAttribute('type') === "thought" ? "#07bff0" : "#fff";
+    desiredTextColour = allCanvases[i].querySelector("textarea").getAttribute('type') === "thought" ? "#07bff0" : "#fff";
+    // tempCanvasContext.fillStyle = allCanvases[i].querySelector("textarea").getAttribute('type') === "thought" ? "#07bff0" : "#fff";
     wrapText(tempCanvasContext, textBoxText, 365, 882, 1200);
     downloadableCanvasContext.drawImage(tempCanvas, 0, [i * 1080]);
 
-    function wrapText(context, text, x, y, maxWidth) {
+    // function wrapText(context, text, x, y, maxWidth) {
+    //   let words = text.split(" ");
+    //   let line = "";
+
+    //   for (let n = 0; n < words.length; n++) {
+    //     let testLine = line + words[n] + " ";
+    //     let metrics = context.measureText(testLine);
+    //     let testWidth = metrics.width;
+    //     if (testWidth > maxWidth && n > 0) {
+    //       context.fillText(line, x, y);
+    //       line = words[n] + " ";
+    //       y += fontSize * 1.25;
+    //     } else {
+    //       line = testLine;
+    //     }
+    //   }
+    //   console.log(line)
+    //   context.fillText(line, x, y);
+    // }
+
+    // function wrapText(context, text, x, y, maxWidth) {
+    //   let words = text.split(" ");
+    //   let line = "";
+    //   let colorIndex = 0; // start with blue
+    
+    //   for (let n = 0; n < words.length; n++) {
+    //     let testLine = line + words[n] + " ";
+    //     let metrics = context.measureText(testLine);
+    //     let testWidth = metrics.width;
+    //     if (testWidth > maxWidth && n > 0) {
+    //       // context.fillStyle = (colorIndex % 2 === 0) ? 'blue' : 'green';
+    //       context.fillStyle = 
+    //       context.fillText(line, x, y);
+    //       line = words[n] + " ";
+    //       y += fontSize * 1.25;
+    //       colorIndex++; // switch color
+    //     } else {
+    //       line = testLine;
+    //     }
+    //   }
+    //   console.log(line)
+    //   context.fillStyle = (colorIndex % 2 === 0) ? 'blue' : 'green';
+    //   context.fillText(line, x, y);
+    // }
+
+    function wrapText(context, text, x, y, maxWidth, colorFn) {
       let words = text.split(" ");
       let line = "";
-
+    
+      function outputLine(line, x, y, context) {
+        let words = line.split(" ");
+        let wordX = x;
+        for (let i = 0; i < words.length; i++) {
+          let color = colorFn(words[i]);
+          words[i] = words[i].replace(/^\*(.*)\*$/, '$1')
+          context.fillStyle = color;
+          context.fillText(words[i], wordX, y);
+          wordX += context.measureText(words[i] + " ").width;
+        }
+      }
+    
       for (let n = 0; n < words.length; n++) {
         let testLine = line + words[n] + " ";
         let metrics = context.measureText(testLine);
         let testWidth = metrics.width;
         if (testWidth > maxWidth && n > 0) {
-          context.fillText(line, x, y);
+          outputLine(line, x, y, context);
           line = words[n] + " ";
           y += fontSize * 1.25;
         } else {
           line = testLine;
         }
       }
-      context.fillText(line, x, y);
+      outputLine(line, x, y, context);
+
+      function colorFn(word) {
+        if (/^\*.*\*$/.test(word)) {
+          return '#f1671a';
+        } else {
+          return desiredTextColour;
+        }
+      }
     }
+    
+    
   }
+
 
   // Add the credits onto the end.
   downloadableCanvasContext.drawImage(
