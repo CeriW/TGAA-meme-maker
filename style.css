@@ -29,6 +29,10 @@ body{
   transition: background-color 1s;
 }
 
+::marker{
+  color: var(--gold);
+}
+
 main{
   display: grid; 
   grid-template-columns: 800px auto; 
@@ -998,6 +1002,9 @@ body:not(.show-about) #about-button div[state="opened"]{
   transition: 0.3s;
   opacity: 1;
   overflow-y: scroll;
+  display: grid;
+  gap: 20px 100px;
+  grid-template-columns: 1fr 350px;
 }
 
 body.show-about{
@@ -1061,6 +1068,19 @@ details summary{
   margin-top: 20px;
 }
 
+#change-log ul{
+  padding-inline-start: 20px;
+}
+
+#change-log li{
+  margin-bottom: 10px;
+}
+
+@media (max-width: 1100px){
+  #about{
+    display: block;
+  }
+}
 
 
 /* -------------------------------------------------------------------------- */
