@@ -70,7 +70,7 @@
 
 @media (max-width: 800px){
   #info-bar{
-    position: initial;
+    position: initial !important;
     border: none;
     margin: 0 20px;
   }
@@ -85,12 +85,13 @@
   }
 
   #weather-bar{
-    display: initial;
+    display: initial !important;
     padding-top: 20px;
   }
 
   #weather-bar > div{
     padding: 10px 0;
+    justify-content: flex-start !important;
   }
 
   #weather-bar > div:not(:first-child){
