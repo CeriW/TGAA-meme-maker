@@ -529,7 +529,7 @@ function download(e) {
 
     // If there is no text in the textarea, we don't render the final two layers
     // of the canvas, which display the text box artwork
-    let layersToRender = allCanvases[i].querySelector("textarea").value.length === 0 ? 3 : 5
+    let layersToRender = allCanvases[i].querySelector("textarea").value.length === 0 ? 4 : 6
 
     for (j = 1; j < layersToRender; j++) {
       let imgToDraw = allCanvases[i].querySelector("img:nth-child(" + j + ")");
