@@ -20,6 +20,9 @@ let currentCanvas = null;
 let backgroundImg;
 let characterImg;
 let tag;
+let characterOverlay;
+// let characterOverlayID = 'prison-cell-bars';
+let characterOverlayID = null;
 let speechbox = document.querySelector("#speech-box");
 let credits = document.querySelector("#credits");
 
@@ -128,7 +131,7 @@ function generateLocations() {
 }
 
 // Generates our canvas with the chosen backgrounds, characters and text
-function generatePanelArtwork(e) {
+function generatePanelArtwork() {
   // Set the background image
   let backgrounds = document.querySelectorAll(
     ".canvas-container img:first-child"
@@ -137,8 +140,10 @@ function generatePanelArtwork(e) {
     background.src = paths.location + backgroundSelector.value + ".jpg";
   });
 
+  
   // If a character has been purposely selected previously then set the character image
   if (characterSelected) {
+    characterOverlay.src = `/assets/locations/${characterOverlayID}.png`;
     tag.src = paths.character + characterSelector.value + "/tag.png";
   }
 }
@@ -156,9 +161,15 @@ function generateCanvas() {
     ? characterImg.cloneNode()
     : document.createElement("img");
   newCanvas.appendChild(characterImg);
-
+  
+  
+  characterOverlay = characterOverlay ? characterOverlay.cloneNode() : document.createElement("img");
+  characterOverlay.id = "character-overlay";
+  characterOverlay.src = `/assets/locations/${characterOverlayID}.png`;
+  newCanvas.appendChild(characterOverlay);
+  
   tag = tag ? tag.cloneNode() : document.createElement("img");
-  newCanvas.appendChild(tag);
+  newCanvas.appendChild(tag)
 
   newSpeechbox = document.createElement("img");
   newSpeechbox.src = "assets/game-elements/speech-box.png";
@@ -221,7 +232,8 @@ function changeActiveCanvas(activeCanvas) {
   currentCanvas = activeCanvas;
   backgroundImg = activeCanvas.querySelector("img:nth-child(1)");
   characterImg = activeCanvas.querySelector("img:nth-child(2)");
-  tag = activeCanvas.querySelector("img:nth-child(3)");
+  characterOverlay = activeCanvas.querySelector("img:nth-child(3)")
+  tag = activeCanvas.querySelector("img:nth-child(4)");
 
   let allCanvases = document.querySelectorAll(".canvas-container");
   allCanvases.forEach(function (node) {
@@ -326,6 +338,9 @@ function generateLocationInterface() {
     // have the new location
     icon.addEventListener("click", function (e) {
       backgroundSelector.value = e.target.getAttribute("value");
+
+      characterOverlayID = locations.find((location) => location.id === backgroundSelector.value).characterOverlay ?? null;
+
       togglePanel(backgroundPreview);
       generatePanelArtwork();
 
@@ -510,7 +525,7 @@ function download(e) {
 
     // If there is no text in the textarea, we don't render the final two layers
     // of the canvas, which display the text box artwork
-    let layersToRender = allCanvases[i].querySelector("textarea").value.length === 0 ? 3 : 5
+    let layersToRender = allCanvases[i].querySelector("textarea").value.length === 0 ? 4 : 6
 
     for (j = 1; j < layersToRender; j++) {
       let imgToDraw = allCanvases[i].querySelector("img:nth-child(" + j + ")");
