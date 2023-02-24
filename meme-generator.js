@@ -603,19 +603,32 @@ function download(e) {
     //   context.fillText(line, x, y);
     // }
 
-    function wrapText(context, text, x, y, maxWidth, colorFn) {
+    function wrapText(context, text, x, y, maxWidth) {
       let words = text.split(" ");
       let line = "";
+
+      console.log(words)
+
+      let result = []
+
+      for (let i = 0; i < words.length; i++) {
+        let splitItems = words[i].split(/(\*.*?\*|[^\w\s])/).filter(Boolean)
+        result = result.concat(splitItems)
+      }
+
+      words = result
     
       function outputLine(line, x, y, context) {
         let words = line.split(" ");
         let wordX = x;
         for (let i = 0; i < words.length; i++) {
           let color = colorFn(words[i]);
-          words[i] = words[i].replace(/^\*(.*)\*$/, '$1')
+          words[i] = words[i].replace(/\*/g, "")
           context.fillStyle = color;
           context.fillText(words[i], wordX, y);
-          wordX += context.measureText(words[i] + " ").width;
+          let spacingCharacter = /^[^\w\s]+$/.test(words[i + 1]) ? '' : ' ';
+
+          wordX += context.measureText(words[i] + spacingCharacter).width;
         }
       }
     
@@ -634,7 +647,8 @@ function download(e) {
       outputLine(line, x, y, context);
 
       function colorFn(word) {
-        if (/^\*.*\*$/.test(word)) {
+        console.log(word)
+        if (/^\*+.*$/.test(word)) {
           return '#f1671a';
         } else {
           return desiredTextColour;
