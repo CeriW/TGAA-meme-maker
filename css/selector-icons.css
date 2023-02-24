@@ -1,0 +1,72 @@
+/* Icon styling --------------------------------------------------------------*/
+
+div[class*="icon"]:not(.tb__icon),
+#pose-selector label{
+  width: 140px;
+  height: 140px;
+  background-position: center bottom;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  display: block;
+  transition: 0.3s;
+  background-color: rgba(255,255,255,0.05);
+  border-radius: 50%;
+  margin: 15px 15px 90px;
+}
+
+div[class*="icon"][selected="true"]{
+  background-color: var(--gold) !important;
+}
+
+#pose-selector label{
+  margin: 15px;
+}
+
+div[class*="icon"]:hover,
+#pose-selector label:hover{
+  background-color: rgba(255,255,255,0.1);
+}
+
+#pose-selector label[selected]{
+  background-color: var(--gold);
+}
+
+.location-icon,
+.character-icon{
+  margin-bottom: 50px;
+}
+
+.location-icon{
+  outline: 3px solid transparent;
+}
+
+.location-icon:hover,
+.location-icon[selected="true"]{
+  outline-color: var(--gold);
+}
+
+.location-icon > div,
+.character-icon > div{
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+
+
+.variant-tag{
+  font-size: 0.9em;
+  font-style: italic;
+  color: var(--gold)
+}
+
+
+@media (max-width: 1000px){
+  div[class*="icon"],
+  #pose-selector label{
+    max-width: 120px;
+    max-height: 120px;
+  }
+}

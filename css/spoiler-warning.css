@@ -1,0 +1,57 @@
+#spoiler-warning > *{
+  width: 650px;
+  max-width: 100%;
+}
+
+
+#spoiler-warning > *{
+  width: 440px;
+}
+
+
+
+
+
+/* Spoiler warning ---------------------------------------------------------- */
+
+#spoiler-warning{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  text-align: center;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#spoilers-okay{
+  background: var(--blue);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-family: inherit;
+  padding: 10px;
+  transition: 0.2s;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 0.9em;
+}
+
+#spoilers-okay:hover{
+  background: #fff;
+  color:  var(--blue);
+}
+
+#remember-spoilers-container *{
+  cursor: pointer;
+}
+
+#remember-spoilers-okay{
+  position: relative;
+  margin-right: 20px;
+  transform: scale(1.5);
+}

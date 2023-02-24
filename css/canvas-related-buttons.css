@@ -1,0 +1,79 @@
+/* Add and delete panel buttons ----------------------------------------------*/
+
+#add-panel,
+.delete-panel{
+  background: linear-gradient(to bottom, #65592d, #9E9150);
+  padding: 5px;
+  transition: 0.5s;
+}
+
+#add-panel{
+  float: right;
+  position: relative;
+  z-index: 2;
+}
+
+.delete-panel{
+  right: unset;
+  left: 0;
+  bottom: 0;
+  position: absolute;
+  z-index: 2;
+}
+
+#add-panel:hover,
+.delete-panel:hover{
+  color: var(--blue);
+}
+
+@media (max-width: 625px){
+  .delete-panel-text{
+    display: none;
+  }
+
+  .delete-panel .material-icons{
+    padding-right: 0;
+    font-size: 24px !important;
+  }
+}
+
+
+/* Download button -----------------------------------------------------------*/
+
+#download{
+  position: absolute;
+  top: 0;
+  left: -35px;
+  z-index: 4;
+}
+
+@media (max-width: 600px){
+  #download{
+    width: 170px;
+    left: -24px !important;
+  }
+
+}
+
+@media (max-width: 450px){
+  
+  #download{
+    position: initial;
+  }
+  
+  #download img{
+    display: none;
+  }
+
+  #download div{
+    display: block;
+    margin-top: 50px;
+  }
+}
+
+@media (min-width: 451px){
+  #download div{
+    display: none;
+  }
+}
+

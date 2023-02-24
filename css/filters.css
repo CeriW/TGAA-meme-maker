@@ -1,0 +1,210 @@
+
+
+.filter{
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  width: 100%;
+  padding: 5px;
+}
+
+.filter span{
+  pointer-events: all;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.filter span.toggled,
+.filter span:hover{
+  color: var(--gold);
+}
+
+.character-icon[toggled="false"]{
+  opacity: 0.1;
+}
+
+span[filter-type="all"]{
+  display: inline-block;
+  background: #fff;
+  color: var(--blue);
+  float: right;
+  padding: 5px;
+}
+
+.filter-form{
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  background: rgba(255,255,255,0.1);
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 650px){
+  .filter-form{
+    display: none;
+  }
+}
+
+.filter-form > *{
+  padding: 5px 10px;
+}
+
+.filter-form > div > label{
+  color: var(--gold);
+  font-weight: bold;
+  display: block;
+  padding-bottom: 7px;
+}
+
+.filter-form > .gender-checkbox > label{
+  padding-bottom: 10px;
+}
+
+
+.case-presence-checkbox .checkbox-group {
+  display: grid; 
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr; 
+  gap: 10px 5px; 
+  grid-template-areas: 
+    ". . . . ."
+    ". . . . ."; 
+}
+
+.gender-checkbox-container .gender-icon,
+.nationality-checkbox .flag-icon{
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background-size: auto 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  margin-right: 10px;
+  position: relative;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gender-checkbox-container,
+.gender-checkbox-container label,
+.nationality-checkbox-container,
+.nationality-checkbox-container label{
+  display: flex;
+  align-items: center;
+}
+
+.present-in-checkbox-container,
+.gender-checkbox-container,
+.nationality-checkbox-container{
+  margin-bottom: 8px;
+}
+
+.present-in-checkbox-container *,
+.gender-checkbox-container *,
+.nationality-checkbox *{
+  cursor: pointer;
+}
+
+.present-in-checkbox-container [checked] + label,
+.gender-checkbox-container [checked] + label,
+.nationality-checkbox-container [checked] + label{
+  transition: 0.3s;
+  opacity: 1;
+}
+
+.present-in-checkbox-container :not([checked="checked"]) + label,
+.gender-checkbox-container :not([checked="checked"]) + label,
+.nationality-checkbox-container :not([checked="checked"]) + label{
+  opacity: 0.2;
+}
+
+input[filter-type="present-in"],
+input[filter-type="gender"],
+input[filter-type="nationality"]{
+  display: none;
+}
+
+.character-icon-gender-tag[gender="female"],
+#gender-checkbox-female + label span{
+  background: pink;
+  color: var(--blue);
+  font-weight: bold;
+  position: relative;
+  top: -1px;
+}
+
+.character-icon-gender-tag[gender="male"],
+#gender-checkbox-male + label span{
+  background: #75D2EF;
+  color: var(--blue);
+  font-weight: bold;
+  position: relative;
+  top: -1px;
+}
+
+.case-presence-checkbox input + label{
+  background: #fff;
+  color: var(--blue);
+  padding: 6px 1px;
+  border-radius: 50%;
+  text-align: center;
+  font-weight: bold;
+}
+
+.present-in-checkbox-container label{
+  min-width: 29px;
+  text-align: center;
+  display: block;
+}
+
+.reset-filters{
+  background: var(--gold);
+  color: var(--blue);
+  font-family: inherit;
+  border: none;
+  transition: 0.3s;
+  font-size: 1rem;
+}
+
+.reset-filters:hover{
+  background: #fff;
+}
+
+
+.character-icon-gender-tag,
+.character-icon-nationality-tag{
+  width: 38px;
+  height: 26px;
+  display: block;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute !important;
+  bottom: 0;
+  top: unset !important;
+  pointer-events: none;
+  opacity: 0;
+  transition: 0.4s;
+}
+
+.character-icon-gender-tag span{
+  margin: 0;
+  padding: 0;
+  top: 0;
+}
+
+.character-icon-nationality-tag{
+  right: 0;
+}
+
+.character-icon:hover .character-icon-nationality-tag,
+.character-icon:hover .character-icon-gender-tag,
+.filter-form:hover ~ .character-icon .character-icon-nationality-tag,
+.filter-form:hover ~ .character-icon .character-icon-gender-tag{
+  opacity: 1;
+}

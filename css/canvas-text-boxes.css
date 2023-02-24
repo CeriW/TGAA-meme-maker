@@ -1,0 +1,44 @@
+
+/* Text boxes ----------------------------------------------------------------*/
+
+.text-overlay{
+  position: absolute;
+  top: 77.5%;
+  bottom: 10%;
+  right: 19%;
+  left: 19%;
+  color: #fff;
+  font-size: 114%;
+  font-family: Toplar, 'Libre Baskerville', Georgia, serif;
+  background: #0D1725;
+  border: none;
+  outline: none !important;
+  resize: none;
+  transition: color 0.2s;
+}
+
+#text{
+  background:  url('assets/game-elements/speech-box.png') center no-repeat;
+  background-size: contain;
+}
+
+
+@media (max-width: 799px){
+  .text-overlay{
+    font-size: 2.3vw;
+  }
+}
+
+@media (max-width: 625px){
+  .text-overlay{
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: unset;
+    padding: 5px 10px 20px 50px;
+    margin: 8px;
+    font-size: 19px;
+    display: flex;
+    align-items: center;
+  }
+}

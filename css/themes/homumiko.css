@@ -1,0 +1,38 @@
+body[theme="homumiko"]{
+  --blue: #302314;
+  --scrollbar: #241a0f;
+  --dark-accent: #241a0f;
+}
+
+body[theme="homumiko"]{
+  background-image: url('assets/misc/yujin-symbol.png'), url('assets/misc/herlock-symbol.png');
+  background-position: -200px calc(100% + 150px), calc(100% + 150px) -150px;
+  background-repeat: no-repeat, no-repeat;
+  background-attachment: fixed, fixed;
+}
+
+body[theme="homumiko"] #info-bar,
+body[theme="homumiko"] #about-button,
+body[theme="homumiko"] #share-buttons{
+  background: var(--dark-accent);
+}
+
+body[theme="homumiko"] #banner:after{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: -200px;
+  pointer-events: none;
+  background: url('assets/misc/banner-overlay-homumiko.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform-origin: right top;
+  
+  animation-name: bounceIn;
+  animation-duration: .75s;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-delay: 1.5s;
+}

@@ -1,0 +1,50 @@
+
+/* Shared bits -------------------------------------------------------------*/
+
+#canvas-grid-item,
+#canvas-grid-item > div > div,
+.canvas-container,
+.active-canvas,
+#character-selector-preview,
+#background-selector-preview,
+#pose-selector,
+.location-icon,
+.character-icon,
+.material-icons,
+.toggle-heading,
+#pose-heading,
+#download{
+  position: relative;
+}
+
+
+.canvas-container,
+canvas,
+div[class*="icon"]:not(.tb__icon),
+#pose-selector label,
+.toggle-heading,
+#pose-heading,
+#download,
+#add-panel,
+.delete-panel,
+.reset-filters{
+  cursor: pointer;
+}
+
+
+
+
+/* Bits to hide ------------------------------------------------------------- */
+#background,
+#character,
+#speech-box,
+#character-selector,
+#background-selector,
+#speech-tag,
+#credits,
+input[type="radio"],
+#character-selector-preview:not(.hidden) + #pose-heading,
+body[character-selected="false"] #pose-heading,
+body[character-selected="false"] #pose-selector{
+  display: none;
+}
