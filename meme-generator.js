@@ -617,7 +617,6 @@ function download(e) {
 // Simply takes a panel and toggles a 'hidden' attribute.
 function togglePanel(associate) {
   associate.classList.toggle("hidden");
-  console.log('hi!')
 }
 
 let filterButtons = document.querySelectorAll(".filter");
