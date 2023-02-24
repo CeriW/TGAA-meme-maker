@@ -535,7 +535,6 @@ function download(e) {
     var myFont = new FontFace("Toplar", 'url("assets/fonts/Toplar.woff")');
 
     // Render the text
-
     let textBoxText = allCanvases[i].querySelector("textarea").value;
 
     myFont.load().then(function (font) {
