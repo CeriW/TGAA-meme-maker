@@ -20,6 +20,7 @@ let currentCanvas = null;
 let backgroundImg;
 let characterImg;
 let tag;
+let characterOverlay;
 let speechbox = document.querySelector("#speech-box");
 let credits = document.querySelector("#credits");
 
@@ -156,9 +157,14 @@ function generateCanvas() {
     ? characterImg.cloneNode()
     : document.createElement("img");
   newCanvas.appendChild(characterImg);
-
+  
+  let newCharacterOverlay = document.createElement("img");
+  newCharacterOverlay.src = "assets/locations/prison-cell-bars.png";
+  newCanvas.appendChild(newCharacterOverlay);
+  
   tag = tag ? tag.cloneNode() : document.createElement("img");
-  newCanvas.appendChild(tag);
+  newCanvas.appendChild(tag)
+  
 
   newSpeechbox = document.createElement("img");
   newSpeechbox.src = "assets/game-elements/speech-box.png";
