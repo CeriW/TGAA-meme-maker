@@ -1,3 +1,15 @@
+#filter-toggle{
+  display: flex;
+  align-items: center;
+  background: #9E9150;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 0 10px;
+  font-size: 1em;
+  border: none;
+  z-index: 1;
+}
 
 
 .filter{
@@ -30,33 +42,38 @@ span[filter-type="all"]{
   padding: 5px;
 }
 
-.filter-form{
+#filter-form{
   display: flex;
   justify-content: space-between;
   padding: 5px;
   background: rgba(255,255,255,0.1);
   width: 100%;
   flex-wrap: wrap;
+  margin-top: -20px;
+}
+
+#filter-form.hidden{
+  display: none;
 }
 
 @media (max-width: 650px){
-  .filter-form{
+  #filter-form{
     display: none;
   }
 }
 
-.filter-form > *{
+#filter-form > *{
   padding: 5px 10px;
 }
 
-.filter-form > div > label{
+#filter-form > div > label{
   color: var(--gold);
   font-weight: bold;
   display: block;
   padding-bottom: 7px;
 }
 
-.filter-form > .gender-checkbox > label{
+#filter-form > .gender-checkbox > label{
   padding-bottom: 10px;
 }
 
@@ -166,6 +183,7 @@ input[filter-type="nationality"]{
   border: none;
   transition: 0.3s;
   font-size: 1rem;
+  align-self: center;
 }
 
 .reset-filters:hover{
@@ -204,7 +222,7 @@ input[filter-type="nationality"]{
 
 .character-icon:hover .character-icon-nationality-tag,
 .character-icon:hover .character-icon-gender-tag,
-.filter-form:hover ~ .character-icon .character-icon-nationality-tag,
-.filter-form:hover ~ .character-icon .character-icon-gender-tag{
+#filter-form:hover ~ .character-icon .character-icon-nationality-tag,
+#filter-form:hover ~ .character-icon .character-icon-gender-tag{
   opacity: 1;
 }

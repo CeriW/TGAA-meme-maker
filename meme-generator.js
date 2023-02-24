@@ -119,6 +119,11 @@ toggleHeadings.forEach(function (node) {
   });
 });
 
+togglePanel(document.querySelector('#filter-form'));
+document.querySelector('#filter-toggle').addEventListener('click', () => {
+  togglePanel(document.querySelector('#filter-form'))});
+
+
 // ---------------------------------------------------------------------------//
 
 function generateLocations() {
@@ -607,9 +612,11 @@ function download(e) {
   })
 }
 
+
 // Simply takes a panel and toggles a 'hidden' attribute.
 function togglePanel(associate) {
   associate.classList.toggle("hidden");
+  console.log('hi!')
 }
 
 let filterButtons = document.querySelectorAll(".filter");
@@ -637,10 +644,11 @@ filterButtons.forEach(function (filter) {
   });
 });
 
-document.querySelector(".filter-form").addEventListener("click", filterItems);
+
+document.querySelector("#filter-form").addEventListener("click", filterItems);
 
 function filterItems(e) {
-  let panel = e.target.closest(".filter-form");
+  let panel = e.target.closest("#filter-form");
 
   let chosenFilterNodes = panel.querySelectorAll('[checked="checked"]');
 
@@ -722,7 +730,7 @@ document
   .addEventListener("click", function (e) {
     e.stopPropagation();
     let checkboxes = e.target
-      .closest(".filter-form")
+      .closest("#filter-form")
       .querySelectorAll('input[type="checkbox"]');
 
     checkboxes.forEach(function (checkbox) {

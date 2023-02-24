@@ -37,6 +37,7 @@
 
 #character-selector-preview{
   max-height: 675px;
+  padding-top: 20px;
 }
 
 #pose-selector{

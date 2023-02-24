@@ -27,7 +27,8 @@ div[class*="icon"]:not(.tb__icon),
 #download,
 #add-panel,
 .delete-panel,
-.reset-filters{
+.reset-filters,
+#filter-toggle{
   cursor: pointer;
 }
 
