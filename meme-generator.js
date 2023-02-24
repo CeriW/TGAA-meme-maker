@@ -21,6 +21,8 @@ let backgroundImg;
 let characterImg;
 let tag;
 let characterOverlay;
+// let characterOverlayID = 'prison-cell-bars';
+let characterOverlayID = null;
 let speechbox = document.querySelector("#speech-box");
 let credits = document.querySelector("#credits");
 
@@ -129,7 +131,7 @@ function generateLocations() {
 }
 
 // Generates our canvas with the chosen backgrounds, characters and text
-function generatePanelArtwork(e) {
+function generatePanelArtwork() {
   // Set the background image
   let backgrounds = document.querySelectorAll(
     ".canvas-container img:first-child"
@@ -138,11 +140,10 @@ function generatePanelArtwork(e) {
     background.src = paths.location + backgroundSelector.value + ".jpg";
   });
 
-  console.log(characterOverlay)
-
+  
   // If a character has been purposely selected previously then set the character image
   if (characterSelected) {
-    characterOverlay.src = "/assets/locations/prison-cell-bars.png"
+    characterOverlay.src = `/assets/locations/${characterOverlayID}.png`;
     tag.src = paths.character + characterSelector.value + "/tag.png";
   }
 }
@@ -164,7 +165,7 @@ function generateCanvas() {
   
   characterOverlay = characterOverlay ? characterOverlay.cloneNode() : document.createElement("img");
   characterOverlay.id = "character-overlay";
-  characterOverlay.src = "assets/locations/prison-cell-bars.png";
+  characterOverlay.src = `/assets/locations/${characterOverlayID}.png`;
   newCanvas.appendChild(characterOverlay);
   
   tag = tag ? tag.cloneNode() : document.createElement("img");
@@ -337,6 +338,13 @@ function generateLocationInterface() {
     // have the new location
     icon.addEventListener("click", function (e) {
       backgroundSelector.value = e.target.getAttribute("value");
+
+      // characterOverlayID = locations.[backgroundSelector.value].characterOverlay;
+      characterOverlayID = locations.find((location) => location.id === backgroundSelector.value).characterOverlay;
+
+      console.log(characterOverlayID)
+      console.log(locations.find((location) => location.id === backgroundSelector.value))
+
       togglePanel(backgroundPreview);
       generatePanelArtwork();
 
