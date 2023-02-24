@@ -339,11 +339,7 @@ function generateLocationInterface() {
     icon.addEventListener("click", function (e) {
       backgroundSelector.value = e.target.getAttribute("value");
 
-      // characterOverlayID = locations.[backgroundSelector.value].characterOverlay;
-      characterOverlayID = locations.find((location) => location.id === backgroundSelector.value).characterOverlay;
-
-      console.log(characterOverlayID)
-      console.log(locations.find((location) => location.id === backgroundSelector.value))
+      characterOverlayID = locations.find((location) => location.id === backgroundSelector.value).characterOverlay ?? null;
 
       togglePanel(backgroundPreview);
       generatePanelArtwork();
