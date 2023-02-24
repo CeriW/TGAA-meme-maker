@@ -138,8 +138,11 @@ function generatePanelArtwork(e) {
     background.src = paths.location + backgroundSelector.value + ".jpg";
   });
 
+  console.log(characterOverlay)
+
   // If a character has been purposely selected previously then set the character image
   if (characterSelected) {
+    characterOverlay.src = "/assets/locations/prison-cell-bars.png"
     tag.src = paths.character + characterSelector.value + "/tag.png";
   }
 }
@@ -158,13 +161,14 @@ function generateCanvas() {
     : document.createElement("img");
   newCanvas.appendChild(characterImg);
   
-  let newCharacterOverlay = document.createElement("img");
-  newCharacterOverlay.src = "assets/locations/prison-cell-bars.png";
-  newCanvas.appendChild(newCharacterOverlay);
+  
+  characterOverlay = characterOverlay ? characterOverlay.cloneNode() : document.createElement("img");
+  characterOverlay.id = "character-overlay";
+  characterOverlay.src = "assets/locations/prison-cell-bars.png";
+  newCanvas.appendChild(characterOverlay);
   
   tag = tag ? tag.cloneNode() : document.createElement("img");
   newCanvas.appendChild(tag)
-  
 
   newSpeechbox = document.createElement("img");
   newSpeechbox.src = "assets/game-elements/speech-box.png";
@@ -227,7 +231,8 @@ function changeActiveCanvas(activeCanvas) {
   currentCanvas = activeCanvas;
   backgroundImg = activeCanvas.querySelector("img:nth-child(1)");
   characterImg = activeCanvas.querySelector("img:nth-child(2)");
-  tag = activeCanvas.querySelector("img:nth-child(3)");
+  characterOverlay = activeCanvas.querySelector("img:nth-child(3)")
+  tag = activeCanvas.querySelector("img:nth-child(4)");
 
   let allCanvases = document.querySelectorAll(".canvas-container");
   allCanvases.forEach(function (node) {
