@@ -1,0 +1,160 @@
+/* About button  -------------------------------------------------------------*/
+
+#about-button{
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 105;
+  cursor: pointer;
+  background: var(--blue);
+  border: 2px solid var(--gold);
+  border-top: none;
+  border-right: none;
+  color: #fff;
+  font-family: inherit;
+  font-size: initial;
+  padding: 5px 10px;
+}
+
+#about-button > div{
+  display: flex;
+  align-items: center;
+}
+
+#about-button .material-icons{
+  top: 0;
+}
+
+.show-about #about-button{
+  position: fixed;
+}
+
+[state="unopened"]{
+  display: none;
+}
+
+.show-about #about-button div[state="unopened"]{
+  display: none;
+}
+
+body:not(.show-about) #about-button div[state="opened"]{
+  display: none;
+}
+
+@media (max-width: 800px){
+  #about-button{
+    position: unset;
+  }
+
+  #about-button{
+    border: 2px solid var(--gold);
+  }
+}
+
+/* About panel top level -----------------------------------------------------*/
+
+#about{
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 102;
+  background: var(--blue);
+  padding: 30px;
+  transition: 0.3s;
+  opacity: 1;
+  overflow-y: scroll;
+  display: grid;
+  gap: 20px 100px;
+  grid-template-columns: 1fr 350px;
+}
+
+body.show-about{
+  height: 100vh;
+  overflow: hidden;
+}
+
+body:not(.show-about) #about{
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@media (max-width: 1100px){
+  #about{
+    display: block;
+  }
+}
+
+#about > div > div{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 35px 100px;
+}
+
+#about div > div > div{
+  flex-basis: 400px;
+  flex-grow: 1;
+}
+
+
+/* About components common styles --------------------------------------------*/
+
+#about h1,
+#about h2,
+#about h3,
+#about h4{
+  color: var(--gold);
+  margin: 50px 0 10px;
+}
+
+#about a{
+  color: var(--lightgold);
+}
+
+
+
+details{
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+details summary{
+  margin-bottom: 10px;
+}
+
+
+/* About me ------------------------------------------------------------------*/
+#about-me{
+  display: flex;
+  gap: 20px 40px;
+  align-items: flex-start;
+}
+
+#about-me img{
+  border-radius: 50%;
+  flex-basis: 150px;
+  margin-top: 20px;
+}
+
+@media (max-width: 600px){
+  #about-me{
+    flex-direction: column;
+  }
+}
+
+/* Change log ----------------------------------------------------------------*/
+
+#version-info{
+  margin-top: 60px;
+  color: rgba(255,255,255,0.15);
+}
+
+#change-log ul{
+  padding-inline-start: 20px;
+}
+
+#change-log li{
+  margin-bottom: 10px;
+}

@@ -1,0 +1,40 @@
+/* Headings ------------------------------------------------------------------*/
+
+.toggle-heading,
+#pose-heading,
+#spoiler-warning,
+#social-feed-heading,
+#download div{
+  background: linear-gradient(to bottom, #65592d, #9E9150);
+  color: #fff;
+  padding: 10px 10px 10px 20px;
+  text-decoration: none;
+  font-size: 1.2em;
+  transition: 0.4s;
+  display: block;
+  border: 2px solid var(--blue);
+  outline: 2px solid var(--gold);
+  text-shadow: -1px -1px 0 rgba(0,0,0,0.3), 1px -1px 0 rgba(0,0,0,0.3), -1px 1px 0 rgba(0,0,0,0.3), 1px 1px 0 rgba(0,0,0,0.3);
+}
+
+#pose-heading{
+  cursor: default;
+}
+
+.toggle-heading:hover,
+#download:hover{
+  color: var(--blue);
+  text-shadow: none;
+}
+
+.down-arrow{
+  float: right;
+}
+
+@media (max-width: 1000px){
+  .toggle-heading,
+  #pose-heading{
+    font-size: 1rem;
+    padding: 5px 20px;
+  }
+}

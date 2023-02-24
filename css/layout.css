@@ -1,0 +1,47 @@
+
+main{
+  display: grid; 
+  grid-template-columns: 800px auto; 
+  grid-template-rows: 1fr; 
+  grid-template-areas: 
+    "canvas options"; 
+  gap: 20px 30px; 
+  padding: 20px;
+}
+
+
+#canvas-grid-item {
+  grid-area: canvas;
+  min-height: 100px;
+}
+
+.sticky-canvas{
+  position: sticky;
+  top: 20px;
+}
+
+
+#options{
+  position: relative;
+}
+
+.options {
+  grid-area: options;
+}
+
+@media (max-width:1450px){
+  main{
+    padding: 20px;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto auto;
+    grid-template-areas:
+    "canvas" 
+    "options";
+  }
+
+  #canvas-grid-item{
+    max-width: 800px;
+    float: none;
+    margin: 0 auto;
+  }
+}

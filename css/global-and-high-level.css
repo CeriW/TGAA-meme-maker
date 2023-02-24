@@ -1,0 +1,68 @@
+@font-face {
+  font-family: Toplar;
+  src: url(assets/fonts/Toplar.woff);
+}
+
+html{
+  font-size: 18px;
+  scroll-behavior: smooth;
+}
+
+body{
+  background: var(--blue);
+  color: #fff;
+  font-family: Toplar, 'Libre Baskerville', Georgia, serif; /* Yes, I chose 'Libre Baskerville' on purpose. Congrats, you found an easter egg */
+  padding: 0 30px 100px;
+  margin: 0;
+  transition: background-color 1s;
+}
+
+@media (max-width: 600px){
+  body{
+    padding: 0 20px 20px;
+  }
+}
+
+@media (max-width:1450px){
+  body{
+    padding-bottom: 30px;
+  }
+}
+
+
+::marker{
+  color: var(--gold);
+}
+
+
+::placeholder{
+  color: rgba(255,255,255,0.5);
+  font-style: italic;
+}
+
+.material-icons{
+  top: 3px;
+  text-shadow: none;
+  padding-right: 10px;
+  font-size: 21px !important;
+  pointer-events: none;
+}
+
+.material-icons.md-17 { font-size: 17px !important; }
+
+
+
+/* Scrollbar styling ------------------- */
+
+/* width */
+::-webkit-scrollbar {width: 10px;}
+
+/* Track */
+::-webkit-scrollbar-track {background: var(--scrollbar); }
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {background: var(--gold);}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {background: #555;}
+

@@ -1,0 +1,20 @@
+
+
+header{
+  text-align: center;
+}
+
+
+#banner{
+  width: 520px;
+  max-width: 100%;
+  position: relative;
+  z-index: 3;
+  float: none;
+  margin: 0 auto;
+}
+
+#banner img{
+  max-width: 100%;
+  height: auto;
+}

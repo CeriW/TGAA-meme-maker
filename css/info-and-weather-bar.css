@@ -1,0 +1,161 @@
+
+/* Info bar ------------------------------------------------------------------*/
+
+#info-bar{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: var(--blue);
+  color: #fff;
+  border-top: 3px solid var(--gold);
+}
+
+#inspiration-bar{
+  background: linear-gradient(to bottom, #65592d, #9E9150);
+  padding: 4px 10px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+#inspiration-bar > span{
+  color: var(--blue);
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.quote-button{
+  background: var(--dark-accent);
+  color: #fff;
+  border: 1px solid #fff;
+  font-family: inherit;
+  font-size: inherit;
+  padding: 5px 40px;
+  cursor: pointer;
+  position: relative;
+  transition: 0.2s;
+  flex-grow: 1;
+}
+
+
+.button-bar{
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  gap: 5px;
+}
+
+@media (max-width: 1315px){
+  .button-bar{
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+  }
+}
+
+@media (max-width: 820px){
+  .button-bar{
+    width: 100%;
+  }
+}
+
+@media(max-width: 740px){
+  .button-bar{
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto auto;
+  }
+}
+
+@media (max-width: 800px){
+  #info-bar{
+    position: initial;
+    border: none;
+    margin: 0 20px;
+  }
+
+  #inspiration-bar{
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+
+  .quote-button{
+    flex-basis: 100%;
+  }
+
+  #weather-bar{
+    display: initial;
+    padding-top: 20px;
+  }
+
+  #weather-bar > div{
+    padding: 10px 0;
+  }
+
+  #weather-bar > div:not(:first-child){
+    border-top: 1px solid var(--gold);
+    justify-content: flex-start;
+  }
+
+
+  #inspiration-bar > span{
+    min-width: initial;
+    padding-top: 5px;
+  }
+
+}
+
+
+
+
+
+
+/* Weather bar -------------------------------------------------------------- */
+
+#weather-bar{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+
+#weather-bar > div{
+  display: grid;
+  grid-template:
+    "flag details icon" min-content
+    / 32px max-content 50px;
+    gap: 0 25px;
+    align-items: center;
+    padding: 0 10px;
+    flex-shrink: 0;
+    flex-grow: 1;
+}
+
+#weather-bar > div:last-child{
+  justify-content: flex-end;
+}
+
+.weather-bar-time{
+  grid-area: time;
+  text-align: center;
+  margin-top: -10px;
+}
+
+.weather-bar-flag{
+  grid-area: flag;
+}
+
+.weather-bar-details{
+  grid-area: details;
+  white-space: nowrap;
+}
+
+.weather-bar-details > span{
+  margin-right: 10px;
+  white-space: nowrap;
+}
+
+
+
+

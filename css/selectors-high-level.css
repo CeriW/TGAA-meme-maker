@@ -1,0 +1,106 @@
+
+/* Selector styling ----------------------------------------------------------*/
+
+#background-selector-preview,
+#pose-selector,
+#character-selector-preview{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  max-height: 1000px;
+  transition: 0.6s;
+}
+
+#character-selector-preview:not(.hidden) ~ #pose-selector{
+  max-height: 0;
+  overflow: hidden;
+  border: none;
+  margin-bottom: 0;
+}
+
+#character-selector-preview,
+#background-selector-preview,
+#pose-selector{
+  border: 2px solid rgba(255,255,255,0.2);
+  margin-bottom: 20px;
+  max-height: 485px;
+  overflow-y: scroll;
+  width: calc(100% + 2px);
+  left: -2px;
+}
+
+.hidden{
+  max-height: 0 !important;
+  overflow: hidden;
+  border: none !important;
+}
+
+#character-selector-preview{
+  max-height: 675px;
+}
+
+#pose-selector{
+  max-height: calc(100vh - 200px);
+}
+
+.text-colour-selector{
+  position: absolute;
+  top: calc(77.5% - 5px);
+  right: calc(19% - 60px);
+}
+
+@media (max-width: 625px){
+  .text-colour-selector{
+    right: 20px;
+    top: calc(77.5% - 90px);
+  }
+}
+
+@media (max-width: 500px){
+  .text-colour-selector{
+    top: 20px;
+  }
+}
+
+/* .text-colour-selector input[type="radio"]{
+  display: block;
+} */
+
+.text-colour-selector label span{
+  color: transparent;
+  position: relative;
+  top: 1px;
+  pointer-events: none;
+}
+
+.text-colour-selector input:checked + label span{
+  color: var(--blue);
+}
+
+.text-colour-selector label{
+  background: #fff;
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  display: block;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+
+.text-colour-selector label[for^="thought"]{
+  background: var(--thought);
+  margin-top: 10px;
+}
+
+.text-overlay[type="thought"]{
+  color: var(--thought);
+}
+
+@media (max-width: 1000px){
+
+  #character-selector-preview,
+  #background-selector-preview,
+  #pose-selector{
+    max-height: 450px;
+  }
+}
