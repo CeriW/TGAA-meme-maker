@@ -23,6 +23,7 @@ main{
 
 #options{
   position: relative;
+  min-height: calc(100vh - 150px);
 }
 
 .options {
@@ -43,5 +44,9 @@ main{
     max-width: 800px;
     float: none;
     margin: 0 auto;
+  }
+
+  #options{
+    min-height: unset;
   }
 }
