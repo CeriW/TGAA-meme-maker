@@ -43,7 +43,7 @@ div[class*="icon"]:not(.tb__icon),
 #background-selector,
 #speech-tag,
 #credits,
-input[type="radio"],
+input[type="radio"]:not(.name-selector-input),
 #character-selector-preview:not(.hidden) + #pose-heading,
 body[character-selected="false"] #pose-heading,
 body[character-selected="false"] #pose-selector{

@@ -433,10 +433,22 @@ function generatePoses(e) {
   console.log(chosenCharacter);
 
   console.log(characters.find((character) => character.id === chosenCharacter))
-  const alternameNames = characters.find((character) => character.id === chosenCharacter).alternameNames ?? null;
+  const alternameNames = characters.find((character) => character.id === chosenCharacter).alternameNames ?? [];
 
   console.log(alternameNames)
 
+  const namePanel = document.createElement('form');
+  alternameNames.forEach((altName) => {
+    const input = document.createElement('span');
+
+    input.innerHTML = `
+      <input type="radio" id="${altName}" name="${alternameNames[0]}" value="${altName}" class="name-selector-input">
+      <label for="${altName}">${altName}</label><br></br>
+    `
+  namePanel.appendChild(input)
+  })
+
+  document.querySelector('#canvas-grid-item').appendChild(namePanel);
   
   
   // characterTheme = characters.find((character) => character.id === chosenCharacter)
