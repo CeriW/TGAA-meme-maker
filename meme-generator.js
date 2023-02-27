@@ -27,6 +27,8 @@ let characterOverlayID = null;
 let speechbox = document.querySelector("#speech-box");
 let credits = document.querySelector("#credits");
 
+let alternateNamesInUse = {};
+
 // Interface elements
 let backgroundSelector = document.querySelector("#background-selector");
 let backgroundPreview = document.querySelector("#background-selector-preview");
@@ -430,14 +432,17 @@ function generatePoses(e) {
   // Reset the character if we're choosing a new one
   characterImg.src = paths.character + chosenCharacter + "/1.png";
   
-  console.log(chosenCharacter);
+  // console.log(chosenCharacter);
 
-  console.log(characters.find((character) => character.id === chosenCharacter))
+  // console.log(characters.find((character) => character.id === chosenCharacter))
   const alternameNames = characters.find((character) => character.id === chosenCharacter).alternameNames ?? [];
 
-  console.log(alternameNames)
+  // console.log(alternameNames)
+  console.log(alternateNamesInUse)
 
   const namePanel = document.createElement('form');
+  namePanel.classList = "name-selector-form";
+  namePanel.setAttribute('for', alternameNames[0])
   alternameNames.forEach((altName) => {
     const input = document.createElement('span');
 
@@ -445,11 +450,18 @@ function generatePoses(e) {
       <input type="radio" id="${altName}" name="${alternameNames[0]}" value="${altName}" class="name-selector-input">
       <label for="${altName}">${altName}</label><br></br>
     `
-  namePanel.appendChild(input)
+
+    namePanel.appendChild(input)
+    input.addEventListener('click', (e) => {
+      // e.stopPropagation();
+      // console.log(input.querySelector('input').value);
+      alternateNamesInUse[alternameNames[0]] = input.querySelector('input').value;
+      console.log(alternateNamesInUse)
+    })
   })
 
   document.querySelector('#canvas-grid-item').appendChild(namePanel);
-  
+  document.querySelector('.name-selector-input').checked = true;
   
   // characterTheme = characters.find((character) => character.id === chosenCharacter)
   // document.querySelector('#theme-music').innerHTML = 
