@@ -495,8 +495,8 @@ function generatePoses(e) {
   // currentCharacter = characters.find((character) => character.id === chosenCharacter);
   currentCharacter = getCharacterFromID(chosenCharacter)
   console.log(currentCharacter)
-  if (currentCharacter?.alternateNames){
-    alternateNamesInUse[currentCharacter.alternateNames[0]] = alternateNamesInUse[chosenCharacter] ?? 'default';
+  if (currentCharacter?.alternateNames && !alternateNamesInUse[currentCharacter.alternateNames[0]]){
+    alternateNamesInUse[currentCharacter.alternateNames[0]] = currentCharacter.alternateNames[0] ?? 'default';
   }
   
   // SPOTIFY
