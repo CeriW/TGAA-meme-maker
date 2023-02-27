@@ -28,6 +28,7 @@ let speechbox = document.querySelector("#speech-box");
 let credits = document.querySelector("#credits");
 
 let alternateNamesInUse = {};
+let currentCharacter = {};
 
 // Interface elements
 let backgroundSelector = document.querySelector("#background-selector");
@@ -152,7 +153,16 @@ function generatePanelArtwork() {
   // If a character has been purposely selected previously then set the character image
   if (characterSelected) {
     characterOverlay.src = `/assets/locations/${characterOverlayID}.png`;
-    tag.src = paths.character + characterSelector.value + "/tag.png";
+
+    // if (alternateNamesInUse[characterSelector.value])
+    console.log(characterSelector.value)
+
+    tagPath = alternateNamesInUse[characterSelector.value] ? "/tag-" + alternateNamesInUse[characterSelector.value] + ".png" : "/tag.png";
+
+    tag.src = paths.character + characterSelector.value + tagPath;
+    // console.log(characterSelector.value)
+
+
   }
 }
 
@@ -435,6 +445,9 @@ function generatePoses(e) {
   // console.log(chosenCharacter);
 
   // console.log(characters.find((character) => character.id === chosenCharacter))
+
+  currentCharacter = characters.find((character) => character.id === chosenCharacter);
+
   const alternameNames = characters.find((character) => character.id === chosenCharacter).alternameNames ?? [];
 
   // console.log(alternameNames)
@@ -449,7 +462,7 @@ function generatePoses(e) {
   // Generate a list of radio buttons for the alternate names
   const namePanel = document.createElement('form');
   namePanel.classList = "name-selector-form";
-  namePanel.setAttribute('for', alternameNames[0])
+  namePanel.setAttribute('for', currentCharacter.id)
   alternameNames.forEach((altName) => {
     const input = document.createElement('span');
 
@@ -459,10 +472,10 @@ function generatePoses(e) {
     `
 
     namePanel.appendChild(input)
-    input.addEventListener('click', (e) => {
+    input.addEventListener('click', () => {
       // e.stopPropagation();
       // console.log(input.querySelector('input').value);
-      alternateNamesInUse[alternameNames[0]] = input.querySelector('input').value;
+      alternateNamesInUse[currentCharacter.id] = input.querySelector('input').value;
       console.log(alternateNamesInUse)
     })
   })

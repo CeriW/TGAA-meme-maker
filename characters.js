@@ -20,7 +20,8 @@ let characters = [
   appearsin: [true,true,true,true,true,false,true,true,true,true],
   images: 8,
   theme: 'https://open.spotify.com/embed/track/6t74To2T8PUd6k1dbSu10D?utm_source=generator',
-  tags: []
+  tags: [],
+  alternameNames: ['Ryunosuke', 'Runo']
 },
 
 {
