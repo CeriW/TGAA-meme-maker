@@ -187,6 +187,7 @@ function generateCanvas() {
   newCanvas.appendChild(characterOverlay);
   
   tag = tag ? tag.cloneNode() : document.createElement("img");
+  tag.classList.add('tag-image')
   newCanvas.appendChild(tag)
 
   newSpeechbox = document.createElement("img");
@@ -473,29 +474,24 @@ function generatePoses(e) {
 
     namePanel.appendChild(input)
     input.addEventListener('click', () => {
-      // e.stopPropagation();
-      // console.log(input.querySelector('input').value);
       alternateNamesInUse[currentCharacter.id] = input.querySelector('input').value;
-      // console.log(alternateNamesInUse)
-      // console.log(tag)
+
 
 
       // Determine what the tag should be
       // If we have a value for the name, AND the name isn't the default one
       if (alternateNamesInUse[characterSelector.value] && alternateNamesInUse[characterSelector.value] !== alternateNames[0]){
         tag.src = paths.character + currentCharacter.id + "/tag-" + alternateNamesInUse[characterSelector.value] + ".png"
+        tag.setAttribute('character', currentCharacter.id)
+        document.querySelectorAll('.tag-image[character = "' + currentCharacter.id + '"]').forEach((image) => {
+          image.src = paths.character + currentCharacter.id + "/tag-" + alternateNamesInUse[characterSelector.value] + ".png"
+        })
       } else{
-        tag.src = paths.character + currentCharacter.id + "/tag.png";
-      }
+        document.querySelectorAll('.tag-image[character = "' + currentCharacter.id + '"]').forEach((image) => {
+          image.src = paths.character + currentCharacter.id + "/tag.png";
+        })
+    }
 
-
-      console.log(alternateNamesInUse[characterSelector.value])
-      console.log(alternateNames[0])
-      console.log(alternateNamesInUse[characterSelector.value] !== alternateNames[0])
-
-
-      // tagPath = alternateNamesInUse[characterSelector.value] ? paths.character + currentCharacter.id + "/tag-" + alternateNamesInUse[characterSelector.value] + ".png" : "/tag.png";
-      // tag.src = tagPath
     })
   })
 
