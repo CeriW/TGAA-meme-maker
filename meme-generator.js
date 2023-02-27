@@ -177,6 +177,10 @@ function generatePanelArtwork() {
   if (characterSelected) {
     characterOverlay.src = `/assets/locations/${characterOverlayID}.png`;
 
+    if (alternateNamesInUse[characterSelector.value]){
+      nameSelector2();
+    }
+
     // // if (alternateNamesInUse[characterSelector.value])
     // console.log(characterSelector.value)
     // tag.setAttribute('character', currentCharacter.id)
@@ -186,6 +190,7 @@ function generatePanelArtwork() {
     // tag.src = paths.character + characterSelector.value + tagPath;
     // console.log(characterSelector.value)
     tag.setAttribute('character', characterSelector.value)
+    // alternateNamesInUse[characterSelector.value] = 'Holmes' // TODO
     propagateAlternateNames()
   }
 }
@@ -193,10 +198,13 @@ function generatePanelArtwork() {
 function propagateAlternateNames() {
   let tagImages = document.querySelectorAll('.tag-image');
   tagImages.forEach((image) => {
+    console.log(image)
     // image.src = `${paths.character + image.getAttribute('character')}/tag.png`
-
-    tagPath = alternateNamesInUse[characterSelector.value] ? "/tag-" + alternateNamesInUse[characterSelector.value] + ".png" : "/tag.png";
-    image.src = paths.character + characterSelector.value + tagPath;
+    // console.log(image.getAttribute('character'))
+    // tagPath = alternateNamesInUse[image.getAttribute('character')] ? "/tag-" + alternateNamesInUse[image.getAttribute('character')] + ".png" : "/tag.png";
+    tagPath = alternateNamesInUse[image.getAttribute('character')] ? "/tag-" + alternateNamesInUse[image.getAttribute('character')] + '.png' : "/tag-default.png"
+    // image.src = paths.character + characterSelector.value + tagPath;
+    image.src = paths.character + image.getAttribute('character') + tagPath;
   })
 }
 
@@ -484,8 +492,9 @@ function generatePoses(e) {
   // console.log(characters.find((character) => character.id === chosenCharacter))
 
   currentCharacter = characters.find((character) => character.id === chosenCharacter);
-
-
+  if (currentCharacter?.alternateNames){
+    alternateNamesInUse[chosenCharacter] = alternateNamesInUse[chosenCharacter] ?? 'default';
+  }
   
   // characterTheme = characters.find((character) => character.id === chosenCharacter)
   // document.querySelector('#theme-music').innerHTML = 
@@ -1077,7 +1086,14 @@ function pasteQuote(type){
 
 
 function nameSelector2 () {
-  modalContent.appendChild(generateCharacterNameListInterface('sholmes-herlock-default'))
+  // modalContent.appendChild(generateCharacterNameListInterface('sholmes-herlock-default'))
+  modalContent.innerHTML = '';
+  
+  for (const [key, value] of Object.entries(alternateNamesInUse)) {
+    console.log(`${key}: ${value}`);
+    modalContent.appendChild(generateCharacterNameListInterface(key))
+  }
+
 }
 
 function generateCharacterNameListInterface (characterID) {
@@ -1095,6 +1111,11 @@ function generateCharacterNameListInterface (characterID) {
       <input type="radio" id="${altName}" name="${alternateNames[0]}" value="${altName}" class="name-selector-input">
       <label for="${altName}">${altName}</label><br></br>
     `
+
+    input.addEventListener('click', () => {
+      alternateNamesInUse[characterID] = altName;
+      propagateAlternateNames();
+    })
 
     namePanel.appendChild(input)
   })
@@ -1131,6 +1152,9 @@ function nameSelector(){
 
       namePanel.appendChild(input)
       input.addEventListener('click', () => {
+        
+        // let desiredTag = 
+        
         alternateNamesInUse[currentCharacter.id] = input.querySelector('input').value;
 
 
