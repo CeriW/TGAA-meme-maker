@@ -439,7 +439,14 @@ function generatePoses(e) {
 
   // console.log(alternameNames)
   console.log(alternateNamesInUse)
+  
+  
+  if (document.querySelector('#canvas-grid-item form')){
+    document.querySelector('#canvas-grid-item form').remove();
+  }
 
+
+  // Generate a list of radio buttons for the alternate names
   const namePanel = document.createElement('form');
   namePanel.classList = "name-selector-form";
   namePanel.setAttribute('for', alternameNames[0])
@@ -461,7 +468,13 @@ function generatePoses(e) {
   })
 
   document.querySelector('#canvas-grid-item').appendChild(namePanel);
-  document.querySelector('.name-selector-input').checked = true;
+
+  // Make the first one checked
+
+  const firstInput = document.querySelector('.name-selector-input')
+  if (firstInput){
+   firstInput.checked = true;
+  }
   
   // characterTheme = characters.find((character) => character.id === chosenCharacter)
   // document.querySelector('#theme-music').innerHTML = 
