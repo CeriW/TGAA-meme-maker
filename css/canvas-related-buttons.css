@@ -92,3 +92,7 @@
   align-items: center;
   gap: 10px;
 }
+
+#edit-names-toggle.hidden{
+  padding: 0;
+}

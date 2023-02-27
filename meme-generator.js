@@ -178,6 +178,10 @@ function generatePanelArtwork() {
     characterOverlay.src = `/assets/locations/${characterOverlayID}.png`;
 
     currentCharacter = getCharacterFromID(characterSelector.value)
+    if (Object.keys(alternateNamesInUse).length > 0){
+      document.querySelector('#edit-names-toggle').classList.remove('hidden')
+    }
+
     if (currentCharacter?.alternateNames){
       nameSelector2();
     }
@@ -264,6 +268,8 @@ function generateCanvas() {
       e.target.parentNode.previousElementSibling.setAttribute('type', e.target.value)   // previousElementSibling should be the textarea
     }
   })
+
+  togglePanel(document.querySelector('#edit-names-toggle'));
 
 
   // Generate the delete button and have it run removeCanvas on click.
@@ -487,14 +493,8 @@ function generatePoses(e) {
 
   // Reset the character if we're choosing a new one
   characterImg.src = paths.character + chosenCharacter + "/1.png";
-  
-  // console.log(chosenCharacter);
 
-  // console.log(characters.find((character) => character.id === chosenCharacter))
-
-  // currentCharacter = characters.find((character) => character.id === chosenCharacter);
   currentCharacter = getCharacterFromID(chosenCharacter)
-  console.log(currentCharacter)
   if (currentCharacter?.alternateNames && !alternateNamesInUse[currentCharacter.alternateNames[0]]){
     alternateNamesInUse[currentCharacter.alternateNames[0]] = currentCharacter.alternateNames[0] ?? 'default';
   }

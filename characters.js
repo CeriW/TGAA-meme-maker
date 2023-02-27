@@ -223,7 +223,8 @@ let characters = [
   appearsin: [false,false,true,true,true,false,true,true,true,true],
   images: 1,
   theme: 'https://open.spotify.com/embed/track/4g9GzmDyca2VZg7j5kx6AT?utm_source=generator',
-  tags: []
+  tags: [],
+  alternateNames: ['Stronghart', 'Vortex']
 },
 
 {
