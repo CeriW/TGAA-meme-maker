@@ -133,9 +133,18 @@ document.querySelector('#filter-toggle').addEventListener('click', () => {
   togglePanel(document.querySelector('#filter-form'))});
 
 
-document.querySelectorAll('#modal .material-symbols-sharp, #edit-names-toggle').forEach((button) => {
+document.querySelectorAll('#modal .material-symbols-sharp').forEach((button) => {
   button.addEventListener('click', () => {
     togglePanel(document.querySelector('#modal'))
+  })
+})
+
+
+document.querySelectorAll('#edit-names-toggle').forEach((button) => {
+  button.addEventListener('click', () => {
+    togglePanel(document.querySelector('#modal'));
+    // generateCharacterNameListInterface()
+    nameSelector2();
   })
 })
 
@@ -1067,6 +1076,31 @@ function pasteQuote(type){
 
 
 
+function nameSelector2 () {
+  modalContent.appendChild(generateCharacterNameListInterface('sholmes-herlock-default'))
+}
+
+function generateCharacterNameListInterface (characterID) {
+
+  const alternateNames = characters.find((character) => character.id === characterID).alternateNames ?? [];
+
+
+  const namePanel = document.createElement('form');
+  namePanel.classList = "name-selector-form";
+  namePanel.setAttribute('for', currentCharacter.id)
+  alternateNames.forEach((altName) => {
+    const input = document.createElement('span');
+
+    input.innerHTML = `
+      <input type="radio" id="${altName}" name="${alternateNames[0]}" value="${altName}" class="name-selector-input">
+      <label for="${altName}">${altName}</label><br></br>
+    `
+
+    namePanel.appendChild(input)
+  })
+
+  return namePanel;
+}
 
 
 function nameSelector(){
