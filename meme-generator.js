@@ -33,7 +33,7 @@ let currentCharacter = {};
 // Interface elements
 let backgroundSelector = document.querySelector("#background-selector");
 let backgroundPreview = document.querySelector("#background-selector-preview");
-let characterSelector = document.querySelector("#character-selector");
+let characterSelector = document.querySelector("#character-selector"); // an invisible select element that stores what character we've selected
 let characterPreview = document.querySelector("#character-selector-preview");
 let poseSelector = document.querySelector("#pose-selector");
 let downloadButton = document.querySelector("#download");
@@ -51,6 +51,10 @@ let paths = {
   character: "assets/characters/",
   location: "assets/locations/",
 };
+
+// alternateNamesInUse = {
+//   "sholmes-herlock-default": "Holmes"
+// }
 
 // A very long list of characters and locations are pulled in from characters.js and locations.js
 
@@ -164,16 +168,27 @@ function generatePanelArtwork() {
   if (characterSelected) {
     characterOverlay.src = `/assets/locations/${characterOverlayID}.png`;
 
-    // if (alternateNamesInUse[characterSelector.value])
-    console.log(characterSelector.value)
+    // // if (alternateNamesInUse[characterSelector.value])
+    // console.log(characterSelector.value)
+    // tag.setAttribute('character', currentCharacter.id)
+
+    // tagPath = alternateNamesInUse[characterSelector.value] ? "/tag-" + alternateNamesInUse[characterSelector.value] + ".png" : "/tag.png";
+
+    // tag.src = paths.character + characterSelector.value + tagPath;
+    // console.log(characterSelector.value)
+    tag.setAttribute('character', characterSelector.value)
+    propagateAlternateNames()
+  }
+}
+
+function propagateAlternateNames() {
+  let tagImages = document.querySelectorAll('.tag-image');
+  tagImages.forEach((image) => {
+    // image.src = `${paths.character + image.getAttribute('character')}/tag.png`
 
     tagPath = alternateNamesInUse[characterSelector.value] ? "/tag-" + alternateNamesInUse[characterSelector.value] + ".png" : "/tag.png";
-
-    tag.src = paths.character + characterSelector.value + tagPath;
-    // console.log(characterSelector.value)
-
-
-  }
+    image.src = paths.character + characterSelector.value + tagPath;
+  })
 }
 
 // Creates a new canvas for us, including delete button and event listeners.
@@ -347,6 +362,8 @@ function generateCharacterInterface() {
       // Set the value on the invisible dropdown
       characterSelector.value = e.target.getAttribute("value");
 
+
+
       // Show the character preview panel, and fill it with the poses for the chosen character.
       togglePanel(characterPreview);
       generatePoses();
@@ -459,60 +476,7 @@ function generatePoses(e) {
 
   currentCharacter = characters.find((character) => character.id === chosenCharacter);
 
-  const alternateNames = characters.find((character) => character.id === chosenCharacter).alternateNames ?? [];
 
-  // console.log(alternateNames)
-  console.log(alternateNamesInUse)
-  
-  
-  if (alternateNames.length > 0){
-
-
-
-    // Generate a list of radio buttons for the alternate names
-    const namePanel = document.createElement('form');
-    namePanel.classList = "name-selector-form";
-    namePanel.setAttribute('for', currentCharacter.id)
-    alternateNames.forEach((altName) => {
-      const input = document.createElement('span');
-
-      input.innerHTML = `
-        <input type="radio" id="${altName}" name="${alternateNames[0]}" value="${altName}" class="name-selector-input">
-        <label for="${altName}">${altName}</label><br></br>
-      `
-
-      namePanel.appendChild(input)
-      input.addEventListener('click', () => {
-        alternateNamesInUse[currentCharacter.id] = input.querySelector('input').value;
-
-
-
-        // Determine what the tag should be
-        // If we have a value for the name, AND the name isn't the default one
-        if (alternateNamesInUse[characterSelector.value] && alternateNamesInUse[characterSelector.value] !== alternateNames[0]){
-          tag.src = paths.character + currentCharacter.id + "/tag-" + alternateNamesInUse[characterSelector.value] + ".png"
-          tag.setAttribute('character', currentCharacter.id)
-          document.querySelectorAll('.tag-image[character = "' + currentCharacter.id + '"]').forEach((image) => {
-            image.src = paths.character + currentCharacter.id + "/tag-" + alternateNamesInUse[characterSelector.value] + ".png"
-          })
-        } else{
-          document.querySelectorAll('.tag-image[character = "' + currentCharacter.id + '"]').forEach((image) => {
-            image.src = paths.character + currentCharacter.id + "/tag.png";
-          })
-      }
-
-      })
-    })
-
-    modalContent.appendChild(namePanel);
-
-    // Make the first one checked
-
-    const firstInput = document.querySelector('.name-selector-input')
-    if (firstInput){
-    firstInput.checked = true;
-    }
-  }
   
   // characterTheme = characters.find((character) => character.id === chosenCharacter)
   // document.querySelector('#theme-music').innerHTML = 
@@ -1096,3 +1060,71 @@ function pasteQuote(type){
   })
 })
 
+
+
+
+
+
+
+
+
+
+function nameSelector(){
+
+
+  
+  const alternateNames = characters.find((character) => character.id === chosenCharacter).alternateNames ?? [];
+
+  // console.log(alternateNames)
+  console.log(alternateNamesInUse)
+  
+  
+  if (alternateNames.length > 0){
+
+
+
+    // Generate a list of radio buttons for the alternate names
+    const namePanel = document.createElement('form');
+    namePanel.classList = "name-selector-form";
+    namePanel.setAttribute('for', currentCharacter.id)
+    alternateNames.forEach((altName) => {
+      const input = document.createElement('span');
+
+      input.innerHTML = `
+        <input type="radio" id="${altName}" name="${alternateNames[0]}" value="${altName}" class="name-selector-input">
+        <label for="${altName}">${altName}</label><br></br>
+      `
+
+      namePanel.appendChild(input)
+      input.addEventListener('click', () => {
+        alternateNamesInUse[currentCharacter.id] = input.querySelector('input').value;
+
+
+
+        // Determine what the tag should be
+        // If we have a value for the name, AND the name isn't the default one
+        if (alternateNamesInUse[characterSelector.value] && alternateNamesInUse[characterSelector.value] !== alternateNames[0]){
+          tag.src = paths.character + currentCharacter.id + "/tag-" + alternateNamesInUse[characterSelector.value] + ".png"
+          tag.setAttribute('character', currentCharacter.id)
+          document.querySelectorAll('.tag-image[character = "' + currentCharacter.id + '"]').forEach((image) => {
+            image.src = paths.character + currentCharacter.id + "/tag-" + alternateNamesInUse[characterSelector.value] + ".png"
+          })
+        } else{
+          document.querySelectorAll('.tag-image[character = "' + currentCharacter.id + '"]').forEach((image) => {
+            image.src = paths.character + currentCharacter.id + "/tag.png";
+          })
+      }
+
+      })
+    })
+
+    modalContent.appendChild(namePanel);
+
+    // Make the first one checked
+
+    const firstInput = document.querySelector('.name-selector-input')
+    if (firstInput){
+    firstInput.checked = true;
+    }
+  }
+}
