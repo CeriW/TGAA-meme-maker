@@ -448,9 +448,9 @@ function generatePoses(e) {
 
   currentCharacter = characters.find((character) => character.id === chosenCharacter);
 
-  const alternameNames = characters.find((character) => character.id === chosenCharacter).alternameNames ?? [];
+  const alternateNames = characters.find((character) => character.id === chosenCharacter).alternateNames ?? [];
 
-  // console.log(alternameNames)
+  // console.log(alternateNames)
   console.log(alternateNamesInUse)
   
   
@@ -463,11 +463,11 @@ function generatePoses(e) {
   const namePanel = document.createElement('form');
   namePanel.classList = "name-selector-form";
   namePanel.setAttribute('for', currentCharacter.id)
-  alternameNames.forEach((altName) => {
+  alternateNames.forEach((altName) => {
     const input = document.createElement('span');
 
     input.innerHTML = `
-      <input type="radio" id="${altName}" name="${alternameNames[0]}" value="${altName}" class="name-selector-input">
+      <input type="radio" id="${altName}" name="${alternateNames[0]}" value="${altName}" class="name-selector-input">
       <label for="${altName}">${altName}</label><br></br>
     `
 
@@ -476,10 +476,26 @@ function generatePoses(e) {
       // e.stopPropagation();
       // console.log(input.querySelector('input').value);
       alternateNamesInUse[currentCharacter.id] = input.querySelector('input').value;
-      console.log(alternateNamesInUse)
-      console.log(tag)
-      tagPath = alternateNamesInUse[characterSelector.value] ? paths.character + currentCharacter.id + "/tag-" + alternateNamesInUse[characterSelector.value] + ".png" : "/tag.png";
-      tag.src = tagPath
+      // console.log(alternateNamesInUse)
+      // console.log(tag)
+
+
+      // Determine what the tag should be
+      // If we have a value for the name, AND the name isn't the default one
+      if (alternateNamesInUse[characterSelector.value] && alternateNamesInUse[characterSelector.value] !== alternateNames[0]){
+        tag.src = paths.character + currentCharacter.id + "/tag-" + alternateNamesInUse[characterSelector.value] + ".png"
+      } else{
+        tag.src = paths.character + currentCharacter.id + "/tag.png";
+      }
+
+
+      console.log(alternateNamesInUse[characterSelector.value])
+      console.log(alternateNames[0])
+      console.log(alternateNamesInUse[characterSelector.value] !== alternateNames[0])
+
+
+      // tagPath = alternateNamesInUse[characterSelector.value] ? paths.character + currentCharacter.id + "/tag-" + alternateNamesInUse[characterSelector.value] + ".png" : "/tag.png";
+      // tag.src = tagPath
     })
   })
 

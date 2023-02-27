@@ -21,7 +21,7 @@ let characters = [
   images: 8,
   theme: 'https://open.spotify.com/embed/track/6t74To2T8PUd6k1dbSu10D?utm_source=generator',
   tags: [],
-  alternameNames: ['Ryunosuke', 'Runo']
+  alternateNames: ['Ryunosuke', 'Runo']
 },
 
 {
@@ -34,7 +34,7 @@ let characters = [
   variant: 'default outfit',
   theme: 'https://open.spotify.com/embed/track/1QUX7xOPs80O5tiQb3MPqd?utm_source=generator',
   tags: ['homumiko'],
-  alternameNames: ['Sholmes', 'Holmes']
+  alternateNames: ['Sholmes', 'Holmes']
 },
 {
   name: 'Herlock Sholmes',
