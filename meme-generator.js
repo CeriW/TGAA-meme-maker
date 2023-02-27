@@ -177,34 +177,35 @@ function generatePanelArtwork() {
   if (characterSelected) {
     characterOverlay.src = `/assets/locations/${characterOverlayID}.png`;
 
-    if (alternateNamesInUse[characterSelector.value]){
+    currentCharacter = getCharacterFromID(characterSelector.value)
+    if (currentCharacter?.alternateNames){
       nameSelector2();
     }
 
-    // // if (alternateNamesInUse[characterSelector.value])
-    // console.log(characterSelector.value)
-    // tag.setAttribute('character', currentCharacter.id)
-
-    // tagPath = alternateNamesInUse[characterSelector.value] ? "/tag-" + alternateNamesInUse[characterSelector.value] + ".png" : "/tag.png";
-
-    // tag.src = paths.character + characterSelector.value + tagPath;
-    // console.log(characterSelector.value)
-    tag.setAttribute('character', characterSelector.value)
-    // alternateNamesInUse[characterSelector.value] = 'Holmes' // TODO
+    if (currentCharacter.alternateNames){
+      tag.setAttribute('character', currentCharacter.alternateNames[0])
+    } else {
+      tag.setAttribute('character', currentCharacter.id)
+    }
+    // tag.setAttribute('character', currentCharacter?.alternateNames[0] ?? currentCharacter.id)
     propagateAlternateNames()
   }
+}
+
+function getCharacterFromID(characterID){
+  return characters.find((character) => character.id === characterID)
 }
 
 function propagateAlternateNames() {
   let tagImages = document.querySelectorAll('.tag-image');
   tagImages.forEach((image) => {
     console.log(image)
-    // image.src = `${paths.character + image.getAttribute('character')}/tag.png`
-    // console.log(image.getAttribute('character'))
-    // tagPath = alternateNamesInUse[image.getAttribute('character')] ? "/tag-" + alternateNamesInUse[image.getAttribute('character')] + ".png" : "/tag.png";
+    currentCharacter = 
+      characters.find((character) => (character.alternateNames ?? []).includes(image.getAttribute('character')))
+      ?? getCharacterFromID(image.getAttribute('character'))
+    console.log(currentCharacter)
     tagPath = alternateNamesInUse[image.getAttribute('character')] ? "/tag-" + alternateNamesInUse[image.getAttribute('character')] + '.png' : "/tag-default.png"
-    // image.src = paths.character + characterSelector.value + tagPath;
-    image.src = paths.character + image.getAttribute('character') + tagPath;
+    image.src = paths.character + currentCharacter.id + tagPath;
   })
 }
 
@@ -491,11 +492,14 @@ function generatePoses(e) {
 
   // console.log(characters.find((character) => character.id === chosenCharacter))
 
-  currentCharacter = characters.find((character) => character.id === chosenCharacter);
+  // currentCharacter = characters.find((character) => character.id === chosenCharacter);
+  currentCharacter = getCharacterFromID(chosenCharacter)
+  console.log(currentCharacter)
   if (currentCharacter?.alternateNames){
-    alternateNamesInUse[chosenCharacter] = alternateNamesInUse[chosenCharacter] ?? 'default';
+    alternateNamesInUse[currentCharacter.alternateNames[0]] = alternateNamesInUse[chosenCharacter] ?? 'default';
   }
   
+  // SPOTIFY
   // characterTheme = characters.find((character) => character.id === chosenCharacter)
   // document.querySelector('#theme-music').innerHTML = 
   //   characterTheme.theme 
@@ -1086,24 +1090,27 @@ function pasteQuote(type){
 
 
 function nameSelector2 () {
-  // modalContent.appendChild(generateCharacterNameListInterface('sholmes-herlock-default'))
   modalContent.innerHTML = '';
   
   for (const [key, value] of Object.entries(alternateNamesInUse)) {
     console.log(`${key}: ${value}`);
-    modalContent.appendChild(generateCharacterNameListInterface(key))
+
+    let characterId = characters.find((character) => (character.alternateNames ?? []).includes(key)).id
+    modalContent.appendChild(generateCharacterNameListInterface(characterId))
   }
 
 }
 
 function generateCharacterNameListInterface (characterID) {
 
-  const alternateNames = characters.find((character) => character.id === characterID).alternateNames ?? [];
 
+  currentCharacter = characters.find((character) => character.id === characterID)
+  const alternateNames = currentCharacter.alternateNames ?? [];
 
   const namePanel = document.createElement('form');
   namePanel.classList = "name-selector-form";
   namePanel.setAttribute('for', currentCharacter.id)
+  // namePanel.setAttribute('for', alternateNames[0] ?? currentCharacter.id)
   alternateNames.forEach((altName) => {
     const input = document.createElement('span');
 
@@ -1113,7 +1120,7 @@ function generateCharacterNameListInterface (characterID) {
     `
 
     input.addEventListener('click', () => {
-      alternateNamesInUse[characterID] = altName;
+      alternateNamesInUse[alternateNames[0]] = altName;
       propagateAlternateNames();
     })
 
@@ -1121,68 +1128,4 @@ function generateCharacterNameListInterface (characterID) {
   })
 
   return namePanel;
-}
-
-
-function nameSelector(){
-
-
-  
-  const alternateNames = characters.find((character) => character.id === chosenCharacter).alternateNames ?? [];
-
-  // console.log(alternateNames)
-  console.log(alternateNamesInUse)
-  
-  
-  if (alternateNames.length > 0){
-
-
-
-    // Generate a list of radio buttons for the alternate names
-    const namePanel = document.createElement('form');
-    namePanel.classList = "name-selector-form";
-    namePanel.setAttribute('for', currentCharacter.id)
-    alternateNames.forEach((altName) => {
-      const input = document.createElement('span');
-
-      input.innerHTML = `
-        <input type="radio" id="${altName}" name="${alternateNames[0]}" value="${altName}" class="name-selector-input">
-        <label for="${altName}">${altName}</label><br></br>
-      `
-
-      namePanel.appendChild(input)
-      input.addEventListener('click', () => {
-        
-        // let desiredTag = 
-        
-        alternateNamesInUse[currentCharacter.id] = input.querySelector('input').value;
-
-
-
-        // Determine what the tag should be
-        // If we have a value for the name, AND the name isn't the default one
-        if (alternateNamesInUse[characterSelector.value] && alternateNamesInUse[characterSelector.value] !== alternateNames[0]){
-          tag.src = paths.character + currentCharacter.id + "/tag-" + alternateNamesInUse[characterSelector.value] + ".png"
-          tag.setAttribute('character', currentCharacter.id)
-          document.querySelectorAll('.tag-image[character = "' + currentCharacter.id + '"]').forEach((image) => {
-            image.src = paths.character + currentCharacter.id + "/tag-" + alternateNamesInUse[characterSelector.value] + ".png"
-          })
-        } else{
-          document.querySelectorAll('.tag-image[character = "' + currentCharacter.id + '"]').forEach((image) => {
-            image.src = paths.character + currentCharacter.id + "/tag.png";
-          })
-      }
-
-      })
-    })
-
-    modalContent.appendChild(namePanel);
-
-    // Make the first one checked
-
-    const firstInput = document.querySelector('.name-selector-input')
-    if (firstInput){
-    firstInput.checked = true;
-    }
-  }
 }

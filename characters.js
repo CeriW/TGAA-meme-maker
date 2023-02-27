@@ -21,7 +21,6 @@ let characters = [
   images: 8,
   theme: 'https://open.spotify.com/embed/track/6t74To2T8PUd6k1dbSu10D?utm_source=generator',
   tags: [],
-  alternateNames: ['Ryunosuke', 'Runo']
 },
 
 {
@@ -45,7 +44,8 @@ let characters = [
   images: 16,
   variant: 'casual outfit',
   theme: 'https://open.spotify.com/embed/track/5FQuOO8w56VPX1tJwaPKx8?utm_source=generator',
-  tags: ['homumiko']
+  tags: ['homumiko'],
+  alternateNames: ['Sholmes', 'Holmes']
 },
 
 {
