@@ -477,6 +477,9 @@ function generatePoses(e) {
       // console.log(input.querySelector('input').value);
       alternateNamesInUse[currentCharacter.id] = input.querySelector('input').value;
       console.log(alternateNamesInUse)
+      console.log(tag)
+      tagPath = alternateNamesInUse[characterSelector.value] ? paths.character + currentCharacter.id + "/tag-" + alternateNamesInUse[characterSelector.value] + ".png" : "/tag.png";
+      tag.src = tagPath
     })
   })
 
