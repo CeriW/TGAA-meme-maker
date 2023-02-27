@@ -21,3 +21,14 @@
 #modal .material-symbols-sharp{
   float: right;
 }
+
+#modal-content{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.name-selector-form{
+  display: flex;
+  flex-direction: column;
+}

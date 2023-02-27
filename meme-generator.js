@@ -28,7 +28,7 @@ let speechbox = document.querySelector("#speech-box");
 let credits = document.querySelector("#credits");
 
 let alternateNamesInUse = {};
-let currentCharacter = {};
+// let currentCharacter = {};
 
 // Interface elements
 let backgroundSelector = document.querySelector("#background-selector");
@@ -144,7 +144,7 @@ document.querySelectorAll('#edit-names-toggle').forEach((button) => {
   button.addEventListener('click', () => {
     togglePanel(document.querySelector('#modal'));
     // generateCharacterNameListInterface()
-    nameSelector2();
+    generateNameSelectorWindow();
   })
 })
 
@@ -177,13 +177,14 @@ function generatePanelArtwork() {
   if (characterSelected) {
     characterOverlay.src = `/assets/locations/${characterOverlayID}.png`;
 
-    currentCharacter = getCharacterFromID(characterSelector.value)
+    let currentCharacter = getCharacterFromID(characterSelector.value)
+    console.log(currentCharacter)
     if (Object.keys(alternateNamesInUse).length > 0){
       document.querySelector('#edit-names-toggle').classList.remove('hidden')
     }
 
     if (currentCharacter?.alternateNames){
-      nameSelector2();
+      generateNameSelectorWindow();
     }
 
     if (currentCharacter.alternateNames){
@@ -203,11 +204,9 @@ function getCharacterFromID(characterID){
 function propagateAlternateNames() {
   let tagImages = document.querySelectorAll('.tag-image');
   tagImages.forEach((image) => {
-    console.log(image)
-    currentCharacter = 
+    let currentCharacter = 
       characters.find((character) => (character.alternateNames ?? []).includes(image.getAttribute('character')))
       ?? getCharacterFromID(image.getAttribute('character'))
-    console.log(currentCharacter)
     tagPath = alternateNamesInUse[image.getAttribute('character')] ? "/tag-" + alternateNamesInUse[image.getAttribute('character')] + '.png' : "/tag-default.png"
     image.src = paths.character + currentCharacter.id + tagPath;
   })
@@ -494,7 +493,7 @@ function generatePoses(e) {
   // Reset the character if we're choosing a new one
   characterImg.src = paths.character + chosenCharacter + "/1.png";
 
-  currentCharacter = getCharacterFromID(chosenCharacter)
+  let currentCharacter = getCharacterFromID(chosenCharacter)
   if (currentCharacter?.alternateNames && !alternateNamesInUse[currentCharacter.alternateNames[0]]){
     alternateNamesInUse[currentCharacter.alternateNames[0]] = currentCharacter.alternateNames[0] ?? 'default';
   }
@@ -1089,12 +1088,10 @@ function pasteQuote(type){
 
 
 
-function nameSelector2 () {
+function generateNameSelectorWindow () {
   modalContent.innerHTML = '';
   
   for (const [key, value] of Object.entries(alternateNamesInUse)) {
-    console.log(`${key}: ${value}`);
-
     let characterId = characters.find((character) => (character.alternateNames ?? []).includes(key)).id
     modalContent.appendChild(generateCharacterNameListInterface(characterId))
   }
@@ -1104,19 +1101,18 @@ function nameSelector2 () {
 function generateCharacterNameListInterface (characterID) {
 
 
-  currentCharacter = characters.find((character) => character.id === characterID)
-  const alternateNames = currentCharacter.alternateNames ?? [];
+  let thisCharacter = characters.find((character) => character.id === characterID)
+  const alternateNames = thisCharacter.alternateNames ?? [];
 
   const namePanel = document.createElement('form');
   namePanel.classList = "name-selector-form";
-  namePanel.setAttribute('for', currentCharacter.id)
-  // namePanel.setAttribute('for', alternateNames[0] ?? currentCharacter.id)
+  namePanel.setAttribute('for', thisCharacter.id)
   alternateNames.forEach((altName) => {
     const input = document.createElement('span');
 
     input.innerHTML = `
       <input type="radio" id="${altName}" name="${alternateNames[0]}" value="${altName}" class="name-selector-input">
-      <label for="${altName}">${altName}</label><br></br>
+      <label for="${altName}">${altName}</label>
     `
 
     input.addEventListener('click', () => {
