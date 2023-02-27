@@ -28,7 +28,9 @@ div[class*="icon"]:not(.tb__icon),
 #add-panel,
 .delete-panel,
 .reset-filters,
-#filter-toggle{
+#filter-toggle,
+#modal .material-symbols-sharp,
+#edit-names-toggle{
   cursor: pointer;
 }
 

@@ -77,3 +77,18 @@
   }
 }
 
+
+/* Edit names button ---------------------------------------------------------*/
+
+#edit-names-toggle{
+  position: absolute;
+  padding: 6px 10px;
+  background: linear-gradient(to bottom, #65592d, #9E9150);
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

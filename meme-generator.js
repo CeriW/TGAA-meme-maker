@@ -38,6 +38,7 @@ let characterPreview = document.querySelector("#character-selector-preview");
 let poseSelector = document.querySelector("#pose-selector");
 let downloadButton = document.querySelector("#download");
 let aboutButton = document.querySelector('#about-button')
+let modalContent = document.querySelector('#modal-content')
 
 // Store whether the user has deliberately chosen a character yet.
 // This will prevent the default character tag being generated
@@ -126,6 +127,15 @@ toggleHeadings.forEach(function (node) {
 togglePanel(document.querySelector('#filter-form'));
 document.querySelector('#filter-toggle').addEventListener('click', () => {
   togglePanel(document.querySelector('#filter-form'))});
+
+
+document.querySelectorAll('#modal .material-symbols-sharp, #edit-names-toggle').forEach((button) => {
+  button.addEventListener('click', () => {
+    togglePanel(document.querySelector('#modal'))
+  })
+})
+
+
 
 
 // ---------------------------------------------------------------------------//
@@ -455,53 +465,53 @@ function generatePoses(e) {
   console.log(alternateNamesInUse)
   
   
-  if (document.querySelector('#canvas-grid-item form')){
-    document.querySelector('#canvas-grid-item form').remove();
-  }
-
-
-  // Generate a list of radio buttons for the alternate names
-  const namePanel = document.createElement('form');
-  namePanel.classList = "name-selector-form";
-  namePanel.setAttribute('for', currentCharacter.id)
-  alternateNames.forEach((altName) => {
-    const input = document.createElement('span');
-
-    input.innerHTML = `
-      <input type="radio" id="${altName}" name="${alternateNames[0]}" value="${altName}" class="name-selector-input">
-      <label for="${altName}">${altName}</label><br></br>
-    `
-
-    namePanel.appendChild(input)
-    input.addEventListener('click', () => {
-      alternateNamesInUse[currentCharacter.id] = input.querySelector('input').value;
+  if (alternateNames.length > 0){
 
 
 
-      // Determine what the tag should be
-      // If we have a value for the name, AND the name isn't the default one
-      if (alternateNamesInUse[characterSelector.value] && alternateNamesInUse[characterSelector.value] !== alternateNames[0]){
-        tag.src = paths.character + currentCharacter.id + "/tag-" + alternateNamesInUse[characterSelector.value] + ".png"
-        tag.setAttribute('character', currentCharacter.id)
-        document.querySelectorAll('.tag-image[character = "' + currentCharacter.id + '"]').forEach((image) => {
-          image.src = paths.character + currentCharacter.id + "/tag-" + alternateNamesInUse[characterSelector.value] + ".png"
-        })
-      } else{
-        document.querySelectorAll('.tag-image[character = "' + currentCharacter.id + '"]').forEach((image) => {
-          image.src = paths.character + currentCharacter.id + "/tag.png";
-        })
-    }
+    // Generate a list of radio buttons for the alternate names
+    const namePanel = document.createElement('form');
+    namePanel.classList = "name-selector-form";
+    namePanel.setAttribute('for', currentCharacter.id)
+    alternateNames.forEach((altName) => {
+      const input = document.createElement('span');
 
+      input.innerHTML = `
+        <input type="radio" id="${altName}" name="${alternateNames[0]}" value="${altName}" class="name-selector-input">
+        <label for="${altName}">${altName}</label><br></br>
+      `
+
+      namePanel.appendChild(input)
+      input.addEventListener('click', () => {
+        alternateNamesInUse[currentCharacter.id] = input.querySelector('input').value;
+
+
+
+        // Determine what the tag should be
+        // If we have a value for the name, AND the name isn't the default one
+        if (alternateNamesInUse[characterSelector.value] && alternateNamesInUse[characterSelector.value] !== alternateNames[0]){
+          tag.src = paths.character + currentCharacter.id + "/tag-" + alternateNamesInUse[characterSelector.value] + ".png"
+          tag.setAttribute('character', currentCharacter.id)
+          document.querySelectorAll('.tag-image[character = "' + currentCharacter.id + '"]').forEach((image) => {
+            image.src = paths.character + currentCharacter.id + "/tag-" + alternateNamesInUse[characterSelector.value] + ".png"
+          })
+        } else{
+          document.querySelectorAll('.tag-image[character = "' + currentCharacter.id + '"]').forEach((image) => {
+            image.src = paths.character + currentCharacter.id + "/tag.png";
+          })
+      }
+
+      })
     })
-  })
 
-  document.querySelector('#canvas-grid-item').appendChild(namePanel);
+    modalContent.appendChild(namePanel);
 
-  // Make the first one checked
+    // Make the first one checked
 
-  const firstInput = document.querySelector('.name-selector-input')
-  if (firstInput){
-   firstInput.checked = true;
+    const firstInput = document.querySelector('.name-selector-input')
+    if (firstInput){
+    firstInput.checked = true;
+    }
   }
   
   // characterTheme = characters.find((character) => character.id === chosenCharacter)
