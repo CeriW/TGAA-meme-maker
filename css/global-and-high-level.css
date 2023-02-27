@@ -3,6 +3,12 @@
   src: url(../assets/fonts/Toplar.woff);
 }
 
+@font-face {
+  font-family: 'MgOpen Cosmetica';
+  src: url('../assets/fonts/MgOpenCosmetica.woff2') format('woff2'),
+      url('../assets/fonts/MgOpenCosmetica.woff') format('woff');
+}
+
 html{
   font-size: 18px;
   scroll-behavior: smooth;
