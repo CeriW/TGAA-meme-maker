@@ -430,16 +430,23 @@ function generatePoses(e) {
   // Reset the character if we're choosing a new one
   characterImg.src = paths.character + chosenCharacter + "/1.png";
   
+  console.log(chosenCharacter);
+
+  console.log(characters.find((character) => character.id === chosenCharacter))
+  const alternameNames = characters.find((character) => character.id === chosenCharacter).alternameNames ?? null;
+
+  console.log(alternameNames)
+
   
   
-  characterTheme = characters.find((character) => character.id === chosenCharacter)
-  document.querySelector('#theme-music').innerHTML = 
-    characterTheme.theme 
-    ? `<iframe style="border-radius:12px" src="
-    ${characterTheme.theme ?? ''}
-    &theme=0" width="100%" height="100" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    `
-    : '';
+  // characterTheme = characters.find((character) => character.id === chosenCharacter)
+  // document.querySelector('#theme-music').innerHTML = 
+  //   characterTheme.theme 
+  //   ? `<iframe style="border-radius:12px" src="
+  //   ${characterTheme.theme ?? ''}
+  //   &theme=0" width="100%" height="100" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+  //   `
+  //   : '';
   
 
   generatePanelArtwork();

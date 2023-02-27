@@ -8,6 +8,7 @@
 //             Cases are commonly referred to the fans by the number of the game they appear in, then the order of that case. For example, case 9 is usually called 2-4 because it's the 4th part of the 2nd game.
 // images - the number of images in the folder to go with this character. The code depends on them being named sequentially beginning at 1 and can't work if there are any numbers missing.
 // tags - used during themed time periods. Will be used to place these characters at the top of the list.
+// alternate names - some characters have alternative names that users might want to toggle between (eg. Herlock Sholmes was callled Sherlock Holmes in the Japanese version)
 
 let characters = [
   
@@ -31,7 +32,8 @@ let characters = [
   images: 16,
   variant: 'default outfit',
   theme: 'https://open.spotify.com/embed/track/1QUX7xOPs80O5tiQb3MPqd?utm_source=generator',
-  tags: ['homumiko']
+  tags: ['homumiko'],
+  alternameNames: ['Sholmes', 'Holmes']
 },
 {
   name: 'Herlock Sholmes',
