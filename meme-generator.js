@@ -1086,7 +1086,49 @@ function generateNameSelectorWindow () {
   modalContent.innerHTML = `
     <h2>Alternate names</h2>
     <div id="name-selector-choices"></div>
+
+    <div class="name-language-selector" language="english">Make all names English</div>
+    <div class="name-language-selector" language="japanese">Make all names Japanese</div>
   `;
+
+  document.querySelectorAll('.name-language-selector').forEach((sel) => {
+    sel.addEventListener('click', updateNamesLanguage);
+  })
+
+  function updateNamesLanguage(e){
+    console.log(alternateNamesInUse)
+
+    let language = e.target.closest('[language]').getAttribute('language')
+    console.log(language)
+
+
+    Object.keys(alternateNamesInUse).forEach((altName) => {
+
+      let character = characters.find((character) => (character.alternateNames ?? []).includes(altName))
+
+      // The first name in the alternate names property should be the English name, the second should be the Japanese name
+      let nameIndex = language === "english" ? 0 : 1
+      alternateNamesInUse[altName] = character.alternateNames[nameIndex]
+      console.log(alternateNamesInUse[altName])
+
+      // Make all of the appropriate radio buttons checked.
+      let radioButtons = document.querySelectorAll(`.name-selector-form[for=${character.alternateNames[0]}] input`)
+      radioButtons.forEach((btn) => {
+        // btn.setAttribute('checked', altName == btn.id)
+        btn.removeAttribute('checked')
+        if (alternateNamesInUse[altName] == btn.id){
+          btn.setAttribute('checked', true)
+        }
+        console.log(`altName: ${alternateNamesInUse[altName]}, btnID: ${btn.id} match: ${altName == btn.id}`)
+        console.log(btn)
+      })
+
+    })
+
+    propagateAlternateNames();
+
+  }
+
   
   for (const [key] of Object.entries(alternateNamesInUse)) {
     let characterId = characters.find((character) => (character.alternateNames ?? []).includes(key)).id
@@ -1103,7 +1145,8 @@ function generateCharacterNameListInterface (characterID) {
 
   const namePanel = document.createElement('form');
   namePanel.classList = "name-selector-form";
-  namePanel.setAttribute('for', thisCharacter.id)
+  // namePanel.setAttribute('for', thisCharacter.id)
+  namePanel.setAttribute('for', alternateNames[0])
 
   const characterIcon = document.createElement('img');
   characterIcon.src = `assets/characters/${thisCharacter.id}/thumbnails/1.png`;
