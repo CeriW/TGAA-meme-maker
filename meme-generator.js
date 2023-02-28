@@ -1104,6 +1104,11 @@ function generateCharacterNameListInterface (characterID) {
   const namePanel = document.createElement('form');
   namePanel.classList = "name-selector-form";
   namePanel.setAttribute('for', thisCharacter.id)
+
+  const characterIcon = document.createElement('img');
+  characterIcon.src = `assets/characters/${thisCharacter.id}/thumbnails/1.png`;
+
+  namePanel.appendChild(characterIcon);
   alternateNames.forEach((altName) => {
     const input = document.createElement('span');
 
