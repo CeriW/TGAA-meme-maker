@@ -1087,11 +1087,13 @@ function generateNameSelectorWindow () {
     <h2>Alternate names</h2>
     <div id="name-selector-choices"></div>
 
-    <div class="name-language-selector" language="english">Make all names English</div>
-    <div class="name-language-selector" language="japanese">Make all names Japanese</div>
+    <div class="name-language-selector-container">
+      <div class="name-language-selector" language="english"><img src="assets/icons/flags/british.svg" width=38>Make all names English</div>
+      <div class="name-language-selector" language="japanese"><img src="assets/icons/flags/japanese.svg" width=38>Make all names Japanese</div>
+    </div>
   `;
 
-  document.querySelectorAll('.name-language-selector').forEach((sel) => {
+  document.querySelectorAll('.name-language-selector-container').forEach((sel) => {
     sel.addEventListener('click', updateNamesLanguage);
   })
 
@@ -1112,15 +1114,21 @@ function generateNameSelectorWindow () {
       console.log(alternateNamesInUse[altName])
 
       // Make all of the appropriate radio buttons checked.
-      let radioButtons = document.querySelectorAll(`.name-selector-form[for=${character.alternateNames[0]}] input`)
+      let radioButtons = document.querySelectorAll(`.name-selector-form[for=${character.alternateNames[0]}] input[type="radio"]`)
+      console.log(radioButtons)
       radioButtons.forEach((btn) => {
         // btn.setAttribute('checked', altName == btn.id)
         btn.removeAttribute('checked')
-        if (alternateNamesInUse[altName] == btn.id){
-          btn.setAttribute('checked', true)
-        }
-        console.log(`altName: ${alternateNamesInUse[altName]}, btnID: ${btn.id} match: ${altName == btn.id}`)
+        console.log(`altName: ${alternateNamesInUse[altName]}, btnID: ${btn.value}, match: ${altName == btn.value}`)
         console.log(btn)
+        // For reasons I don't understand, doing this without the timeout causes
+        // the browser default checked styling not to work if you keep switching
+        // and forth between English and Japanese
+        window.setTimeout(() => {
+          if (alternateNamesInUse[altName] == btn.value){
+            btn.setAttribute('checked', true)
+          }
+        }, 1)
       })
 
     })
