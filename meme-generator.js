@@ -143,7 +143,6 @@ document.querySelectorAll('#modal .material-symbols-sharp').forEach((button) => 
 document.querySelectorAll('#edit-names-toggle').forEach((button) => {
   button.addEventListener('click', () => {
     togglePanel(document.querySelector('#modal'));
-    // generateCharacterNameListInterface()
     generateNameSelectorWindow();
   })
 })
@@ -1083,17 +1082,15 @@ function pasteQuote(type){
 
 
 
-
-
-
-
-
 function generateNameSelectorWindow () {
-  modalContent.innerHTML = '';
+  modalContent.innerHTML = `
+    <h2>Alternate names</h2>
+    <div id="name-selector-choices"></div>
+  `;
   
-  for (const [key, value] of Object.entries(alternateNamesInUse)) {
+  for (const [key] of Object.entries(alternateNamesInUse)) {
     let characterId = characters.find((character) => (character.alternateNames ?? []).includes(key)).id
-    modalContent.appendChild(generateCharacterNameListInterface(characterId))
+    modalContent.querySelector('#name-selector-choices').appendChild(generateCharacterNameListInterface(characterId))
   }
 
 }
@@ -1114,14 +1111,19 @@ function generateCharacterNameListInterface (characterID) {
       <input type="radio" id="${altName}" name="${alternateNames[0]}" value="${altName}" class="name-selector-input">
       <label for="${altName}">${altName}</label>
     `
-
+    
+    namePanel.appendChild(input)
+    
     input.addEventListener('click', () => {
       alternateNamesInUse[alternateNames[0]] = altName;
       propagateAlternateNames();
     })
-
-    namePanel.appendChild(input)
   })
+
+  let selectedName = alternateNamesInUse[thisCharacter.alternateNames[0] ?? thisCharacter.id]
+  namePanel.querySelector(`input[value="${selectedName}"]`).setAttribute('checked', true)
+  console.log(selectedName)
+
 
   return namePanel;
 }

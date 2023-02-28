@@ -14,7 +14,7 @@
   padding: 20px;
   background: linear-gradient(to bottom, #65592d, #9E9150);
   box-shadow: 0 0 10px rgba(0,0,0,0.3);
-  width: 300px;
+  width: 450px;
   max-width: 100vw;
 }
 
@@ -22,11 +22,13 @@
   float: right;
 }
 
-#modal-content{
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+#modal-content h2{
+  font-family: 'MgOpen Cosmetica', Toplar, serif;
+  text-shadow: -1px -1px 0 rgba(0,0,0,0.3), 1px -1px 0 rgba(0,0,0,0.3), -1px 1px 0 rgba(0,0,0,0.3), 1px 1px 0 rgba(0,0,0,0.3);
+
 }
+
+
 
 .name-selector-form{
   display: flex;
