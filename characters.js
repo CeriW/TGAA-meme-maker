@@ -22,7 +22,6 @@ let characters = [
   theme: 'https://open.spotify.com/embed/track/6t74To2T8PUd6k1dbSu10D?utm_source=generator',
   tags: [],
 },
-
 {
   name: 'Herlock Sholmes',
   id:'sholmes-herlock-default',
@@ -170,7 +169,8 @@ let characters = [
   appearsin: [false,false,false,false,false,false,false,true,false,false],
   images: 1,
   theme: 'https://open.spotify.com/embed/track/3c4rqLvhHImiVKNPD0IN1V?utm_source=generator',
-  tags: []
+  tags: [],
+  alternateNames: ['Tusspells', 'Rozaic']
 },
 
 {
@@ -191,7 +191,8 @@ let characters = [
   nationality: 'british',
   appearsin: [false,false,false,false,false,false,false,true,true,true],
   images: 1,
-  tags: []
+  tags: [],
+  alternateNames: ['Gorey', 'Goulloyne']
 },
 
 {
@@ -201,7 +202,8 @@ let characters = [
   nationality: 'irish',
   appearsin: [false,false,true,false,false,false,false,false,false,false],
   images: 1,
-  tags: []
+  tags: [],
+  alternateNames: ['McGuilded', 'Megundal']
 },
 
 {
@@ -212,7 +214,8 @@ let characters = [
   appearsin: [false,true,false,false,false,false,false,false,false,false],
   images: 1,
   theme: 'https://open.spotify.com/embed/track/6x6OrJ2G3rdwTyYVFuezBf?utm_source=generator',
-  tags: []
+  tags: [],
+  alternateNames: ['Pavlova', 'Borschevic']
 },
 
 {
@@ -245,6 +248,7 @@ let characters = [
   nationality: 'japanese',
   appearsin: [false,false,false,false,false,true,false,false,false,false],
   images: 3,
+  alternateNames: ['Rei', 'Haori']
 },
 
 
