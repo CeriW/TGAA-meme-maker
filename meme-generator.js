@@ -181,11 +181,8 @@ function generatePanelArtwork() {
       document.querySelector('#edit-names-toggle').classList.remove('hidden')
     }
 
-    if (currentCharacter?.alternateNames){
-      generateNameSelectorWindow();
-    }
-
     if (currentCharacter.alternateNames){
+      generateNameSelectorWindow();
       tag.setAttribute('character', currentCharacter.alternateNames[0])
     } else {
       tag.setAttribute('character', currentCharacter.id)
@@ -202,11 +199,19 @@ function getCharacterFromID(characterID){
 function propagateAlternateNames() {
   let tagImages = document.querySelectorAll('.tag-image');
   tagImages.forEach((image) => {
+
     let currentCharacter = 
       characters.find((character) => (character.alternateNames ?? []).includes(image.getAttribute('character')))
       ?? getCharacterFromID(image.getAttribute('character'))
+
     tagPath = alternateNamesInUse[image.getAttribute('character')] ? "/tag-" + alternateNamesInUse[image.getAttribute('character')] + '.png' : "/tag-default.png"
-    image.src = paths.character + currentCharacter.id + tagPath;
+    
+    if (currentCharacter){
+      image.src = paths.character + currentCharacter.id + tagPath;
+    }
+
+
+
   })
 }
 
@@ -266,7 +271,8 @@ function generateCanvas() {
     }
   })
 
-  togglePanel(document.querySelector('#edit-names-toggle'));
+  
+  // togglePanel(document.querySelector('#edit-names-toggle'));
 
 
   // Generate the delete button and have it run removeCanvas on click.
@@ -496,14 +502,14 @@ function generatePoses(e) {
     alternateNamesInUse[currentCharacter.alternateNames[0]] = currentCharacter.alternateNames[0] ?? 'default';
   }
   
-  // SPOTIFY
-  document.querySelector('#theme-music').innerHTML = 
-  currentCharacter.theme 
-    ? `<iframe style="border-radius:12px" src="
-    ${currentCharacter.theme ?? ''}
-    &theme=0" width="100%" height="100" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    `
-    : '';
+  // // SPOTIFY
+  // document.querySelector('#theme-music').innerHTML = 
+  // currentCharacter.theme 
+  //   ? `<iframe style="border-radius:12px" src="
+  //   ${currentCharacter.theme ?? ''}
+  //   &theme=0" width="100%" height="100" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+  //   `
+  //   : '';
   
 
   generatePanelArtwork();

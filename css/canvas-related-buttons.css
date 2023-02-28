@@ -9,6 +9,7 @@
   display: flex;
   gap: 5px;
   align-items: center;
+  font-size: 0.9em;
 }
 
 #add-panel{
@@ -85,18 +86,21 @@
 /* Edit names button ---------------------------------------------------------*/
 
 #edit-names-toggle{
-  position: absolute;
+  /* position: absolute;
   z-index: 3;
   top: 0;
-  right: 0;
+  right: 0; */
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 10px;
   animation: textColour 4s infinite;
   box-shadow: 0 0 10px rgba(0,0,0,0.8);
   background: linear-gradient(to bottom, #65592d, #9E9150);
   padding: 5px;
   font-family: 'MgOpen Cosmetica', Toplar, serif;
+  border-bottom: 2px solid var(--blue);
+  font-size: 0.9em;
 }
 
 #edit-names-toggle:hover{

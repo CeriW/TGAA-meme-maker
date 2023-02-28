@@ -15,7 +15,7 @@
   padding: 20px;
   background: linear-gradient(to bottom, #65592d, #9E9150);
   box-shadow: 0 0 10px rgba(0,0,0,0.3);
-  width: 540px;
+  width: 560px;
   max-width: 100vw;
   position: relative;
 }
@@ -28,7 +28,7 @@
 
 #modal-content h2{
   font-family: 'MgOpen Cosmetica', Toplar, serif;
-  text-shadow: -1px -1px 0 rgba(0,0,0,0.3), 1px -1px 0 rgba(0,0,0,0.3), -1px 1px 0 rgba(0,0,0,0.3), 1px 1px 0 rgba(0,0,0,0.3);
+  text-shadow: -1px -1px 0 rgba(0,0,0,0.3), 1px -1px 0 rgba(0,0,0,0.), -1px 1px 0 rgba(0,0,0,0.3), 1px 1px 0 rgba(0,0,0,0.3);
   margin-top: 0;
   border-bottom: 3px solid #fff;
   padding-bottom: 10px;
@@ -58,14 +58,21 @@
 .name-language-selector{
   display: flex;
   align-items: center;
-  gap: 15px;
-  padding: 10px 0 0;
+  gap: 10px;
+  background: var(--blue);
+  padding: 5px 10px;
+  border: 1px solid #fff;
+  transition: 0.2s;
+}
+
+.name-language-selector:hover{
+  box-shadow: 0 0 10px black;
 }
 
 .name-language-selector-container{
   display: flex;
   flex-wrap: wrap;
-  gap: 0 20px;
-  margin-top: 20px;
-  border-top: 3px solid #fff;
+  justify-content: space-between;
+  gap: 0 10px;
+  margin-top: 40px;
 }
