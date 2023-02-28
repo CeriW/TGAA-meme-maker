@@ -30,6 +30,8 @@
   font-family: 'MgOpen Cosmetica', Toplar, serif;
   text-shadow: -1px -1px 0 rgba(0,0,0,0.3), 1px -1px 0 rgba(0,0,0,0.3), -1px 1px 0 rgba(0,0,0,0.3), 1px 1px 0 rgba(0,0,0,0.3);
   margin-top: 0;
+  border-bottom: 3px solid #fff;
+  padding-bottom: 10px;
 }
 
 #name-selector-choices{
@@ -56,4 +58,12 @@
   align-items: center;
   gap: 15px;
   padding: 10px 0 0;
+}
+
+.name-language-selector-container{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 20px;
+  margin-top: 20px;
+  border-top: 3px solid #fff;
 }

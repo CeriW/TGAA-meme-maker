@@ -32,7 +32,8 @@ div[class*="icon"]:not(.tb__icon),
 #modal .material-symbols-sharp,
 #edit-names-toggle,
 .name-selector-form > span,
-.name-selector-form > span *{
+.name-selector-form > span *,
+.name-language-selector{
   cursor: pointer;
 }
 
