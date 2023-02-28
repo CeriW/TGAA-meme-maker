@@ -28,7 +28,6 @@ let speechbox = document.querySelector("#speech-box");
 let credits = document.querySelector("#credits");
 
 let alternateNamesInUse = {};
-// let currentCharacter = {};
 
 // Interface elements
 let backgroundSelector = document.querySelector("#background-selector");
@@ -498,14 +497,13 @@ function generatePoses(e) {
   }
   
   // SPOTIFY
-  // characterTheme = characters.find((character) => character.id === chosenCharacter)
-  // document.querySelector('#theme-music').innerHTML = 
-  //   characterTheme.theme 
-  //   ? `<iframe style="border-radius:12px" src="
-  //   ${characterTheme.theme ?? ''}
-  //   &theme=0" width="100%" height="100" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-  //   `
-  //   : '';
+  document.querySelector('#theme-music').innerHTML = 
+  currentCharacter.theme 
+    ? `<iframe style="border-radius:12px" src="
+    ${currentCharacter.theme ?? ''}
+    &theme=0" width="100%" height="100" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    `
+    : '';
   
 
   generatePanelArtwork();
@@ -1081,7 +1079,9 @@ function pasteQuote(type){
 })
 
 
+/* Name selectors ------------------------------------------------------------*/
 
+// Generate the modal content for the name selector
 function generateNameSelectorWindow () {
   modalContent.innerHTML = `
     <h2>Alternate names</h2>
@@ -1097,40 +1097,30 @@ function generateNameSelectorWindow () {
     sel.addEventListener('click', updateNamesLanguage);
   })
 
+  // Update all characters to their English or Japanese names.
   function updateNamesLanguage(e){
-    console.log(alternateNamesInUse)
 
+    // Figure out what language we're wanting to change to.
     let language = e.target.closest('[language]').getAttribute('language')
-    console.log(language)
-
 
     Object.keys(alternateNamesInUse).forEach((altName) => {
 
+      // Get the character object so we can reference it
       let character = characters.find((character) => (character.alternateNames ?? []).includes(altName))
 
       // The first name in the alternate names property should be the English name, the second should be the Japanese name
       let nameIndex = language === "english" ? 0 : 1
       alternateNamesInUse[altName] = character.alternateNames[nameIndex]
-      console.log(alternateNamesInUse[altName])
 
       // Make all of the appropriate radio buttons checked.
       let radioButtons = document.querySelectorAll(`.name-selector-form[for=${character.alternateNames[0]}] input[type="radio"]`)
-      console.log(radioButtons)
       radioButtons.forEach((btn) => {
-        // btn.setAttribute('checked', altName == btn.id)
         btn.removeAttribute('checked')
-        console.log(`altName: ${alternateNamesInUse[altName]}, btnID: ${btn.value}, match: ${altName == btn.value}`)
-        console.log(btn)
-        // For reasons I don't understand, doing this without the timeout causes
-        // the browser default checked styling not to work if you keep switching
-        // and forth between English and Japanese
-        window.setTimeout(() => {
-          if (alternateNamesInUse[altName] == btn.value){
-            btn.setAttribute('checked', true)
-          }
-        }, 1)
+        if (alternateNamesInUse[altName] == btn.value){
+          btn.setAttribute('checked', true);
+          btn.click();
+        }
       })
-
     })
 
     propagateAlternateNames();
@@ -1142,18 +1132,16 @@ function generateNameSelectorWindow () {
     let characterId = characters.find((character) => (character.alternateNames ?? []).includes(key)).id
     modalContent.querySelector('#name-selector-choices').appendChild(generateCharacterNameListInterface(characterId))
   }
-
 }
 
+// Generate the names interface for each individual character.
 function generateCharacterNameListInterface (characterID) {
-
 
   let thisCharacter = characters.find((character) => character.id === characterID)
   const alternateNames = thisCharacter.alternateNames ?? [];
 
-  const namePanel = document.createElement('form');
+  const namePanel = document.createElement('fieldset');
   namePanel.classList = "name-selector-form";
-  // namePanel.setAttribute('for', thisCharacter.id)
   namePanel.setAttribute('for', alternateNames[0])
 
   const characterIcon = document.createElement('img');
@@ -1178,8 +1166,5 @@ function generateCharacterNameListInterface (characterID) {
 
   let selectedName = alternateNamesInUse[thisCharacter.alternateNames[0] ?? thisCharacter.id]
   namePanel.querySelector(`input[value="${selectedName}"]`).setAttribute('checked', true)
-  console.log(selectedName)
-
-
   return namePanel;
 }
