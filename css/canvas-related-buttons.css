@@ -52,6 +52,10 @@
   z-index: 4;
 }
 
+#edit-names-toggle:not(.hidden) + #download{
+  top: 40px;
+}
+
 @media (max-width: 600px){
   #download{
     width: 170px;

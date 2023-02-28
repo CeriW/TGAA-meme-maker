@@ -187,7 +187,6 @@ function generatePanelArtwork() {
     } else {
       tag.setAttribute('character', currentCharacter.id)
     }
-    // tag.setAttribute('character', currentCharacter?.alternateNames[0] ?? currentCharacter.id)
     propagateAlternateNames()
   }
 }
@@ -196,6 +195,7 @@ function getCharacterFromID(characterID){
   return characters.find((character) => character.id === characterID)
 }
 
+// Loop through all of the character tag artwork and update accordingly.
 function propagateAlternateNames() {
   let tagImages = document.querySelectorAll('.tag-image');
   tagImages.forEach((image) => {
@@ -209,9 +209,6 @@ function propagateAlternateNames() {
     if (currentCharacter){
       image.src = paths.character + currentCharacter.id + tagPath;
     }
-
-
-
   })
 }
 
