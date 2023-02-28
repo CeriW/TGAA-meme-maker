@@ -5,6 +5,10 @@
   background: linear-gradient(to bottom, #65592d, #9E9150);
   padding: 5px;
   transition: 0.5s;
+  font-family: 'MgOpen Cosmetica', Toplar, serif;
+  display: flex;
+  gap: 5px;
+  align-items: center;
 }
 
 #add-panel{
@@ -82,15 +86,22 @@
 
 #edit-names-toggle{
   position: absolute;
-  padding: 6px 10px;
-  background: linear-gradient(to bottom, #65592d, #9E9150);
-  position: absolute;
   z-index: 3;
   top: 0;
   right: 0;
   display: flex;
   align-items: center;
   gap: 10px;
+  animation: textColour 4s infinite;
+  box-shadow: 0 0 10px rgba(0,0,0,0.8);
+  background: linear-gradient(to bottom, #65592d, #9E9150);
+  padding: 5px;
+  font-family: 'MgOpen Cosmetica', Toplar, serif;
+}
+
+#edit-names-toggle:hover{
+  color: var(--blue) !important;
+  animation: none;
 }
 
 #edit-names-toggle.hidden{

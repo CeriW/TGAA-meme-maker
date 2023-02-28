@@ -52,3 +52,18 @@
   transform: scale3d(1, 1, 1);
   }
   } 
+
+
+@keyframes textColour{
+  0%{
+    color: #fff;
+  }
+
+  25%{
+    color: var(--blue);
+  }
+
+  50% {
+    color: #fff;
+  }
+}
