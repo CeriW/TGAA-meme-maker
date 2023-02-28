@@ -2,8 +2,9 @@
 
 // A string to set the theme with. If this is not null it will do some
 // rearranging of the data and add an attribute to the site class to match the theme. 
-let theme = null;
+// let theme = null;
 // let theme = "homumiko";
+let theme = "asobaro";
 
 
 // Some themes will contain spoilers, so we shouldn't show the theme until the 
@@ -80,8 +81,8 @@ function sortItemsByTag(characters, tag) {
 // Rearrange our characters and locations by tag. This is used during themed 
 // periods to prevent the need to manually rearrange things.
 if (theme){
-  characters = sortItemsByTag(characters, 'homumiko');
-  locations = sortItemsByTag(locations, 'homumiko');
+  characters = sortItemsByTag(characters, theme);
+  locations = sortItemsByTag(locations, theme);
 };
 
 // If the theme isn't a spoiler, change the theme immediately.

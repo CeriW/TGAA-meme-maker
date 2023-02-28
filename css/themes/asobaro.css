@@ -1,0 +1,107 @@
+body[theme="asobaro"]{
+  --blue: #a5a0be;
+  --scrollbar: #fff;
+  --gold: #bf8fa5;
+  --dark-accent: #4d495c;
+}
+
+body[theme="asobaro"]{
+  background: url('../../assets/themes/asobaro/page-bg.png');
+}
+
+body[theme="asobaro"] #info-bar,
+body[theme="asobaro"] #about-button,
+body[theme="asobaro"] #share-buttons{
+  background: var(--dark-accent);
+}
+
+body[theme="asobaro"] #banner:after{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: -200px;
+  pointer-events: none;
+  background: url('assets/misc/banner-overlay-asobaro.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform-origin: right top;
+  
+  animation-name: bounceIn;
+  animation-duration: .75s;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-delay: 1.5s;
+}
+
+body[theme="asobaro"] #inspiration-bar{
+  background: var(--gold);
+}
+
+body[theme="asobaro"] #inspiration-bar > span{
+  color: #312e3b;
+}
+
+
+body[theme="asobaro"] .toggle-heading,
+body[theme="asobaro"] #pose-heading,
+body[theme="asobaro"] #spoiler-warning,
+body[theme="asobaro"] #social-feed-heading,
+body[theme="asobaro"] #download div,
+body[theme="asobaro"] #filter-toggle{
+  background: linear-gradient(to bottom, #8b6677, #bf8fa5);
+  color: #fff;
+  border-color: #a5a0be;
+  outline-color: #694e5b;
+}
+
+body[theme="asobaro"] #character-selector-preview,
+body[theme="asobaro"] #background-selector-preview,
+body[theme="asobaro"] #pose-selector{
+  background: #fff;
+  color: #333;
+  border-color: #694e5b;
+}
+
+body[theme="asobaro"] div[class*="icon"]:not(.tb__icon),
+body[theme="asobaro"] #pose-selector label{
+  background-color: rgb(191, 143, 165, 0.2);
+}
+
+body[theme="asobaro"] .toggle-heading
+body[theme="asobaro"] #background-selector-preview,
+body[theme="asobaro"] .canvas-container.active-canvas:before{
+  border-color: #694e5b;
+}
+
+body[theme="asobaro"] #weather-bar{
+  background: #312e3b;
+}
+
+body[theme="asobaro"] #add-panel, 
+body[theme="asobaro"] .delete-panel{
+  background: linear-gradient(to bottom, #8b6677, #bf8fa5);
+  color: #fff;
+}
+
+body[theme="asobaro"] #add-panel:hover,
+body[theme="asobaro"] .delete-panel:hover,
+body[theme="asobaro"] .tb_mc_authorname,
+body[theme="asobaro"] .tb_mc_post_info *,
+body[theme="asobaro"] .tb_mc_social_ico.tb__icon.tb-twitter{
+  color: #312e3b !important;
+}
+
+body[theme="asobaro"] .tb_mc_seprator{
+  background-color: #312e3b !important;
+}
+
+body[theme="asobaro"]  div[class*="icon"]:hover,
+body[theme="asobaro"]  #pose-selector label:hover{
+  background-color: rgb(191, 143, 165, 0.4);
+}
+
+body[theme="asobaro"] #pose-selector label[selected]{
+  background-color: #bf8fa5;
+}

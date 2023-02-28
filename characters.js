@@ -64,7 +64,7 @@ let characters = [
   appearsin: [false,false,true,true,true,false,true,true,true,true],
   images: 6,
   theme: 'https://open.spotify.com/embed/track/5OmhUtWkaW7czq8v42yjIg?utm_source=generator',
-  tags: []
+  tags: ['asobaro']
 },
 
 {
@@ -231,7 +231,7 @@ let characters = [
   appearsin: [true,false,false,false,false,false,false,true,true,true],
   images: 1,
   theme: 'https://open.spotify.com/embed/track/4qiFdo2jEF4AcZzj8LxPUP?utm_source=generator',
-  tags: []
+  tags: ['asobaro']
 },
 
 {
@@ -241,6 +241,7 @@ let characters = [
   nationality: 'japanese',
   appearsin: [false,false,false,false,false,true,false,false,false,false],
   images: 3,
+  tags: []
 },
 
 

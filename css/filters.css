@@ -146,7 +146,7 @@ input[filter-type="nationality"]{
 .character-icon-gender-tag[gender="female"],
 #gender-checkbox-female + label span{
   background: pink;
-  color: var(--blue);
+  color: #000;
   font-weight: bold;
   position: relative;
   top: -1px;
@@ -155,7 +155,7 @@ input[filter-type="nationality"]{
 .character-icon-gender-tag[gender="male"],
 #gender-checkbox-male + label span{
   background: #75D2EF;
-  color: var(--blue);
+  color: #000;
   font-weight: bold;
   position: relative;
   top: -1px;
