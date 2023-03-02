@@ -505,14 +505,14 @@ function generatePoses(e) {
     window.localStorage.setItem('alternateNamesInUse', JSON.stringify(alternateNamesInUse));
   }
   
-  // // SPOTIFY
-  // document.querySelector('#theme-music').innerHTML = 
-  // currentCharacter.theme 
-  //   ? `<iframe style="border-radius:12px" src="
-  //   ${currentCharacter.theme ?? ''}
-  //   &theme=0" width="100%" height="100" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-  //   `
-  //   : '';
+  // SPOTIFY
+  document.querySelector('#theme-music').innerHTML = 
+  currentCharacter.theme 
+    ? `<iframe style="border-radius:12px" src="
+    ${currentCharacter.theme ?? ''}
+    &theme=0" width="100%" height="100" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    `
+    : '';
   
 
   generatePanelArtwork();
