@@ -29,7 +29,7 @@ let credits = document.querySelector("#credits");
 
 // Name related variables
 let alternateNamesInUse = {}; // Used to store user chosen names
-let prefersJapaneseNames = false; // If this is true, names will default to Japanese for characters that have them.
+let prefersJapaneseNames = window.localStorage.getItem('prefersJapaneseNames') === "true"; // If this is true, names will default to Japanese for characters that have them.
 
 // Interface elements
 let backgroundSelector = document.querySelector("#background-selector");
@@ -1112,7 +1112,7 @@ function generateNameSelectorWindow () {
     let language = e.target.closest('[language]').getAttribute('language')
 
     prefersJapaneseNames = language === 'japanese';
-    console.log(prefersJapaneseNames);
+    window.localStorage.setItem('prefersJapaneseNames', language === 'japanese');
 
     Object.keys(alternateNamesInUse).forEach((altName) => {
 
