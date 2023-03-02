@@ -27,7 +27,9 @@ let characterOverlayID = null;
 let speechbox = document.querySelector("#speech-box");
 let credits = document.querySelector("#credits");
 
-let alternateNamesInUse = {};
+// Name related variables
+let alternateNamesInUse = {}; // Used to store user chosen names
+let prefersJapaneseNames = false; // If this is true, names will default to Japanese for characters that have them.
 
 // Interface elements
 let backgroundSelector = document.querySelector("#background-selector");
@@ -386,7 +388,10 @@ function generateCharacterInterface() {
       // Set the value on the invisible dropdown
       characterSelector.value = e.target.getAttribute("value");
 
-
+      // If the user has not used this character before and has indicated they like the Japanese names, store their new name in the alternate names object.
+      if (character.alternateNames && !alternateNamesInUse[character.alternateNames[0]]?.alternateNames[0] && prefersJapaneseNames){
+        alternateNamesInUse[character.alternateNames[0]] = character.alternateNames[1];
+      }
 
       // Show the character preview panel, and fill it with the poses for the chosen character.
       togglePanel(characterPreview);
@@ -1105,6 +1110,9 @@ function generateNameSelectorWindow () {
 
     // Figure out what language we're wanting to change to.
     let language = e.target.closest('[language]').getAttribute('language')
+
+    prefersJapaneseNames = language === 'japanese';
+    console.log(prefersJapaneseNames);
 
     Object.keys(alternateNamesInUse).forEach((altName) => {
 
