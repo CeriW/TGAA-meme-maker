@@ -28,7 +28,7 @@ let speechbox = document.querySelector("#speech-box");
 let credits = document.querySelector("#credits");
 
 // Name related variables
-let alternateNamesInUse = {}; // Used to store user chosen names
+let alternateNamesInUse = JSON.parse(window.localStorage.getItem('alternateNamesInUse')) ?? {};  // An object storing the alternate names the user has chosen.
 let prefersJapaneseNames = window.localStorage.getItem('prefersJapaneseNames') === "true"; // If this is true, names will default to Japanese for characters that have them.
 
 // Interface elements
@@ -178,7 +178,6 @@ function generatePanelArtwork() {
     characterOverlay.src = `/assets/locations/${characterOverlayID}.png`;
 
     let currentCharacter = getCharacterFromID(characterSelector.value)
-    console.log(currentCharacter)
     if (Object.keys(alternateNamesInUse).length > 0){
       document.querySelector('#edit-names-toggle').classList.remove('hidden')
     }
@@ -389,8 +388,9 @@ function generateCharacterInterface() {
       characterSelector.value = e.target.getAttribute("value");
 
       // If the user has not used this character before and has indicated they like the Japanese names, store their new name in the alternate names object.
-      if (character.alternateNames && !alternateNamesInUse[character.alternateNames[0]]?.alternateNames[0] && prefersJapaneseNames){
+      if (character.alternateNames && !alternateNamesInUse[character.alternateNames[0]] && prefersJapaneseNames){
         alternateNamesInUse[character.alternateNames[0]] = character.alternateNames[1];
+        window.localStorage.setItem('alternateNamesInUse', JSON.stringify(alternateNamesInUse));
       }
 
       // Show the character preview panel, and fill it with the poses for the chosen character.
@@ -502,6 +502,7 @@ function generatePoses(e) {
   let currentCharacter = getCharacterFromID(chosenCharacter)
   if (currentCharacter?.alternateNames && !alternateNamesInUse[currentCharacter.alternateNames[0]]){
     alternateNamesInUse[currentCharacter.alternateNames[0]] = currentCharacter.alternateNames[0] ?? 'default';
+    window.localStorage.setItem('alternateNamesInUse', JSON.stringify(alternateNamesInUse));
   }
   
   // // SPOTIFY
@@ -830,7 +831,7 @@ function checkSpoilers(e) {
     document.querySelector("#remember-spoilers-okay").checked ||
     window.localStorage.getItem("reveal-spoilers")
   ) {
-    localStorage.setItem("reveal-spoilers", true);
+    window.localStorage.setItem("reveal-spoilers", true);
     spoilerWarning.remove();
     document.body.setAttribute('accept-spoilers', true)
     document.body.setAttribute('theme', theme)
@@ -940,8 +941,6 @@ async function displayWeather() {
           
           Promise.all(data)
           .then((info) => {
-
-            console.log(info)
             britishTimeDisplay.textContent = info[0].datetime.slice(11,16);
             japaneseTimeDisplay.textContent = info[1].datetime.slice(11,16);
 
@@ -1058,7 +1057,6 @@ function pasteQuote(type){
       if (text.length > 110 || text.indexOf('fuck') > -1){
         pasteQuote(type)
       } else{
-        console.log(data)
         document.querySelector('.active-canvas textarea').value = text
       }
     })
@@ -1122,6 +1120,8 @@ function generateNameSelectorWindow () {
       // The first name in the alternate names property should be the English name, the second should be the Japanese name
       let nameIndex = language === "english" ? 0 : 1
       alternateNamesInUse[altName] = character.alternateNames[nameIndex]
+      window.localStorage.setItem('alternateNamesInUse', JSON.stringify(alternateNamesInUse));
+
 
       // Make all of the appropriate radio buttons checked.
       let radioButtons = document.querySelectorAll(`.name-selector-form[for=${character.alternateNames[0]}] input[type="radio"]`)
@@ -1171,6 +1171,7 @@ function generateCharacterNameListInterface (characterID) {
     
     input.addEventListener('click', () => {
       alternateNamesInUse[alternateNames[0]] = altName;
+      window.localStorage.setItem('alternateNamesInUse', JSON.stringify(alternateNamesInUse));
       propagateAlternateNames();
     })
   })
