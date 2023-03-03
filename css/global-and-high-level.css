@@ -1,6 +1,12 @@
 @font-face {
   font-family: Toplar;
-  src: url(../assets/fonts/Toplar.woff);
+  src: url(assets/fonts/Toplar.woff);
+}
+
+@font-face {
+  font-family: 'MgOpen Cosmetica';
+  src: url('../assets/fonts/MgOpenCosmetica.woff2') format('woff2'),
+      url('../assets/fonts/MgOpenCosmetica.woff') format('woff');
 }
 
 html{
@@ -50,7 +56,9 @@ body{
 
 .material-icons.md-17 { font-size: 17px !important; }
 
-
+input{
+  accent-color: var(--blue);
+}
 
 /* Scrollbar styling ------------------- */
 

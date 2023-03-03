@@ -11,6 +11,7 @@
 // lastUpdated - a date string of the last time this character was updated. Will be used to generate a 'new' image tag for a set number of days.
 // posesAddedOnLastUpdate - will tag the specified poses as new for a set number of days.
 
+
 let characters = [
   
 {
@@ -25,7 +26,6 @@ let characters = [
   lastUpdated: null,
   posesAddedOnLastUpdate: 0,
 },
-
 {
   name: 'Herlock Sholmes',
   id:'sholmes-herlock-default',
@@ -38,6 +38,7 @@ let characters = [
   tags: ['homumiko'],
   lastUpdated: null,
   posesAddedOnLastUpdate: 0,
+
 },
 {
   name: 'Herlock Sholmes',
@@ -51,6 +52,7 @@ let characters = [
   tags: ['homumiko'],
   lastUpdated: null,
   posesAddedOnLastUpdate: 0,
+
 },
 
 {
@@ -246,6 +248,7 @@ let characters = [
   tags: [],
   lastUpdated: null,
   posesAddedOnLastUpdate: 0,
+
 },
 
 {
