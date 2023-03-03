@@ -44,6 +44,15 @@
       <div id="fb-root"></div>
       <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v16.0" nonce="CIiXsY1X"></script>
 
+      <aside id="modal" class = "hidden">
+        <div>
+          <span class="material-symbols-sharp">close</span>
+          <div id="modal-content">
+            Hello
+          </div>
+        </div>
+      </aside>
+
       <header>
         <div id="banner">
           <img src="assets/misc/banner.png">
@@ -56,12 +65,21 @@
           <div id="sticky-panel">
             <div id="canvases-container">
               
+              <div id="edit-names-toggle" class="hidden">
+                <span class="material-symbols-sharp">
+                  edit_square
+                  </span>
+                edit names
+              </div>
+              
               <a id="download">
                 <img width="100%" src="assets/misc/download.png">
                 <div><span class="material-icons md-17">download</span>Download my meme</span></div>
               </a>
+
+
             </div>
-            <span id="add-panel"><span class="material-icons md-17">add</span>Add panel</span>
+            <span id="add-panel"><span class="material-symbols-sharp">add</span>Add panel</span>
             <div id="theme-music"></div>
           </div>
         </div>
@@ -110,7 +128,7 @@
             <div id="character-selector-preview">
               
 
-              <div id="filter-toggle">
+              <div id="filter-toggle" style="display: none;">
                 Filters<span class="material-symbols-sharp">filter_alt</span>
               </div>
 
@@ -398,7 +416,7 @@
 
           I also broadcast this information on my Twitter using #tgaaMemeUpdate
           <div id="version-info">
-            Version 2.1.1 2023-02-24
+            Version 2.1.2 2023-02-27
           </div>
         </div>
 

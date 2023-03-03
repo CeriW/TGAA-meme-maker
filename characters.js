@@ -8,6 +8,7 @@
 //             Cases are commonly referred to the fans by the number of the game they appear in, then the order of that case. For example, case 9 is usually called 2-4 because it's the 4th part of the 2nd game.
 // images - the number of images in the folder to go with this character. The code depends on them being named sequentially beginning at 1 and can't work if there are any numbers missing.
 // tags - used during themed time periods. Will be used to place these characters at the top of the list.
+// alternate names - some characters have alternative names that users might want to toggle between (eg. Herlock Sholmes was callled Sherlock Holmes in the Japanese version)
 
 let characters = [
   
@@ -19,9 +20,8 @@ let characters = [
   appearsin: [true,true,true,true,true,false,true,true,true,true],
   images: 8,
   theme: 'https://open.spotify.com/embed/track/6t74To2T8PUd6k1dbSu10D?utm_source=generator',
-  tags: []
+  tags: [],
 },
-
 {
   name: 'Herlock Sholmes',
   id:'sholmes-herlock-default',
@@ -31,7 +31,8 @@ let characters = [
   images: 16,
   variant: 'default outfit',
   theme: 'https://open.spotify.com/embed/track/1QUX7xOPs80O5tiQb3MPqd?utm_source=generator',
-  tags: ['homumiko']
+  tags: ['homumiko'],
+  alternateNames: ['Sholmes', 'Holmes']
 },
 {
   name: 'Herlock Sholmes',
@@ -42,7 +43,8 @@ let characters = [
   images: 16,
   variant: 'casual outfit',
   theme: 'https://open.spotify.com/embed/track/5FQuOO8w56VPX1tJwaPKx8?utm_source=generator',
-  tags: ['homumiko']
+  tags: ['homumiko'],
+  alternateNames: ['Sholmes', 'Holmes']
 },
 
 {
@@ -167,7 +169,8 @@ let characters = [
   appearsin: [false,false,false,false,false,false,false,true,false,false],
   images: 1,
   theme: 'https://open.spotify.com/embed/track/3c4rqLvhHImiVKNPD0IN1V?utm_source=generator',
-  tags: []
+  tags: [],
+  alternateNames: ['Tusspells', 'Rozaic']
 },
 
 {
@@ -188,7 +191,8 @@ let characters = [
   nationality: 'british',
   appearsin: [false,false,false,false,false,false,false,true,true,true],
   images: 1,
-  tags: []
+  tags: [],
+  alternateNames: ['Gorey', 'Goulloyne']
 },
 
 {
@@ -198,7 +202,8 @@ let characters = [
   nationality: 'irish',
   appearsin: [false,false,true,false,false,false,false,false,false,false],
   images: 1,
-  tags: []
+  tags: [],
+  alternateNames: ['McGuilded', 'Megundal']
 },
 
 {
@@ -209,7 +214,8 @@ let characters = [
   appearsin: [false,true,false,false,false,false,false,false,false,false],
   images: 1,
   theme: 'https://open.spotify.com/embed/track/6x6OrJ2G3rdwTyYVFuezBf?utm_source=generator',
-  tags: []
+  tags: [],
+  alternateNames: ['Pavlova', 'Borschevic']
 },
 
 {
@@ -220,7 +226,8 @@ let characters = [
   appearsin: [false,false,true,true,true,false,true,true,true,true],
   images: 1,
   theme: 'https://open.spotify.com/embed/track/4g9GzmDyca2VZg7j5kx6AT?utm_source=generator',
-  tags: []
+  tags: [],
+  alternateNames: ['Stronghart', 'Vortex']
 },
 
 {
@@ -241,6 +248,7 @@ let characters = [
   nationality: 'japanese',
   appearsin: [false,false,false,false,false,true,false,false,false,false],
   images: 3,
+  alternateNames: ['Rei', 'Haori']
 },
 
 
