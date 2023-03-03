@@ -16,7 +16,7 @@ let locations = [
   {name   : "Defendant's Antechamber",               id:"defendants-antechamber-japan-right",              variant:'Japanese Court of Judicature', tags: []},
   {name   : "Prosecutor's Office",                   id:"prosecutors-office-left",                         tags: []},
   {name   : "Prison cell",                           id:"prison-cell",                                     variant: 'Outside', tags: []},
-  {name   : "Prison cell",                           id:"prison-cell-inside",                              variant: 'Inside', characterOverlay: "prison-cell-bars", tags: []},
+  {name   : "Prison cell",                           id:"prison-cell-inside",                              variant: 'Inside', characterOverlay: "prison-cell-bars", tags: [], addedDate: "Feb 24 2023"},
   {name   : "Crystal Tower base",                    id:"crystal-tower-base",                              tags: []},
   {name   : "Drebber's workshop",                    id:"drebbers-workshop",                               tags: []},
   {name   : "Drebber's room",                        id:"drebbers-room",                                   tags: []},
