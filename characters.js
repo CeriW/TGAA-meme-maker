@@ -8,6 +8,8 @@
 //             Cases are commonly referred to the fans by the number of the game they appear in, then the order of that case. For example, case 9 is usually called 2-4 because it's the 4th part of the 2nd game.
 // images - the number of images in the folder to go with this character. The code depends on them being named sequentially beginning at 1 and can't work if there are any numbers missing.
 // tags - used during themed time periods. Will be used to place these characters at the top of the list.
+// lastUpdated - a date string of the last time this character was updated. Will be used to generate a 'new' image tag for a set number of days.
+// posesAddedOnLastUpdate - will tag the specified poses as new for a set number of days.
 
 let characters = [
   
@@ -34,6 +36,7 @@ let characters = [
   theme: 'https://open.spotify.com/embed/track/1QUX7xOPs80O5tiQb3MPqd?utm_source=generator',
   tags: ['homumiko'],
   lastUpdated: 'Thu Mar 02 2023',
+  posesAddedOnLastUpdate: 2,
 },
 {
   name: 'Herlock Sholmes',

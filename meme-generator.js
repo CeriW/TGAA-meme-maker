@@ -48,6 +48,10 @@ let paths = {
   location: "assets/locations/",
 };
 
+
+// How many days we show 'new' tags for on icons
+let daysForNew = 14;
+
 // A very long list of characters and locations are pulled in from characters.js and locations.js
 
 // ---------------------------------------------------------------------------//
@@ -397,15 +401,11 @@ function generateLabelledIcon(type, object) {
         'url("assets/icons/flags/' + object.nationality + '.svg")';
       icon.appendChild(nationalityIcon);
 
-      if (object.lastUpdated && (new Date() - new Date(object.lastUpdated)) / (1000 * 60 * 60 * 24) < 14){
+      if (object.lastUpdated && (new Date() - new Date(object.lastUpdated)) / (1000 * 60 * 60 * 24) < daysForNew){
         let newIcon = document.createElement('img')
         newIcon.classList.add('new-icon')
         newIcon.src = "/assets/icons/new-icon.png"
         newIcon.width = 50;
-        // newIcon.textContent = "new"
-        // let newIconImage = document.createElement('img');
-        // newIconImage.src = "assets/icons/new-icon.png";
-        // newIcon.appendChild(newIconImage)
         icon.appendChild(newIcon)
       }
 
@@ -446,12 +446,13 @@ function generatePoses(e) {
   characterImg.src = paths.character + chosenCharacter + "/1.png";
   
   
+  let characterObject = characters.find((character) => character.id === chosenCharacter)
   
-  characterTheme = characters.find((character) => character.id === chosenCharacter)
+  // characterTheme = characters.find((character) => character.id === chosenCharacter)
   document.querySelector('#theme-music').innerHTML = 
-    characterTheme.theme 
+  characterObject.theme 
     ? `<iframe style="border-radius:12px" src="
-    ${characterTheme.theme ?? ''}
+    ${characterObject.theme ?? ''}
     &theme=0" width="100%" height="100" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     `
     : '';
@@ -490,6 +491,19 @@ function generatePoses(e) {
       i +
       '.png")';
     poseSelector.appendChild(newLabel);
+
+    if (
+      characterObject.posesAddedOnLastUpdate
+      && i > (characterObject.images - characterObject.posesAddedOnLastUpdate)
+      && (new Date() - new Date(characterObject.lastUpdated)) / (1000 * 60 * 60 * 24) < daysForNew){
+      let newIcon = document.createElement('img')
+      newIcon.classList.add('new-icon')
+      newIcon.src = "/assets/icons/new-icon.png"
+      newIcon.width = 50;
+      newLabel.appendChild(newIcon)
+    }
+
+
   }
 
   poseSelector.querySelector("label").setAttribute("selected", "");
