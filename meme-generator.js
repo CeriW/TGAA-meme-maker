@@ -404,7 +404,7 @@ function generateLabelledIcon(type, object) {
       if (object.lastUpdated && (new Date() - new Date(object.lastUpdated)) / (1000 * 60 * 60 * 24) < daysForNew){
         let newIcon = document.createElement('img')
         newIcon.classList.add('new-icon')
-        newIcon.src = "/assets/icons/new-icon.png"
+        newIcon.src = "/assets/icons/new-icon.svg"
         newIcon.width = 50;
         icon.appendChild(newIcon)
       }
@@ -418,7 +418,7 @@ function generateLabelledIcon(type, object) {
       if (object.addedDate && (new Date() - new Date(object.addedDate)) / (1000 * 60 * 60 * 24) < daysForNew){
         let newIcon = document.createElement('img')
         newIcon.classList.add('new-icon')
-        newIcon.src = "/assets/icons/new-icon.png"
+        newIcon.src = "/assets/icons/new-icon.svg"
         newIcon.width = 50;
         icon.appendChild(newIcon)
       }
@@ -507,7 +507,7 @@ function generatePoses(e) {
       && (new Date() - new Date(characterObject.lastUpdated)) / (1000 * 60 * 60 * 24) < daysForNew){
       let newIcon = document.createElement('img')
       newIcon.classList.add('new-icon')
-      newIcon.src = "/assets/icons/new-icon.png"
+      newIcon.src = "/assets/icons/new-icon.svg"
       newIcon.width = 50;
       newLabel.appendChild(newIcon)
     }
