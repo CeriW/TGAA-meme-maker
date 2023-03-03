@@ -23,6 +23,7 @@ let characters = [
   theme: 'https://open.spotify.com/embed/track/6t74To2T8PUd6k1dbSu10D?utm_source=generator',
   tags: [],
   lastUpdated: null,
+  posesAddedOnLastUpdate: 0,
 },
 
 {
@@ -35,8 +36,8 @@ let characters = [
   variant: 'default outfit',
   theme: 'https://open.spotify.com/embed/track/1QUX7xOPs80O5tiQb3MPqd?utm_source=generator',
   tags: ['homumiko'],
-  lastUpdated: 'Thu Mar 02 2023',
-  posesAddedOnLastUpdate: 2,
+  lastUpdated: null,
+  posesAddedOnLastUpdate: 0,
 },
 {
   name: 'Herlock Sholmes',
@@ -49,6 +50,7 @@ let characters = [
   theme: 'https://open.spotify.com/embed/track/5FQuOO8w56VPX1tJwaPKx8?utm_source=generator',
   tags: ['homumiko'],
   lastUpdated: null,
+  posesAddedOnLastUpdate: 0,
 },
 
 {
@@ -61,6 +63,7 @@ let characters = [
   theme: 'https://open.spotify.com/embed/track/09pXZRySXfq6Z17YiVnOJC?utm_source=generator',
   tags: [],
   lastUpdated: null,
+  posesAddedOnLastUpdate: 0,
 },
 
 {
@@ -73,6 +76,7 @@ let characters = [
   theme: 'https://open.spotify.com/embed/track/5OmhUtWkaW7czq8v42yjIg?utm_source=generator',
   tags: [],
   lastUpdated: null,
+  posesAddedOnLastUpdate: 0,
 },
 
 {
@@ -85,6 +89,7 @@ let characters = [
   theme: 'https://open.spotify.com/embed/track/3oCMdfOMvnlS9BBAZ2YBQ5?utm_source=generator',
   tags: [],
   lastUpdated: null,
+  posesAddedOnLastUpdate: 0,
 },
 
 {
@@ -97,6 +102,7 @@ let characters = [
   theme: 'https://open.spotify.com/embed/track/657DqxHnOmnX3ZRJlbs9xZ?utm_source=generator',
   tags: [],
   lastUpdated: null,
+  posesAddedOnLastUpdate: 0,
 },
 
 {
@@ -109,6 +115,7 @@ let characters = [
   theme: 'https://open.spotify.com/embed/track/582mS91YcS5PHaTx5LUPn4?utm_source=generator',
   tags: [],
   lastUpdated: null,
+  posesAddedOnLastUpdate: 0,
 },
 
 {
@@ -121,6 +128,7 @@ let characters = [
   theme: 'https://open.spotify.com/embed/track/0hWRHYklo8CRyV8BxVQugG?utm_source=generator',
   tags: [],
   lastUpdated: null,
+  posesAddedOnLastUpdate: 0,
 },
 
 {
@@ -135,6 +143,7 @@ let characters = [
   theme: 'https://open.spotify.com/embed/track/7rePNo1I17JmU49JX6rbnE?utm_source=generator',
   tags: ['homumiko'],
   lastUpdated: null,
+  posesAddedOnLastUpdate: 0,
 },
 
 // {
@@ -160,6 +169,7 @@ let characters = [
   theme: 'https://open.spotify.com/embed/track/1QBM9EnE2HiyIvEL1vz8U6?utm_source=generator',
   tags: [],
   lastUpdated: null,
+  posesAddedOnLastUpdate: 0,
 },
 
 {
@@ -171,6 +181,7 @@ let characters = [
   images: 3,
   tags: [],
   lastUpdated: null,
+  posesAddedOnLastUpdate: 0,
 },
 
 
@@ -184,6 +195,7 @@ let characters = [
   theme: 'https://open.spotify.com/embed/track/3c4rqLvhHImiVKNPD0IN1V?utm_source=generator',
   tags: [],
   lastUpdated: null,
+  posesAddedOnLastUpdate: 0,
 },
 
 {
@@ -196,6 +208,7 @@ let characters = [
   theme: 'https://open.spotify.com/embed/track/3R1YvtpoUWBWy6OGd92nU0?utm_source=generator',
   tags: [],
   lastUpdated: null,
+  posesAddedOnLastUpdate: 0,
 },
 
 {
@@ -207,6 +220,7 @@ let characters = [
   images: 1,
   tags: [],
   lastUpdated: null,
+  posesAddedOnLastUpdate: 0,
 },
 
 {
@@ -218,6 +232,7 @@ let characters = [
   images: 1,
   tags: [],
   lastUpdated: null,
+  posesAddedOnLastUpdate: 0,
 },
 
 {
@@ -230,6 +245,7 @@ let characters = [
   theme: 'https://open.spotify.com/embed/track/6x6OrJ2G3rdwTyYVFuezBf?utm_source=generator',
   tags: [],
   lastUpdated: null,
+  posesAddedOnLastUpdate: 0,
 },
 
 {
@@ -242,6 +258,7 @@ let characters = [
   theme: 'https://open.spotify.com/embed/track/4g9GzmDyca2VZg7j5kx6AT?utm_source=generator',
   tags: [],
   lastUpdated: null,
+  posesAddedOnLastUpdate: 0,
 },
 
 {
@@ -250,10 +267,11 @@ let characters = [
   gender: 'male',
   nationality: 'japanese',
   appearsin: [true,false,false,false,false,false,false,true,true,true],
-  images: 1,
+  images: 4,
   theme: 'https://open.spotify.com/embed/track/4qiFdo2jEF4AcZzj8LxPUP?utm_source=generator',
   tags: [],
-  lastUpdated: null,
+  lastUpdated: "Fri Mar 03 2023",
+  posesAddedOnLastUpdate: 0,
 },
 
 {
@@ -265,6 +283,7 @@ let characters = [
   images: 3,
   tags: [],
   lastUpdated: null,
+  posesAddedOnLastUpdate: 0,
 },
 
 
