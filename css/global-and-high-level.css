@@ -56,7 +56,9 @@ body{
 
 .material-icons.md-17 { font-size: 17px !important; }
 
-
+input{
+  accent-color: var(--blue);
+}
 
 /* Scrollbar styling ------------------- */
 

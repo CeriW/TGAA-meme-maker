@@ -5,7 +5,8 @@
 #spoiler-warning,
 #social-feed-heading,
 #download div,
-#filter-toggle{
+#filter-toggle,
+#modal > div{
   background: linear-gradient(to bottom, #65592d, #9E9150);
   color: #fff;
   padding: 10px 10px 10px 20px;
