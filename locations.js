@@ -35,5 +35,6 @@ let locations = [
   {name   : "Shamspeare's Flat",                     id:"shamspeares-flat",                                tags: []},
   {name   : "Experimentation Stage",                 id:"experimentation-stage",                           tags: []},
   {name   : "Madame Tuspells' Museum of Waxworks",   id:"madame-tuspells",                                 tags: []},
+  // {name   : "Waterloo Hotel lobby",                  id:"waterloo-hotel",                                  tags: ['homumiko'],    addedDate: "Sun Mar 05 2023"},
 
 ]

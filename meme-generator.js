@@ -414,8 +414,17 @@ function generateLabelledIcon(type, object) {
       break;
     case "location":
       iconURL = 'url("assets/locations/thumbnails/' + object.id + '.png")';
+      
+      if (object.addedDate && (new Date() - new Date(object.addedDate)) / (1000 * 60 * 60 * 24) < daysForNew){
+        let newIcon = document.createElement('img')
+        newIcon.classList.add('new-icon')
+        newIcon.src = "/assets/icons/new-icon.png"
+        newIcon.width = 50;
+        icon.appendChild(newIcon)
+      }
       break;
   }
+
   icon.style.backgroundImage = iconURL;
 
   let label = document.createElement("div");
