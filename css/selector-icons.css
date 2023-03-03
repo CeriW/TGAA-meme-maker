@@ -54,12 +54,16 @@ div[class*="icon"]:hover,
   text-align: center;
 }
 
-
-
 .variant-tag{
   font-size: 0.9em;
   font-style: italic;
   color: var(--gold)
+}
+
+.new-icon{
+  position: relative;
+  top: -10px;
+  left: -10px;
 }
 
 

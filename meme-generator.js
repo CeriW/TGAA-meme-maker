@@ -304,6 +304,7 @@ function generateCharacterInterface() {
     icon.setAttribute("gender", "gender-" + character.gender); // This is set like this since 'female' contains the string 'male'
     icon.setAttribute("nationality", character.nationality);
 
+
     for (i = 0; i < 10; i++) {
       icon.setAttribute("present-in-case-" + i, character.appearsin[i]);
     }
@@ -395,6 +396,20 @@ function generateLabelledIcon(type, object) {
       nationalityIcon.style.backgroundImage =
         'url("assets/icons/flags/' + object.nationality + '.svg")';
       icon.appendChild(nationalityIcon);
+
+      if (object.lastUpdated && (new Date() - new Date(object.lastUpdated)) / (1000 * 60 * 60 * 24) < 14){
+        let newIcon = document.createElement('img')
+        newIcon.classList.add('new-icon')
+        newIcon.src = "/assets/icons/new-icon.png"
+        newIcon.width = 50;
+        // newIcon.textContent = "new"
+        // let newIconImage = document.createElement('img');
+        // newIconImage.src = "assets/icons/new-icon.png";
+        // newIcon.appendChild(newIconImage)
+        icon.appendChild(newIcon)
+      }
+
+  
 
       break;
     case "location":
