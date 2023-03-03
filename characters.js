@@ -119,19 +119,6 @@ let characters = [
 },
 
 {
-  name: 'Soseki Natsume',
-  id:'natsume-soseki',
-  gender: 'male',
-  nationality: 'japanese',
-  appearsin: [false,false,false,true,false,true,true,false,false,false],
-  images: 9,
-  theme: 'https://open.spotify.com/embed/track/0hWRHYklo8CRyV8BxVQugG?utm_source=generator',
-  tags: [],
-  lastUpdated: null,
-  posesAddedOnLastUpdate: 0,
-},
-
-{
   name: 'Yujin Mikotoba',
   id:'mikotoba-yujin-london',
   gender: 'male',
@@ -142,6 +129,32 @@ let characters = [
   variant: 'London outfit',
   theme: 'https://open.spotify.com/embed/track/7rePNo1I17JmU49JX6rbnE?utm_source=generator',
   tags: ['homumiko'],
+  lastUpdated: null,
+  posesAddedOnLastUpdate: 0,
+},
+
+{
+  name: 'Kazuma Asogi',
+  id:'asogi-kazuma',
+  gender: 'male',
+  nationality: 'japanese',
+  appearsin: [true,false,false,false,false,false,false,true,true,true],
+  images: 4,
+  theme: 'https://open.spotify.com/embed/track/4qiFdo2jEF4AcZzj8LxPUP?utm_source=generator',
+  tags: [],
+  lastUpdated: "Fri Mar 03 2023",
+  posesAddedOnLastUpdate: 0,
+},
+
+{
+  name: 'Soseki Natsume',
+  id:'natsume-soseki',
+  gender: 'male',
+  nationality: 'japanese',
+  appearsin: [false,false,false,true,false,true,true,false,false,false],
+  images: 9,
+  theme: 'https://open.spotify.com/embed/track/0hWRHYklo8CRyV8BxVQugG?utm_source=generator',
+  tags: [],
   lastUpdated: null,
   posesAddedOnLastUpdate: 0,
 },
@@ -258,19 +271,6 @@ let characters = [
   theme: 'https://open.spotify.com/embed/track/4g9GzmDyca2VZg7j5kx6AT?utm_source=generator',
   tags: [],
   lastUpdated: null,
-  posesAddedOnLastUpdate: 0,
-},
-
-{
-  name: 'Kazuma Asogi',
-  id:'asogi-kazuma',
-  gender: 'male',
-  nationality: 'japanese',
-  appearsin: [true,false,false,false,false,false,false,true,true,true],
-  images: 4,
-  theme: 'https://open.spotify.com/embed/track/4qiFdo2jEF4AcZzj8LxPUP?utm_source=generator',
-  tags: [],
-  lastUpdated: "Fri Mar 03 2023",
   posesAddedOnLastUpdate: 0,
 },
 
