@@ -2,8 +2,8 @@
 
 // A string to set the theme with. If this is not null it will do some
 // rearranging of the data and add an attribute to the site class to match the theme. 
-let theme = null;
-// let theme = "homumiko";
+// let theme = null;
+let theme = "homumiko";
 
 
 // Some themes will contain spoilers, so we shouldn't show the theme until the 

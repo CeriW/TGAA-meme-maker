@@ -54,6 +54,20 @@ let characters = [
 },
 
 {
+  name: 'Herlock Sholmes',
+  id:'sholmes-herlock-japanese-jumble',
+  gender: 'male',
+  nationality: 'british',
+  appearsin: [false,true,true,true,true,false,true,true,true,true],
+  images: 13,
+  variant: 'Japanese Jumble',
+  theme: 'https://open.spotify.com/embed/track/5FQuOO8w56VPX1tJwaPKx8?utm_source=generator',
+  tags: ['homumiko'],
+  lastUpdated: "Sat Mar 04 2023",
+  posesAddedOnLastUpdate: 13,
+},
+
+{
   name: 'Susato Mikotoba',
   id:'mikotoba-susato',
   gender: 'female',
@@ -120,17 +134,31 @@ let characters = [
 
 {
   name: 'Yujin Mikotoba',
+  id:'mikotoba-yujin-japan',
+  gender: 'male',
+  nationality: 'japanese',
+  appearsin: [true,false,false,false,false,true,false,false,false,false],
+  images: 7,
+  variant: 'Japan outfit',
+  theme: 'https://open.spotify.com/embed/track/7rePNo1I17JmU49JX6rbnE?utm_source=generator',
+  tags: ['homumiko'],
+  lastUpdated: "Sat Mar 04 2023",
+  posesAddedOnLastUpdate: 7
+},
+
+
+{
+  name: 'Yujin Mikotoba',
   id:'mikotoba-yujin-london',
   gender: 'male',
   nationality: 'japanese',
   appearsin: [false,false,false,false,false,false,false,false,true,true],
-  images: 5,
-  // images: 14,
+  images: 14,
   variant: 'London outfit',
   theme: 'https://open.spotify.com/embed/track/7rePNo1I17JmU49JX6rbnE?utm_source=generator',
   tags: ['homumiko'],
-  lastUpdated: null,
-  posesAddedOnLastUpdate: 0,
+  lastUpdated: "Sat Mar 04 2023",
+  posesAddedOnLastUpdate: 8,
 },
 
 {
@@ -159,18 +187,6 @@ let characters = [
   posesAddedOnLastUpdate: 0,
 },
 
-// {
-//   name: 'Yujin Mikotoba',
-//   id:'mikotoba-yujin-japan',
-//   gender: 'male',
-//   nationality: 'japanese',
-//   appearsin: [true,false,false,false,false,true,false,false,false,false],
-//   // images: 5,
-//   images: 7,
-//   variant: 'London outfit',
-//   theme: 'https://open.spotify.com/embed/track/7rePNo1I17JmU49JX6rbnE?utm_source=generator',
-//   tags: ['homumiko']
-// },
 
 {
   name: 'Enoch Drebber',
