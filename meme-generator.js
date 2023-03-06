@@ -2,13 +2,13 @@
 
 // A string to set the theme with. If this is not null it will do some
 // rearranging of the data and add an attribute to the site class to match the theme. 
+
 // let theme = null;
-let theme = "homumiko";
 
+let theme = {name: "homumiko", isSpoiler: true};
 
-// Some themes will contain spoilers, so we shouldn't show the theme until the 
-// user has confirmed they're okay with this.
-let themeIsSpoiler = true;
+// let theme = {name: 'aprilfools2023', isSpoiler: false};
+// initialiseCumberbatchTheme();
 
 // ---------------------------------------------------------------------------//
 
@@ -84,13 +84,13 @@ function sortItemsByTag(characters, tag) {
 // Rearrange our characters and locations by tag. This is used during themed 
 // periods to prevent the need to manually rearrange things.
 if (theme){
-  characters = sortItemsByTag(characters, 'homumiko');
-  locations = sortItemsByTag(locations, 'homumiko');
+  characters = sortItemsByTag(characters, theme.name);
+  locations = sortItemsByTag(locations, theme.name);
 };
 
 // If the theme isn't a spoiler, change the theme immediately.
-if (theme && !themeIsSpoiler){
-  document.body.setAttribute('theme', theme);
+if (theme && !theme.isSpoiler){
+  document.body.setAttribute('theme', theme.name);
 };
 
 
@@ -799,7 +799,7 @@ function checkSpoilers(e) {
     localStorage.setItem("reveal-spoilers", true);
     spoilerWarning.remove();
     document.body.setAttribute('accept-spoilers', true)
-    document.body.setAttribute('theme', theme)
+    document.body.setAttribute('theme', theme.name)
   }
 
   // If this is running as the result of an event, it means that the okay
@@ -807,7 +807,7 @@ function checkSpoilers(e) {
   if (e && spoilerWarning) {
     spoilerWarning.remove();
     document.body.setAttribute('accept-spoilers', true)
-    document.body.setAttribute('theme', theme)
+    document.body.setAttribute('theme', theme.name)
   }
 }
 
@@ -1052,3 +1052,93 @@ function pasteQuote(type){
   })
 })
 
+
+
+
+
+
+
+
+
+
+/* APRIL FOOLS 2023 - BENEDICT CUMBERBATCH THEME -----------------------------*/
+
+function initialiseCumberbatchTheme () {
+
+  const benedictAlternateForenames = [
+    "Buttercup",
+    "Bendydoodle",
+    "Bonkyhort",
+    "Bodysnatch",
+    "Beetleborg",
+    "Bumblebee",
+    "Blunderbuss",
+    "Bubblebath",
+    "Bulbasaur",
+    "Billiardball",
+    "Butterfree",
+    "Bendyboot",
+    "Banister"
+  ]
+
+  const benedictAlternateSurnames = [
+    "Cumbersnatch",
+    "Crackerdoodle",
+    "Crunchynut",
+    "Cummerbund",
+    "Cabbagepatch",
+    "Cuttlefish",
+    "Cottonswab",
+    "Crumpetsnitch",
+    "Crumblescrunch",
+    "Charizard",
+    "Candlestick",
+    "Crackerjack",
+    "Custardbath",
+    "Candycrush",
+    "Counterstrike",
+    "Cinderblock"
+  ]
+
+
+  // Generate a new random name for Benedict Cumberbatch
+  function generateRandomCumberbatchName() {
+    let forename = benedictAlternateForenames[Math.floor(Math.random() * benedictAlternateForenames.length)]
+    let surname = benedictAlternateSurnames[Math.floor(Math.random() * benedictAlternateForenames.length)]
+
+    return forename + ' ' + surname;
+  }
+
+  // Add Benedict Cumberbatch to the characters array
+  characters.push({
+    name: "Sherlock Holmes",
+    id: "holmes-benedict",
+    variant: generateRandomCumberbatchName(),
+    gender: 'male',
+    nationality: 'british',
+    appearsin: [false,false,false,false,false,false,false,false,false,false],
+    images: 5,
+    tags: ['aprilfools2023'],
+    lastUpdated: "Apr 01 2023",
+    posesAddedOnLastUpdate: 5
+  })
+
+  // Display the random name on the page
+  function displayNewBenedictName () {
+    const benedictLabel = document.querySelector('.character-icon[value="holmes-benedict"] .variant-tag')
+    if (benedictLabel) {
+      benedictLabel.textContent = generateRandomCumberbatchName()
+    }
+  }
+
+  // Start off with a new random name
+  let benedict = characters.find((character) => character.id === "holmes-benedict")
+  benedict.variant = generateRandomCumberbatchName();
+
+  // Every 10 seconds, give Benedict a new name
+  window.setInterval(displayNewBenedictName, 10000)
+  
+
+
+
+}
