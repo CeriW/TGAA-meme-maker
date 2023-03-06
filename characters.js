@@ -12,7 +12,7 @@
 // posesAddedOnLastUpdate - will tag the specified poses as new for a set number of days.
 
 let characters = [
-  
+
 {
   name: 'Ryunosuke Naruhodo',
   id:'naruhodo-ryunosuke',
@@ -302,5 +302,16 @@ let characters = [
   posesAddedOnLastUpdate: 0,
 },
 
+{
+  name: "Sherlock Holmes",
+  id: "holmes-benedict",
+  gender: 'male',
+  nationality: 'british',
+  appearsin: [false,false,false,false,false,false,false,false,false,false],
+  images: 5,
+  tags: ['aprilfools2023'],
+  lastUpdated: "Apr 01 2023",
+  posesAddedOnLastUpdate: 5
+}
 
 ]
