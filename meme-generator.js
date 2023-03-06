@@ -1110,7 +1110,7 @@ function initialiseCumberbatchTheme () {
   }
 
   // Add Benedict Cumberbatch to the characters array
-  characters.push({
+  characters.unshift({
     name: "Sherlock Holmes",
     id: "holmes-benedict",
     variant: generateRandomCumberbatchName(),
