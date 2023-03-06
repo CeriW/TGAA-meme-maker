@@ -5,10 +5,9 @@
 
 // let theme = null;
 
-let theme = {name: "homumiko", isSpoiler: true}
+let theme = {name: "homumiko", isSpoiler: true};
 
-
-// let theme = {name: 'aprilfools2023', isSpoiler: false}
+// let theme = {name: 'aprilfools2023', isSpoiler: false};
 // initialiseCumberbatchTheme();
 
 // ---------------------------------------------------------------------------//
