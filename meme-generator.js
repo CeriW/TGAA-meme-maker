@@ -532,9 +532,9 @@ function generatePoses(e) {
   
   characterTheme = characters.find((character) => character.id === chosenCharacter)
   document.querySelector('#theme-music').innerHTML = 
-  characterObject.theme 
+  currentCharacter.theme 
     ? `<iframe style="border-radius:12px" src="
-    ${characterObject.theme ?? ''}
+    ${currentCharacter.theme ?? ''}
     &theme=0" width="100%" height="100" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     `
     : '';
@@ -575,9 +575,9 @@ function generatePoses(e) {
     poseSelector.appendChild(newLabel);
 
     if (
-      characterObject.posesAddedOnLastUpdate
-      && i > (characterObject.images - characterObject.posesAddedOnLastUpdate)
-      && (new Date() - new Date(characterObject.lastUpdated)) / (1000 * 60 * 60 * 24) < daysForNew){
+      currentCharacter.posesAddedOnLastUpdate
+      && i > (currentCharacter.images - currentCharacter.posesAddedOnLastUpdate)
+      && (new Date() - new Date(currentCharacter.lastUpdated)) / (1000 * 60 * 60 * 24) < daysForNew){
       let newIcon = document.createElement('img')
       newIcon.classList.add('new-icon')
       newIcon.src = "/assets/icons/new-icon.svg"
