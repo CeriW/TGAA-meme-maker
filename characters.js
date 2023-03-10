@@ -57,7 +57,7 @@ let characters = [
 
 {
   name: 'Herlock Sholmes',
-  id:'sholmes-herlock-japanese-jumble',
+  id:'sholmes-herlock-j-jumble',
   gender: 'male',
   nationality: 'british',
   appearsin: [false,true,true,true,true,false,true,true,true,true],
