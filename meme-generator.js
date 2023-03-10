@@ -160,8 +160,6 @@ function generatePanelArtwork() {
   backgrounds.forEach(function (background) {
     background.src = paths.location + backgroundSelector.value + ".jpg";
   });
-
-  console.log('generatePanelArtwork')
   
   // If a character has been purposely selected previously then set the character image
   if (characterSelected) {
