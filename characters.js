@@ -128,7 +128,7 @@ let characters = [
   gender: 'female',
   nationality: 'british',
   appearsin: [false,false,true,false,true,false,false,true,true,true],
-  images: 4,
+  images: 5,
   theme: 'https://open.spotify.com/embed/track/582mS91YcS5PHaTx5LUPn4?utm_source=generator',
   tags: [],
   lastUpdated: "2023-03-10",
