@@ -89,3 +89,15 @@ body[accept-spoilers] #social-feed-spoiler-notice{
 .tb_mc_post_in{
   background-color: transparent !important;
 }
+
+.tb_mc_author_info *{
+  font-family: 'Toplar', 'Baskerville Old Face', Georgia, serif !important;
+}
+
+.tb_mc_authorname{
+  font-size: 16px !important;
+}
+
+.tb_mc_post_info * {
+  font-size: 14px !important;
+}

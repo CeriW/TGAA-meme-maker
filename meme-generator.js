@@ -2,13 +2,13 @@
 
 // A string to set the theme with. If this is not null it will do some
 // rearranging of the data and add an attribute to the site class to match the theme. 
-let theme = null;
-// let theme = "homumiko";
 
+// let theme = null;
 
-// Some themes will contain spoilers, so we shouldn't show the theme until the 
-// user has confirmed they're okay with this.
-let themeIsSpoiler = true;
+let theme = {name: "homumiko", isSpoiler: true};
+
+// let theme = {name: 'aprilfools2023', isSpoiler: false};
+// initialiseCumberbatchTheme();
 
 // ---------------------------------------------------------------------------//
 
@@ -53,6 +53,10 @@ let paths = {
   location: "assets/locations/",
 };
 
+
+// How many days we show 'new' tags for on icons
+let daysForNew = 14;
+
 // alternateNamesInUse = {
 //   "sholmes-herlock-default": "Holmes"
 // }
@@ -89,13 +93,13 @@ function sortItemsByTag(characters, tag) {
 // Rearrange our characters and locations by tag. This is used during themed 
 // periods to prevent the need to manually rearrange things.
 if (theme){
-  characters = sortItemsByTag(characters, 'homumiko');
-  locations = sortItemsByTag(locations, 'homumiko');
+  characters = sortItemsByTag(characters, theme.name);
+  locations = sortItemsByTag(locations, theme.name);
 };
 
 // If the theme isn't a spoiler, change the theme immediately.
-if (theme && !themeIsSpoiler){
-  document.body.setAttribute('theme', theme);
+if (theme && !theme.isSpoiler){
+  document.body.setAttribute('theme', theme.name);
 };
 
 
@@ -367,6 +371,7 @@ function generateCharacterInterface() {
     icon.setAttribute("gender", "gender-" + character.gender); // This is set like this since 'female' contains the string 'male'
     icon.setAttribute("nationality", character.nationality);
 
+
     for (i = 0; i < 10; i++) {
       icon.setAttribute("present-in-case-" + i, character.appearsin[i]);
     }
@@ -465,11 +470,30 @@ function generateLabelledIcon(type, object) {
         'url("assets/icons/flags/' + object.nationality + '.svg")';
       icon.appendChild(nationalityIcon);
 
+      if (object.lastUpdated && (new Date() - new Date(object.lastUpdated)) / (1000 * 60 * 60 * 24) < daysForNew){
+        let newIcon = document.createElement('img')
+        newIcon.classList.add('new-icon')
+        newIcon.src = "/assets/icons/new-icon.svg"
+        newIcon.width = 50;
+        icon.appendChild(newIcon)
+      }
+
+  
+
       break;
     case "location":
       iconURL = 'url("assets/locations/thumbnails/' + object.id + '.png")';
+      
+      if (object.addedDate && (new Date() - new Date(object.addedDate)) / (1000 * 60 * 60 * 24) < daysForNew){
+        let newIcon = document.createElement('img')
+        newIcon.classList.add('new-icon')
+        newIcon.src = "/assets/icons/new-icon.svg"
+        newIcon.width = 50;
+        icon.appendChild(newIcon)
+      }
       break;
   }
+
   icon.style.backgroundImage = iconURL;
 
   let label = document.createElement("div");
@@ -505,11 +529,12 @@ function generatePoses(e) {
     window.localStorage.setItem('alternateNamesInUse', JSON.stringify(alternateNamesInUse));
   }
   
-  // SPOTIFY
+  
+  characterTheme = characters.find((character) => character.id === chosenCharacter)
   document.querySelector('#theme-music').innerHTML = 
-  currentCharacter.theme 
+  characterObject.theme 
     ? `<iframe style="border-radius:12px" src="
-    ${currentCharacter.theme ?? ''}
+    ${characterObject.theme ?? ''}
     &theme=0" width="100%" height="100" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     `
     : '';
@@ -548,6 +573,19 @@ function generatePoses(e) {
       i +
       '.png")';
     poseSelector.appendChild(newLabel);
+
+    if (
+      characterObject.posesAddedOnLastUpdate
+      && i > (characterObject.images - characterObject.posesAddedOnLastUpdate)
+      && (new Date() - new Date(characterObject.lastUpdated)) / (1000 * 60 * 60 * 24) < daysForNew){
+      let newIcon = document.createElement('img')
+      newIcon.classList.add('new-icon')
+      newIcon.src = "/assets/icons/new-icon.svg"
+      newIcon.width = 50;
+      newLabel.appendChild(newIcon)
+    }
+
+
   }
 
   poseSelector.querySelector("label").setAttribute("selected", "");
@@ -834,7 +872,7 @@ function checkSpoilers(e) {
     window.localStorage.setItem("reveal-spoilers", true);
     spoilerWarning.remove();
     document.body.setAttribute('accept-spoilers', true)
-    document.body.setAttribute('theme', theme)
+    document.body.setAttribute('theme', theme.name)
   }
 
   // If this is running as the result of an event, it means that the okay
@@ -842,7 +880,7 @@ function checkSpoilers(e) {
   if (e && spoilerWarning) {
     spoilerWarning.remove();
     document.body.setAttribute('accept-spoilers', true)
-    document.body.setAttribute('theme', theme)
+    document.body.setAttribute('theme', theme.name)
   }
 }
 
@@ -1179,4 +1217,94 @@ function generateCharacterNameListInterface (characterID) {
   let selectedName = alternateNamesInUse[thisCharacter.alternateNames[0] ?? thisCharacter.id]
   namePanel.querySelector(`input[value="${selectedName}"]`).setAttribute('checked', true)
   return namePanel;
+}
+
+
+
+
+
+
+
+
+
+/* APRIL FOOLS 2023 - BENEDICT CUMBERBATCH THEME -----------------------------*/
+
+function initialiseCumberbatchTheme () {
+
+  const benedictAlternateForenames = [
+    "Buttercup",
+    "Bendydoodle",
+    "Bonkyhort",
+    "Bodysnatch",
+    "Beetleborg",
+    "Bumblebee",
+    "Blunderbuss",
+    "Bubblebath",
+    "Bulbasaur",
+    "Billiardball",
+    "Butterfree",
+    "Bendyboot",
+    "Banister"
+  ]
+
+  const benedictAlternateSurnames = [
+    "Cumbersnatch",
+    "Crackerdoodle",
+    "Crunchynut",
+    "Cummerbund",
+    "Cabbagepatch",
+    "Cuttlefish",
+    "Cottonswab",
+    "Crumpetsnitch",
+    "Crumblescrunch",
+    "Charizard",
+    "Candlestick",
+    "Crackerjack",
+    "Custardbath",
+    "Candycrush",
+    "Counterstrike",
+    "Cinderblock"
+  ]
+
+
+  // Generate a new random name for Benedict Cumberbatch
+  function generateRandomCumberbatchName() {
+    let forename = benedictAlternateForenames[Math.floor(Math.random() * benedictAlternateForenames.length)]
+    let surname = benedictAlternateSurnames[Math.floor(Math.random() * benedictAlternateForenames.length)]
+
+    return forename + ' ' + surname;
+  }
+
+  // Add Benedict Cumberbatch to the characters array
+  characters.unshift({
+    name: "Sherlock Holmes",
+    id: "holmes-benedict",
+    variant: generateRandomCumberbatchName(),
+    gender: 'male',
+    nationality: 'british',
+    appearsin: [false,false,false,false,false,false,false,false,false,false],
+    images: 5,
+    tags: ['aprilfools2023'],
+    lastUpdated: "Apr 01 2023",
+    posesAddedOnLastUpdate: 5
+  })
+
+  // Display the random name on the page
+  function displayNewBenedictName () {
+    const benedictLabel = document.querySelector('.character-icon[value="holmes-benedict"] .variant-tag')
+    if (benedictLabel) {
+      benedictLabel.textContent = generateRandomCumberbatchName()
+    }
+  }
+
+  // Start off with a new random name
+  let benedict = characters.find((character) => character.id === "holmes-benedict")
+  benedict.variant = generateRandomCumberbatchName();
+
+  // Every 10 seconds, give Benedict a new name
+  window.setInterval(displayNewBenedictName, 10000)
+  
+
+
+
 }
