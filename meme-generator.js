@@ -161,15 +161,13 @@ function generatePanelArtwork() {
     background.src = paths.location + backgroundSelector.value + ".jpg";
   });
 
+  console.log('generatePanelArtwork')
   
   // If a character has been purposely selected previously then set the character image
   if (characterSelected) {
     characterOverlay.src = `/assets/locations/${characterOverlayID}.png`;
 
     let currentCharacter = getCharacterFromID(characterSelector.value)
-    if (Object.keys(alternateNamesInUse).length > 0 && currentCharacter.alternateNames && alternateNamesInUse[currentCharacter.alternateNames[0]]){
-      document.querySelector('#edit-names-toggle').classList.remove('hidden')
-    }
 
     if (currentCharacter.alternateNames){
       generateNameSelectorWindow();
@@ -178,6 +176,22 @@ function generatePanelArtwork() {
       tag.setAttribute('character', currentCharacter.id)
     }
     propagateAlternateNames()
+
+    getCharactersInUse()
+    console.log(charactersInUse)
+    let charactersInUseHaveAlternateNames = false;
+    charactersInUse.forEach((char) => {
+      if (!getCharacterFromID(char)){
+        charactersInUseHaveAlternateNames = true
+      }
+    })
+
+    // if (Object.keys(alternateNamesInUse).length > 0 && currentCharacter.alternateNames && alternateNamesInUse[currentCharacter.alternateNames[0]]){
+    if (charactersInUseHaveAlternateNames){
+      document.querySelector('#edit-names-toggle').classList.remove('hidden')
+    } else{
+      document.querySelector('#edit-names-toggle').classList.add('hidden')
+    }
   }
 }
 
