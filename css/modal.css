@@ -55,7 +55,7 @@
   margin-bottom: 10px;
 }
 
-.name-language-selector{
+.name-language-selector:not(.name-reset){
   display: flex;
   align-items: center;
   gap: 10px;
@@ -65,7 +65,7 @@
   transition: 0.2s;
 }
 
-.name-language-selector:hover{
+.name-language-selector:not(.name-reset):hover{
   box-shadow: 0 0 10px black;
 }
 
@@ -75,4 +75,11 @@
   justify-content: space-between;
   gap: 0 10px;
   margin-top: 40px;
+}
+
+
+.name-reset{
+  position: absolute;
+  right: 20px;
+  top: 89px;
 }
