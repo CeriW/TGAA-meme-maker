@@ -32,7 +32,7 @@ let speechbox = document.querySelector("#speech-box");
 let credits = document.querySelector("#credits");
 
 // Name related variables
-let alternateNamesInUse = JSON.parse(window.localStorage.getItem('alternateNamesInUse')) ?? {};  // An object storing the alternate names the user has chosen.
+let alternateNamesInUse = window.localStorage.getItem('alternateNamesInUse') ? JSON.parse(window.localStorage.getItem('alternateNamesInUse')) : {};  // An object storing the alternate names the user has chosen.
 let prefersJapaneseNames = window.localStorage.getItem('prefersJapaneseNames') === "true"; // If this is true, names will default to Japanese for characters that have them.
 
 // Interface elements
@@ -1154,8 +1154,10 @@ function generateNameSelectorWindow () {
   // Update all characters to their English or Japanese names.
   function updateNamesLanguage(e){
 
+    let clickedButton = e.target.closest('[language]')
+
     // Figure out what language we're wanting to change to.
-    let language = e.target.closest('[language]').getAttribute('language')
+    let language = clickedButton.getAttribute('language')
 
     prefersJapaneseNames = language === 'japanese';
     window.localStorage.setItem('prefersJapaneseNames', language === 'japanese');
@@ -1181,6 +1183,7 @@ function generateNameSelectorWindow () {
         }
       })
     })
+
 
     propagateAlternateNames();
 
