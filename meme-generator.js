@@ -178,7 +178,7 @@ function generatePanelArtwork() {
     characterOverlay.src = `/assets/locations/${characterOverlayID}.png`;
 
     let currentCharacter = getCharacterFromID(characterSelector.value)
-    if (Object.keys(alternateNamesInUse).length > 0){
+    if (Object.keys(alternateNamesInUse).length > 0 && alternateNamesInUse[currentCharacter.alternateNames[0]]){
       document.querySelector('#edit-names-toggle').classList.remove('hidden')
     }
 
