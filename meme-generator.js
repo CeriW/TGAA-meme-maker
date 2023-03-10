@@ -1169,9 +1169,8 @@ function generateNameSelectorWindow () {
   }
 
   let charactersInUse = [];
-  
   document.querySelectorAll('img.tag-image').forEach((img) => charactersInUse.push(img.getAttribute('character')));
-  console.log(charactersInUse)
+
   
   for (const [key] of Object.entries(alternateNamesInUse)) {
 
