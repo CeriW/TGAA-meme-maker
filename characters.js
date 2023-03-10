@@ -49,6 +49,7 @@ let characters = [
   images: 16,
   variant: 'casual outfit',
   theme: 'https://open.spotify.com/embed/track/5FQuOO8w56VPX1tJwaPKx8?utm_source=generator',
+  alternateNames: ['Sholmes', 'Holmes'],
   tags: ['homumiko'],
   lastUpdated: null,
   posesAddedOnLastUpdate: 0,
