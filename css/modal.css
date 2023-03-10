@@ -74,13 +74,17 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 0 10px;
+  gap: 10px;
   margin-top: 40px;
 }
 
+@media (max-width: 650px){
+  .name-language-selector-container{
+    flex-direction: column;
+  }
+}
 
 .name-reset{
-  position: absolute;
-  right: 20px;
-  top: 40px;
+  width: 100%;
+  text-align: right;
 }

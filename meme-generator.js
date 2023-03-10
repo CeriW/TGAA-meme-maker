@@ -1138,11 +1138,11 @@ function generateNameSelectorWindow () {
     <div id="name-selector-choices"></div>
 
     <div class="name-language-selector-container">
-      <div class="name-language-selector" language="english"><img src="assets/icons/flags/british.svg" width=38>Make all names English</div>
-      <div class="name-language-selector" language="japanese"><img src="assets/icons/flags/japanese.svg" width=38>Make all names Japanese</div>
       <div class="name-language-selector name-reset" language="english">
         <span class="material-icons">restart_alt</span> Reset
       </div>
+      <div class="name-language-selector" language="english"><img src="assets/icons/flags/british.svg" width=38>Make all names English</div>
+      <div class="name-language-selector" language="japanese"><img src="assets/icons/flags/japanese.svg" width=38>Make all names Japanese</div>
     </div>
   `;
 
