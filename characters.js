@@ -76,11 +76,11 @@ let characters = [
   gender: 'female',
   nationality: 'japanese',
   appearsin: [true,true,true,true,true,true,true,true,true,true],
-  images: 15,
+  images: 16,
   theme: 'https://open.spotify.com/embed/track/09pXZRySXfq6Z17YiVnOJC?utm_source=generator',
   tags: [],
-  lastUpdated: null,
-  posesAddedOnLastUpdate: 0,
+  lastUpdated: "2023-03-10",
+  posesAddedOnLastUpdate: 1,
 },
 
 {
@@ -131,8 +131,8 @@ let characters = [
   images: 4,
   theme: 'https://open.spotify.com/embed/track/582mS91YcS5PHaTx5LUPn4?utm_source=generator',
   tags: [],
-  lastUpdated: null,
-  posesAddedOnLastUpdate: 0,
+  lastUpdated: "2023-03-10",
+  posesAddedOnLastUpdate: 1,
 },
 
 {
@@ -263,11 +263,11 @@ let characters = [
   gender: 'male',
   nationality: 'irish',
   appearsin: [false,false,true,false,false,false,false,false,false,false],
-  images: 1,
+  images: 2,
   tags: [],
   alternateNames: ['McGuilded', 'Megundal'],
-  lastUpdated: null,
-  posesAddedOnLastUpdate: 0,
+  lastUpdated: "2023-03-10",
+  posesAddedOnLastUpdate: 1,
 },
 
 {
