@@ -174,7 +174,7 @@ let characters = [
   theme: 'https://open.spotify.com/embed/track/4qiFdo2jEF4AcZzj8LxPUP?utm_source=generator',
   tags: [],
   lastUpdated: "Fri Mar 03 2023",
-  posesAddedOnLastUpdate: 0,
+  posesAddedOnLastUpdate: 3,
 },
 
 {
