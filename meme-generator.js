@@ -26,6 +26,8 @@ let characterImg;
 let tag;
 let characterOverlay;
 let characterOverlayID = null;
+
+
 let speechbox = document.querySelector("#speech-box");
 let credits = document.querySelector("#credits");
 
@@ -48,6 +50,8 @@ let modalContent = document.querySelector('#modal-content')
 // while selecting a location
 let characterSelected = false;
 document.body.setAttribute("character-selected", characterSelected);
+let charactersInUse = [];
+
 
 // The locations to find certain visual elements
 let paths = {
@@ -127,17 +131,16 @@ document.querySelectorAll('#modal .material-symbols-sharp').forEach((button) => 
 })
 
 
-document.querySelectorAll('#edit-names-toggle').forEach((button) => {
-  button.addEventListener('click', () => {
+document.querySelector('#edit-names-toggle').addEventListener('click', () => {
     togglePanel(document.querySelector('#modal'));
     generateNameSelectorWindow();
-  })
-})
+  });
 
 
 
 
 // ---------------------------------------------------------------------------//
+
 
 function generateLocations() {
   locations.forEach(function (location) {
@@ -1168,8 +1171,7 @@ function generateNameSelectorWindow () {
 
   }
 
-  let charactersInUse = [];
-  document.querySelectorAll('img.tag-image').forEach((img) => charactersInUse.push(img.getAttribute('character')));
+  getCharactersInUse();
 
   
   for (const [key] of Object.entries(alternateNamesInUse)) {
@@ -1182,6 +1184,11 @@ function generateNameSelectorWindow () {
     }
   }
 }
+
+function getCharactersInUse() { 
+  charactersInUse = [];
+  document.querySelectorAll('img.tag-image').forEach((img) => charactersInUse.push(img.getAttribute('character')));
+};
 
 // Generate the names interface for each individual character.
 function generateCharacterNameListInterface (characterID) {
