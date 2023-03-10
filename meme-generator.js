@@ -589,7 +589,8 @@ function generatePoses(e) {
       newIcon.classList.add('new-icon')
       newIcon.src = "/assets/icons/new-icon.svg"
       newIcon.width = 50;
-      newLabel.appendChild(newIcon)
+      newLabel.style.order = 1;
+      newLabel.appendChild(newIcon);
     }
 
 
