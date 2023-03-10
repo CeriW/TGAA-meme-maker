@@ -12,6 +12,8 @@ let theme = {name: "homumiko", isSpoiler: true};
 // let theme = {name: 'aprilfools2023', isSpoiler: false};
 // initialiseCumberbatchTheme();
 
+console.log('3.0.0')
+
 // ---------------------------------------------------------------------------//
 
 
