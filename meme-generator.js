@@ -5,7 +5,9 @@
 
 // let theme = null;
 
-let theme = {name: "homumiko", isSpoiler: true};
+let theme = {name: null, isSpoiler: null};
+
+// let theme = {name: "homumiko", isSpoiler: true};
 
 // let theme = {name: 'aprilfools2023', isSpoiler: false};
 // initialiseCumberbatchTheme();
@@ -76,26 +78,6 @@ document.querySelector("#spoilers-okay").addEventListener("click", (e) => {
 });
 checkSpoilers();
 
-
-function sortItemsByTag(characters, tag) {
-  return characters.sort((a, b) => {
-    if (a?.tags.includes(tag) && !b?.tags.includes(tag)) {
-      return -1; // a should come before b
-    } else if (!a?.tags.includes(tag) && b?.tags.includes(tag)) {
-      return 1; // b should come before a
-    } else {
-      return 0; // no change to order
-    }
-  });
-}
-
-
-// Rearrange our characters and locations by tag. This is used during themed 
-// periods to prevent the need to manually rearrange things.
-if (theme){
-  characters = sortItemsByTag(characters, theme.name);
-  locations = sortItemsByTag(locations, theme.name);
-};
 
 // If the theme isn't a spoiler, change the theme immediately.
 if (theme && !theme.isSpoiler){
@@ -182,7 +164,7 @@ function generatePanelArtwork() {
     characterOverlay.src = `/assets/locations/${characterOverlayID}.png`;
 
     let currentCharacter = getCharacterFromID(characterSelector.value)
-    if (Object.keys(alternateNamesInUse).length > 0 && alternateNamesInUse[currentCharacter.alternateNames[0]]){
+    if (Object.keys(alternateNamesInUse).length > 0 && currentCharacter.alternateNames && alternateNamesInUse[currentCharacter.alternateNames[0]]){
       document.querySelector('#edit-names-toggle').classList.remove('hidden')
     }
 
@@ -370,7 +352,10 @@ function generateCharacterInterface() {
     let icon = generateLabelledIcon("character", character);
     icon.setAttribute("gender", "gender-" + character.gender); // This is set like this since 'female' contains the string 'male'
     icon.setAttribute("nationality", character.nationality);
-
+    
+    if (character.tags.includes(theme.name)){
+      icon.style.order = 0;
+    }
 
     for (i = 0; i < 10; i++) {
       icon.setAttribute("present-in-case-" + i, character.appearsin[i]);
@@ -412,13 +397,16 @@ function generateLocationInterface() {
     // Generate an icon
     let icon = generateLabelledIcon("location", location);
     backgroundPreview.appendChild(icon);
+    
+    if (location.tags.includes(theme.name)){
+      icon.style.order = 0;
+    }
 
     // When the icon is clicked, set the value of the invisible dropdown to match,
     // toggle the location panel off and regenerate our current panel so it can
     // have the new location
     icon.addEventListener("click", function (e) {
       backgroundSelector.value = e.target.getAttribute("value");
-
       characterOverlayID = locations.find((location) => location.id === backgroundSelector.value).characterOverlay ?? null;
 
       togglePanel(backgroundPreview);
@@ -476,9 +464,9 @@ function generateLabelledIcon(type, object) {
         newIcon.src = "/assets/icons/new-icon.svg"
         newIcon.width = 50;
         icon.appendChild(newIcon)
+        icon.style.order = 1;
       }
 
-  
 
       break;
     case "location":
@@ -490,6 +478,7 @@ function generateLabelledIcon(type, object) {
         newIcon.src = "/assets/icons/new-icon.svg"
         newIcon.width = 50;
         icon.appendChild(newIcon)
+        icon.style.order = 1;
       }
       break;
   }
