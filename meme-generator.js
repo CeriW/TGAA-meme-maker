@@ -178,7 +178,6 @@ function generatePanelArtwork() {
     propagateAlternateNames()
 
     getCharactersInUse()
-    console.log(charactersInUse)
     let charactersInUseHaveAlternateNames = false;
     charactersInUse.forEach((char) => {
       if (!getCharacterFromID(char)){
@@ -186,7 +185,6 @@ function generatePanelArtwork() {
       }
     })
 
-    // if (Object.keys(alternateNamesInUse).length > 0 && currentCharacter.alternateNames && alternateNamesInUse[currentCharacter.alternateNames[0]]){
     if (charactersInUseHaveAlternateNames){
       document.querySelector('#edit-names-toggle').classList.remove('hidden')
     } else{
