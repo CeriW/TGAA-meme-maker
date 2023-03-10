@@ -63,7 +63,7 @@ let characters = [
   appearsin: [false,true,true,true,true,false,true,true,true,true],
   images: 13,
   variant: 'Japanese Jumble',
-  theme: 'https://open.spotify.com/embed/track/5FQuOO8w56VPX1tJwaPKx8?utm_source=generator',
+  theme: 'https://open.spotify.com/embed/track/0EFqdvTgJMPd02XUUCsHnI?utm_source=generator',
   tags: ['homumiko'],
   lastUpdated: "Sat Mar 04 2023",
   posesAddedOnLastUpdate: 13,
