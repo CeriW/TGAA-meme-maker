@@ -251,5 +251,15 @@ let characters = [
   alternateNames: ['Rei', 'Haori']
 },
 
+{
+  name: 'Ashley Graydon',
+  id: 'graydon-ashley',
+  gender: 'male',
+  nationality: 'british',
+  appearsin: [false,false,false,false,true,false,false,false,false,false],
+  images: 5,
+  alternateNames: ['Graydon', 'Chrogray', 'Benedict', 'Egg']
+}
+
 
 ]
