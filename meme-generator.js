@@ -204,7 +204,7 @@ function propagateAlternateNames() {
       characters.find((character) => (character.alternateNames ?? []).includes(image.getAttribute('character')))
       ?? getCharacterFromID(image.getAttribute('character'))
 
-    tagPath = alternateNamesInUse[image.getAttribute('character')] ? "/tag-" + alternateNamesInUse[image.getAttribute('character').toLowerCase()] + '.png' : "/tag-default.png"
+    tagPath = alternateNamesInUse[image.getAttribute('character')] ? "/tag-" + alternateNamesInUse[image.getAttribute('character')].toLowerCase() + '.png' : "/tag-default.png"
     
     if (currentCharacter){
       image.src = paths.character + currentCharacter.id + tagPath;
