@@ -354,7 +354,7 @@ function generateCharacterInterface() {
     icon.setAttribute("nationality", character.nationality);
     
     if (character.tags.includes(theme.name)){
-      icon.style.order = 0;
+      icon.style.order = 1;
     }
 
     for (i = 0; i < 10; i++) {
@@ -399,7 +399,7 @@ function generateLocationInterface() {
     backgroundPreview.appendChild(icon);
     
     if (location.tags.includes(theme.name)){
-      icon.style.order = 0;
+      icon.style.order = 1;
     }
 
     // When the icon is clicked, set the value of the invisible dropdown to match,
@@ -464,7 +464,7 @@ function generateLabelledIcon(type, object) {
         newIcon.src = "/assets/icons/new-icon.svg"
         newIcon.width = 50;
         icon.appendChild(newIcon)
-        icon.style.order = 1;
+        icon.style.order = 2;
       }
 
 

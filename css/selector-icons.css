@@ -12,7 +12,7 @@ div[class*="icon"]:not(.tb__icon),
   background-color: rgba(255,255,255,0.05);
   border-radius: 50%;
   margin: 15px 15px 90px;
-  order: 2;
+  order: 3;
 }
 
 div[class*="icon"][selected="true"]{
