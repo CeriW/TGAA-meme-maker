@@ -512,6 +512,9 @@ function generatePoses(e) {
   // Reset the character if we're choosing a new one
   characterImg.src = paths.character + chosenCharacter + "/1.png";
 
+  characterImg.classList.add('character-img')
+  characterImg.setAttribute('character', chosenCharacter);
+
   let currentCharacter = getCharacterFromID(chosenCharacter)
   if (currentCharacter?.alternateNames && !alternateNamesInUse[currentCharacter.alternateNames[0]]){
     alternateNamesInUse[currentCharacter.alternateNames[0]] = currentCharacter.alternateNames[0] ?? 'default';
@@ -1165,10 +1168,19 @@ function generateNameSelectorWindow () {
 
   }
 
+  let charactersInUse = [];
+  
+  document.querySelectorAll('img.tag-image').forEach((img) => charactersInUse.push(img.getAttribute('character')));
+  console.log(charactersInUse)
   
   for (const [key] of Object.entries(alternateNamesInUse)) {
-    let characterId = characters.find((character) => (character.alternateNames ?? []).includes(key)).id
-    modalContent.querySelector('#name-selector-choices').appendChild(generateCharacterNameListInterface(characterId))
+
+    let characterObject = characters.find((character) => (character.alternateNames ?? []).includes(key));
+    let characterId = characterObject.id
+
+    if (charactersInUse.includes(characterObject.id) || charactersInUse.includes(characterObject?.alternateNames[0])){
+      modalContent.querySelector('#name-selector-choices').appendChild(generateCharacterNameListInterface(characterId))
+    }
   }
 }
 
