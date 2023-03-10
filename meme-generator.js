@@ -5,6 +5,8 @@
 
 // let theme = null;
 
+// let theme = {name: null, isSpoiler: null};
+
 let theme = {name: "homumiko", isSpoiler: true};
 
 // let theme = {name: 'aprilfools2023', isSpoiler: false};
@@ -24,23 +26,32 @@ let characterImg;
 let tag;
 let characterOverlay;
 let characterOverlayID = null;
+
+
 let speechbox = document.querySelector("#speech-box");
 let credits = document.querySelector("#credits");
+
+// Name related variables
+let alternateNamesInUse = window.localStorage.getItem('alternateNamesInUse') ? JSON.parse(window.localStorage.getItem('alternateNamesInUse')) : {};  // An object storing the alternate names the user has chosen.
+let prefersJapaneseNames = window.localStorage.getItem('prefersJapaneseNames') === "true"; // If this is true, names will default to Japanese for characters that have them.
 
 // Interface elements
 let backgroundSelector = document.querySelector("#background-selector");
 let backgroundPreview = document.querySelector("#background-selector-preview");
-let characterSelector = document.querySelector("#character-selector");
+let characterSelector = document.querySelector("#character-selector"); // an invisible select element that stores what character we've selected
 let characterPreview = document.querySelector("#character-selector-preview");
 let poseSelector = document.querySelector("#pose-selector");
 let downloadButton = document.querySelector("#download");
 let aboutButton = document.querySelector('#about-button')
+let modalContent = document.querySelector('#modal-content')
 
 // Store whether the user has deliberately chosen a character yet.
 // This will prevent the default character tag being generated
 // while selecting a location
 let characterSelected = false;
 document.body.setAttribute("character-selected", characterSelected);
+let charactersInUse = [];
+
 
 // The locations to find certain visual elements
 let paths = {
@@ -51,6 +62,10 @@ let paths = {
 
 // How many days we show 'new' tags for on icons
 let daysForNew = 14;
+
+// alternateNamesInUse = {
+//   "sholmes-herlock-default": "Holmes"
+// }
 
 // A very long list of characters and locations are pulled in from characters.js and locations.js
 
@@ -67,26 +82,6 @@ document.querySelector("#spoilers-okay").addEventListener("click", (e) => {
 });
 checkSpoilers();
 
-
-function sortItemsByTag(characters, tag) {
-  return characters.sort((a, b) => {
-    if (a?.tags.includes(tag) && !b?.tags.includes(tag)) {
-      return -1; // a should come before b
-    } else if (!a?.tags.includes(tag) && b?.tags.includes(tag)) {
-      return 1; // b should come before a
-    } else {
-      return 0; // no change to order
-    }
-  });
-}
-
-
-// Rearrange our characters and locations by tag. This is used during themed 
-// periods to prevent the need to manually rearrange things.
-if (theme){
-  characters = sortItemsByTag(characters, theme.name);
-  locations = sortItemsByTag(locations, theme.name);
-};
 
 // If the theme isn't a spoiler, change the theme immediately.
 if (theme && !theme.isSpoiler){
@@ -129,7 +124,23 @@ document.querySelector('#filter-toggle').addEventListener('click', () => {
   togglePanel(document.querySelector('#filter-form'))});
 
 
+document.querySelectorAll('#modal .material-symbols-sharp').forEach((button) => {
+  button.addEventListener('click', () => {
+    togglePanel(document.querySelector('#modal'))
+  })
+})
+
+
+document.querySelector('#edit-names-toggle').addEventListener('click', () => {
+    togglePanel(document.querySelector('#modal'));
+    generateNameSelectorWindow();
+  });
+
+
+
+
 // ---------------------------------------------------------------------------//
+
 
 function generateLocations() {
   locations.forEach(function (location) {
@@ -150,12 +161,57 @@ function generatePanelArtwork() {
     background.src = paths.location + backgroundSelector.value + ".jpg";
   });
 
+  console.log('generatePanelArtwork')
   
   // If a character has been purposely selected previously then set the character image
   if (characterSelected) {
     characterOverlay.src = `/assets/locations/${characterOverlayID}.png`;
-    tag.src = paths.character + characterSelector.value + "/tag.png";
+
+    let currentCharacter = getCharacterFromID(characterSelector.value)
+
+    if (currentCharacter.alternateNames){
+      generateNameSelectorWindow();
+      tag.setAttribute('character', currentCharacter.alternateNames[0])
+    } else {
+      tag.setAttribute('character', currentCharacter.id)
+    }
+    propagateAlternateNames()
+
+    getCharactersInUse()
+    let charactersInUseHaveAlternateNames = false;
+    charactersInUse.forEach((char) => {
+      if (!getCharacterFromID(char)){
+        charactersInUseHaveAlternateNames = true
+      }
+    })
+
+    if (charactersInUseHaveAlternateNames){
+      document.querySelector('#edit-names-toggle').classList.remove('hidden')
+    } else{
+      document.querySelector('#edit-names-toggle').classList.add('hidden')
+    }
   }
+}
+
+function getCharacterFromID(characterID){
+  return characters.find((character) => character.id === characterID)
+}
+
+// Loop through all of the character tag artwork and update accordingly.
+function propagateAlternateNames() {
+  let tagImages = document.querySelectorAll('.tag-image');
+  tagImages.forEach((image) => {
+
+    let currentCharacter = 
+      characters.find((character) => (character.alternateNames ?? []).includes(image.getAttribute('character')))
+      ?? getCharacterFromID(image.getAttribute('character'))
+
+    tagPath = alternateNamesInUse[image.getAttribute('character')] ? "/tag-" + alternateNamesInUse[image.getAttribute('character')] + '.png' : "/tag-default.png"
+    
+    if (currentCharacter){
+      image.src = paths.character + currentCharacter.id + tagPath;
+    }
+  })
 }
 
 // Creates a new canvas for us, including delete button and event listeners.
@@ -179,6 +235,7 @@ function generateCanvas() {
   newCanvas.appendChild(characterOverlay);
   
   tag = tag ? tag.cloneNode() : document.createElement("img");
+  tag.classList.add('tag-image')
   newCanvas.appendChild(tag)
 
   newSpeechbox = document.createElement("img");
@@ -213,12 +270,15 @@ function generateCanvas() {
     }
   })
 
+  
+  // togglePanel(document.querySelector('#edit-names-toggle'));
+
 
   // Generate the delete button and have it run removeCanvas on click.
   let deleteButton = document.createElement("div");
   deleteButton.classList.add("delete-panel");
   deleteButton.innerHTML =
-    '<span class="material-icons md-17">delete</span><span class="delete-panel-text">Delete panel</span>';
+    '<span class="material-symbols-sharp md-17">delete</span><span class="delete-panel-text">Delete panel</span>';
   deleteButton.addEventListener("click", removeCanvas);
   newCanvas.appendChild(deleteButton);
 
@@ -307,7 +367,10 @@ function generateCharacterInterface() {
     let icon = generateLabelledIcon("character", character);
     icon.setAttribute("gender", "gender-" + character.gender); // This is set like this since 'female' contains the string 'male'
     icon.setAttribute("nationality", character.nationality);
-
+    
+    if (character.tags.includes(theme.name)){
+      icon.style.order = 1;
+    }
 
     for (i = 0; i < 10; i++) {
       icon.setAttribute("present-in-case-" + i, character.appearsin[i]);
@@ -329,6 +392,12 @@ function generateCharacterInterface() {
       // Set the value on the invisible dropdown
       characterSelector.value = e.target.getAttribute("value");
 
+      // If the user has not used this character before and has indicated they like the Japanese names, store their new name in the alternate names object.
+      if (character.alternateNames && !alternateNamesInUse[character.alternateNames[0]] && prefersJapaneseNames){
+        alternateNamesInUse[character.alternateNames[0]] = character.alternateNames[1];
+        window.localStorage.setItem('alternateNamesInUse', JSON.stringify(alternateNamesInUse));
+      }
+
       // Show the character preview panel, and fill it with the poses for the chosen character.
       togglePanel(characterPreview);
       generatePoses();
@@ -343,13 +412,16 @@ function generateLocationInterface() {
     // Generate an icon
     let icon = generateLabelledIcon("location", location);
     backgroundPreview.appendChild(icon);
+    
+    if (location.tags.includes(theme.name)){
+      icon.style.order = 1;
+    }
 
     // When the icon is clicked, set the value of the invisible dropdown to match,
     // toggle the location panel off and regenerate our current panel so it can
     // have the new location
     icon.addEventListener("click", function (e) {
       backgroundSelector.value = e.target.getAttribute("value");
-
       characterOverlayID = locations.find((location) => location.id === backgroundSelector.value).characterOverlay ?? null;
 
       togglePanel(backgroundPreview);
@@ -407,9 +479,9 @@ function generateLabelledIcon(type, object) {
         newIcon.src = "/assets/icons/new-icon.svg"
         newIcon.width = 50;
         icon.appendChild(newIcon)
+        icon.style.order = 2;
       }
 
-  
 
       break;
     case "location":
@@ -421,6 +493,7 @@ function generateLabelledIcon(type, object) {
         newIcon.src = "/assets/icons/new-icon.svg"
         newIcon.width = 50;
         icon.appendChild(newIcon)
+        icon.style.order = 1;
       }
       break;
   }
@@ -453,15 +526,22 @@ function generatePoses(e) {
 
   // Reset the character if we're choosing a new one
   characterImg.src = paths.character + chosenCharacter + "/1.png";
+
+  characterImg.classList.add('character-img')
+  characterImg.setAttribute('character', chosenCharacter);
+
+  let currentCharacter = getCharacterFromID(chosenCharacter)
+  if (currentCharacter?.alternateNames && !alternateNamesInUse[currentCharacter.alternateNames[0]]){
+    alternateNamesInUse[currentCharacter.alternateNames[0]] = currentCharacter.alternateNames[0] ?? 'default';
+    window.localStorage.setItem('alternateNamesInUse', JSON.stringify(alternateNamesInUse));
+  }
   
   
-  let characterObject = characters.find((character) => character.id === chosenCharacter)
-  
-  // characterTheme = characters.find((character) => character.id === chosenCharacter)
+  characterTheme = characters.find((character) => character.id === chosenCharacter)
   document.querySelector('#theme-music').innerHTML = 
-  characterObject.theme 
+  currentCharacter.theme 
     ? `<iframe style="border-radius:12px" src="
-    ${characterObject.theme ?? ''}
+    ${currentCharacter.theme ?? ''}
     &theme=0" width="100%" height="100" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     `
     : '';
@@ -502,9 +582,9 @@ function generatePoses(e) {
     poseSelector.appendChild(newLabel);
 
     if (
-      characterObject.posesAddedOnLastUpdate
-      && i > (characterObject.images - characterObject.posesAddedOnLastUpdate)
-      && (new Date() - new Date(characterObject.lastUpdated)) / (1000 * 60 * 60 * 24) < daysForNew){
+      currentCharacter.posesAddedOnLastUpdate
+      && i > (currentCharacter.images - currentCharacter.posesAddedOnLastUpdate)
+      && (new Date() - new Date(currentCharacter.lastUpdated)) / (1000 * 60 * 60 * 24) < daysForNew){
       let newIcon = document.createElement('img')
       newIcon.classList.add('new-icon')
       newIcon.src = "/assets/icons/new-icon.svg"
@@ -796,7 +876,7 @@ function checkSpoilers(e) {
     document.querySelector("#remember-spoilers-okay").checked ||
     window.localStorage.getItem("reveal-spoilers")
   ) {
-    localStorage.setItem("reveal-spoilers", true);
+    window.localStorage.setItem("reveal-spoilers", true);
     spoilerWarning.remove();
     document.body.setAttribute('accept-spoilers', true)
     document.body.setAttribute('theme', theme.name)
@@ -906,8 +986,6 @@ async function displayWeather() {
           
           Promise.all(data)
           .then((info) => {
-
-            console.log(info)
             britishTimeDisplay.textContent = info[0].datetime.slice(11,16);
             japaneseTimeDisplay.textContent = info[1].datetime.slice(11,16);
 
@@ -1024,7 +1102,6 @@ function pasteQuote(type){
       if (text.length > 110 || text.indexOf('fuck') > -1){
         pasteQuote(type)
       } else{
-        console.log(data)
         document.querySelector('.active-canvas textarea').value = text
       }
     })
@@ -1052,6 +1129,120 @@ function pasteQuote(type){
   })
 })
 
+
+/* Name selectors ------------------------------------------------------------*/
+
+// Generate the modal content for the name selector
+function generateNameSelectorWindow () {
+  modalContent.innerHTML = `
+    <h2>Alternate names</h2>
+    <div id="name-selector-choices"></div>
+
+    <div class="name-language-selector-container">
+      <div class="name-language-selector" language="english"><img src="assets/icons/flags/british.svg" width=38>Make all names English</div>
+      <div class="name-language-selector" language="japanese"><img src="assets/icons/flags/japanese.svg" width=38>Make all names Japanese</div>
+      <div class="name-language-selector name-reset" language="english">
+        <span class="material-icons">restart_alt</span> Reset
+      </div>
+    </div>
+  `;
+
+  document.querySelectorAll('.name-language-selector-container').forEach((sel) => {
+    sel.addEventListener('click', updateNamesLanguage);
+  })
+
+  // Update all characters to their English or Japanese names.
+  function updateNamesLanguage(e){
+
+    let clickedButton = e.target.closest('[language]')
+
+    // Figure out what language we're wanting to change to.
+    let language = clickedButton.getAttribute('language')
+
+    prefersJapaneseNames = language === 'japanese';
+    window.localStorage.setItem('prefersJapaneseNames', language === 'japanese');
+
+    Object.keys(alternateNamesInUse).forEach((altName) => {
+
+      // Get the character object so we can reference it
+      let character = characters.find((character) => (character.alternateNames ?? []).includes(altName))
+
+      // The first name in the alternate names property should be the English name, the second should be the Japanese name
+      let nameIndex = language === "english" ? 0 : 1
+      alternateNamesInUse[altName] = character.alternateNames[nameIndex]
+      window.localStorage.setItem('alternateNamesInUse', JSON.stringify(alternateNamesInUse));
+
+
+      // Make all of the appropriate radio buttons checked.
+      let radioButtons = document.querySelectorAll(`.name-selector-form[for=${character.alternateNames[0]}] input[type="radio"]`)
+      radioButtons.forEach((btn) => {
+        btn.removeAttribute('checked')
+        if (alternateNamesInUse[altName] == btn.value){
+          btn.setAttribute('checked', true);
+          btn.click();
+        }
+      })
+    })
+
+
+    propagateAlternateNames();
+
+  }
+
+  getCharactersInUse();
+
+  
+  for (const [key] of Object.entries(alternateNamesInUse)) {
+
+    let characterObject = characters.find((character) => (character.alternateNames ?? []).includes(key));
+    let characterId = characterObject.id
+
+    if (charactersInUse.includes(characterObject.id) || charactersInUse.includes(characterObject?.alternateNames[0])){
+      modalContent.querySelector('#name-selector-choices').appendChild(generateCharacterNameListInterface(characterId))
+    }
+  }
+}
+
+function getCharactersInUse() { 
+  charactersInUse = [];
+  document.querySelectorAll('img.tag-image').forEach((img) => charactersInUse.push(img.getAttribute('character')));
+};
+
+// Generate the names interface for each individual character.
+function generateCharacterNameListInterface (characterID) {
+
+  let thisCharacter = characters.find((character) => character.id === characterID)
+  const alternateNames = thisCharacter.alternateNames ?? [];
+
+  const namePanel = document.createElement('fieldset');
+  namePanel.classList = "name-selector-form";
+  namePanel.setAttribute('for', alternateNames[0])
+
+  const characterIcon = document.createElement('img');
+  characterIcon.src = `assets/characters/${thisCharacter.id}/thumbnails/1.png`;
+
+  namePanel.appendChild(characterIcon);
+  alternateNames.forEach((altName) => {
+    const input = document.createElement('span');
+
+    input.innerHTML = `
+      <input type="radio" id="${altName}" name="${alternateNames[0]}" value="${altName}" class="name-selector-input">
+      <label for="${altName}">${altName}</label>
+    `
+    
+    namePanel.appendChild(input)
+    
+    input.addEventListener('click', () => {
+      alternateNamesInUse[alternateNames[0]] = altName;
+      window.localStorage.setItem('alternateNamesInUse', JSON.stringify(alternateNamesInUse));
+      propagateAlternateNames();
+    })
+  })
+
+  let selectedName = alternateNamesInUse[thisCharacter.alternateNames[0] ?? thisCharacter.id]
+  namePanel.querySelector(`input[value="${selectedName}"]`).setAttribute('checked', true)
+  return namePanel;
+}
 
 
 

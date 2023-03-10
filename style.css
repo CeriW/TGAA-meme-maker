@@ -24,6 +24,8 @@
 @import "css/about.css";
 @import "css/share-buttons.css";
 @import "css/twitter-feed.css";
+@import "css/modal.css";
+
 
 /* Themes */
 @import "css/themes/homumiko.css";
@@ -36,5 +38,6 @@
   /* Default theme */
   --blue: #0D1725;
   --scrollbar: #080f1a;
+  --light-accent: #1d2f49;
   --dark-accent: #0D1725;
 }

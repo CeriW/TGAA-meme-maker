@@ -10,6 +10,7 @@
 // tags - used during themed time periods. Will be used to place these characters at the top of the list.
 // lastUpdated - a date string of the last time this character was updated. Will be used to generate a 'new' image tag for a set number of days.
 // posesAddedOnLastUpdate - will tag the specified poses as new for a set number of days.
+// alternate names - some characters have alternative names that users might want to toggle between (eg. Herlock Sholmes was callled Sherlock Holmes in the Japanese version)
 
 let characters = [
 
@@ -25,7 +26,6 @@ let characters = [
   lastUpdated: null,
   posesAddedOnLastUpdate: 0,
 },
-
 {
   name: 'Herlock Sholmes',
   id:'sholmes-herlock-default',
@@ -38,6 +38,7 @@ let characters = [
   tags: ['homumiko'],
   lastUpdated: null,
   posesAddedOnLastUpdate: 0,
+  alternateNames: ['Sholmes', 'Holmes']
 },
 {
   name: 'Herlock Sholmes',
@@ -48,6 +49,7 @@ let characters = [
   images: 16,
   variant: 'casual outfit',
   theme: 'https://open.spotify.com/embed/track/5FQuOO8w56VPX1tJwaPKx8?utm_source=generator',
+  alternateNames: ['Sholmes', 'Holmes'],
   tags: ['homumiko'],
   lastUpdated: null,
   posesAddedOnLastUpdate: 0,
@@ -55,16 +57,17 @@ let characters = [
 
 {
   name: 'Herlock Sholmes',
-  id:'sholmes-herlock-japanese-jumble',
+  id:'sholmes-herlock-j-jumble',
   gender: 'male',
   nationality: 'british',
   appearsin: [false,true,true,true,true,false,true,true,true,true],
   images: 13,
   variant: 'Japanese Jumble',
-  theme: 'https://open.spotify.com/embed/track/5FQuOO8w56VPX1tJwaPKx8?utm_source=generator',
+  theme: 'https://open.spotify.com/embed/track/0EFqdvTgJMPd02XUUCsHnI?utm_source=generator',
   tags: ['homumiko'],
   lastUpdated: "Sat Mar 04 2023",
   posesAddedOnLastUpdate: 13,
+  alternateNames: ['Sholmes', 'Holmes']
 },
 
 {
@@ -73,11 +76,11 @@ let characters = [
   gender: 'female',
   nationality: 'japanese',
   appearsin: [true,true,true,true,true,true,true,true,true,true],
-  images: 15,
+  images: 16,
   theme: 'https://open.spotify.com/embed/track/09pXZRySXfq6Z17YiVnOJC?utm_source=generator',
   tags: [],
-  lastUpdated: null,
-  posesAddedOnLastUpdate: 0,
+  lastUpdated: "2023-03-10",
+  posesAddedOnLastUpdate: 1,
 },
 
 {
@@ -128,8 +131,8 @@ let characters = [
   images: 4,
   theme: 'https://open.spotify.com/embed/track/582mS91YcS5PHaTx5LUPn4?utm_source=generator',
   tags: [],
-  lastUpdated: null,
-  posesAddedOnLastUpdate: 0,
+  lastUpdated: "2023-03-10",
+  posesAddedOnLastUpdate: 1,
 },
 
 {
@@ -225,6 +228,7 @@ let characters = [
   tags: [],
   lastUpdated: null,
   posesAddedOnLastUpdate: 0,
+  alternateNames: ['Tusspells', 'Rozaic']
 },
 
 {
@@ -250,6 +254,7 @@ let characters = [
   tags: [],
   lastUpdated: null,
   posesAddedOnLastUpdate: 0,
+  alternateNames: ['Gorey', 'Goulloyne']
 },
 
 {
@@ -258,10 +263,11 @@ let characters = [
   gender: 'male',
   nationality: 'irish',
   appearsin: [false,false,true,false,false,false,false,false,false,false],
-  images: 1,
+  images: 2,
   tags: [],
-  lastUpdated: null,
-  posesAddedOnLastUpdate: 0,
+  alternateNames: ['McGuilded', 'Megundal'],
+  lastUpdated: "2023-03-10",
+  posesAddedOnLastUpdate: 1,
 },
 
 {
@@ -273,6 +279,7 @@ let characters = [
   images: 1,
   theme: 'https://open.spotify.com/embed/track/6x6OrJ2G3rdwTyYVFuezBf?utm_source=generator',
   tags: [],
+  alternateNames: ['Pavlova', 'Borschevic'],
   lastUpdated: null,
   posesAddedOnLastUpdate: 0,
 },
@@ -286,6 +293,7 @@ let characters = [
   images: 1,
   theme: 'https://open.spotify.com/embed/track/4g9GzmDyca2VZg7j5kx6AT?utm_source=generator',
   tags: [],
+  alternateNames: ['Stronghart', 'Vortex'],
   lastUpdated: null,
   posesAddedOnLastUpdate: 0,
 },
@@ -297,9 +305,24 @@ let characters = [
   nationality: 'japanese',
   appearsin: [false,false,false,false,false,true,false,false,false,false],
   images: 3,
+  alternateNames: ['Rei', 'Haori'],
   tags: [],
   lastUpdated: null,
   posesAddedOnLastUpdate: 0,
 },
+
+{
+  name: 'Ashley Graydon',
+  id: 'graydon-ashley',
+  gender: 'male',
+  nationality: 'british',
+  appearsin: [false,false,false,false,true,false,false,false,false,false],
+  images: 5,
+  tags: [],
+  alternateNames: ['Graydon', 'Chrogray', 'Benedict', 'Egg'],
+  lastUpdated: "2023-03-11",
+  posesAddedOnLastUpdate: 5,
+}
+
 
 ]
