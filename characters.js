@@ -258,7 +258,9 @@ let characters = [
   nationality: 'british',
   appearsin: [false,false,false,false,true,false,false,false,false,false],
   images: 5,
-  alternateNames: ['Graydon', 'Chrogray', 'Benedict', 'Egg']
+  alternateNames: ['Graydon', 'Chrogray', 'Benedict', 'Egg'],
+  lastUpdated: "2023-03-11",
+  posesAddedOnLastUpdate: 5,
 }
 
 
