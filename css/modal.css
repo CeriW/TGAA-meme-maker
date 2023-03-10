@@ -43,7 +43,8 @@
 .name-selector-form{
   display: flex;
   flex-direction: column;
-  flex-basis: 160px;
+  /* flex-basis: 160px; */
+  flex-grow: 1;
   border: none;
   padding: 0;
 }
@@ -81,5 +82,5 @@
 .name-reset{
   position: absolute;
   right: 20px;
-  top: 89px;
+  top: 40px;
 }
