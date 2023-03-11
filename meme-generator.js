@@ -24,7 +24,11 @@ function isBetweenDates(startDate, endDate) {
   return (currentDate >= new Date(startDate) && currentDate <= new Date(endDate));
 }
 
-console.log('The Great Ace Attorney Meme Maker by CherryLestrade v3.0.0')
+// Version info
+const versionInfo = '3.0.0 - 2023-03-11';
+console.log(`The Great Ace Attorney Meme Maker by CherryLestrade v${versionInfo} - theme: ${theme.name}`);
+document.getElementById('#version-info').innerHTML = `Version ${versionInfo} - theme: ${theme.name}`; 
+
 
 
 
