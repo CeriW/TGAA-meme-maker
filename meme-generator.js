@@ -25,7 +25,7 @@ function isBetweenDates(startDate, endDate) {
 }
 
 // Version info
-const versionInfo = '3.0.0 - 2023-03-11';
+const versionInfo = '3.0.1 - 2023-03-11';
 console.log(`The Great Ace Attorney Meme Maker by CherryLestrade v${versionInfo} - theme: ${theme.name}`);
 document.getElementById('#version-info').innerHTML = `Version ${versionInfo} - theme: ${theme.name}`; 
 
