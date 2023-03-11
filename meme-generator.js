@@ -3,16 +3,30 @@
 // A string to set the theme with. If this is not null it will do some
 // rearranging of the data and add an attribute to the site class to match the theme. 
 
-// let theme = null;
+let currentYear = new Date().getFullYear()
 
-// let theme = {name: null, isSpoiler: null};
+let theme = {name: null, isSpoiler: null};
 
-let theme = {name: "homumiko", isSpoiler: true};
 
-// let theme = {name: 'aprilfools2023', isSpoiler: false};
-// initialiseCumberbatchTheme();
+if (isBetweenDates("2023-03-05", "2023-03-11")){
+  theme = {name: "homumiko", isSpoiler: true};
+} 
 
-console.log('3.0.0')
+
+if (isBetweenDates(currentYear + "-04-01", currentYear + "-04-07")){
+  theme = {name: 'cumberbatch', isSpoiler: false};
+  initialiseCumberbatchTheme();
+}
+
+function isBetweenDates(startDate, endDate) {
+  const currentDate = new Date();
+  endDate = new Date(endDate).getTime() + 24 * 60 * 60 * 1000; // Set it to the end of the date to make it easier
+  return (currentDate >= new Date(startDate) && currentDate <= new Date(endDate));
+}
+
+console.log('The Great Ace Attorney Meme Maker by CherryLestrade v3.0.0')
+
+
 
 // ---------------------------------------------------------------------------//
 
@@ -1310,8 +1324,8 @@ function initialiseCumberbatchTheme () {
     nationality: 'british',
     appearsin: [false,false,false,false,false,false,false,false,false,false],
     images: 5,
-    tags: ['aprilfools2023'],
-    lastUpdated: "Apr 01 2023",
+    tags: ['cumberbatch'],
+    lastUpdated: "Apr 01 9999",  // since this will only ever be temporary, make it always show as new
     posesAddedOnLastUpdate: 5
   })
 
