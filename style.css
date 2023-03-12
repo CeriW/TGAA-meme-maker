@@ -30,6 +30,7 @@
 /* Themes */
 @import "css/themes/homumiko.css";
 @import "css/themes/ryulock.css";
+@import "css/themes/asobaro.css";
 
 :root{
   --gold: #9E9150;

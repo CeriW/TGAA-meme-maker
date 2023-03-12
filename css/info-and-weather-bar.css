@@ -24,7 +24,7 @@
 }
 
 #inspiration-bar > span{
-  color: var(--blue);
+  color: var(--gradient-text-colour);
   font-weight: bold;
   font-size: 20px;
 }

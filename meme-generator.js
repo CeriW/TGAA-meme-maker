@@ -8,18 +8,25 @@ let currentYear = new Date().getFullYear()
 let theme = {name: null, isSpoiler: null};
 
 
+
 // if (isBetweenDates("2023-03-05", "2023-03-11")){
 //   theme = {name: "homumiko", isSpoiler: true};
 // } 
 
-if (isBetweenDates("2023-04-17", "2023-03-23")){
-  theme = {name: "ryuulock", isSpoiler: false};
-} 
 
 if (isBetweenDates(currentYear + "-04-01", currentYear + "-04-07")){
   theme = {name: 'cumberbatch', isSpoiler: false};
   initialiseCumberbatchTheme();
 }
+
+if (isBetweenDates("2023-04-17", "2023-03-23")){
+  theme = {name: "ryuulock", isSpoiler: false};
+} 
+
+if (isBetweenDates("2023-05-28", "2023-06-03")){
+  theme = {name: "asobaro", isSpoiler: true};
+} 
+
 
 function isBetweenDates(startDate, endDate) {
   const currentDate = new Date();
@@ -28,7 +35,7 @@ function isBetweenDates(startDate, endDate) {
 }
 
 // Version info
-const versionInfo = '3.1.0 - 2023-03-12';
+const versionInfo = '3.1.1 - 2023-03-12';
 console.log(`The Great Ace Attorney Meme Maker by CherryLestrade v${versionInfo} - theme: ${theme.name}`);
 document.querySelector('#version-info').innerHTML = `Version ${versionInfo} - theme: ${theme.name}`; 
 
