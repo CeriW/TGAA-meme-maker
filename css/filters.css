@@ -1,7 +1,7 @@
 #filter-toggle{
   display: flex;
   align-items: center;
-  background: #9E9150;
+  background: var(--gold);
   position: absolute;
   right: 0;
   top: 0;

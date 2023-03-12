@@ -29,6 +29,7 @@
 
 /* Themes */
 @import "css/themes/homumiko.css";
+@import "css/themes/ryulock.css";
 
 :root{
   --gold: #9E9150;
@@ -40,4 +41,13 @@
   --scrollbar: #080f1a;
   --light-accent: #1d2f49;
   --dark-accent: #0D1725;
+
+  
+  --gradient-top: #65592d;
+  --gradient-bottom: #9E9150;
+  
+  /* Colours the text should be to show against their backgrounds */
+  --blue-text-colour: #fff;
+  --gold-text-colour: #fff;
+  --gradient-text-colour: #fff;
 }

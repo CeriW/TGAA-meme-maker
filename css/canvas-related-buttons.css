@@ -2,7 +2,6 @@
 
 #add-panel,
 .delete-panel{
-  background: linear-gradient(to bottom, #65592d, #9E9150);
   padding: 5px;
   transition: 0.5s;
   font-family: 'MgOpen Cosmetica', Toplar, serif;
@@ -10,6 +9,9 @@
   gap: 5px;
   align-items: center;
   font-size: 0.9em;
+  background: linear-gradient(to bottom, var(--gradient-top), var(--gradient-bottom));
+  color: var(--gradient-text-colour);
+
 }
 
 #add-panel{
@@ -98,9 +100,10 @@
   align-items: center;
   justify-content: flex-end;
   gap: 10px;
-  animation: textColour 4s infinite;
+  /* animation: textColour 4s infinite; */
   box-shadow: 0 0 10px rgba(0,0,0,0.8);
-  background: linear-gradient(to bottom, #65592d, #9E9150);
+  background: linear-gradient(to bottom, var(--gradient-top), var(--gradient-bottom));
+  color: var(--gradient-text-colour);
   padding: 5px;
   font-family: 'MgOpen Cosmetica', Toplar, serif;
   border-bottom: 2px solid var(--blue);

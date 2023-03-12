@@ -1,0 +1,52 @@
+body[theme="ryuulock"]{
+  --blue: #0c0b08;
+  --scrollbar: #000000;
+  --dark-accent: #0a0a06;
+  --gold: #b07f3d;
+
+  --gradient-top: #b07f3d;
+  --gradient-bottom: #c99859;
+  --gradient-text-colour: #0c0b08;
+}
+
+/* body[theme="ryuulock"]{
+  background-image: url('/assets/misc/yujin-symbol.png'), url('/assets/misc/herlock-symbol.png');
+  background-position: -200px calc(100% + 150px), calc(100% + 150px) -150px;
+  background-repeat: no-repeat, no-repeat;
+  background-attachment: fixed, fixed;
+} */
+
+body[theme="ryuulock"] #info-bar,
+body[theme="ryuulock"] #about-button,
+body[theme="ryuulock"] #share-buttons{
+  background: var(--dark-accent);
+}
+
+body[theme="ryuulock"] #banner:after{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: -200px;
+  pointer-events: none;
+  background: url('/assets/misc/banner-overlay-ryuulock-week.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  transform-origin: right top;
+  
+  animation-name: bounceIn;
+  animation-duration: .75s;
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-delay: 1.5s;
+}
+
+body[theme="ryuulock"] .toggle-heading, body[theme="ryuulock"] #pose-heading, body[theme="ryuulock"] #spoiler-warning, body[theme="ryuulock"] #social-feed-heading, body[theme="ryuulock"] #download div, body[theme="ryuulock"] #filter-toggle, body[theme="ryuulock"] #modal > div{
+  text-shadow: none;
+}
+
+/* 
+.toggle-heading, #pose-heading, #spoiler-warning, #social-feed-heading, #download div, #filter-toggle, #modal > div{
+} */
+

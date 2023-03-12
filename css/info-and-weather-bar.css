@@ -13,7 +13,8 @@
 }
 
 #inspiration-bar{
-  background: linear-gradient(to bottom, #65592d, #9E9150);
+  background: linear-gradient(to bottom, var(--gradient-top), var(--gradient-bottom));
+  color: var(--gradient-text-colour);
   padding: 4px 10px;
   display: flex;
   gap: 10px;
