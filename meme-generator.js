@@ -1,3 +1,8 @@
+// Version info
+const versionInfo = '3.1.3 - 2023-03-12';
+
+
+
 // THEME
 
 // A string to set the theme with. If this is not null it will do some
@@ -8,7 +13,7 @@ let currentYear = new Date().getFullYear()
 let theme = {name: null, isSpoiler: null};
 
 
-
+// 
 // if (isBetweenDates("2023-03-05", "2023-03-11")){
 //   theme = {name: "homumiko", isSpoiler: true};
 // } 
@@ -23,6 +28,10 @@ if (isBetweenDates("2023-04-17", "2023-03-23")){
   theme = {name: "ryuulock", isSpoiler: false};
 } 
 
+if (isBetweenDates("2023-05-01", "2023-06-07")){
+  theme = {name: "baroasoryuu", isSpoiler: true};
+} 
+
 if (isBetweenDates("2023-05-28", "2023-06-03")){
   theme = {name: "asobaro", isSpoiler: true};
 } 
@@ -34,8 +43,6 @@ function isBetweenDates(startDate, endDate) {
   return (currentDate >= new Date(startDate) && currentDate <= new Date(endDate));
 }
 
-// Version info
-const versionInfo = '3.1.1 - 2023-03-12';
 console.log(`The Great Ace Attorney Meme Maker by CherryLestrade v${versionInfo} - theme: ${theme.name}`);
 document.querySelector('#version-info').innerHTML = `Version ${versionInfo} - theme: ${theme.name}`; 
 
