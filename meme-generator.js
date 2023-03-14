@@ -24,7 +24,7 @@ if (isBetweenDates(currentYear + "-04-01", currentYear + "-04-07")){
   initialiseCumberbatchTheme();
 }
 
-if (isBetweenDates("2023-04-17", "2023-03-23")){
+if (isBetweenDates("2023-04-17", "2023-04-23")){
   theme = {name: "ryuulock", isSpoiler: false};
 } 
 
