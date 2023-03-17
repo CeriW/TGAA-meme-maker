@@ -6,7 +6,16 @@
 // tags - an array of tags which will be used to bump these locations to the top of the list during themed weeks. The tag needs to match the theme name.
 // addedDate - the date you added this location. Used to generate a 'new' tag on it and bump it to the top of the location list.
 
-let locations = [
+export type LocationObject = {
+  name                : string;
+  id                  : string;
+  variant?            : string;
+  tags?               : string[];
+  characterOverlay?   : string;
+  addedDate?          : string;
+}
+
+export let locations: LocationObject[] = [
   {name   : "221B Baker Street",                     id:"baker-street-221b",                               tags: ['homumiko']},
   {name   : "221B Baker Street",                     id:"baker-street-221b-night",                         variant:"Night",                             tags: ['homumiko']},
   {name   : "Sholmes' Suite",                        id:"sholmes-suite",                                   variant: "Fireplace",                        tags: ['homumiko', 'ryuulock']},
