@@ -46,12 +46,10 @@ function isBetweenDates(startDate: string, endDate: string) {
 }
 
 
-console.log(`The Great Ace Attorney Meme Maker by CherryLestrade v${versionInfo} - theme: ${theme.name}`);
+console.log(`The Great Ace Attorney Meme Maker by CherryLestrade v${versionInfo} - theme: ${theme.name ?? 'none'}`);
 
-const versionInfoDiv = document.querySelector('#version-info');
-if (versionInfoDiv){
-  versionInfoDiv.innerHTML = `Version ${versionInfo} - theme: ${theme.name}`; 
-}
+const versionInfoDiv = document.querySelector('#version-info')!;
+versionInfoDiv.innerHTML = `Version ${versionInfo} - theme: none`; 
 
 
 

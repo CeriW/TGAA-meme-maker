@@ -1,3 +1,4 @@
+var _a;
 // Version info
 const versionInfo = '3.1.3 - 2023-03-12';
 import { locations } from "./locations.js";
@@ -29,11 +30,9 @@ function isBetweenDates(startDate, endDate) {
     const myEndDate = new Date(endDate).getTime() + 24 * 60 * 60 * 1000; // Set it to the end of the date to make it easier
     return (currentDate >= new Date(startDate) && currentDate <= new Date(myEndDate));
 }
-console.log(`The Great Ace Attorney Meme Maker by CherryLestrade v${versionInfo} - theme: ${theme.name}`);
+console.log(`The Great Ace Attorney Meme Maker by CherryLestrade v${versionInfo} - theme: ${(_a = theme.name) !== null && _a !== void 0 ? _a : 'none'}`);
 const versionInfoDiv = document.querySelector('#version-info');
-if (versionInfoDiv) {
-    versionInfoDiv.innerHTML = `Version ${versionInfo} - theme: ${theme.name}`;
-}
+versionInfoDiv.innerHTML = `Version ${versionInfo} - theme: none`;
 // ---------------------------------------------------------------------------//
 // The current canvas the user is working on. We'll initialise to null and then
 // set it to the first panel the code generates.
