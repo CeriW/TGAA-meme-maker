@@ -38,10 +38,6 @@ body:not([accept-spoilers="true"]) .tb_mc_media_wrap img{
   gap: 10px;
 }
 
-#social-feed-heading iframe{
-  margin-left: 30px;
-}
-
 #social-feed-spoiler-notice{
   text-align: center;
   font-size: 1.2em;
@@ -50,6 +46,13 @@ body:not([accept-spoilers="true"]) .tb_mc_media_wrap img{
 
 body[accept-spoilers] #social-feed-spoiler-notice{
   display: none;
+}
+
+/*------------*/
+
+
+#social-feed-heading iframe{
+  margin-left: 30px;
 }
 
 .tb_mc_content a.text_links_{
