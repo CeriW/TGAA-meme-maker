@@ -1,8 +1,9 @@
 // Version info
 const versionInfo = '3.1.3 - 2023-03-12';
 
-import {locations, LocationObject} from "./locations.js";
-import {characters, CharacterObject} from "./characters.js";
+import { locations, LocationObject } from "./locations.js";
+import { characters, CharacterObject } from "./characters.js";
+
 
 // THEME
 
@@ -159,27 +160,30 @@ toggleHeadings.forEach(function (node) {
   node.addEventListener("click", function (e) {
 
 
-    let associate = document.querySelector(
+    let associate : HTMLDivElement | null = document.querySelector(
       "#" + (e.target as HTMLDivElement).getAttribute("associated-panel")
     );
-    togglePanel(associate);
+
+    if (associate){
+      togglePanel(associate);
+    }
   });
 });
 
-togglePanel(document.querySelector('#filter-form'));
+togglePanel(document.querySelector('#filter-form')!);
 document.querySelector('#filter-toggle')!.addEventListener('click', () => {
-  togglePanel(document.querySelector('#filter-form'))});
+  togglePanel(document.querySelector('#filter-form')!)});
 
 
 document.querySelectorAll('#modal .material-symbols-sharp').forEach((button) => {
   button.addEventListener('click', () => {
-    togglePanel(document.querySelector('#modal'))
+    togglePanel(document.querySelector('#modal')!);
   })
 })
 
 
 document.querySelector('#edit-names-toggle')!.addEventListener('click', () => {
-    togglePanel(document.querySelector('#modal'));
+    togglePanel(document.querySelector('#modal')!);
     generateNameSelectorWindow();
   });
 
@@ -370,29 +374,31 @@ function changeActiveCanvas(activeCanvas: HTMLDivElement) {
 }
 
 // Remove a canvas/panel from the page.
-function removeCanvas(e) {
+function removeCanvas(e:Event) {
   e.stopPropagation();
-  let deadCanvas = e.target.closest(".canvas-container");
+  let deadCanvas: HTMLDivElement | null = (e.target as HTMLDivElement).closest(".canvas-container");
 
-  if (deadCanvas.previousElementSibling && deadCanvas.previousElementSibling.id !== "download") {
-    // If the panel has one before it, make that the active one.
-    changeActiveCanvas(deadCanvas.previousElementSibling);
-  } else if (deadCanvas.nextElementSibling) {
-    // If no previous one but there's a next one, make the next one the active one.
-    changeActiveCanvas(deadCanvas.nextElementSibling);
-  } else {
-    // If this function results in there being no panel at all, generate a fresh one.
-    generateCanvas();
+  if (deadCanvas){
+    if (deadCanvas.previousElementSibling && deadCanvas.previousElementSibling.id !== "download") {
+      // If the panel has one before it, make that the active one.
+      changeActiveCanvas((deadCanvas.previousElementSibling as HTMLDivElement));
+    } else if (deadCanvas.nextElementSibling) {
+      // If no previous one but there's a next one, make the next one the active one.
+      changeActiveCanvas((deadCanvas.nextElementSibling as HTMLDivElement));
+    } else {
+      // If this function results in there being no panel at all, generate a fresh one.
+      generateCanvas();
+    }
+
+    // Run a nice animation, then delete the panel.
+    deadCanvas.style.animation = "shrink 0.5s both";
+    window.setTimeout(function () {
+      deadCanvas!.remove();
+      // Check whether we still want the canvas to be sticky, based on the height of the canvases total
+      determineStickyCanvas();
+
+    }, 500);
   }
-
-  // Run a nice animation, then delete the panel.
-  deadCanvas.style.animation = "shrink 0.5s both";
-  window.setTimeout(function () {
-    deadCanvas.remove();
-    // Check whether we still want the canvas to be sticky, based on the height of the canvases total
-    determineStickyCanvas();
-
-  }, 500);
 }
 
 function determineStickyCanvas () {
@@ -674,7 +680,6 @@ function generatePoses(e? : Event) {
 function selectPose(e: Event) {
 
   let myTarget = e.target as HTMLInputElement;
-
   let url = myTarget.getAttribute("character");
   characterImg.setAttribute(
     "src",
@@ -687,16 +692,18 @@ function selectPose(e: Event) {
 // Put appropriate attributes on the specified event target and its siblings to
 // be able to apply styling in the CSS.
 function selectItem(e: Event) {
-  let siblings = e.target.parentNode.querySelectorAll("label");
-  siblings.forEach(function (sibling: HTMLLabelElement) {
-    sibling.removeAttribute("selected");
-  });
+  let siblings = (e.target as HTMLInputElement).parentNode?.querySelectorAll("label");
+  if (siblings && siblings.length > 0){
+    siblings.forEach(function (sibling: HTMLLabelElement) {
+      sibling.removeAttribute("selected");
+    });
+  }
 
-  e.target.nextElementSibling.setAttribute("selected", "");
+  (e.target as HTMLInputElement).nextElementSibling?.setAttribute("selected", "");
 }
 
 // Recreate the meme as an image file and download it.
-function download(e) {
+function download(e:Event) {
 
   e.preventDefault();
 
