@@ -827,30 +827,33 @@ function togglePanel(associate: HTMLDivElement) {
   associate.classList.toggle("hidden");
 }
 
-// let filterButtons = document.querySelectorAll(".filter");
-// filterButtons.forEach(function (filter) {
-//   filter.addEventListener("click", function (e) {
-//     let filterType = e.target.getAttribute("filter-type");
-//     let filterValue = e.target.getAttribute("filter-value");
-//     let panel = e.target.closest('div[id*="selector"]');
-//     let icons = panel.querySelectorAll('div[class*="icon"]');
+let filterButtons = document.querySelectorAll(".filter");
+filterButtons.forEach(function (filter) {
+  filter.addEventListener("click", function (e) {
 
-//     if (filterType && filterValue !== "all") {
-//       icons.forEach(function (icon) {
-//         //icon.classList.remove('toggled-off')
-//         if (icon.getAttribute(filterType) == filterValue) {
-//           icon.setAttribute("toggled", "on");
-//         } else {
-//           icon.setAttribute("toggled", "off");
-//         }
-//       });
-//     } else if (filterValue == "all") {
-//       icons.forEach(function (icon) {
-//         icon.setAttribute("toggled", "on");
-//       });
-//     }
-//   });
-// });
+    let myTarget = e.target as HTMLDivElement;
+
+    let filterType = myTarget.getAttribute("filter-type") ?? '';
+    let filterValue = myTarget.getAttribute("filter-value") ?? '';
+    let panel = myTarget.closest('div[id*="selector"]');
+    let icons = panel?.querySelectorAll('div[class*="icon"]');
+
+    if (filterType && filterValue !== "all" && icons) {
+      icons.forEach(function (icon) {
+        //icon.classList.remove('toggled-off')
+        if (icon.getAttribute(filterType) == filterValue) {
+          icon.setAttribute("toggled", "on");
+        } else {
+          icon.setAttribute("toggled", "off");
+        }
+      });
+    } else if (filterValue == "all" && icons) {
+      icons.forEach(function (icon) {
+        icon.setAttribute("toggled", "on");
+      });
+    }
+  });
+});
 
 
 document.querySelector("#filter-form")!.addEventListener("click", filterItems);
@@ -861,16 +864,14 @@ function filterItems(e: Event) {
   let chosenFilterNodes : NodeListOf<HTMLInputElement> = panel.querySelectorAll('[checked="checked"]');
 
   let acceptableGenders: string[] = [];
-  if (acceptableGenders.length > 0){
-    chosenFilterNodes.forEach(function (node) {
-      if (
-        node.getAttribute("checked") == "checked" &&
-        node.getAttribute("filter-type") == "gender"
-      ) {
-        acceptableGenders.push(node.value);
-      }
-    });
-  }
+  chosenFilterNodes.forEach(function (node) {
+    if (
+      node.getAttribute("checked") == "checked" &&
+      node.getAttribute("filter-type") == "gender"
+    ) {
+      acceptableGenders.push(node.value);
+    }
+  });
 
 
   let acceptableNationalities : string[] = [];
