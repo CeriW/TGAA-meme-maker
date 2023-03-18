@@ -1122,7 +1122,7 @@ async function displayWeather() {
             <span>${Math.round(weather.main.temp)}&deg;C</span>
             <span>${weather.weather[0].description} <br></span>
           </div>
-        <img src="http://openweathermap.org/img/wn/${weather.weather[0].icon}.png">
+        <img src="https://openweathermap.org/img/wn/${weather.weather[0].icon}.png">
       `
 
       weatherArea.appendChild(panel)
