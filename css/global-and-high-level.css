@@ -12,7 +12,7 @@ body{
   background: var(--blue);
   color: #fff;
   font-family: Toplar, 'Libre Baskerville', Georgia, serif; /* Yes, I chose 'Libre Baskerville' on purpose. Congrats, you found an easter egg */
-  padding: 0 30px 100px;
+  padding: 0 0 100px;
   margin: 0;
   transition: background-color 1s;
 }
