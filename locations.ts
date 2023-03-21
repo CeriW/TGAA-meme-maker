@@ -15,7 +15,7 @@ export type LocationObject = {
   addedDate?          : string;
 }
 
-export let locations: LocationObject[] = [
+export const locations: LocationObject[] = [
   {name   : "221B Baker Street",                     id:"baker-street-221b",                               tags: ['homumiko']},
   {name   : "221B Baker Street",                     id:"baker-street-221b-night",                         variant:"Night",                             tags: ['homumiko']},
   {name   : "Sholmes' Suite",                        id:"sholmes-suite",                                   variant: "Fireplace",                        tags: ['homumiko', 'ryuulock']},
