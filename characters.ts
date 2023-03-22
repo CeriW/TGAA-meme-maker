@@ -319,11 +319,11 @@ export const characters : CharacterObject[] = [
   gender: 'female',
   nationality: 'japanese',
   appearsIn: [false,false,false,false,false,true,false,false,false,false],
-  images: 3,
+  images: 12,
   alternateNames: ['Rei', 'Haori'],
   tags: [],
-  lastUpdated: null,
-  posesAddedOnLastUpdate: 0,
+  lastUpdated: "2023-03-22",
+  posesAddedOnLastUpdate: 9,
 },
 
 {

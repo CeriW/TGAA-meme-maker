@@ -427,7 +427,8 @@ function generateCharacterInterface() {
     icon.setAttribute("nationality", character.nationality);
     
     if (theme.name && character.tags.includes(theme.name)){
-      icon.style.order = '1';
+      // icon.style.order = '1';
+      icon.style.order = '-' + new Date().getTime() * 2; // A crude way of making sure that theme characters take precedence over new characters
     }
 
     for (let i = 0; i < 10; i++) {
@@ -475,7 +476,7 @@ function generateLocationInterface() {
     backgroundPreview.appendChild(icon);
     
     if (location.tags && theme?.name && location.tags.includes(theme.name)){
-      icon.style.order = '1';
+      icon.style.order = '-' + new Date().getTime() * 2
     }
 
     // When the icon is clicked, set the value of the invisible dropdown to match,
@@ -551,7 +552,7 @@ function generateLabelledIcon(type: "character" | "location", object: CharacterO
         newIcon.src = "/assets/icons/new-icon.svg"
         newIcon.width = 50;
         icon.appendChild(newIcon)
-        icon.style.order = '2';
+        icon.style.order = '-' + new Date(myCharacter.lastUpdated).getTime() / 10000;
       }
 
 
@@ -568,7 +569,7 @@ function generateLabelledIcon(type: "character" | "location", object: CharacterO
         newIcon.src = "/assets/icons/new-icon.svg"
         newIcon.width = 50;
         icon.appendChild(newIcon)
-        icon.style.order = '1';
+        icon.style.order = '-' + new Date(myLocation.addedDate).getTime() / 10000;
       }
       break;
   }
@@ -664,7 +665,7 @@ function generatePoses(e? : Event) {
       newIcon.classList.add('new-icon')
       newIcon.src = "/assets/icons/new-icon.svg"
       newIcon.width = 50;
-      newLabel.style.order = '1';
+      newLabel.style.order = '-' + new Date(currentCharacter.lastUpdated).getTime()/1000;
       newLabel.appendChild(newIcon);
     }
 
