@@ -12,7 +12,7 @@ let theme = { name: null, isSpoiler: false };
 // if (isBetweenDates("2023-03-05", "2023-03-11")){
 //   theme = {name: "homumiko", isSpoiler: true};
 // } 
-if (isBetweenDates(currentYear + "-04-01", currentYear + "-04-07")) {
+if (isBetweenDates(currentYear + "-04-01", currentYear + "-04-03")) {
     theme = { name: 'cumberbatch', isSpoiler: false };
     initialiseCumberbatchTheme();
 }
@@ -326,7 +326,7 @@ function generateCharacterInterface() {
         icon.setAttribute("gender", "gender-" + character.gender); // This is set like this since 'female' contains the string 'male'
         icon.setAttribute("nationality", character.nationality);
         if (theme.name && character.tags.includes(theme.name)) {
-            icon.style.order = '1';
+            icon.style.order = '-' + new Date().getTime() * 2; // A crude way of ensuring theme characters have precendence over recently updated characters
         }
         for (let i = 0; i < 10; i++) {
             icon.setAttribute("present-in-case-" + i, String(character.appearsIn[i]));
@@ -419,13 +419,14 @@ function generateLabelledIcon(type, object) {
             nationalityIcon.style.backgroundImage =
                 'url("assets/icons/flags/' + myCharacter.nationality + '.svg")';
             icon.appendChild(nationalityIcon);
+            // If the character has been update recently, give them a 'new' tag and bump them to the top of the list
             if (myCharacter.lastUpdated && (new Date().getTime() - new Date(myCharacter.lastUpdated).getTime()) / 86400000 < daysForNew) {
                 let newIcon = document.createElement('img');
                 newIcon.classList.add('new-icon');
                 newIcon.src = "/assets/icons/new-icon.svg";
                 newIcon.width = 50;
                 icon.appendChild(newIcon);
-                icon.style.order = '2';
+                icon.style.order = '-' + new Date(myCharacter.lastUpdated).getTime() / 100000;
             }
             break;
         case "location":
@@ -437,7 +438,7 @@ function generateLabelledIcon(type, object) {
                 newIcon.src = "/assets/icons/new-icon.svg";
                 newIcon.width = 50;
                 icon.appendChild(newIcon);
-                icon.style.order = '1';
+                icon.style.order = '-' + new Date(myLocation.addedDate).getTime() / 100000;
             }
             break;
     }
@@ -516,7 +517,8 @@ function generatePoses(e) {
             newIcon.classList.add('new-icon');
             newIcon.src = "/assets/icons/new-icon.svg";
             newIcon.width = 50;
-            newLabel.style.order = '1';
+            // newLabel.style.order = '1';
+            newLabel.style.order = new Date().getTime().toString();
             newLabel.appendChild(newIcon);
         }
     }
