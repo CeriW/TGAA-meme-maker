@@ -223,11 +223,11 @@ function generateCanvas() {
     let groupCode = Date.now();
     textColourRadios.innerHTML = `
     <input type="radio" name="group${groupCode}" id="default${groupCode}" value="default" checked></input>
-    <label for="default${groupCode}">
+    <label for="default${groupCode}" value="default">
       <span class="material-symbols-sharp">done</span>
     </label>
     <input type="radio" name="group${groupCode}" id="thought${groupCode}" value="thought"></input>
-    <label for="thought${groupCode}">
+    <label for="thought${groupCode}" value="thought">
       <span class="material-symbols-sharp">done</span>
     </label>
   `;
@@ -236,8 +236,9 @@ function generateCanvas() {
         var _a;
         const target = e.target;
         const value = target.value;
-        if (value) {
-            (_a = target.previousElementSibling) === null || _a === void 0 ? void 0 : _a.setAttribute('type', value); // previousElementSibling should be the textarea
+        const targetTextArea = (_a = textColourRadios.parentNode) === null || _a === void 0 ? void 0 : _a.querySelector('textarea.text-overlay');
+        if (value && targetTextArea) {
+            targetTextArea.setAttribute('type', value); // previousElementSibling should be the textarea
         }
     });
     // Generate the delete button and have it run removeCanvas on click.

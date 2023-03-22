@@ -309,11 +309,11 @@ function generateCanvas() {
   let groupCode = Date.now()
   textColourRadios.innerHTML = `
     <input type="radio" name="group${groupCode}" id="default${groupCode}" value="default" checked></input>
-    <label for="default${groupCode}">
+    <label for="default${groupCode}" value="default">
       <span class="material-symbols-sharp">done</span>
     </label>
     <input type="radio" name="group${groupCode}" id="thought${groupCode}" value="thought"></input>
-    <label for="thought${groupCode}">
+    <label for="thought${groupCode}" value="thought">
       <span class="material-symbols-sharp">done</span>
     </label>
   `
@@ -323,9 +323,9 @@ function generateCanvas() {
 
     const target = e.target as HTMLInputElement;
     const value = target.value;
-
-    if (value){
-      target.previousElementSibling?.setAttribute('type', value)   // previousElementSibling should be the textarea
+    const targetTextArea = textColourRadios.parentNode?.querySelector('textarea.text-overlay');
+    if (value && targetTextArea){
+      targetTextArea.setAttribute('type', value)   // previousElementSibling should be the textarea
     }
   })
 
