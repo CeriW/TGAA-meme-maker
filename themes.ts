@@ -11,6 +11,7 @@ export const themes: {[key: string]: Theme} = {
   asobaroWeek       : {name: "asobaro", isSpoiler: true, message: '<b style="color: var(--gold)">Happy Asobaro week!</b><br>28 May - 3 Jun #asobaroweek2023'},
   baroasoryuuWeek   : {name: "baroasoryuu", isSpoiler: true, message: '<b style="color: var(--red)">Happy BaroAsoRyuu week!</b><br>1-7 May #baroasoryuuweek2023'},
   cumberbatch       : {name: 'cumberbatch', isSpoiler: false, message: "Nothing suspicious here"},
+  fathersDay        : {name: "homumiko", isSpoiler: true, message: "Happy Father's Day - 18th Jun"},
   homumikoWeek      : {name: "homumiko", isSpoiler: true, message: "Happy Homumiko week!"},
   ryuulockWeek      : {name: "ryuulock", isSpoiler: false, message: '<b style="color: var(--gold)">Happy Ryuulock week!</b><br>17-23 April #ryuulockweek2023'},
 }
@@ -23,6 +24,8 @@ function isBetweenDates(startDate: string, endDate: string) {
 
 
 export function setTheme () {
+
+  
 
   let myTheme = null;
 
@@ -37,6 +40,8 @@ export function setTheme () {
   if (isBetweenDates("2023-05-01", "2023-06-07")){myTheme = themes.baroasoryuuWeek;} 
   if (isBetweenDates("2023-05-28", "2023-06-03")){myTheme = themes.asobaroWeek;} 
 
+
+  myTheme = themes.fathersDay;
 
   if (myTheme?.message){
     let bannerBottom = document.createElement('div');

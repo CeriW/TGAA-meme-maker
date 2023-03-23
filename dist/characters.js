@@ -33,7 +33,7 @@ export const characters = [
         variant: 'default outfit',
         theme: 'https://open.spotify.com/embed/track/1QUX7xOPs80O5tiQb3MPqd?utm_source=generator',
         tags: ['homumiko', 'ryuulock'],
-        lastUpdated: "2023-03-23",
+        lastUpdated: null,
         posesAddedOnLastUpdate: 0,
         alternateNames: ['Sholmes', 'Holmes']
     },
