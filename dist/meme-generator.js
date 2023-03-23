@@ -4,6 +4,7 @@ const versionInfo = '4.3.0 - 2023-03-23';
 import { locations } from "./locations.js";
 import { characters } from "./characters.js";
 import { setTheme } from "./themes.js";
+const theme = setTheme();
 console.log(`The Great Ace Attorney Meme Maker by CherryLestrade v${versionInfo} - theme: ${(_a = theme.name) !== null && _a !== void 0 ? _a : 'none'}`);
 const versionInfoDiv = document.querySelector('#version-info');
 versionInfoDiv.innerHTML = `Version ${versionInfo} - theme: none`;
@@ -46,7 +47,6 @@ const paths = {
 };
 // How many days we show 'new' tags for on icons
 const daysForNew = 14;
-const theme = setTheme();
 // ---------------------------------------------------------------------------//
 // Create our first canvas, and set it as the selected one.
 generateCanvas();

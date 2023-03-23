@@ -5,6 +5,7 @@ import { locations, LocationObject } from "./locations.js";
 import { characters, CharacterObject } from "./characters.js";
 import { setTheme, Theme } from "./themes.js";
 
+const theme: Theme = setTheme();
 console.log(`The Great Ace Attorney Meme Maker by CherryLestrade v${versionInfo} - theme: ${theme.name ?? 'none'}`);
 
 const versionInfoDiv = document.querySelector('#version-info')!;
@@ -63,8 +64,6 @@ const paths = {
 
 // How many days we show 'new' tags for on icons
 const daysForNew : number = 14;
-
-const theme: Theme = setTheme();
 
 // ---------------------------------------------------------------------------//
 
