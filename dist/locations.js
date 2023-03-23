@@ -6,11 +6,11 @@
 // addedDate - the date you added this location. Used to generate a 'new' tag on it and bump it to the top of the location list.
 // characterOverlay - the file name of an image to place over the top of the character (for example, prison bars).
 export const locations = [
-    { name: "221B Baker Street", id: "baker-street-221b", tags: ['homumiko'] },
-    { name: "221B Baker Street", id: "baker-street-221b-night", variant: "Night", tags: ['homumiko'] },
-    { name: "Sholmes' Suite", id: "sholmes-suite", variant: "Fireplace", tags: ['homumiko', 'ryuulock'] },
-    { name: "Sholmes' Suite", id: "sholmes-suite-sholmes", variant: "Herlock's side", tags: ['homumiko', 'ryuulock'] },
-    { name: "Sholmes' Suite", id: "sholmes-suite-iris", variant: "Iris' side", tags: ['homumiko', 'ryuulock'] },
+    { name: "221B Baker Street", id: "baker-street-221b", tags: ['homumiko', 'doyle'] },
+    { name: "221B Baker Street", id: "baker-street-221b-night", variant: "Night", tags: ['homumiko', 'doyle'] },
+    { name: "Sholmes' Suite", id: "sholmes-suite", variant: "Fireplace", tags: ['homumiko', 'ryuulock', 'doyle'] },
+    { name: "Sholmes' Suite", id: "sholmes-suite-sholmes", variant: "Herlock's side", tags: ['homumiko', 'ryuulock', 'doyle'] },
+    { name: "Sholmes' Suite", id: "sholmes-suite-iris", variant: "Iris' side", tags: ['homumiko', 'ryuulock', 'doyle'] },
     { name: "Naruhodo's Legal Consultancy", id: "naruhodos-legal-consultancy", tags: ['ryuulock', 'baroasoryuu'] },
     { name: "Defendant's Antechamber", id: "defendants-antechamber-the-old-bailey-left", variant: 'The Old Bailey', tags: ['asobaro', 'baroasoryuu'] },
     { name: "Defendant's Antechamber", id: "defendants-antechamber-japan-right", variant: 'Japanese Court of Judicature', tags: ['asobaro', 'baroasoryuu'] },
@@ -22,9 +22,9 @@ export const locations = [
     { name: "Crystal Tower base", id: "crystal-tower-base", tags: [] },
     { name: "Drebber's workshop", id: "drebbers-workshop", tags: [] },
     { name: "Drebber's room", id: "drebbers-room", tags: [] },
-    { name: "The Garridebs' room", id: "garridebs-room", tags: [] },
+    { name: "The Garridebs' room", id: "garridebs-room", tags: ['doyle'] },
     { name: "Natsume's Room", id: "natsumes-room", tags: ['natsume'] },
-    { name: "Windibank's Pawnbrokery", id: "windibanks", tags: [] },
+    { name: "Windibank's Pawnbrokery", id: "windibanks", tags: ['doyle'] },
     { name: "Forensics Laboratory", id: "forensics-laboratory-courtney", variant: "Courtney's version", tags: [], },
     { name: "Forensics Laboratory", id: "forensics-laboratory-maria", variant: "Maria's version", tags: [] },
     { name: "Room on Fresno Street", id: "room-on-fresno-street", tags: [] },

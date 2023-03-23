@@ -36,14 +36,12 @@ function isDate ({ day, month }: dateCheck) {
 
 
 export function setTheme () {  
-
   let myTheme = null;
-
 
   // ONE OFF EVENTS
   if (isBetweenDates("2023-04-17", "2023-04-23")){myTheme = themes.ryuulockWeek;} 
   if (isBetweenDates("2023-05-01", "2023-05-07")){myTheme = themes.baroasoryuuWeek;} 
-  if (isBetweenDates("2023-05-28", "2023-06-03")){myTheme = themes.asobaro;} 
+  if (isBetweenDates("2023-05-28", "2023-06-03")){myTheme = themes.asobaroWeek;} 
   if (isBetweenDates("2023-06-18", "2023-06-18")){myTheme = themes.fathersDay;} 
 
 
@@ -72,7 +70,7 @@ export function setTheme () {
 
   // Localised release anniversary - 26th July
   if (isDate( {day: 26, month: 7})){myTheme = themes.tgaaAnniversary;} 
-
+  
 
 
   if (myTheme?.message){

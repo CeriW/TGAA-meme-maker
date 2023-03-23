@@ -32,7 +32,7 @@ export function setTheme() {
         myTheme = themes.baroasoryuuWeek;
     }
     if (isBetweenDates("2023-05-28", "2023-06-03")) {
-        myTheme = themes.asobaro;
+        myTheme = themes.asobaroWeek;
     }
     if (isBetweenDates("2023-06-18", "2023-06-18")) {
         myTheme = themes.fathersDay;
