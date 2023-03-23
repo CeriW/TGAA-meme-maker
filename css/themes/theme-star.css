@@ -1,0 +1,22 @@
+.theme-star{
+  background: var(--gold);
+  width: 35px;
+  height: 35px;
+  clip-path: polygon(50% 0%, 64% 27%, 98% 35%, 76% 59%, 79% 91%, 50% 76%, 21% 91%, 25% 60%, 2% 35%, 34% 27%);
+}
+
+.theme-star:after{
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(to right, transparent 20%, rgba(255,255,255,0.3), transparent 80%);
+}
+
+.location-icon .theme-star,
+.character-icon .theme-star{
+  top: 0;
+  left: unset;
+}

@@ -29,6 +29,7 @@
 
 
 /* Themes */
+@import "css/themes/theme-star.css";
 @import "css/themes/homumiko.css";
 @import "css/themes/ryulock.css";
 @import "css/themes/asobaro.css";

@@ -1,35 +1,9 @@
 var _a;
 // Version info
-const versionInfo = '4.2.0 - 2023-03-22';
+const versionInfo = '4.3.0 - 2023-03-23';
 import { locations } from "./locations.js";
 import { characters } from "./characters.js";
-// THEME
-// A string to set the theme with. If this is not null it will do some
-// rearranging of the data and add an attribute to the site class to match the theme. 
-let currentYear = new Date().getFullYear();
-let theme = { name: null, isSpoiler: false };
-// 
-// if (isBetweenDates("2023-03-05", "2023-03-11")){
-//   theme = {name: "homumiko", isSpoiler: true};
-// } 
-if (isBetweenDates(currentYear + "-04-01", currentYear + "-04-07")) {
-    theme = { name: 'cumberbatch', isSpoiler: false };
-    initialiseCumberbatchTheme();
-}
-if (isBetweenDates("2023-04-17", "2023-04-23")) {
-    theme = { name: "ryuulock", isSpoiler: false };
-}
-if (isBetweenDates("2023-05-01", "2023-06-07")) {
-    theme = { name: "baroasoryuu", isSpoiler: true };
-}
-if (isBetweenDates("2023-05-28", "2023-06-03")) {
-    theme = { name: "asobaro", isSpoiler: true };
-}
-function isBetweenDates(startDate, endDate) {
-    const currentDate = new Date();
-    const myEndDate = new Date(endDate).getTime() + 24 * 60 * 60 * 1000; // Set it to the end of the date to make it easier
-    return (currentDate >= new Date(startDate) && currentDate <= new Date(myEndDate));
-}
+import { setTheme } from "./themes.js";
 console.log(`The Great Ace Attorney Meme Maker by CherryLestrade v${versionInfo} - theme: ${(_a = theme.name) !== null && _a !== void 0 ? _a : 'none'}`);
 const versionInfoDiv = document.querySelector('#version-info');
 versionInfoDiv.innerHTML = `Version ${versionInfo} - theme: none`;
@@ -71,11 +45,8 @@ const paths = {
     location: "assets/locations/",
 };
 // How many days we show 'new' tags for on icons
-let daysForNew = 14;
-// alternateNamesInUse = {
-//   "sholmes-herlock-default": "Holmes"
-// }
-// A very long list of characters and locations are pulled in from characters.js and locations.js
+const daysForNew = 14;
+const theme = setTheme();
 // ---------------------------------------------------------------------------//
 // Create our first canvas, and set it as the selected one.
 generateCanvas();
@@ -177,7 +148,7 @@ function generatePanelArtwork() {
         }
     }
 }
-function getCharacterFromID(characterID) {
+export function getCharacterFromID(characterID) {
     return characters.find((character) => character.id === characterID);
 }
 // Loop through all of the character tag artwork and update accordingly.
@@ -331,7 +302,6 @@ function generateCharacterInterface() {
         icon.setAttribute("gender", "gender-" + character.gender); // This is set like this since 'female' contains the string 'male'
         icon.setAttribute("nationality", character.nationality);
         if (theme.name && character.tags.includes(theme.name)) {
-            // icon.style.order = '1';
             icon.style.order = '-' + new Date().getTime() * 2; // A crude way of making sure that theme characters take precedence over new characters
         }
         for (let i = 0; i < 10; i++) {
@@ -404,6 +374,7 @@ function generateLocationInterface() {
 // type may be either 'character' or 'location'
 // object should be the object we're using from either the characters or locations array.
 function generateLabelledIcon(type, object) {
+    var _a;
     let icon = document.createElement("div");
     icon.classList.add(type + "-icon");
     icon.setAttribute("value", object.id);
@@ -433,6 +404,11 @@ function generateLabelledIcon(type, object) {
                 icon.appendChild(newIcon);
                 icon.style.order = '-' + new Date(myCharacter.lastUpdated).getTime() / 10000;
             }
+            if (theme.name && myCharacter.tags.includes(theme.name)) {
+                let themeIcon = document.createElement('div');
+                themeIcon.classList.add('theme-star');
+                icon.appendChild(themeIcon);
+            }
             break;
         case "location":
             const myLocation = object;
@@ -444,6 +420,11 @@ function generateLabelledIcon(type, object) {
                 newIcon.width = 50;
                 icon.appendChild(newIcon);
                 icon.style.order = '-' + new Date(myLocation.addedDate).getTime() / 10000;
+            }
+            if (theme.name && ((_a = myLocation.tags) === null || _a === void 0 ? void 0 : _a.includes(theme.name))) {
+                let themeIcon = document.createElement('div');
+                themeIcon.classList.add('theme-star');
+                icon.appendChild(themeIcon);
             }
             break;
     }
@@ -1029,74 +1010,4 @@ function generateCharacterNameListInterface(characterID) {
         namePanel.querySelector(`input[value="${selectedName}"]`).setAttribute('checked', 'true');
     }
     return namePanel;
-}
-/* APRIL FOOLS 2023 - BENEDICT CUMBERBATCH THEME -----------------------------*/
-function initialiseCumberbatchTheme() {
-    const benedictAlternateForenames = [
-        "Buttercup",
-        "Bendydoodle",
-        "Bonkyhort",
-        "Bodysnatch",
-        "Beetleborg",
-        "Bumblebee",
-        "Blunderbuss",
-        "Bubblebath",
-        "Bulbasaur",
-        "Billiardball",
-        "Butterfree",
-        "Bendyboot",
-        "Banister"
-    ];
-    const benedictAlternateSurnames = [
-        "Cumbersnatch",
-        "Crackerdoodle",
-        "Crunchynut",
-        "Cummerbund",
-        "Cabbagepatch",
-        "Cuttlefish",
-        "Cottonswab",
-        "Crumpetsnitch",
-        "Crumblescrunch",
-        "Charizard",
-        "Candlestick",
-        "Crackerjack",
-        "Custardbath",
-        "Candycrush",
-        "Counterstrike",
-        "Cinderblock"
-    ];
-    // Generate a new random name for Benedict Cumberbatch
-    function generateRandomCumberbatchName() {
-        let forename = benedictAlternateForenames[Math.floor(Math.random() * benedictAlternateForenames.length)];
-        let surname = benedictAlternateSurnames[Math.floor(Math.random() * benedictAlternateForenames.length)];
-        return forename + ' ' + surname;
-    }
-    // Add Benedict Cumberbatch to the characters array
-    characters.unshift({
-        name: "Sherlock Holmes",
-        id: "holmes-benedict",
-        variant: generateRandomCumberbatchName(),
-        gender: 'male',
-        nationality: 'british',
-        appearsIn: [false, false, false, false, false, false, false, false, false, false],
-        images: 5,
-        tags: ['cumberbatch'],
-        lastUpdated: "Apr 01 9999",
-        posesAddedOnLastUpdate: 5
-    });
-    // Display the random name on the page
-    function displayNewBenedictName() {
-        const benedictLabel = document.querySelector('.character-icon[value="holmes-benedict"] .variant-tag');
-        if (benedictLabel) {
-            benedictLabel.textContent = generateRandomCumberbatchName();
-        }
-    }
-    // Start off with a new random name
-    // let benedict = characters.find((character) => character.id === "holmes-benedict")
-    let benedict = getCharacterFromID("holmes-benedict");
-    if (benedict) {
-        benedict.variant = generateRandomCumberbatchName();
-    }
-    // Every 10 seconds, give Benedict a new name
-    window.setInterval(displayNewBenedictName, 10000);
 }

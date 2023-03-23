@@ -15,25 +15,6 @@ body[theme="asobaro"] #share-buttons{
   background: var(--dark-accent);
 }
 
-body[theme="asobaro"] #banner:after{
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: -200px;
-  pointer-events: none;
-  background: url('/assets/misc/banner-overlay-asobaro-week.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  transform-origin: right top;
-  
-  animation-name: bounceIn;
-  animation-duration: .75s;
-  animation-duration: 1s;
-  animation-fill-mode: both;
-  animation-delay: 1.5s;
-}
 
 body[theme="asobaro"] .toggle-heading, body[theme="asobaro"] #pose-heading, body[theme="asobaro"] #spoiler-warning, body[theme="asobaro"] #social-feed-heading, body[theme="asobaro"] #download div, body[theme="asobaro"] #filter-toggle, body[theme="asobaro"] #modal > div{
   text-shadow: none;
@@ -47,8 +28,3 @@ body[theme="asobaro"] .reset-filters{
 body[theme="asobaro"] .variant-tag{
   color: #d89797;
 }
-
-/* 
-.toggle-heading, #pose-heading, #spoiler-warning, #social-feed-heading, #download div, #filter-toggle, #modal > div{
-} */
-

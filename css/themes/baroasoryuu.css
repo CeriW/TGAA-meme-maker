@@ -2,12 +2,6 @@ body[theme="baroasoryuu"]{
   --blue: #0c0b08;
   --scrollbar: #000000;
   --dark-accent: #0a0a06;
-  /* --gold: #860606; */
-
-  /* --gradient-top: #fff;
-  --gradient-bottom: #dbdbdb;
-  --gradient-text-colour: #860606; */
-
   --red: #860606;
 }
 
@@ -15,26 +9,6 @@ body[theme="baroasoryuu"] #info-bar,
 body[theme="baroasoryuu"] #about-button,
 body[theme="baroasoryuu"] #share-buttons{
   background: var(--dark-accent);
-}
-
-body[theme="baroasoryuu"] #banner:after{
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: -200px;
-  pointer-events: none;
-  background: url('/assets/misc/banner-overlay-baroasoryuu-week.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  transform-origin: right top;
-  
-  animation-name: bounceIn;
-  animation-duration: .75s;
-  animation-duration: 1s;
-  animation-fill-mode: both;
-  animation-delay: 1.5s;
 }
 
 body[theme="baroasoryuu"] .toggle-heading,
@@ -55,18 +29,4 @@ body[theme="baroasoryuu"] .reset-filters{
   color: var(--gradient-text-colour);
 }
 
-
-/* body[theme="baroasoryuu"] .variant-tag{
-  color: #d89797;
-} */
-
-/* body[theme="baroasoryuu"] #inspiration-bar,
-body[theme="baroasoryuu"] #inspiration-bar > span{
-  background: #fff;
-  color: var(--red);
-} */
-
-/* 
-.toggle-heading, #pose-heading, #spoiler-warning, #social-feed-heading, #download div, #filter-toggle, #modal > div{
-} */
 
