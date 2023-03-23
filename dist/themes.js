@@ -29,6 +29,9 @@ export function setTheme() {
     if (isBetweenDates("2023-05-28", "2023-06-03")) {
         myTheme = themes.asobaroWeek;
     }
+    if (isBetweenDates("2023-06-18", "2023-06-18")) {
+        myTheme = themes.fathersDay;
+    }
     if (myTheme === null || myTheme === void 0 ? void 0 : myTheme.message) {
         let bannerBottom = document.createElement('div');
         bannerBottom.innerHTML = `

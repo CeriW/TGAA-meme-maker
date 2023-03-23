@@ -23,9 +23,7 @@ function isBetweenDates(startDate: string, endDate: string) {
 }
 
 
-export function setTheme () {
-
-  
+export function setTheme () {  
 
   let myTheme = null;
 
@@ -39,6 +37,8 @@ export function setTheme () {
   if (isBetweenDates("2023-04-17", "2023-04-23")){myTheme = themes.ryuulockWeek;} 
   if (isBetweenDates("2023-05-01", "2023-06-07")){myTheme = themes.baroasoryuuWeek;} 
   if (isBetweenDates("2023-05-28", "2023-06-03")){myTheme = themes.asobaroWeek;} 
+  if (isBetweenDates("2023-06-18", "2023-06-18")){myTheme = themes.fathersDay;} 
+
 
   if (myTheme?.message){
     let bannerBottom = document.createElement('div');
