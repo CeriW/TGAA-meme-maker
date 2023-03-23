@@ -8,6 +8,8 @@ export type Theme = {
 
 export const themes: {[key: string]: Theme} = {
   default           : {name: null, isSpoiler: false},
+  
+  doyleBirthday     : {name: "doyleBirthday", isSpoiler: false, message: '<b style="color: var(--gold)">Happy Asobaro week!</b><br>28 May - 3 Jun #asobaroweek2023'},
   asobaroWeek       : {name: "asobaro", isSpoiler: true, message: '<b style="color: var(--gold)">Happy Asobaro week!</b><br>28 May - 3 Jun #asobaroweek2023'},
   baroasoryuuWeek   : {name: "baroasoryuu", isSpoiler: true, message: '<b style="color: var(--red)">Happy BaroAsoRyuu week!</b><br>1-7 May #baroasoryuuweek2023'},
   cumberbatch       : {name: 'cumberbatch', isSpoiler: false, message: "Nothing suspicious here"},
@@ -38,7 +40,6 @@ export function setTheme () {
   if (isBetweenDates("2023-05-01", "2023-06-07")){myTheme = themes.baroasoryuuWeek;} 
   if (isBetweenDates("2023-05-28", "2023-06-03")){myTheme = themes.asobaroWeek;} 
   if (isBetweenDates("2023-06-18", "2023-06-18")){myTheme = themes.fathersDay;} 
-
 
   if (myTheme?.message){
     let bannerBottom = document.createElement('div');

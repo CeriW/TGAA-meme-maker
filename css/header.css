@@ -21,6 +21,10 @@ header{
   z-index: 2;
 }
 
+body:not([accept-spoilers="true"]) #banner-bottom{
+  display: none;
+}
+
 #banner-bottom{
   background: #fff;
   color:black;
@@ -49,7 +53,6 @@ header{
   right: -21px;
   clip-path: polygon(100% 0%, 0% 100%, 0% 0%);
 }
-
 
 #banner .theme-star{
   position: absolute;
