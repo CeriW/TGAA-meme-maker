@@ -26,6 +26,10 @@ export const locations: LocationObject[] = [
   {name   : "Naruhodo's Legal Consultancy",          id:"naruhodos-legal-consultancy",                     tags: ['ryuulock',  'baroasoryuu']},
   {name   : "Defendant's Antechamber",               id:"defendants-antechamber-the-old-bailey-left",      variant:'The Old Bailey', tags: ['asobaro', 'baroasoryuu']},
   {name   : "Defendant's Antechamber",               id:"defendants-antechamber-japan-right",              variant:'Japanese Court of Judicature', tags: ['asobaro','baroasoryuu']},
+  {name   : "Witness stand",                         id:"witness-stand-old-bailey",              variant:'The Old Bailey', characterOverlay: "witness-stand-old-bailey-overlay", addedDate: "2023-03-23"},
+  {name   : "Witness stand",                         id:"witness-stand-japan",              variant:'Japanese Court of Judicature', characterOverlay: "witness-stand-japan-overlay", addedDate: "2023-03-23"},
+
+  
   {name   : "Prosecutor's Office",                   id:"prosecutors-office-left",                         tags: ['asobaro', 'baroasoryuu']},
   {name   : "Prison cell",                           id:"prison-cell",                                     variant: 'Outside', tags: []},
   {name   : "Prison cell",                           id:"prison-cell-inside",                              variant: 'Inside', characterOverlay: "prison-cell-bars", tags: [], addedDate: "Feb 24 2023"},

@@ -209,13 +209,20 @@ function generatePanelArtwork() {
   backgrounds.forEach(function (background) {
     background.src = paths.location + backgroundSelector.value + ".jpg";
   });
+
+  characterOverlay.src = `/assets/locations/${characterOverlayID}.png`;
+  let overlays : NodeListOf<HTMLImageElement> = document.querySelectorAll(
+    ".canvas-container img:nth-child(3)"
+  );
+  overlays.forEach(function (overlay) {
+    overlay.src = characterOverlay.src;
+  });
   
   // If a character has been purposely selected previously then set the character image
   if (characterSelected) {
-    characterOverlay.src = `/assets/locations/${characterOverlayID}.png`;
+    
 
     let currentCharacter = getCharacterFromID(characterSelector.value)
-
     if (currentCharacter){
       if (currentCharacter.alternateNames){
         generateNameSelectorWindow();
@@ -285,7 +292,7 @@ function generateCanvas() {
   
   
   characterOverlay = characterOverlay ? characterOverlay.cloneNode() as HTMLImageElement : document.createElement("img");
-  characterOverlay.id = "character-overlay";
+  characterOverlay.classList.add("character-overlay");
   characterOverlay.src = `/assets/locations/${characterOverlayID}.png`;
   newCanvas.appendChild(characterOverlay);
   
