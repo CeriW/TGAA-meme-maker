@@ -23,7 +23,7 @@ export const locations = [
     { name: "Drebber's workshop", id: "drebbers-workshop", tags: [] },
     { name: "Drebber's room", id: "drebbers-room", tags: [] },
     { name: "The Garridebs' room", id: "garridebs-room", tags: [] },
-    { name: "Natsume's Room", id: "natsumes-room", tags: [] },
+    { name: "Natsume's Room", id: "natsumes-room", tags: ['natsume'] },
     { name: "Windibank's Pawnbrokery", id: "windibanks", tags: [] },
     { name: "Forensics Laboratory", id: "forensics-laboratory-courtney", variant: "Courtney's version", tags: [], },
     { name: "Forensics Laboratory", id: "forensics-laboratory-maria", variant: "Maria's version", tags: [] },

@@ -7,24 +7,24 @@
 // appearsIn - for filtering purposes. For those unfamiliar with TGAA, the game is split into two parts, each part being split up into 5 individual cases making 10 in total. This array is made up of ten values containing true or false to indicate whether this character was present in that case.
 //             Cases are commonly referred to the fans by the number of the game they appear in, then the order of that case. For example, case 9 is usually called 2-4 because it's the 4th part of the 2nd game.
 // images - the number of images in the folder to go with this character. The code depends on them being named sequentially beginning at 1 and can't work if there are any numbers missing.
-// tags - used during themed time periods. Will be used to place these characters at the top of the list.
+// tags - used during themed time periods. Will be used to place these characters at the top of the list. The tags should correspond to theme names
 // lastUpdated - a date string of the last time this character was updated. Will be used to generate a 'new' image tag for a set number of days.
 // posesAddedOnLastUpdate - will tag the specified poses as new for a set number of days.
 // alternate names - some characters have alternative names that users might want to toggle between (eg. Herlock Sholmes was callled Sherlock Holmes in the Japanese version)
 
 export type CharacterObject = {
-  name: string;
-  id: string;
-  gender: 'male' | 'female';
-  nationality: string;
-  appearsIn: [boolean,boolean,boolean,boolean,boolean,boolean,boolean,boolean,boolean,boolean];
-  images: number;
-  theme?: string;
-  tags: string[];
-  variant?: string;
-  lastUpdated: string | null;
-  posesAddedOnLastUpdate: number;
-  alternateNames?: string[];
+  name                      : string;
+  id                        : string;
+  gender                    : 'male' | 'female';
+  nationality               : string;
+  appearsIn                 : [boolean,boolean,boolean,boolean,boolean,boolean,boolean,boolean,boolean,boolean];
+  images                    : number;
+  theme?                    : string;
+  tags                      : string[];
+  variant?                  : string;
+  lastUpdated               : string | null;
+  posesAddedOnLastUpdate    : number;
+  alternateNames?           : string[];
 };
 
 export const characters : CharacterObject[] = [
@@ -50,7 +50,7 @@ export const characters : CharacterObject[] = [
   images: 16,
   variant: 'default outfit',
   theme: 'https://open.spotify.com/embed/track/1QUX7xOPs80O5tiQb3MPqd?utm_source=generator',
-  tags: ['homumiko', 'ryuulock'],
+  tags: ['homumiko', 'ryuulock', 'doyle'],
   lastUpdated: null,
   posesAddedOnLastUpdate: 0,
   alternateNames: ['Sholmes', 'Holmes']
@@ -65,7 +65,7 @@ export const characters : CharacterObject[] = [
   variant: 'casual outfit',
   theme: 'https://open.spotify.com/embed/track/5FQuOO8w56VPX1tJwaPKx8?utm_source=generator',
   alternateNames: ['Sholmes', 'Holmes'],
-  tags: ['homumiko', 'ryuulock'],
+  tags: ['homumiko', 'ryuulock', 'doyle'],
   lastUpdated: null,
   posesAddedOnLastUpdate: 0,
 },
@@ -79,7 +79,7 @@ export const characters : CharacterObject[] = [
   images: 13,
   variant: 'Japanese Jumble',
   theme: 'https://open.spotify.com/embed/track/0EFqdvTgJMPd02XUUCsHnI?utm_source=generator',
-  tags: ['homumiko','ryuulock'],
+  tags: ['homumiko','ryuulock', 'doyle'],
   lastUpdated: "Sat Mar 04 2023",
   posesAddedOnLastUpdate: 13,
   alternateNames: ['Sholmes', 'Holmes']
@@ -119,7 +119,7 @@ export const characters : CharacterObject[] = [
   appearsIn: [false,false,true,true,true,false,true,true,true,true],
   images: 9,
   theme: 'https://open.spotify.com/embed/track/3oCMdfOMvnlS9BBAZ2YBQ5?utm_source=generator',
-  tags: [],
+  tags: ['doyle'],
   lastUpdated: null,
   posesAddedOnLastUpdate: 0,
 },
@@ -132,7 +132,7 @@ export const characters : CharacterObject[] = [
   appearsIn: [false,false,true,true,true,false,true,true,true,true],
   images: 5,
   theme: 'https://open.spotify.com/embed/track/657DqxHnOmnX3ZRJlbs9xZ?utm_source=generator',
-  tags: [],
+  tags: ['doyle'],
   lastUpdated: null,
   posesAddedOnLastUpdate: 0,
 },
@@ -145,7 +145,7 @@ export const characters : CharacterObject[] = [
   appearsIn: [false,false,true,false,true,false,false,true,true,true],
   images: 5,
   theme: 'https://open.spotify.com/embed/track/582mS91YcS5PHaTx5LUPn4?utm_source=generator',
-  tags: [],
+  tags: ['doyle'],
   lastUpdated: "2023-03-10",
   posesAddedOnLastUpdate: 1,
 },
@@ -200,7 +200,7 @@ export const characters : CharacterObject[] = [
   appearsIn: [false,false,false,true,false,true,true,false,false,false],
   images: 9,
   theme: 'https://open.spotify.com/embed/track/0hWRHYklo8CRyV8BxVQugG?utm_source=generator',
-  tags: [],
+  tags: ['natsume'],
   lastUpdated: null,
   posesAddedOnLastUpdate: 0,
 },
@@ -214,7 +214,7 @@ export const characters : CharacterObject[] = [
   appearsIn: [false,false,false,false,false,false,false,true,false,false],
   images: 4,
   theme: 'https://open.spotify.com/embed/track/1QBM9EnE2HiyIvEL1vz8U6?utm_source=generator',
-  tags: [],
+  tags: ['doyle'],
   lastUpdated: null,
   posesAddedOnLastUpdate: 0,
 },
@@ -226,7 +226,7 @@ export const characters : CharacterObject[] = [
   nationality: 'british',
   appearsIn: [false,false,false,true,true,false,true,false,false,false],
   images: 3,
-  tags: [],
+  tags: ['natsume'],
   lastUpdated: null,
   posesAddedOnLastUpdate: 0,
 },

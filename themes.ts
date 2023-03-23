@@ -9,13 +9,17 @@ export type Theme = {
 export const themes: {[key: string]: Theme} = {
   default           : {name: null, isSpoiler: false},
   
-  doyleBirthday     : {name: "doyleBirthday", isSpoiler: false, message: '<b style="color: var(--gold)">Happy Asobaro week!</b><br>28 May - 3 Jun #asobaroweek2023'},
+  dgsAnniversary    : {name: "dgsAnniversary", isSpoiler: false, message: '<b>Happy anniversary Dai Gyakuten Saiban!</b> 9th July 2015'},
+  doyle             : {name: "doyle", isSpoiler: false, message: '<b>Happy birthday Sir Arthur<br>Conan Doyle!</b> 22nd May'},
   asobaroWeek       : {name: "asobaro", isSpoiler: true, message: '<b style="color: var(--gold)">Happy Asobaro week!</b><br>28 May - 3 Jun #asobaroweek2023'},
   baroasoryuuWeek   : {name: "baroasoryuu", isSpoiler: true, message: '<b style="color: var(--red)">Happy BaroAsoRyuu week!</b><br>1-7 May #baroasoryuuweek2023'},
   cumberbatch       : {name: 'cumberbatch', isSpoiler: false, message: "Nothing suspicious here"},
   fathersDay        : {name: "homumiko", isSpoiler: true, message: "Happy Father's Day - 18th Jun"},
   homumikoWeek      : {name: "homumiko", isSpoiler: true, message: "Happy Homumiko week!"},
+  natsume           : {name: "natsume", isSpoiler: false, message: '<b>Happy birthday Soseki Natsume!</b><br>9th Feb'},
   ryuulockWeek      : {name: "ryuulock", isSpoiler: false, message: '<b style="color: var(--gold)">Happy Ryuulock week!</b><br>17-23 April #ryuulockweek2023'},
+  takumi            : {name: "takumi", isSpoiler: false, message: "Happy birthday Shu Takumi!"},
+  tgaaAnniversary   : {name: "tgaaAnniversary", isSpoiler: false, message: "<b>Happy localisation day!</b><br>26th July 2021"}
 }
 
 function isBetweenDates(startDate: string, endDate: string) {
@@ -24,22 +28,52 @@ function isBetweenDates(startDate: string, endDate: string) {
   return (currentDate >= new Date(startDate) && currentDate <= new Date(myEndDate));
 }
 
+type dateCheck = {day: number, month: number}
+function isDate ({ day, month }: dateCheck) {
+  let today = new Date();
+  return today.getDate() === day && today.getMonth() ===  month - 1;
+}
+
 
 export function setTheme () {  
 
   let myTheme = null;
 
-  let currentYear = new Date().getFullYear()
 
-  if (isBetweenDates(currentYear + "-04-01", currentYear + "-04-07")){
+  // ONE OFF EVENTS
+  if (isBetweenDates("2023-04-17", "2023-04-23")){myTheme = themes.ryuulockWeek;} 
+  if (isBetweenDates("2023-05-01", "2023-05-07")){myTheme = themes.baroasoryuuWeek;} 
+  if (isBetweenDates("2023-05-28", "2023-06-03")){myTheme = themes.asobaro;} 
+  if (isBetweenDates("2023-06-18", "2023-06-18")){myTheme = themes.fathersDay;} 
+
+
+  // ANNUALLY REOCCURING EVENTS
+
+  // Sherlock Holmes' birthday - 6th Jan
+  if (isDate( {day: 6, month: 1})){myTheme = themes.natsume;} 
+
+  // Soseki Natsume's birthday - 9th Feb
+  if (isDate( {day: 9, month: 2})){myTheme = themes.natsume;} 
+  
+  // April Fool's Day - 1st April
+  if (isDate( {day: 1, month: 4})){
     initialiseCumberbatchTheme();
     myTheme = themes.cumberbatch;
   }
 
-  if (isBetweenDates("2023-04-17", "2023-04-23")){myTheme = themes.ryuulockWeek;} 
-  if (isBetweenDates("2023-05-01", "2023-06-07")){myTheme = themes.baroasoryuuWeek;} 
-  if (isBetweenDates("2023-05-28", "2023-06-03")){myTheme = themes.asobaroWeek;} 
-  if (isBetweenDates("2023-06-18", "2023-06-18")){myTheme = themes.fathersDay;} 
+  // Shu Takumi's birthday - 2nd May
+  if (isDate( {day: 2, month: 5})){myTheme = themes.takumi;} 
+
+  // Sir Arthur Conan Doyle's birthday - 22nd May
+  if (isDate( {day: 22, month: 5})){myTheme = themes.doyle;} 
+
+  // Japanese release anniversary - 9th July
+  if (isDate( {day: 9, month: 7})){myTheme = themes.dgsAnniversary;} 
+
+  // Localised release anniversary - 26th July
+  if (isDate( {day: 26, month: 7})){myTheme = themes.tgaaAnniversary;} 
+
+
 
   if (myTheme?.message){
     let bannerBottom = document.createElement('div');
