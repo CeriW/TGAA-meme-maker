@@ -9,6 +9,7 @@ export type Theme = {
 export const themes: {[key: string]: Theme} = {
   default           : {name: null, isSpoiler: false},
   
+  cherrylestradeBirthday: {name: "homumiko", isSpoiler: true, message: "<b>Happy birthday CherryLestrade!</b><br>Have some Homumiko"},
   dgsAnniversary    : {name: "dgsAnniversary", isSpoiler: false, message: '<b>Happy anniversary Dai Gyakuten Saiban!</b> 9th July 2015'},
   doyle             : {name: "doyle", isSpoiler: false, message: '<b>Happy birthday Sir Arthur<br>Conan Doyle!</b> 22nd May'},
   asobaroWeek       : {name: "asobaro", isSpoiler: true, message: '<b style="color: var(--gold)">Happy Asobaro week!</b><br>28 May - 3 Jun #asobaroweek2023'},
@@ -71,8 +72,10 @@ export function setTheme () {
   // Localised release anniversary - 26th July
   if (isDate( {day: 26, month: 7})){myTheme = themes.tgaaAnniversary;} 
   
+  // My birthday :) - 7th Dec
+  if (isDate( {day: 7, month: 12})){myTheme = themes.cherrylestradeBirthday;} 
 
-
+  
   if (myTheme?.message){
     let bannerBottom = document.createElement('div');
     bannerBottom.innerHTML = `
