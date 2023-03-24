@@ -4,6 +4,7 @@ const versionInfo = '4.4.0 - 2023-03-23';
 import { locations } from "./locations.js";
 import { characters } from "./characters.js";
 import { setTheme } from "./themes.js";
+import { michaelScott, deadpool } from "./random-quotes.js";
 const theme = setTheme();
 console.log(`The Great Ace Attorney Meme Maker by CherryLestrade v${versionInfo} - theme: ${(_a = theme.name) !== null && _a !== void 0 ? _a : 'none'}`);
 const versionInfoDiv = document.querySelector('#version-info');
@@ -191,7 +192,7 @@ function generateCanvas() {
     let newTextBox = document.createElement("textarea");
     newTextBox.classList.add("text-overlay");
     newTextBox.setAttribute('placeholder', "Type your text here...");
-    newTextBox.setAttribute("maxlength", '110');
+    newTextBox.setAttribute("maxlength", '115');
     newCanvas.appendChild(newTextBox);
     let textColourRadios = document.createElement('div');
     textColourRadios.classList.add("text-colour-selector");
@@ -895,7 +896,7 @@ function pasteQuote(type) {
         }
         // If the quote is too long, get a new one.
         // Otherwise go ahead and use it.
-        if (text.length > 110 || text.indexOf('fuck') > -1) {
+        if (text.length > 115 || text.indexOf('fuck') > -1) {
             pasteQuote(type);
         }
         else {
@@ -907,9 +908,32 @@ function pasteQuote(type) {
     });
 }
 ;
+function pasteQuoteFromArray(type) {
+    let array;
+    if (type === "michaelScott") {
+        array = michaelScott;
+    }
+    else if (type === "deadpool") {
+        array = deadpool;
+    }
+    if (!array) {
+        return;
+    }
+    let text = array[Math.floor((Math.random() * array.length))];
+    // If the quote is too long, get a new one.
+    // Otherwise go ahead and use it.
+    if (text.length < 115 && text.indexOf('fuck') === -1) {
+        document.querySelector('.active-canvas textarea').value = text;
+    }
+}
 ['kanye', 'dadJoke', 'ronSwanson', 'advice'].forEach((type) => {
     document.querySelector(`.quote-button[type="${type}"]`).addEventListener('click', () => {
         pasteQuote(type);
+    });
+});
+['michaelScott', 'deadpool'].forEach((type) => {
+    document.querySelector(`.quote-button[type="${type}"]`).addEventListener('click', () => {
+        pasteQuoteFromArray(type);
     });
 });
 /* Name selectors ------------------------------------------------------------*/
@@ -980,7 +1004,6 @@ function getCharactersInUse() {
 // Generate the names interface for each individual character.
 function generateCharacterNameListInterface(characterID) {
     var _a, _b;
-    // let myCharacter = characters.find((character) => character.id === characterID)
     let myCharacter = getCharacterFromID(characterID);
     const namePanel = document.createElement('fieldset');
     namePanel.classList.add("name-selector-form");
