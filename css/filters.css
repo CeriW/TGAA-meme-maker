@@ -50,6 +50,7 @@ span[filter-type="all"]{
   width: 100%;
   flex-wrap: wrap;
   margin-top: -20px;
+  order: -100000000000000000000000000000000000;
 }
 
 #filter-form.hidden{
