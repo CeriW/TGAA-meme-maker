@@ -35,7 +35,7 @@
   border: 1px solid #fff;
   font-family: inherit;
   font-size: inherit;
-  padding: 5px 40px;
+  padding: 5px 10px;
   cursor: pointer;
   position: relative;
   transition: 0.2s;
@@ -45,27 +45,43 @@
 
 .button-bar{
   display: grid;
-  grid-template-columns: auto auto auto auto;
+  grid-template-columns: repeat(6, 1fr);
   gap: 5px;
 }
 
 @media (max-width: 1315px){
   .button-bar{
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto;
+    grid-template-columns: 1fr 1fr 1fr;
+    width: 100%;
+  }
+}
+
+@media (max-width: 850px){
+  .quote-button{
+    font-size: 16px;
   }
 }
 
 @media (max-width: 820px){
   .button-bar{
-    width: 100%;
+    width: 100%; 
+    grid-template-columns: 1fr 1fr;
   }
 }
 
 @media(max-width: 740px){
   .button-bar{
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 450px){
+  .button-bar{
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto auto;
+  }
+
+  .quote-button{
+    font-size: 1em;
   }
 }
 
