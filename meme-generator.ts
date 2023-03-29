@@ -254,6 +254,7 @@ function generateCanvas() {
   newCanvas.appendChild(tag)
 
   let newSpeechbox = document.createElement("img");
+  newSpeechbox.classList.add('speech-box');
   newSpeechbox.src = "assets/game-elements/speech-box.png";
   newCanvas.appendChild(newSpeechbox);
 

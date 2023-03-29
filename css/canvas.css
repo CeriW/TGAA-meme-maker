@@ -67,8 +67,8 @@ canvas{
 }
 
 @media (max-width: 625px){
-  .canvas-container img:nth-child(3),
-  .canvas-container img:nth-child(4){
+  .canvas-container img.tag-image,
+  .canvas-container img.speech-box{
     opacity: 0;
   }
 }

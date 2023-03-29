@@ -35,8 +35,9 @@
     right: 0;
     bottom: 0;
     top: unset;
+    position: relative;
     padding: 5px 10px 20px 50px;
-    margin: 8px;
+    margin: -30px 8px 8px;
     font-size: 19px;
     display: flex;
     align-items: center;
