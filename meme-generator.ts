@@ -736,7 +736,6 @@ function download(e:Event) {
         });       
         let words = editedWords.split(" ");
         words = words.filter(element => element !== "")
-        console.log(words);
       
         let line = "";
       
