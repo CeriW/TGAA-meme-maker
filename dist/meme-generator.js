@@ -578,6 +578,8 @@ function download(e) {
                     return '|' + words.join('| |') + '| ';
                 });
                 let words = editedWords.split(" ");
+                words = words.filter(element => element !== "");
+                console.log(words);
                 let line = "";
                 function outputLine(line, x, y, context) {
                     let words = line.split(" ");
