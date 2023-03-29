@@ -1,6 +1,6 @@
 var _a;
 // Version info
-const versionInfo = '4.2.0 - 2023-03-29';
+const versionInfo = '4.2.0 - 2023-03-29 b';
 import { locations } from "./locations.js";
 import { characters } from "./characters.js";
 import { setTheme } from "./themes.js";
