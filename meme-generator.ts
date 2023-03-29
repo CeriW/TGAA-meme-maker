@@ -729,43 +729,33 @@ function download(e:Event) {
       downloadableCanvasContext.drawImage(tempCanvas, 0, i * 1080);
       
       function wrapText(context: CanvasRenderingContext2D, text: string, x: number, y: number, maxWidth: number) {
-        
-
-        // const text = "Hello! This is a *test hello world* thank you *for watching* haha";
         const regex = /\*([^*]+)\*/g;
         const editedWords = text.replace(regex, (match, p1) => {
           const words = p1.split(' ');
-          return '*' + words.join('* *') + '*';
+          return '|' + words.join('| |') + '|';
         });
-      
         let words = editedWords.split(" ");
-
-        // let words = editedWords;
-        
+      
         let line = "";
-  
-        // console.log(words)
-  
-        let result: string[] = []
-  
-        for (let i = 0; i < words.length; i++) {
-          let splitItems = words[i].split(/(\*.*?\*|[^\w\s])/).filter(Boolean)
-          result = result.concat(splitItems)
-        }
-  
-        words = result;
       
         function outputLine(line: string, x: number, y: number, context: CanvasRenderingContext2D) {
           let words = line.split(" ");
           let wordX = x;
           for (let i = 0; i < words.length; i++) {
             let color = colorFn(words[i]);
-            words[i] = words[i].replace(/\*/g, "")
+            let myWord = words[i].replace(/\|/g, "");
             context.fillStyle = color;
-            context.fillText(words[i], wordX, y);
-            let spacingCharacter = /^[^\w\s]+$/.test(words[i + 1]) ? '' : ' ';
-  
-            wordX += context.measureText(words[i] + spacingCharacter).width;
+            context.fillText(myWord, wordX, y);
+            let nextWord = words[i + 1] ? words[i + 1].replace(/\|/g, "") : "";
+            let spacingCharacter = /^[^\w\s]+$/.test(nextWord) ? '' : ' ';
+      
+            // Calculate the width of the word without the pipes
+            let wordWidth = context.measureText(myWord).width;
+      
+            // Add the width of the spacing character
+            wordWidth += context.measureText(spacingCharacter).width;
+      
+            wordX += wordWidth;
           }
         }
       
@@ -782,15 +772,16 @@ function download(e:Event) {
           }
         }
         outputLine(line, x, y, context);
-  
+      
         function colorFn(word: string) {
-          if (/^\*+.*$/.test(word)) {
+          if (/^\|+.*$/.test(word)) {
             return '#f1671a';
           } else {
             return desiredTextColour;
           }
         }
       }
+      
 
 
   

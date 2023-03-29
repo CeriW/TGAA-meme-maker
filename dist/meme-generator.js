@@ -572,32 +572,28 @@ function download(e) {
             wrapText(tempCanvasContext, textBoxText, 365, 882, 1200);
             downloadableCanvasContext.drawImage(tempCanvas, 0, i * 1080);
             function wrapText(context, text, x, y, maxWidth) {
-                // const text = "Hello! This is a *test hello world* thank you *for watching* haha";
                 const regex = /\*([^*]+)\*/g;
                 const editedWords = text.replace(regex, (match, p1) => {
                     const words = p1.split(' ');
-                    return '*' + words.join('* *') + '*';
+                    return '|' + words.join('| |') + '|';
                 });
                 let words = editedWords.split(" ");
-                // let words = editedWords;
                 let line = "";
-                // console.log(words)
-                let result = [];
-                for (let i = 0; i < words.length; i++) {
-                    let splitItems = words[i].split(/(\*.*?\*|[^\w\s])/).filter(Boolean);
-                    result = result.concat(splitItems);
-                }
-                words = result;
                 function outputLine(line, x, y, context) {
                     let words = line.split(" ");
                     let wordX = x;
                     for (let i = 0; i < words.length; i++) {
                         let color = colorFn(words[i]);
-                        words[i] = words[i].replace(/\*/g, "");
+                        let myWord = words[i].replace(/\|/g, "");
                         context.fillStyle = color;
-                        context.fillText(words[i], wordX, y);
-                        let spacingCharacter = /^[^\w\s]+$/.test(words[i + 1]) ? '' : ' ';
-                        wordX += context.measureText(words[i] + spacingCharacter).width;
+                        context.fillText(myWord, wordX, y);
+                        let nextWord = words[i + 1] ? words[i + 1].replace(/\|/g, "") : "";
+                        let spacingCharacter = /^[^\w\s]+$/.test(nextWord) ? '' : ' ';
+                        // Calculate the width of the word without the pipes
+                        let wordWidth = context.measureText(myWord).width;
+                        // Add the width of the spacing character
+                        wordWidth += context.measureText(spacingCharacter).width;
+                        wordX += wordWidth;
                     }
                 }
                 for (let n = 0; n < words.length; n++) {
@@ -615,7 +611,7 @@ function download(e) {
                 }
                 outputLine(line, x, y, context);
                 function colorFn(word) {
-                    if (/^\*+.*$/.test(word)) {
+                    if (/^\|+.*$/.test(word)) {
                         return '#f1671a';
                     }
                     else {
