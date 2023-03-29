@@ -32,7 +32,7 @@ export const characters = [
         images: 16,
         variant: 'default outfit',
         theme: 'https://open.spotify.com/embed/track/1QUX7xOPs80O5tiQb3MPqd?utm_source=generator',
-        tags: ['homumiko', 'ryuulock', 'doyle'],
+        tags: ['homumiko', 'ryuulock', 'doyle', 'herlock'],
         lastUpdated: null,
         posesAddedOnLastUpdate: 0,
         alternateNames: ['Sholmes', 'Holmes']
@@ -47,7 +47,7 @@ export const characters = [
         variant: 'casual outfit',
         theme: 'https://open.spotify.com/embed/track/5FQuOO8w56VPX1tJwaPKx8?utm_source=generator',
         alternateNames: ['Sholmes', 'Holmes'],
-        tags: ['homumiko', 'ryuulock', 'doyle'],
+        tags: ['homumiko', 'ryuulock', 'doyle', 'herlock'],
         lastUpdated: null,
         posesAddedOnLastUpdate: 0,
     },
@@ -60,7 +60,7 @@ export const characters = [
         images: 13,
         variant: 'Japanese Jumble',
         theme: 'https://open.spotify.com/embed/track/0EFqdvTgJMPd02XUUCsHnI?utm_source=generator',
-        tags: ['homumiko', 'ryuulock', 'doyle'],
+        tags: ['homumiko', 'ryuulock', 'doyle', 'herlock'],
         lastUpdated: "Sat Mar 04 2023",
         posesAddedOnLastUpdate: 13,
         alternateNames: ['Sholmes', 'Holmes']

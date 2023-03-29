@@ -16,6 +16,7 @@ export const themes: {[key: string]: Theme} = {
   baroasoryuuWeek   : {name: "baroasoryuu", isSpoiler: true, message: '<b style="color: var(--red)">Happy BaroAsoRyuu week!</b><br>1-7 May #baroasoryuuweek2023'},
   cumberbatch       : {name: 'cumberbatch', isSpoiler: false, message: "Nothing suspicious here"},
   fathersDay        : {name: "homumiko", isSpoiler: true, message: "Happy Father's Day - 18th Jun"},
+  herlock           : {name: "herlock", isSpoiler: false, message: "<b>Happy birthday Sherlock Holmes!</b><br>6th Jan"},
   homumikoWeek      : {name: "homumiko", isSpoiler: true, message: "Happy Homumiko week!"},
   natsume           : {name: "natsume", isSpoiler: false, message: '<b>Happy birthday Soseki Natsume!</b><br>9th Feb'},
   ryuulockWeek      : {name: "ryuulock", isSpoiler: false, message: '<b style="color: var(--gold)">Happy Ryuulock week!</b><br>17-23 April #ryuulockweek2023'},
@@ -49,7 +50,7 @@ export function setTheme () {
   // ANNUALLY REOCCURING EVENTS
 
   // Sherlock Holmes' birthday - 6th Jan
-  if (isDate( {day: 6, month: 1})){myTheme = themes.natsume;} 
+  if (isDate( {day: 6, month: 1})){myTheme = themes.herlock;} 
 
   // Soseki Natsume's birthday - 9th Feb
   if (isDate( {day: 9, month: 2})){myTheme = themes.natsume;} 
