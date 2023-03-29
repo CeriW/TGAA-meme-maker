@@ -732,8 +732,8 @@ function download(e:Event) {
         const regex = /\*([^*]+)\*/g;
         const editedWords = text.replace(regex, (match, p1) => {
           const words = p1.split(' ');
-          return '|' + words.join('| |') + '|';
-        });
+          return '|' + words.join('| |') + '| ';
+        });       
         let words = editedWords.split(" ");
       
         let line = "";
