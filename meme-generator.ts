@@ -722,32 +722,113 @@ function download(e:Event) {
       });
 
       let fontSize = 50;
-
       tempCanvasContext.font = `${fontSize}px Toplar`;
-      tempCanvasContext.fillStyle = allCanvases[i].querySelector("textarea")!.getAttribute('type') === "thought" ? "#07bff0" : "#fff";
+      let desiredTextColour = allCanvases[i].querySelector("textarea")!.getAttribute('type') === "thought" ? "#07bff0" : "#fff";
+      // tempCanvasContext.fillStyle = allCanvases[i].querySelector("textarea").getAttribute('type') === "thought" ? "#07bff0" : "#fff";
       wrapText(tempCanvasContext, textBoxText, 365, 882, 1200);
       downloadableCanvasContext.drawImage(tempCanvas, 0, i * 1080);
-
+  
+      // function wrapText(context, text, x, y, maxWidth) {
+      //   let words = text.split(" ");
+      //   let line = "";
+  
+      //   for (let n = 0; n < words.length; n++) {
+      //     let testLine = line + words[n] + " ";
+      //     let metrics = context.measureText(testLine);
+      //     let testWidth = metrics.width;
+      //     if (testWidth > maxWidth && n > 0) {
+      //       context.fillText(line, x, y);
+      //       line = words[n] + " ";
+      //       y += fontSize * 1.25;
+      //     } else {
+      //       line = testLine;
+      //     }
+      //   }
+      //   console.log(line)
+      //   context.fillText(line, x, y);
+      // }
+  
+      // function wrapText(context, text, x, y, maxWidth) {
+      //   let words = text.split(" ");
+      //   let line = "";
+      //   let colorIndex = 0; // start with blue
+      
+      //   for (let n = 0; n < words.length; n++) {
+      //     let testLine = line + words[n] + " ";
+      //     let metrics = context.measureText(testLine);
+      //     let testWidth = metrics.width;
+      //     if (testWidth > maxWidth && n > 0) {
+      //       // context.fillStyle = (colorIndex % 2 === 0) ? 'blue' : 'green';
+      //       context.fillStyle = 
+      //       context.fillText(line, x, y);
+      //       line = words[n] + " ";
+      //       y += fontSize * 1.25;
+      //       colorIndex++; // switch color
+      //     } else {
+      //       line = testLine;
+      //     }
+      //   }
+      //   console.log(line)
+      //   context.fillStyle = (colorIndex % 2 === 0) ? 'blue' : 'green';
+      //   context.fillText(line, x, y);
+      // }
+  
       function wrapText(context: CanvasRenderingContext2D, text: string, x: number, y: number, maxWidth: number) {
         let words = text.split(" ");
         let line = "";
-
+  
+        console.log(words)
+  
+        let result: any[] = []
+  
+        for (let i = 0; i < words.length; i++) {
+          let splitItems = words[i].split(/(\*.*?\*|[^\w\s])/).filter(Boolean)
+          result = result.concat(splitItems)
+        }
+  
+        words = result
+      
+        function outputLine(line: string, x:number, y:number, context: CanvasRenderingContext2D) {
+          let words = line.split(" ");
+          let wordX = x;
+          for (let i = 0; i < words.length; i++) {
+            let color = colorFn(words[i]);
+            words[i] = words[i].replace(/\*/g, "")
+            context.fillStyle = color;
+            context.fillText(words[i], wordX, y);
+            let spacingCharacter = /^[^\w\s]+$/.test(words[i + 1]) ? '' : ' ';
+  
+            wordX += context.measureText(words[i] + spacingCharacter).width;
+          }
+        }
+      
         for (let n = 0; n < words.length; n++) {
           let testLine = line + words[n] + " ";
           let metrics = context.measureText(testLine);
           let testWidth = metrics.width;
           if (testWidth > maxWidth && n > 0) {
-            context.fillText(line, x, y);
+            outputLine(line, x, y, context);
             line = words[n] + " ";
             y += fontSize * 1.25;
           } else {
             line = testLine;
           }
         }
-        context.fillText(line, x, y);
+        outputLine(line, x, y, context);
+  
+        function colorFn(word: string) {
+          console.log(word)
+          if (/^\*+.*$/.test(word)) {
+            return '#f1671a';
+          } else {
+            return desiredTextColour;
+          }
+        }
       }
+      
+      
     }
-  }
+  
 
   // Add the credits onto the end.
   downloadableCanvasContext.drawImage(
@@ -791,6 +872,7 @@ function download(e:Event) {
     newImg.remove();
     downloadableCanvas.remove();
   })
+}
 }
 
 
