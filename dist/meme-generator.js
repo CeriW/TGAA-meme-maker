@@ -568,54 +568,20 @@ function download(e) {
             let fontSize = 50;
             tempCanvasContext.font = `${fontSize}px Toplar`;
             let desiredTextColour = allCanvases[i].querySelector("textarea").getAttribute('type') === "thought" ? "#07bff0" : "#fff";
-            // tempCanvasContext.fillStyle = allCanvases[i].querySelector("textarea").getAttribute('type') === "thought" ? "#07bff0" : "#fff";
+            tempCanvasContext.fillStyle = allCanvases[i].querySelector("textarea").getAttribute('type') === "thought" ? "#07bff0" : "#fff";
             wrapText(tempCanvasContext, textBoxText, 365, 882, 1200);
             downloadableCanvasContext.drawImage(tempCanvas, 0, i * 1080);
-            // function wrapText(context, text, x, y, maxWidth) {
-            //   let words = text.split(" ");
-            //   let line = "";
-            //   for (let n = 0; n < words.length; n++) {
-            //     let testLine = line + words[n] + " ";
-            //     let metrics = context.measureText(testLine);
-            //     let testWidth = metrics.width;
-            //     if (testWidth > maxWidth && n > 0) {
-            //       context.fillText(line, x, y);
-            //       line = words[n] + " ";
-            //       y += fontSize * 1.25;
-            //     } else {
-            //       line = testLine;
-            //     }
-            //   }
-            //   console.log(line)
-            //   context.fillText(line, x, y);
-            // }
-            // function wrapText(context, text, x, y, maxWidth) {
-            //   let words = text.split(" ");
-            //   let line = "";
-            //   let colorIndex = 0; // start with blue
-            //   for (let n = 0; n < words.length; n++) {
-            //     let testLine = line + words[n] + " ";
-            //     let metrics = context.measureText(testLine);
-            //     let testWidth = metrics.width;
-            //     if (testWidth > maxWidth && n > 0) {
-            //       // context.fillStyle = (colorIndex % 2 === 0) ? 'blue' : 'green';
-            //       context.fillStyle = 
-            //       context.fillText(line, x, y);
-            //       line = words[n] + " ";
-            //       y += fontSize * 1.25;
-            //       colorIndex++; // switch color
-            //     } else {
-            //       line = testLine;
-            //     }
-            //   }
-            //   console.log(line)
-            //   context.fillStyle = (colorIndex % 2 === 0) ? 'blue' : 'green';
-            //   context.fillText(line, x, y);
-            // }
             function wrapText(context, text, x, y, maxWidth) {
-                let words = text.split(" ");
+                // const text = "Hello! This is a *test hello world* thank you *for watching* haha";
+                const regex = /\*([^*]+)\*/g;
+                const editedWords = text.replace(regex, (match, p1) => {
+                    const words = p1.split(' ');
+                    return '*' + words.join('* *') + '*';
+                });
+                let words = editedWords.split(" ");
+                // let words = editedWords;
                 let line = "";
-                console.log(words);
+                // console.log(words)
                 let result = [];
                 for (let i = 0; i < words.length; i++) {
                     let splitItems = words[i].split(/(\*.*?\*|[^\w\s])/).filter(Boolean);
@@ -649,7 +615,6 @@ function download(e) {
                 }
                 outputLine(line, x, y, context);
                 function colorFn(word) {
-                    console.log(word);
                     if (/^\*+.*$/.test(word)) {
                         return '#f1671a';
                     }
@@ -658,6 +623,29 @@ function download(e) {
                     }
                 }
             }
+            // function wrapText(context, text, x, y, maxWidth) {
+            //   let words = text.split(" ");
+            //   let line = "";
+            //   let colorIndex = 0; // start with blue
+            //   for (let n = 0; n < words.length; n++) {
+            //     let testLine = line + words[n] + " ";
+            //     let metrics = context.measureText(testLine);
+            //     let testWidth = metrics.width;
+            //     if (testWidth > maxWidth && n > 0) {
+            //       // context.fillStyle = (colorIndex % 2 === 0) ? 'blue' : 'green';
+            //       context.fillStyle = 
+            //       context.fillText(line, x, y);
+            //       line = words[n] + " ";
+            //       y += fontSize * 1.25;
+            //       colorIndex++; // switch color
+            //     } else {
+            //       line = testLine;
+            //     }
+            //   }
+            //   console.log(line)
+            //   context.fillStyle = (colorIndex % 2 === 0) ? 'blue' : 'green';
+            //   context.fillText(line, x, y);
+            // }
         }
         // Add the credits onto the end.
         downloadableCanvasContext.drawImage(credits, 0, (allCanvases.length - 1) * 1080);
