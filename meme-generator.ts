@@ -1,5 +1,5 @@
 // Version info
-const versionInfo = '4.2.2 - 2023-03-29';
+const versionInfo = '4.2.3 - 2023-03-30';
 
 import { locations, LocationObject } from "./locations.js";
 import { characters, CharacterObject } from "./characters.js";
@@ -279,8 +279,9 @@ function generateCanvas() {
       const regex = /\*([^*]+)\*/g;
       const editedWords = thisTextBox.value.replace(regex, (match, p1) => {
         const words = p1.split(' ');
-        return `<span style="color: var(--orange)">${words.join(' ')}</span>`;
-      });      
+        return ' <span style="color: var(--orange);">' + words.join('</span> <span style="color: var(--orange);">') + '</span> ';
+
+      });       
 
       preview.innerHTML = editedWords;
 
@@ -759,7 +760,7 @@ function download(e:Event) {
         const regex = /\*([^*]+)\*/g;
         const editedWords = text.replace(regex, (match, p1) => {
           const words = p1.split(' ');
-          return '|' + words.join('| |') + '| ';
+          return ' |' + words.join('| |') + '| ';
         });       
         let words = editedWords.split(" ");
         words = words.filter(element => element !== "")
@@ -770,7 +771,7 @@ function download(e:Event) {
           let words = line.split(" ");
           let wordX = x;
           for (let i = 0; i < words.length; i++) {
-            let color = colorFn(words[i]);
+            let color = determineColour(words[i]);
             let myWord = words[i].replace(/\|/g, "");
             context.fillStyle = color;
             context.fillText(myWord, wordX, y);
@@ -801,7 +802,7 @@ function download(e:Event) {
         }
         outputLine(line, x, y, context);
       
-        function colorFn(word: string) {
+        function determineColour(word: string) {
           if (/^\|+.*$/.test(word)) {
             return '#f1671a';
           } else {
