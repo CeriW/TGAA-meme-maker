@@ -186,5 +186,5 @@ export function initialiseCumberbatchTheme () {
   }
 
   // Every 10 seconds, give Benedict a new name
-  window.setInterval(displayNewBenedictName, 10000)
+  window.setInterval(displayNewBenedictName, 7000)
 }
