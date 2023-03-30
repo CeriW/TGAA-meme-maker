@@ -78,7 +78,6 @@
 
   #download div{
     display: block;
-    margin-top: 50px;
   }
 }
 
@@ -92,15 +91,10 @@
 /* Edit names button ---------------------------------------------------------*/
 
 #edit-names-toggle{
-  /* position: absolute;
-  z-index: 3;
-  top: 0;
-  right: 0; */
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 10px;
-  /* animation: textColour 4s infinite; */
   box-shadow: 0 0 10px rgba(0,0,0,0.8);
   background: linear-gradient(to bottom, var(--gradient-top), var(--gradient-bottom));
   color: var(--gradient-text-colour);

@@ -1,0 +1,18 @@
+.random-animal{
+  position: absolute;
+  bottom: calc(100% + 4px);
+  right: 23%;
+  pointer-events: none;
+}
+
+@media (min-width: 451px){
+  #canvas-grid-item .random-animal{
+    bottom: calc(100% + 2px);
+  }
+}
+
+@media (max-width: 500px){
+  .random-animal{
+    width: 90px;
+  }
+}
