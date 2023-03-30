@@ -258,11 +258,37 @@ function generateCanvas() {
   newSpeechbox.src = "assets/game-elements/speech-box.png";
   newCanvas.appendChild(newSpeechbox);
 
+
+  let textOverlayContainer = document.createElement('div');
+  textOverlayContainer.classList.add('text-overlay-container');
+
   let newTextBox = document.createElement("textarea");
   newTextBox.classList.add("text-overlay");
   newTextBox.setAttribute('placeholder', "Type your text here...");
   newTextBox.setAttribute("maxlength", '115');
-  newCanvas.appendChild(newTextBox);
+  textOverlayContainer.appendChild(newTextBox);
+
+  let previewTextBox = document.createElement('div');
+  previewTextBox.classList.add('text-overlay-preview');
+  textOverlayContainer.appendChild(previewTextBox);
+
+  newTextBox.addEventListener('input', (e: Event) => {
+    let thisTextBox = e.target as HTMLTextAreaElement;
+    let preview = thisTextBox.nextElementSibling;
+    if (preview){
+      const regex = /\*([^*]+)\*/g;
+      const editedWords = thisTextBox.value.replace(regex, (match, p1) => {
+        const words = p1.split(' ');
+        return `<span style="color: var(--orange)">${words.join(' ')}</span>`;
+      });      
+
+      preview.innerHTML = editedWords;
+
+    }
+
+  });
+
+  newCanvas.appendChild(textOverlayContainer);
 
 
   let textColourRadios = document.createElement('div');

@@ -1,12 +1,16 @@
 
 /* Text boxes ----------------------------------------------------------------*/
 
-.text-overlay{
+.text-overlay-container{
   position: absolute;
   top: 77.5%;
   bottom: 10%;
   right: 19%;
   left: 19%;
+}
+
+.text-overlay,
+.text-overlay-preview{
   color: #fff;
   font-size: 114%;
   font-family: Toplar, 'Libre Baskerville', Georgia, serif;
@@ -15,6 +19,26 @@
   outline: none !important;
   resize: none;
   transition: color 0.2s;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.text-overlay-preview{
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  white-space: pre;
+  transition: 0.15s;
+}
+
+.active-canvas .text-overlay-preview,
+.canvas-container:hover .text-overlay-preview,
+.text-overlay:placeholder-shown + .text-overlay-preview{
+  opacity: 0;
 }
 
 #text{
@@ -24,20 +48,25 @@
 
 
 @media (max-width: 799px){
-  .text-overlay{
+  .text-overlay, .text-overlay-preview{
     font-size: 2.3vw;
   }
 }
 
 @media (max-width: 625px){
-  .text-overlay{
+  .text-overlay-container{
     left: 0;
     right: 0;
     bottom: 0;
     top: unset;
     position: relative;
-    padding: 5px 10px 20px 50px;
     margin: -30px 8px 8px;
+  }
+
+  .text-overlay,
+  .text-overlay-preview{
+    padding: 5px 10px 20px 50px;
+    margin: 0;
     font-size: 19px;
     display: flex;
     align-items: center;
