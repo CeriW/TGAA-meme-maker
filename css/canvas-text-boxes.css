@@ -33,6 +33,7 @@
   right: 0;
   white-space: pre;
   transition: 0.15s;
+  opacity: 0 !important;
 }
 
 .active-canvas .text-overlay-preview,
