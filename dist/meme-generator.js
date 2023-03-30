@@ -300,12 +300,12 @@ function removeCanvas(e) {
     }
 }
 function determineStickyCanvas() {
-    var _a, _b, _c;
-    if (window.innerWidth > 1450 && ((_a = document.querySelector("#canvas-grid-item > div")) === null || _a === void 0 ? void 0 : _a.offsetHeight) < window.innerHeight - 200) {
-        (_b = document.querySelector("#sticky-panel")) === null || _b === void 0 ? void 0 : _b.classList.add('sticky-canvas');
+    var _a, _b, _c, _d;
+    if (window.innerWidth > 1450 && ((_a = document.querySelector("#canvas-grid-item > div")) === null || _a === void 0 ? void 0 : _a.offsetHeight) < window.innerHeight - ((_b = document.querySelector("#info-bar")) === null || _b === void 0 ? void 0 : _b.clientHeight) + 100) {
+        (_c = document.querySelector("#sticky-panel")) === null || _c === void 0 ? void 0 : _c.classList.add('sticky-canvas');
     }
     else {
-        (_c = document.querySelector("#sticky-panel")) === null || _c === void 0 ? void 0 : _c.classList.remove('sticky-canvas');
+        (_d = document.querySelector("#sticky-panel")) === null || _d === void 0 ? void 0 : _d.classList.remove('sticky-canvas');
     }
 }
 determineStickyCanvas();

@@ -386,7 +386,7 @@ function removeCanvas(e:Event) {
 }
 
 function determineStickyCanvas () {
-  if (window.innerWidth > 1450 && (document.querySelector("#canvas-grid-item > div") as HTMLDivElement)?.offsetHeight < window.innerHeight - 200){
+  if (window.innerWidth > 1450 && (document.querySelector("#canvas-grid-item > div") as HTMLDivElement)?.offsetHeight < window.innerHeight - (document.querySelector("#info-bar")?.clientHeight!) + 100) {
     document.querySelector("#sticky-panel")?.classList.add('sticky-canvas')
   } else{
     document.querySelector("#sticky-panel")?.classList.remove('sticky-canvas')
