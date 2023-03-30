@@ -13,7 +13,8 @@ export const themes = {
     natsume: { name: "natsume", isSpoiler: false, message: '<b>Happy birthday Soseki Natsume!</b><br>9th Feb' },
     ryuulockWeek: { name: "ryuulock", isSpoiler: false, message: '<b style="color: var(--gold)">Happy Ryuulock week!</b><br>17-23 April #ryuulockweek2023' },
     takumi: { name: "takumi", isSpoiler: false, message: "Happy birthday Shu Takumi!" },
-    tgaaAnniversary: { name: "tgaaAnniversary", isSpoiler: false, message: "<b>Happy localisation day!</b><br>26th July 2021" }
+    tgaaAnniversary: { name: "tgaaAnniversary", isSpoiler: false, message: "<b>Happy localisation day!</b><br>26th July 2021" },
+    watson: { name: "watson", isSpoiler: false, message: "<b>Happy Dr Watson!</b><br>7th August" }
 };
 function isBetweenDates(startDate, endDate) {
     const currentDate = new Date();
@@ -39,7 +40,7 @@ export function setTheme() {
     if (isBetweenDates("2023-06-18", "2023-06-18")) {
         myTheme = themes.fathersDay;
     }
-    // ANNUALLY REOCCURING EVENTS
+    // ANNUALLY RECURRING EVENTS
     // Sherlock Holmes' birthday - 6th Jan
     if (isDate({ day: 6, month: 1 })) {
         myTheme = themes.herlock;
@@ -68,6 +69,10 @@ export function setTheme() {
     // Localised release anniversary - 26th July
     if (isDate({ day: 26, month: 7 })) {
         myTheme = themes.tgaaAnniversary;
+    }
+    // Watson's birthday - 26th July
+    if (isDate({ day: 7, month: 8 })) {
+        myTheme = themes.watson;
     }
     // My birthday :) - 7th Dec
     if (isDate({ day: 7, month: 12 })) {
