@@ -258,13 +258,13 @@ function generateCanvas() {
   newSpeechbox.src = "assets/game-elements/speech-box.png";
   newCanvas.appendChild(newSpeechbox);
 
-
   let textOverlayContainer = document.createElement('div');
   textOverlayContainer.classList.add('text-overlay-container');
 
   let newTextBox = document.createElement("textarea");
   newTextBox.classList.add("text-overlay");
-  newTextBox.setAttribute('placeholder', "Type your text here...");
+  const placeholderText = document.querySelectorAll('.canvas-container').length % 2 ? "Tip: surround text with *asterisks* to make it turn orange" : "Type your text here...";
+  newTextBox.setAttribute('placeholder', placeholderText);
   newTextBox.setAttribute("maxlength", '115');
   textOverlayContainer.appendChild(newTextBox);
 
@@ -386,7 +386,7 @@ function removeCanvas(e:Event) {
 }
 
 function determineStickyCanvas () {
-  if (window.innerWidth > 1450 && (document.querySelector("#canvas-grid-item > div") as HTMLDivElement)?.offsetHeight < window.innerHeight - 100){
+  if (window.innerWidth > 1450 && (document.querySelector("#canvas-grid-item > div") as HTMLDivElement)?.offsetHeight < window.innerHeight - 200){
     document.querySelector("#sticky-panel")?.classList.add('sticky-canvas')
   } else{
     document.querySelector("#sticky-panel")?.classList.remove('sticky-canvas')

@@ -194,7 +194,8 @@ function generateCanvas() {
     textOverlayContainer.classList.add('text-overlay-container');
     let newTextBox = document.createElement("textarea");
     newTextBox.classList.add("text-overlay");
-    newTextBox.setAttribute('placeholder', "Type your text here...");
+    const placeholderText = document.querySelectorAll('.canvas-container').length % 2 ? "Tip: surround text with *asterisks* to make it turn orange" : "Type your text here...";
+    newTextBox.setAttribute('placeholder', placeholderText);
     newTextBox.setAttribute("maxlength", '115');
     textOverlayContainer.appendChild(newTextBox);
     let previewTextBox = document.createElement('div');
@@ -300,7 +301,7 @@ function removeCanvas(e) {
 }
 function determineStickyCanvas() {
     var _a, _b, _c;
-    if (window.innerWidth > 1450 && ((_a = document.querySelector("#canvas-grid-item > div")) === null || _a === void 0 ? void 0 : _a.offsetHeight) < window.innerHeight - 100) {
+    if (window.innerWidth > 1450 && ((_a = document.querySelector("#canvas-grid-item > div")) === null || _a === void 0 ? void 0 : _a.offsetHeight) < window.innerHeight - 200) {
         (_b = document.querySelector("#sticky-panel")) === null || _b === void 0 ? void 0 : _b.classList.add('sticky-canvas');
     }
     else {

@@ -18,12 +18,12 @@ export type LocationObject = {
 }
 
 export const locations: LocationObject[] = [
-  {name   : "221B Baker Street",                     id:"baker-street-221b",                               tags: ['homumiko', 'doyle']},
-  {name   : "221B Baker Street",                     id:"baker-street-221b-night",                         variant:"Night",                             tags: ['homumiko', 'doyle']},
   {name   : "Sholmes' Suite",                        id:"sholmes-suite",                                   variant: "Fireplace",                        tags: ['homumiko', 'ryuulock', 'doyle']},
   {name   : "Sholmes' Suite",                        id:"sholmes-suite-sholmes",                           variant:"Herlock's side",            tags: ['homumiko','ryuulock', 'doyle']},
   {name   : "Sholmes' Suite",                        id:"sholmes-suite-iris",                              variant:"Iris' side",        tags: ['homumiko','ryuulock', 'doyle']},
   {name   : "Naruhodo's Legal Consultancy",          id:"naruhodos-legal-consultancy",                     tags: ['ryuulock',  'baroasoryuu']},
+  {name   : "221B Baker Street",                     id:"baker-street-221b",                               tags: ['homumiko', 'doyle']},
+  {name   : "221B Baker Street",                     id:"baker-street-221b-night",                         variant:"Night",                             tags: ['homumiko', 'doyle']},
   {name   : "Defendant's Antechamber",               id:"defendants-antechamber-the-old-bailey-left",      variant:'The Old Bailey', tags: ['asobaro', 'baroasoryuu']},
   {name   : "Defendant's Antechamber",               id:"defendants-antechamber-japan-right",              variant:'Japanese Court of Judicature', tags: ['asobaro','baroasoryuu']},
   {name   : "Witness stand",                         id:"witness-stand-old-bailey",              variant:'The Old Bailey', characterOverlay: "witness-stand-old-bailey-overlay", addedDate: "2023-03-23"},
