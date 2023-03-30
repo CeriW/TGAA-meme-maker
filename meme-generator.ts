@@ -1,5 +1,5 @@
 // Version info
-const versionInfo = '4.2.3 - 2023-03-30';
+const versionInfo = '4.2.4 - 2023-03-30';
 
 import { locations, LocationObject } from "./locations.js";
 import { characters, CharacterObject } from "./characters.js";
@@ -807,38 +807,7 @@ function download(e:Event) {
             return desiredTextColour;
           }
         }
-      }
-      
-
-
-  
-      // function wrapText(context, text, x, y, maxWidth) {
-      //   let words = text.split(" ");
-      //   let line = "";
-      //   let colorIndex = 0; // start with blue
-      
-      //   for (let n = 0; n < words.length; n++) {
-      //     let testLine = line + words[n] + " ";
-      //     let metrics = context.measureText(testLine);
-      //     let testWidth = metrics.width;
-      //     if (testWidth > maxWidth && n > 0) {
-      //       // context.fillStyle = (colorIndex % 2 === 0) ? 'blue' : 'green';
-      //       context.fillStyle = 
-      //       context.fillText(line, x, y);
-      //       line = words[n] + " ";
-      //       y += fontSize * 1.25;
-      //       colorIndex++; // switch color
-      //     } else {
-      //       line = testLine;
-      //     }
-      //   }
-      //   console.log(line)
-      //   context.fillStyle = (colorIndex % 2 === 0) ? 'blue' : 'green';
-      //   context.fillText(line, x, y);
-      // }
-
-      
-      
+      }      
     }
   
 
