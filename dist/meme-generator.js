@@ -20,7 +20,6 @@ let characterImg;
 let tag;
 let characterOverlay;
 let characterOverlayID = null;
-let speechbox = document.querySelector("#speech-box");
 let credits = document.querySelector("#credits");
 // Name related variables
 const existingNamesInUse = window.localStorage.getItem('alternateNamesInUse');
@@ -190,7 +189,8 @@ function generateCanvas() {
     newSpeechbox.classList.add('speech-box');
     newSpeechbox.src = "assets/game-elements/speech-box.png";
     newCanvas.appendChild(newSpeechbox);
-    let newTextBox = document.createElement("textarea");
+    let newTextBox = document.createElement("div");
+    newTextBox.setAttribute('contentEditable', 'true');
     newTextBox.classList.add("text-overlay");
     newTextBox.setAttribute('placeholder', "Type your text here...");
     newTextBox.setAttribute("maxlength", '115');
@@ -213,7 +213,7 @@ function generateCanvas() {
         var _a;
         const target = e.target;
         const value = target.value;
-        const targetTextArea = (_a = textColourRadios.parentNode) === null || _a === void 0 ? void 0 : _a.querySelector('textarea.text-overlay');
+        const targetTextArea = (_a = textColourRadios.parentNode) === null || _a === void 0 ? void 0 : _a.querySelector('div.text-overlay');
         if (value && targetTextArea) {
             targetTextArea.setAttribute('type', value); // previousElementSibling should be the textarea
         }
@@ -533,6 +533,7 @@ function selectItem(e) {
 }
 // Recreate the meme as an image file and download it.
 function download(e) {
+    var _a;
     e.preventDefault();
     // Generate a temporary canvas that we'll combine all of our individual canvases onto for download
     let downloadableCanvas = document.createElement("canvas");
@@ -555,22 +556,22 @@ function download(e) {
             let tempCanvasContext = tempCanvas.getContext("2d");
             // If there is no text in the textarea, we don't render the final two layers
             // of the canvas, which display the text box artwork
-            let layersToRender = allCanvases[i].querySelector("textarea").value.length === 0 ? 4 : 6;
+            let layersToRender = ((_a = allCanvases[i].querySelector(".text-overlay").textContent) === null || _a === void 0 ? void 0 : _a.length) === 0 ? 4 : 6;
             for (let j = 1; j < layersToRender; j++) {
                 let imgToDraw = allCanvases[i].querySelector("img:nth-child(" + j + ")");
                 tempCanvasContext === null || tempCanvasContext === void 0 ? void 0 : tempCanvasContext.drawImage(imgToDraw, 0, 0);
             }
             var myFont = new FontFace("Toplar", 'url("assets/fonts/Toplar.woff")');
             // Render the text
-            let textBoxText = allCanvases[i].querySelector("textarea").value;
+            let textBoxText = allCanvases[i].querySelector(".text-overlay").textContent;
             myFont.load().then(function (font) {
                 document.fonts.add(font);
             });
             let fontSize = 50;
             tempCanvasContext.font = `${fontSize}px Toplar`;
-            let desiredTextColour = allCanvases[i].querySelector("textarea").getAttribute('type') === "thought" ? "#07bff0" : "#fff";
-            tempCanvasContext.fillStyle = allCanvases[i].querySelector("textarea").getAttribute('type') === "thought" ? "#07bff0" : "#fff";
-            wrapText(tempCanvasContext, textBoxText, 365, 882, 1200);
+            let desiredTextColour = allCanvases[i].querySelector(".text-overlay").getAttribute('type') === "thought" ? "#07bff0" : "#fff";
+            tempCanvasContext.fillStyle = allCanvases[i].querySelector(".text-overlay").getAttribute('type') === "thought" ? "#07bff0" : "#fff";
+            wrapText(tempCanvasContext, textBoxText !== null && textBoxText !== void 0 ? textBoxText : "", 365, 882, 1200);
             downloadableCanvasContext.drawImage(tempCanvas, 0, i * 1080);
             function wrapText(context, text, x, y, maxWidth) {
                 const regex = /\*([^*]+)\*/g;
@@ -956,7 +957,7 @@ function pasteQuote(type) {
             pasteQuote(type);
         }
         else {
-            document.querySelector('.active-canvas textarea').value = text;
+            document.querySelector('.active-canvas .text-overlay').textContent = text;
         }
     })
         .catch(failure => {
@@ -979,7 +980,7 @@ function pasteQuoteFromArray(type) {
     // If the quote is too long, get a new one.
     // Otherwise go ahead and use it.
     if (text.length < 115 && text.indexOf('fuck') === -1) {
-        document.querySelector('.active-canvas textarea').value = text;
+        document.querySelector('.active-canvas .text-overlay').textContent = text;
     }
 }
 ['kanye', 'dadJoke', 'ronSwanson', 'advice'].forEach((type) => {

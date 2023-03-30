@@ -29,7 +29,6 @@ let characterOverlay    : HTMLImageElement;
 let characterOverlayID  : string | null = null;
 
 
-let speechbox   : HTMLTextAreaElement = document.querySelector("#speech-box") !;
 let credits     : HTMLImageElement = document.querySelector("#credits") !;
 
 // Name related variables
@@ -258,7 +257,8 @@ function generateCanvas() {
   newSpeechbox.src = "assets/game-elements/speech-box.png";
   newCanvas.appendChild(newSpeechbox);
 
-  let newTextBox = document.createElement("textarea");
+  let newTextBox = document.createElement("div");
+  newTextBox.setAttribute('contentEditable', 'true');
   newTextBox.classList.add("text-overlay");
   newTextBox.setAttribute('placeholder', "Type your text here...");
   newTextBox.setAttribute("maxlength", '115');
@@ -284,7 +284,7 @@ function generateCanvas() {
 
     const target = e.target as HTMLInputElement;
     const value = target.value;
-    const targetTextArea = textColourRadios.parentNode?.querySelector('textarea.text-overlay');
+    const targetTextArea = textColourRadios.parentNode?.querySelector('div.text-overlay');
     if (value && targetTextArea){
       targetTextArea.setAttribute('type', value)   // previousElementSibling should be the textarea
     }
@@ -706,7 +706,7 @@ function download(e:Event) {
       
       // If there is no text in the textarea, we don't render the final two layers
       // of the canvas, which display the text box artwork
-      let layersToRender = allCanvases[i].querySelector("textarea")!.value.length === 0 ? 4 : 6
+      let layersToRender = allCanvases[i].querySelector(".text-overlay")!.textContent?.length === 0 ? 4 : 6
 
       for (let j = 1; j < layersToRender; j++) {
         let imgToDraw : HTMLImageElement = allCanvases[i].querySelector("img:nth-child(" + j + ")") !;
@@ -716,7 +716,7 @@ function download(e:Event) {
       var myFont = new FontFace("Toplar", 'url("assets/fonts/Toplar.woff")');
 
       // Render the text
-      let textBoxText = allCanvases[i].querySelector("textarea")!.value;
+      let textBoxText = allCanvases[i].querySelector(".text-overlay")!.textContent;
 
       myFont.load().then(function (font) {
         document.fonts.add(font);
@@ -724,9 +724,9 @@ function download(e:Event) {
 
       let fontSize = 50;
       tempCanvasContext.font = `${fontSize}px Toplar`;
-      let desiredTextColour = allCanvases[i].querySelector("textarea")!.getAttribute('type') === "thought" ? "#07bff0" : "#fff";
-      tempCanvasContext.fillStyle = allCanvases[i].querySelector("textarea")!.getAttribute('type') === "thought" ? "#07bff0" : "#fff";
-      wrapText(tempCanvasContext, textBoxText, 365, 882, 1200);
+      let desiredTextColour = allCanvases[i].querySelector(".text-overlay")!.getAttribute('type') === "thought" ? "#07bff0" : "#fff";
+      tempCanvasContext.fillStyle = allCanvases[i].querySelector(".text-overlay")!.getAttribute('type') === "thought" ? "#07bff0" : "#fff";
+      wrapText(tempCanvasContext, textBoxText ?? "", 365, 882, 1200);
       downloadableCanvasContext.drawImage(tempCanvas, 0, i * 1080);
       
       function wrapText(context: CanvasRenderingContext2D, text: string, x: number, y: number, maxWidth: number) {
@@ -1247,7 +1247,7 @@ function pasteQuote(type: string){
       if (text.length > 115 || text.indexOf('fuck') > -1){
         pasteQuote(type)
       } else{
-        (document.querySelector('.active-canvas textarea') as HTMLTextAreaElement).value = text;
+        (document.querySelector('.active-canvas .text-overlay') as HTMLDivElement).textContent = text;
       }
     })
     .catch(failure => {
@@ -1274,7 +1274,7 @@ function pasteQuoteFromArray(type: string){
   // If the quote is too long, get a new one.
   // Otherwise go ahead and use it.
   if (text.length < 115 && text.indexOf('fuck') === -1){
-    (document.querySelector('.active-canvas textarea') as HTMLTextAreaElement).value = text;
+    (document.querySelector('.active-canvas .text-overlay') as HTMLDivElement).textContent = text;
   }
 }
 
