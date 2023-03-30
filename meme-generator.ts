@@ -280,9 +280,7 @@ function generateCanvas() {
       const editedWords = thisTextBox.value.replace(regex, (match, p1) => {
         const words = p1.split(' ');
         return ' <span style="color: var(--orange);">' + words.join('</span> <span style="color: var(--orange);">') + '</span> ';
-
-      });       
-
+      });  
       preview.innerHTML = editedWords;
 
     }

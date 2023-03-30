@@ -36,6 +36,11 @@
   transition: 0.15s;
 }
 
+.text-overlay[type="thought"],
+.text-overlay[type="thought"] + .text-overlay-preview{
+  color: var(--thought);
+}
+
 .active-canvas .text-overlay-preview,
 .canvas-container:hover .text-overlay-preview,
 .text-overlay:placeholder-shown + .text-overlay-preview{

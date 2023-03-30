@@ -94,10 +94,6 @@
   margin-top: 10px;
 }
 
-.text-overlay[type="thought"]{
-  color: var(--thought);
-}
-
 @media (max-width: 1000px){
 
   #character-selector-preview,
