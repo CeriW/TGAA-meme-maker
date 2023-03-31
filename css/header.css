@@ -37,6 +37,12 @@ body:not([accept-spoilers="true"]) #banner-bottom{
   position: relative;
 }
 
+@media (max-width: 435px){
+  #banner-bottom{
+    margin-top: -23px;
+  }
+}
+
 #banner-bottom:before,
 #banner-bottom:after{
   content: '';
