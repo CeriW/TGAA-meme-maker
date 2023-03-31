@@ -57,7 +57,7 @@ export function setTheme () {
   if (isDate( {day: 9, month: 2})){myTheme = themes.natsume;} 
   
   // April Fool's Day - 1st April
-  if (isDate( {day: 31, month: 3})){
+  if (isDate( {day: 1, month: 4})){
     initialiseCumberbatchTheme();
     myTheme = themes.cumberbatch;
   }
