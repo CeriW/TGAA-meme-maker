@@ -28,11 +28,12 @@
 }
 
 #modal-content h2{
-  font-family: 'MgOpen Cosmetica', Toplar, serif;
-  text-shadow: -1px -1px 0 rgba(0,0,0,0.3), 1px -1px 0 rgba(0,0,0,0.), -1px 1px 0 rgba(0,0,0,0.3), 1px 1px 0 rgba(0,0,0,0.3);
+  font-family: Epigrafica, Toplar, serif;
+  text-shadow: -1px -1px 0 rgba(0,0,0,0.3), 1px -1px 0 rgba(0,0,0,0.3), -1px 1px 0 rgba(0,0,0,0.3), 1px 1px 0 rgba(0,0,0,0.3);
   margin-top: 0;
   border-bottom: 3px solid var(--gradient-text-colour);
   padding-bottom: 10px;
+  line-height: 1;
 }
 
 #name-selector-choices{
@@ -44,10 +45,10 @@
 .name-selector-form{
   display: flex;
   flex-direction: column;
-  /* flex-basis: 160px; */
   flex-grow: 1;
   border: none;
   padding: 0;
+  font-size: 1.1em;
 }
 
 .name-selector-form img{

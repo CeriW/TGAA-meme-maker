@@ -3,6 +3,11 @@
   src: url(../assets/fonts/Toplar.woff);
 }
 
+@font-face {
+  font-family: Epigrafica;
+  src: url(../assets/fonts/Epigrafica.woff);
+}
+
 html{
   font-size: 18px;
   scroll-behavior: smooth;

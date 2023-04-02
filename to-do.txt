@@ -1,9 +1,0 @@
-- Multi character view
-- Characters IN the prison cell
-- Labels for poses
-
-- GIF support for character animations
-- GIF support for locations
-- Search
-
-<span class="material-icons">face</span>

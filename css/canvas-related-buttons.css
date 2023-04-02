@@ -4,14 +4,14 @@
 .delete-panel{
   padding: 5px;
   transition: 0.5s;
-  font-family: 'MgOpen Cosmetica', Toplar, serif;
+  font-family: Epigrafica, Toplar, serif;
   display: flex;
   gap: 5px;
   align-items: center;
   font-size: 0.9em;
   background: linear-gradient(to bottom, var(--gradient-top), var(--gradient-bottom));
   color: var(--gradient-text-colour);
-
+  line-height: 1;
 }
 
 #add-panel{
@@ -99,9 +99,10 @@
   background: linear-gradient(to bottom, var(--gradient-top), var(--gradient-bottom));
   color: var(--gradient-text-colour);
   padding: 5px;
-  font-family: 'MgOpen Cosmetica', Toplar, serif;
+  font-family: Epigrafica, Toplar, serif;
   border-bottom: 2px solid var(--blue);
   font-size: 0.9em;
+  line-height: 1;
 }
 
 #edit-names-toggle:hover{
@@ -111,4 +112,14 @@
 
 #edit-names-toggle.hidden{
   padding: 0;
+}
+
+
+
+
+
+
+
+.canvas-button-text{
+  padding-top: 4px;
 }
