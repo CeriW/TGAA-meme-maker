@@ -1,5 +1,5 @@
 // Version info
-const versionInfo = '4.2.4 - 2023-03-30';
+const versionInfo = '4.2.1 - 2023-04-02';
 
 import { locations, LocationObject } from "./locations.js";
 import { characters, CharacterObject } from "./characters.js";
