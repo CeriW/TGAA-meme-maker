@@ -58,6 +58,10 @@ input{
   accent-color: var(--blue);
 }
 
+a{
+  color: var(--gold);
+}
+
 /* Scrollbar styling ------------------- */
 
 /* width */
