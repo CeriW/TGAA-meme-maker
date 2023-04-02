@@ -64,10 +64,6 @@
   }
 }
 
-/* .text-colour-selector input[type="radio"]{
-  display: block;
-} */
-
 .text-colour-selector label span{
   color: transparent;
   position: relative;
