@@ -9,20 +9,20 @@ export type Theme = {
 export const themes: {[key: string]: Theme} = {
   default           : {name: null, isSpoiler: false},
   
-  cherrylestradeBirthday: {name: "homumiko", isSpoiler: true, message: "<b>Happy birthday CherryLestrade!</b><br>Have some Homumiko"},
-  dgsAnniversary    : {name: "dgsAnniversary", isSpoiler: false, message: '<b>Happy anniversary Dai Gyakuten Saiban!</b> 9th July 2015'},
-  doyle             : {name: "doyle", isSpoiler: false, message: '<b>Happy birthday Sir Arthur<br>Conan Doyle!</b> 22nd May'},
-  asobaroWeek       : {name: "asobaro", isSpoiler: true, message: '<b style="color: var(--gold)">Happy Asobaro week!</b><br>28 May - 3 Jun #asobaroweek2023'},
-  baroasoryuuWeek   : {name: "baroasoryuu", isSpoiler: true, message: '<b style="color: var(--red)">Happy BaroAsoRyuu week!</b><br>1-7 May #baroasoryuuweek2023'},
-  cumberbatch       : {name: 'cumberbatch', isSpoiler: false, message: "Nothing suspicious here"},
-  fathersDay        : {name: "homumiko", isSpoiler: true, message: "Happy Father's Day - 18th Jun"},
-  herlock           : {name: "herlock", isSpoiler: false, message: "<b>Happy birthday Sherlock Holmes!</b><br>6th Jan"},
-  homumikoWeek      : {name: "homumiko", isSpoiler: true, message: "Happy Homumiko week!"},
-  natsume           : {name: "natsume", isSpoiler: false, message: '<b>Happy birthday Soseki Natsume!</b><br>9th Feb'},
-  ryuulockWeek      : {name: "ryuulock", isSpoiler: false, message: '<b style="color: var(--gold)">Happy Ryuulock week!</b><br>17-23 April #ryuulockweek2023'},
-  takumi            : {name: "takumi", isSpoiler: false, message: "Happy birthday Shu Takumi!"},
-  tgaaAnniversary   : {name: "tgaaAnniversary", isSpoiler: false, message: "<b>Happy localisation day!</b><br>26th July 2021"},
-  watson            : {name: "watson", isSpoiler: false, message: "<b>Happy Dr Watson!</b><br>7th August"}
+  asobaroWeek               : {name: "asobaro", isSpoiler: true, message: '<b style="color: var(--gold)">Happy Asobaro week!</b><br>28 May - 3 Jun #asobaroweek2023'},
+  baroasoryuuWeek           : {name: "baroasoryuu", isSpoiler: true, message: '<b style="color: var(--red)">Happy BaroAsoRyuu week!</b><br>1-7 May #baroasoryuuweek2023'},
+  cherrylestradeBirthday    : {name: "homumiko", isSpoiler: true, message: "<b>Happy birthday CherryLestrade!</b><br>Have some Homumiko"},
+  cumberbatch               : {name: 'cumberbatch', isSpoiler: false, message: "Nothing suspicious here"},
+  dgsAnniversary            : {name: "dgsAnniversary", isSpoiler: false, message: '<b>Happy anniversary Dai Gyakuten Saiban!</b> 9th July 2015'},
+  doyle                     : {name: "doyle", isSpoiler: false, message: '<b>Happy birthday Sir Arthur<br>Conan Doyle!</b> 22nd May'},
+  fathersDay                : {name: "homumiko", isSpoiler: true, message: "Happy Father's Day - 18th Jun"},
+  herlock                   : {name: "herlock", isSpoiler: false, message: "<b>Happy birthday Sherlock Holmes!</b><br>6th Jan"},
+  homumikoWeek              : {name: "homumiko", isSpoiler: true, message: "Happy Homumiko week!"},
+  natsume                   : {name: "natsume", isSpoiler: false, message: '<b>Happy birthday Soseki Natsume!</b><br>9th Feb'},
+  ryuulockWeek              : {name: "ryuulock", isSpoiler: false, message: '<b style="color: var(--gold)">Happy Ryuulock week!</b><br>17-23 April #ryuulockweek2023'},
+  takumi                    : {name: "takumi", isSpoiler: false, message: "Happy birthday Shu Takumi!"},
+  tgaaAnniversary           : {name: "tgaaAnniversary", isSpoiler: false, message: "<b>Happy localisation day!</b><br>26th July 2021"},
+  watson                    : {name: "watson", isSpoiler: false, message: "<b>Happy Dr Watson!</b><br>7th August"}
 }
 
 function isBetweenDates(startDate: string, endDate: string) {
@@ -77,7 +77,6 @@ export function setTheme () {
   // Watson's birthday - 26th July
   if (isDate( {day: 7, month: 8})){myTheme = themes.watson;} 
   
-
   // My birthday :) - 7th Dec
   if (isDate( {day: 7, month: 12})){myTheme = themes.cherrylestradeBirthday;} 
 
