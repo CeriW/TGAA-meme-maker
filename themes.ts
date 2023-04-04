@@ -7,7 +7,7 @@ export type Theme = {
 }
 
 export const themes: {[key: string]: Theme} = {
-  default           : {name: null, isSpoiler: false},
+  default                   : {name: null, isSpoiler: false},
   
   asobaroWeek               : {name: "asobaro", isSpoiler: true, message: '<b style="color: var(--gold)">Happy Asobaro week!</b><br>28 May - 3 Jun #asobaroweek2023'},
   baroasoryuuWeek           : {name: "baroasoryuu", isSpoiler: true, message: '<b style="color: var(--red)">Happy BaroAsoRyuu week!</b><br>1-7 May #baroasoryuuweek2023'},
@@ -16,6 +16,7 @@ export const themes: {[key: string]: Theme} = {
   dgsAnniversary            : {name: "dgsAnniversary", isSpoiler: false, message: '<b>Happy anniversary Dai Gyakuten Saiban!</b> 9th July 2015'},
   doyle                     : {name: "doyle", isSpoiler: false, message: '<b>Happy birthday Sir Arthur<br>Conan Doyle!</b> 22nd May'},
   fathersDay                : {name: "homumiko", isSpoiler: true, message: "Happy Father's Day - 18th Jun"},
+  ginaLestradeWeek          : {name: "ginaLestradeWeek", isSpoiler: false, message: '<b style="color: var(--red)">Happy Gina Lestrade week!</b><br>8-14 April #LestradeWeek23'},
   herlock                   : {name: "herlock", isSpoiler: false, message: "<b>Happy birthday Sherlock Holmes!</b><br>6th Jan"},
   homumikoWeek              : {name: "homumiko", isSpoiler: true, message: "Happy Homumiko week!"},
   natsume                   : {name: "natsume", isSpoiler: false, message: '<b>Happy birthday Soseki Natsume!</b><br>9th Feb'},
@@ -42,6 +43,7 @@ export function setTheme () {
   let myTheme = null;
 
   // ONE OFF EVENTS
+  if (isBetweenDates("2023-04-08", "2023-04-14")){myTheme = themes.ginaLestradeWeek;} 
   if (isBetweenDates("2023-04-17", "2023-04-23")){myTheme = themes.ryuulockWeek;} 
   if (isBetweenDates("2023-05-01", "2023-05-07")){myTheme = themes.baroasoryuuWeek;} 
   if (isBetweenDates("2023-05-28", "2023-06-03")){myTheme = themes.asobaroWeek;} 
@@ -94,6 +96,7 @@ export function setTheme () {
   }
 
   return myTheme ?? themes.default;
+
   
 
 }

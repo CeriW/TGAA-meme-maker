@@ -1,13 +1,14 @@
 import { characters } from "./characters.js";
 export const themes = {
     default: { name: null, isSpoiler: false },
-    cherrylestradeBirthday: { name: "homumiko", isSpoiler: true, message: "<b>Happy birthday CherryLestrade!</b><br>Have some Homumiko" },
-    dgsAnniversary: { name: "dgsAnniversary", isSpoiler: false, message: '<b>Happy anniversary Dai Gyakuten Saiban!</b> 9th July 2015' },
-    doyle: { name: "doyle", isSpoiler: false, message: '<b>Happy birthday Sir Arthur<br>Conan Doyle!</b> 22nd May' },
     asobaroWeek: { name: "asobaro", isSpoiler: true, message: '<b style="color: var(--gold)">Happy Asobaro week!</b><br>28 May - 3 Jun #asobaroweek2023' },
     baroasoryuuWeek: { name: "baroasoryuu", isSpoiler: true, message: '<b style="color: var(--red)">Happy BaroAsoRyuu week!</b><br>1-7 May #baroasoryuuweek2023' },
+    cherrylestradeBirthday: { name: "homumiko", isSpoiler: true, message: "<b>Happy birthday CherryLestrade!</b><br>Have some Homumiko" },
     cumberbatch: { name: 'cumberbatch', isSpoiler: false, message: "Nothing suspicious here" },
+    dgsAnniversary: { name: "dgsAnniversary", isSpoiler: false, message: '<b>Happy anniversary Dai Gyakuten Saiban!</b> 9th July 2015' },
+    doyle: { name: "doyle", isSpoiler: false, message: '<b>Happy birthday Sir Arthur<br>Conan Doyle!</b> 22nd May' },
     fathersDay: { name: "homumiko", isSpoiler: true, message: "Happy Father's Day - 18th Jun" },
+    ginaLestradeWeek: { name: "ginaLestradeWeek", isSpoiler: false, message: '<b style="color: var(--red)">Happy Gina Lestrade week!</b><br>8-14 April #LestradeWeek23' },
     herlock: { name: "herlock", isSpoiler: false, message: "<b>Happy birthday Sherlock Holmes!</b><br>6th Jan" },
     homumikoWeek: { name: "homumiko", isSpoiler: true, message: "Happy Homumiko week!" },
     natsume: { name: "natsume", isSpoiler: false, message: '<b>Happy birthday Soseki Natsume!</b><br>9th Feb' },
@@ -28,6 +29,9 @@ function isDate({ day, month }) {
 export function setTheme() {
     let myTheme = null;
     // ONE OFF EVENTS
+    if (isBetweenDates("2023-04-08", "2023-04-14")) {
+        myTheme = themes.ginaLestradeWeek;
+    }
     if (isBetweenDates("2023-04-17", "2023-04-23")) {
         myTheme = themes.ryuulockWeek;
     }

@@ -1,0 +1,30 @@
+
+
+body[theme="ginaLestradeWeek"]{
+  --blue: #435e21;
+  --dark-accent: #182507;
+  --scrollbar: #202c0d;
+}
+
+body[theme="ginaLestradeWeek"] #info-bar,
+body[theme="ginaLestradeWeek"] [id*="selector-preview"],
+body[theme="ginaLestradeWeek"] #about,
+body[theme="ginaLestradeWeek"] #spoilers-okay{
+  background: var(--dark-accent);
+}
+
+body[theme="ginaLestradeWeek"] .gradient-panel:hover{
+  color:   #131b07;
+}
+
+body[theme="ginaLestradeWeek"] [id*="selector-preview"]{
+  border-color: var(--gold);
+}
+
+body[theme="ginaLestradeWeek"] .gradient-panel {
+  border-color: #2f4416;
+}
+
+body[theme="ginaLestradeWeek"] #social-feed{
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}

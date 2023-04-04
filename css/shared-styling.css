@@ -1,0 +1,23 @@
+/* Shared styling ------------------------------------------------------------*/
+
+.gradient-panel{
+  background: linear-gradient(to bottom, var(--gradient-top), var(--gradient-bottom));
+  color: var(--gradient-text-colour);
+  padding: 10px 10px 10px 20px;
+  text-decoration: none;
+  transition: 0.4s;
+  display: block;
+  border: 2px solid var(--blue);
+  outline: 2px solid var(--gold);
+
+  color: var(--gradient-text-colour);
+  line-height: 1;
+  font-family: Epigrafica, Toplar, serif;
+  text-shadow: -1px -1px 0 rgba(0,0,0,0.3), 1px -1px 0 rgba(0,0,0,0.3), -1px 1px 0 rgba(0,0,0,0.3), 1px 1px 0 rgba(0,0,0,0.3);
+  font-size: 1.2em;
+}
+
+.gradient-panel:hover{
+  color: var(--blue);
+  text-shadow: none;
+}

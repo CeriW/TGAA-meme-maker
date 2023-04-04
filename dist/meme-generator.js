@@ -31,7 +31,7 @@ const backgroundSelector = document.querySelector("#background-selector");
 const backgroundPreview = document.querySelector("#background-selector-preview");
 const characterSelector = document.querySelector("#character-selector"); // an invisible select element that stores what character we've selected
 const characterPreview = document.querySelector("#character-selector-preview");
-const poseSelector = document.querySelector("#pose-selector");
+const poseSelectorPreview = document.querySelector("#pose-selector-preview");
 const downloadButton = document.querySelector("#download");
 const aboutButton = document.querySelector('#about-button');
 const modalContent = document.querySelector('#modal-content');
@@ -509,7 +509,7 @@ function generatePoses(e) {
         }
     });
     // Clear the pose selector.
-    poseSelector.innerHTML = '';
+    poseSelectorPreview.innerHTML = '';
     // Generate each icon.
     for (let i = 1; i <= imageAmount; i++) {
         let newRadio = document.createElement("input");
@@ -519,7 +519,7 @@ function generatePoses(e) {
         newRadio.setAttribute("character", chosenCharacter);
         newRadio.value = String(i);
         newRadio.addEventListener("click", selectPose);
-        poseSelector.appendChild(newRadio);
+        poseSelectorPreview.appendChild(newRadio);
         let newLabel = document.createElement("label");
         newLabel.setAttribute("for", String(i));
         newLabel.style.backgroundImage =
@@ -528,7 +528,7 @@ function generatePoses(e) {
                 "/thumbnails/" +
                 i +
                 '.png")';
-        poseSelector.appendChild(newLabel);
+        poseSelectorPreview.appendChild(newLabel);
         if (currentCharacter
             && currentCharacter.posesAddedOnLastUpdate
             && currentCharacter.lastUpdated
@@ -542,7 +542,7 @@ function generatePoses(e) {
             newLabel.appendChild(newIcon);
         }
     }
-    (_c = poseSelector.querySelector("label")) === null || _c === void 0 ? void 0 : _c.setAttribute("selected", "");
+    (_c = poseSelectorPreview.querySelector("label")) === null || _c === void 0 ? void 0 : _c.setAttribute("selected", "");
 }
 // When a pose is clicked, put that onto the canvas and mark it as selected.
 function selectPose(e) {

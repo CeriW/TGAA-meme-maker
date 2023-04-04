@@ -55,8 +55,8 @@
       <div id="fb-root"></div>
       <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v16.0" nonce="CIiXsY1X"></script>
 
-      <aside id="modal" class = "hidden">
-        <div>
+      <aside id="modal" class="hidden">
+        <div class="gradient-panel">
           <span class="material-symbols-sharp">close</span>
           <div id="modal-content">
             
@@ -83,7 +83,7 @@
               
               <a id="download">
                 <img width="100%" src="assets/misc/download.png">
-                <div><span class="material-icons md-17">download</span>Download my meme</span></div>
+                <div class="gradient-panel"><span class="material-icons md-17">download</span>Download my meme</span></div>
               </a>
 
 
@@ -102,7 +102,7 @@
 
         <div id="options">
 
-          <div id="spoiler-warning">
+          <div id="spoiler-warning" class="gradient-panel">
             <h2 class="heading-text">Spoiler warning</h2>
             <p>The content within contains spoilers for the entirety of The Great Ace Attorney Chronicles</p>
             <button id="spoilers-okay">
@@ -117,7 +117,7 @@
             
           </div>
 
-          <div class="toggle-heading" associated-panel="background-selector-preview">
+          <div class="toggle-heading gradient-panel" associated-panel="background-selector-preview">
             <span class="material-icons">edit_location</span>
             Select your location
             <span class="material-icons down-arrow">expand_more</span>
@@ -127,7 +127,7 @@
           
 
           <div>
-            <div class="toggle-heading" associated-panel="character-selector-preview">
+            <div class="toggle-heading gradient-panel" associated-panel="character-selector-preview">
               <span class="material-icons">person_add</span>
               Select your character
               <span class="material-icons down-arrow">expand_more</span>
@@ -250,11 +250,11 @@
 
             </div>
 
-            <div id="pose-heading">
+            <div id="pose-heading" class="gradient-panel">
               <span class="material-icons">sentiment_very_satisfied</span>
               Select your pose
             </div>
-            <div id="pose-selector">
+            <div id="pose-selector-preview">
             </div>
           </div>
 
@@ -304,7 +304,7 @@
       
 
       <div id="social-feed">
-        <div id="social-feed-heading">
+        <div id="social-feed-heading" class="gradient-panel">
           <span>Tweet your creations using <b style="color: #0D1725; text-shadow: none;">#tgaaMemeMaker</b> and appear here! </span>
           <a href="https://twitter.com/intent/tweet?button_hashtag=tgaaMemeMaker&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">Tweet #tgaaMemeMaker</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
           <a id="back-to-top" href="#top"><span class="material-symbols-sharp">

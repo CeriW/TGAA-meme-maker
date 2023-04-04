@@ -1,33 +1,28 @@
 
 /* Selector styling ----------------------------------------------------------*/
 
-#background-selector-preview,
-#pose-selector,
-#character-selector-preview{
+[id*="selector-preview"]{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  max-height: 1000px;
+  /* max-height: 1000px; */
+  max-height: 485px;
   transition: max-height 0.6s;
+
+  border: 2px solid rgba(255,255,255,0.2);
+  margin-bottom: 20px;
+  overflow-y: scroll;
+  width: calc(100% + 1px);
+  left: -2px;
 }
 
-#character-selector-preview:not(.hidden) ~ #pose-selector{
+#character-selector-preview:not(.hidden) ~ #pose-selector-preview{
   max-height: 0;
   overflow: hidden;
   border: none;
   margin-bottom: 0;
 }
 
-#character-selector-preview,
-#background-selector-preview,
-#pose-selector{
-  border: 2px solid rgba(255,255,255,0.2);
-  margin-bottom: 20px;
-  max-height: 485px;
-  overflow-y: scroll;
-  width: calc(100% + 1px);
-  left: -2px;
-}
 
 .hidden{
   max-height: 0 !important;
@@ -41,7 +36,7 @@
   padding-top: 20px;
 }
 
-#pose-selector{
+#pose-selector-preview{
   max-height: calc(100vh - 200px);
 }
 
@@ -92,9 +87,7 @@
 
 @media (max-width: 1000px){
 
-  #character-selector-preview,
-  #background-selector-preview,
-  #pose-selector{
+  [id*="selector-preview"]{
     max-height: 450px;
   }
 }

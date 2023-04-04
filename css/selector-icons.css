@@ -1,7 +1,7 @@
 /* Icon styling --------------------------------------------------------------*/
 
 div[class*="icon"]:not(.tb__icon),
-#pose-selector label{
+#pose-selector-preview label{
   width: 140px;
   height: 140px;
   background-position: center bottom;
@@ -19,16 +19,16 @@ div[class*="icon"][selected="true"]{
   background-color: var(--gold) !important;
 }
 
-#pose-selector label{
+#pose-selector-preview label{
   margin: 15px;
 }
 
 div[class*="icon"]:hover,
-#pose-selector label:hover{
+#pose-selector-preview label:hover{
   background-color: rgba(255,255,255,0.1);
 }
 
-#pose-selector label[selected]{
+#pose-selector-preview label[selected]{
   background-color: var(--gold);
 }
 
@@ -70,7 +70,7 @@ div[class*="icon"]:hover,
 
 @media (max-width: 1000px){
   div[class*="icon"],
-  #pose-selector label{
+  #pose-selector-preview label{
     max-width: 120px;
     max-height: 120px;
   }

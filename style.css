@@ -1,6 +1,7 @@
 /* Shared bits */
 @import "css/helpers.css";
 @import "css/animations.css";
+@import "css/shared-styling.css";
 
 /* General page layout */
 @import "css/global-and-high-level.css";
@@ -32,10 +33,11 @@
 
 /* Themes */
 @import "css/themes/theme-star.css";
-@import "css/themes/homumiko.css";
-@import "css/themes/ryulock.css";
 @import "css/themes/asobaro.css";
 @import "css/themes/baroasoryuu.css";
+@import "css/themes/gina.css";
+@import "css/themes/homumiko.css";
+@import "css/themes/ryulock.css";
 
 
 :root{

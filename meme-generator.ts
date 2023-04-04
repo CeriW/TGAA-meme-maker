@@ -43,7 +43,7 @@ const backgroundSelector    : HTMLSelectElement = document.querySelector("#backg
 const backgroundPreview     : HTMLDivElement = document.querySelector("#background-selector-preview")!;
 const characterSelector     : HTMLSelectElement = document.querySelector("#character-selector")!; // an invisible select element that stores what character we've selected
 const characterPreview      : HTMLDivElement = document.querySelector("#character-selector-preview")!;
-const poseSelector          : HTMLDivElement = document.querySelector("#pose-selector")!;
+const poseSelectorPreview   : HTMLDivElement = document.querySelector("#pose-selector-preview")!;
 const downloadButton        : HTMLLinkElement= document.querySelector("#download")!;
 const aboutButton           : HTMLButtonElement= document.querySelector('#about-button')!;
 const modalContent          : HTMLDivElement = document.querySelector('#modal-content')!;
@@ -651,7 +651,7 @@ function generatePoses(e? : Event) {
   });
 
   // Clear the pose selector.
-  poseSelector.innerHTML = '';
+  poseSelectorPreview.innerHTML = '';
 
   // Generate each icon.
   for (let i = 1; i <= imageAmount; i++) {
@@ -662,7 +662,7 @@ function generatePoses(e? : Event) {
     newRadio.setAttribute("character", chosenCharacter);
     newRadio.value = String(i);
     newRadio.addEventListener("click", selectPose);
-    poseSelector.appendChild(newRadio);
+    poseSelectorPreview.appendChild(newRadio);
 
     let newLabel = document.createElement("label");
     newLabel.setAttribute("for", String(i));
@@ -672,7 +672,7 @@ function generatePoses(e? : Event) {
       "/thumbnails/" +
       i +
       '.png")';
-    poseSelector.appendChild(newLabel);
+    poseSelectorPreview.appendChild(newLabel);
 
     if (
       currentCharacter
@@ -691,7 +691,7 @@ function generatePoses(e? : Event) {
 
   }
 
-  poseSelector.querySelector("label")?.setAttribute("selected", "");
+  poseSelectorPreview.querySelector("label")?.setAttribute("selected", "");
 }
 
 // When a pose is clicked, put that onto the canvas and mark it as selected.

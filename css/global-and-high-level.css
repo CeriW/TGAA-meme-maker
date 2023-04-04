@@ -19,7 +19,7 @@ body{
   font-family: Toplar, 'Libre Baskerville', Georgia, serif; /* Yes, I chose 'Libre Baskerville' on purpose. Congrats, you found an easter egg */
   padding: 0 0 100px;
   margin: 0;
-  transition: background-color 1s;
+  /* transition: background-color 1s; */
 }
 
 @media (max-width:1450px){

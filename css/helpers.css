@@ -7,7 +7,7 @@
 .active-canvas,
 #character-selector-preview,
 #background-selector-preview,
-#pose-selector,
+#pose-selector-preview,
 .location-icon,
 .character-icon,
 .material-icons,
@@ -21,7 +21,7 @@
 .canvas-container,
 canvas,
 div[class*="icon"]:not(.tb__icon),
-#pose-selector label,
+#pose-selector-preview label,
 .toggle-heading,
 #pose-heading,
 #download,
@@ -51,6 +51,6 @@ div[class*="icon"]:not(.tb__icon),
 input[type="radio"]:not(.name-selector-input),
 #character-selector-preview:not(.hidden) + #pose-heading,
 body[character-selected="false"] #pose-heading,
-body[character-selected="false"] #pose-selector{
+body[character-selected="false"] #pose-selector-preview{
   display: none;
 }
