@@ -480,8 +480,20 @@ function generateLocationInterface() {
     let icon = generateLabelledIcon("location", location);
     backgroundPreview.appendChild(icon);
     
-    if (location.tags && theme?.name && location.tags.includes(theme.name)){
-      icon.style.order = '-' + new Date().getTime() * 2
+    // if (location.tags && theme?.name && location.tags.includes(theme.name)){
+    //   icon.style.order = '-' + new Date().getTime() * 2
+    // }
+
+    let isNew = location.addedDate && (new Date().getTime() - new Date(location.addedDate).getTime()) / 86400000 < daysForNew;
+    let matchesTheme = theme.name && location.tags?.includes(theme.name);
+    let order = new Date(location.addedDate!).getTime() / 10000;
+
+    if (isNew && matchesTheme){
+      icon.style.order = '-10'
+    } else if (matchesTheme){
+      icon.style.order = '-9'
+    } else if (isNew){
+      icon.style.order = '-8'
     }
 
     // When the icon is clicked, set the value of the invisible dropdown to match,
@@ -566,29 +578,36 @@ function generateLabelledIcon(type: "character" | "location", object: CharacterO
         icon.appendChild(themeIcon);
       }
 
-
       break;
+
     case "location":
 
       const myLocation = object as LocationObject;
 
       iconURL = 'url("assets/locations/thumbnails/' + object.id + '.png")';
-      
-      if (myLocation.addedDate && (new Date().getTime() - new Date(myLocation.addedDate).getTime()) / 86400000 < daysForNew){
+
+      let isNew = myLocation.addedDate && (new Date().getTime() - new Date(myLocation.addedDate).getTime()) / 86400000 < daysForNew;
+      let matchesTheme = theme.name && myLocation.tags?.includes(theme.name);
+      let order = new Date(myLocation.addedDate!).getTime() / 10000;
+
+      console.log(
+        'isNew ' + isNew + '    matches theme ' + matchesTheme + '    order' + order
+      ) ;
+
+      if (isNew){
         let newIcon = document.createElement('img')
         newIcon.classList.add('new-icon')
         newIcon.src = "/assets/icons/new-icon.svg"
         newIcon.width = 50;
         icon.appendChild(newIcon)
-        icon.style.order = '-' + new Date(myLocation.addedDate).getTime() / 10000;
+        icon.style.order = !matchesTheme ? '-' + order : '-' + (order - 1000000000000);
       }
 
-      if (theme.name && myLocation.tags?.includes(theme.name)){
+      if (matchesTheme){
         let themeIcon = document.createElement('div');
         themeIcon.classList.add('theme-star');
         icon.appendChild(themeIcon);
       }
-
 
       break;
   }
