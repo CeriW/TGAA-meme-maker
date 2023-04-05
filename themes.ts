@@ -82,6 +82,7 @@ export function setTheme () {
   // My birthday :) - 7th Dec
   if (isDate( {day: 7, month: 12})){myTheme = themes.cherrylestradeBirthday;} 
 
+  myTheme = themes.ginaLestradeWeek;
   
   if (myTheme?.message){
     let bannerBottom = document.createElement('div');

@@ -25,6 +25,7 @@ export const locations = [
     { name: "The Garridebs' room", id: "garridebs-room", tags: ['doyle'] },
     { name: "Natsume's Room", id: "natsumes-room", tags: ['natsume'] },
     { name: "Windibank's Pawnbrokery", id: "windibanks", tags: ['doyle', 'ginaLestradeWeek'] },
+    { name: "Windibank's Storeroom", id: "windibanks-storeroom", tags: ['doyle', 'ginaLestradeWeek'], addedDate: "Apr 08 2023" },
     { name: "Forensics Laboratory", id: "forensics-laboratory-courtney", variant: "Courtney's version", tags: [], },
     { name: "Forensics Laboratory", id: "forensics-laboratory-maria", variant: "Maria's version", tags: [] },
     { name: "Room on Fresno Street", id: "room-on-fresno-street", tags: ['ginaLestradeWeek'] },
