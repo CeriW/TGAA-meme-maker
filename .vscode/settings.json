@@ -1,4 +1,4 @@
 {
-  "window.title": "${dirty}${activeEditorShort}${separator}${rootName}${separator}${profileName}${separator}${appName} ${separator} [Branch: main]",
+  "window.title": "${dirty}${activeEditorShort}${separator}${rootName}${separator}${profileName}${separator}${appName} ${separator} [Branch: upload-your-own-background]",
   "compile-hero.disable-compile-files-on-did-save-code": true
 }

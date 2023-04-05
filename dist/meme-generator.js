@@ -35,6 +35,7 @@ const poseSelectorPreview = document.querySelector("#pose-selector-preview");
 const downloadButton = document.querySelector("#download");
 const aboutButton = document.querySelector('#about-button');
 const modalContent = document.querySelector('#modal-content');
+const customBackgroundInput = document.querySelector('#custom-background-input');
 // Store whether the user has deliberately chosen a character yet.
 // This will prevent the default character tag being generated
 // while selecting a location
@@ -123,6 +124,16 @@ function generateLocations() {
         backgroundSelector.appendChild(newOption);
     });
 }
+customBackgroundInput.addEventListener('change', () => {
+    let myBackground = customBackgroundInput.files ? URL.createObjectURL(customBackgroundInput.files[0]) : null;
+    if (myBackground) {
+        // Set the background image
+        let backgrounds = document.querySelectorAll(".canvas-container img:first-child");
+        backgrounds.forEach(function (background) {
+            background.src = myBackground !== null && myBackground !== void 0 ? myBackground : '';
+        });
+    }
+});
 // Generates our canvas with the chosen backgrounds, characters and text
 function generatePanelArtwork() {
     // Set the background image
