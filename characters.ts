@@ -151,6 +151,34 @@ export const characters : CharacterObject[] = [
   posesAddedOnLastUpdate: 1,
 },
 
+// {
+//   name: 'Gina Lestrade',
+//   id:'lestrade-gina-tgaa1',
+//   variant: 'Adventures',
+//   gender: 'female',
+//   nationality: 'british',
+//   appearsIn: [false,false,true,false,true,false,false,true,true,true],
+//   images: 9,
+//   theme: 'https://open.spotify.com/embed/track/582mS91YcS5PHaTx5LUPn4?utm_source=generator',
+//   tags: ['doyle', 'ginaLestradeWeek'],
+//   lastUpdated: "2023-04-08",
+//   posesAddedOnLastUpdate: 9,
+// },
+
+// {
+//   name: 'Gina Lestrade',
+//   id:'lestrade-gina-tgaa2',
+//   variant: 'Resolve',
+//   gender: 'female',
+//   nationality: 'british',
+//   appearsIn: [false,false,true,false,true,false,false,true,true,true],
+//   images: 13,
+//   theme: 'https://open.spotify.com/embed/track/582mS91YcS5PHaTx5LUPn4?utm_source=generator',
+//   tags: ['doyle', 'ginaLestradeWeek'],
+//   lastUpdated: "2023-04-08",
+//   posesAddedOnLastUpdate: 8,
+// },
+
 {
   name: 'Yujin Mikotoba',
   id:'mikotoba-yujin-japan',
