@@ -1,5 +1,5 @@
 // Version info
-const versionInfo = '4.2.1 - 2023-04-02';
+const versionInfo = '4.2.2 - 2023-04-05';
 
 import { locations, LocationObject } from "./locations.js";
 import { characters, CharacterObject } from "./characters.js";
@@ -71,7 +71,7 @@ const daysForNew : number = 14;
 
 const randomAnimal = document.createElement('img');
 randomAnimal.classList.add("random-animal");
-randomAnimal.src = `assets/random-animal/${Math.ceil(Math.random() * 5)}.png`;
+randomAnimal.src = `assets/random-animal/${Math.ceil(Math.random() * 7)}.png`;
 randomAnimal.width = 110;
 
 const possibleAnimalLocations = [

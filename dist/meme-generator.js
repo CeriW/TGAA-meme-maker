@@ -1,6 +1,6 @@
 var _a;
 // Version info
-const versionInfo = '4.2.1 - 2023-04-02';
+const versionInfo = '4.2.2 - 2023-04-05';
 import { locations } from "./locations.js";
 import { characters } from "./characters.js";
 import { setTheme } from "./themes.js";
@@ -51,7 +51,7 @@ const daysForNew = 14;
 // Random animal -------------------------------------------------------------//
 const randomAnimal = document.createElement('img');
 randomAnimal.classList.add("random-animal");
-randomAnimal.src = `assets/random-animal/${Math.ceil(Math.random() * 5)}.png`;
+randomAnimal.src = `assets/random-animal/${Math.ceil(Math.random() * 7)}.png`;
 randomAnimal.width = 110;
 const possibleAnimalLocations = [
     '.toggle-heading[associated-panel="background-selector-preview"]',
