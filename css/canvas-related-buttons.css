@@ -78,6 +78,9 @@
 
   #download div{
     display: block;
+    width: calc(100% - 4px);
+    margin: 0 0 2px 2px;
+    box-sizing: border-box;
   }
 }
 
