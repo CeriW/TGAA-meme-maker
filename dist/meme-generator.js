@@ -123,23 +123,42 @@ function generateLocations() {
         newOption.setAttribute("value", location.id);
         backgroundSelector.appendChild(newOption);
     });
+    let newOption = document.createElement("option");
+    newOption.textContent = 'custom';
+    newOption.setAttribute("value", 'custom');
+    backgroundSelector.appendChild(newOption);
 }
 customBackgroundInput.addEventListener('change', () => {
-    let myBackground = customBackgroundInput.files ? URL.createObjectURL(customBackgroundInput.files[0]) : null;
-    if (myBackground) {
-        // Set the background image
-        let backgrounds = document.querySelectorAll(".canvas-container img:first-child");
-        backgrounds.forEach(function (background) {
-            background.src = myBackground !== null && myBackground !== void 0 ? myBackground : '';
-        });
+    // let myBackground = customBackgroundInput.files ? URL.createObjectURL(customBackgroundInput.files[0]) : 'hi';
+    // if (customBackgroundInput.files){
+    //   console.log(URL.createObjectURL(customBackgroundInput.files[0]));
+    // }
+    if (customBackgroundInput.files) {
+        let myBackground = URL.createObjectURL(customBackgroundInput.files[0]);
+        backgroundSelector.value = 'custom';
+        generatePanelArtwork();
+        // console.log(myBackground);
+        // // Set the background image
+        // let backgrounds : NodeListOf<HTMLImageElement> = document.querySelectorAll(
+        //   ".canvas-container img:first-child"
+        // );
+        // backgrounds.forEach(function (background) {
+        //   background.src = myBackground;
+        // });
     }
 });
 // Generates our canvas with the chosen backgrounds, characters and text
 function generatePanelArtwork() {
     // Set the background image
     let backgrounds = document.querySelectorAll(".canvas-container img:first-child");
+    console.log("Value = " + backgroundSelector.value);
+    console.log(backgroundSelector.value.length);
+    console.log(backgroundSelector.value.indexOf('blob'));
+    let myBackground = backgroundSelector.value === "custom" && customBackgroundInput.files ? URL.createObjectURL(customBackgroundInput.files[0]) : `${paths.location}${backgroundSelector.value}.jpg`;
+    console.log(myBackground);
     backgrounds.forEach(function (background) {
-        background.src = paths.location + backgroundSelector.value + ".jpg";
+        background.src = myBackground;
+        // background.src = paths.location + backgroundSelector.value + ".jpg";
     });
     characterOverlay.src = `/assets/locations/${characterOverlayID}.png`;
     let overlays = document.querySelectorAll(".canvas-container img:nth-child(3)");

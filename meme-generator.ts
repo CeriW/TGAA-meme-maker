@@ -172,20 +172,38 @@ function generateLocations() {
     newOption.setAttribute("value", location.id);
     backgroundSelector.appendChild(newOption);
   });
+
+  let newOption = document.createElement("option");
+  newOption.textContent = 'custom';
+  newOption.setAttribute("value", 'custom');
+  backgroundSelector.appendChild(newOption);
 }
 
 customBackgroundInput.addEventListener('change', () => {
-  let myBackground = customBackgroundInput.files ? URL.createObjectURL(customBackgroundInput.files[0]) : null;
+  // let myBackground = customBackgroundInput.files ? URL.createObjectURL(customBackgroundInput.files[0]) : 'hi';
 
-  if (myBackground){
-    // Set the background image
-    let backgrounds : NodeListOf<HTMLImageElement> = document.querySelectorAll(
-      ".canvas-container img:first-child"
-    );
+  // if (customBackgroundInput.files){
 
-    backgrounds.forEach(function (background) {
-      background.src = myBackground ?? '';
-    });
+  //   console.log(URL.createObjectURL(customBackgroundInput.files[0]));
+  // }
+
+  if (customBackgroundInput.files){
+
+    let myBackground = URL.createObjectURL(customBackgroundInput.files[0]) as string;
+
+    backgroundSelector.value = 'custom';
+    generatePanelArtwork();
+    // console.log(myBackground);
+
+
+    // // Set the background image
+    // let backgrounds : NodeListOf<HTMLImageElement> = document.querySelectorAll(
+    //   ".canvas-container img:first-child"
+    // );
+
+    // backgrounds.forEach(function (background) {
+    //   background.src = myBackground;
+    // });
   }
 
 })
@@ -196,8 +214,19 @@ function generatePanelArtwork() {
   let backgrounds : NodeListOf<HTMLImageElement> = document.querySelectorAll(
     ".canvas-container img:first-child"
   );
+
+  console.log("Value = " + backgroundSelector.value);
+  console.log(backgroundSelector.value.length);
+  console.log(backgroundSelector.value.indexOf('blob'))
+
+
+  let myBackground = backgroundSelector.value === "custom" && customBackgroundInput.files ? URL.createObjectURL(customBackgroundInput.files[0]) : `${paths.location}${backgroundSelector.value}.jpg`;
+  console.log(myBackground);
+
+
   backgrounds.forEach(function (background) {
-    background.src = paths.location + backgroundSelector.value + ".jpg";
+    background.src = myBackground;
+    // background.src = paths.location + backgroundSelector.value + ".jpg";
   });
 
   characterOverlay.src = `/assets/locations/${characterOverlayID}.png`;
@@ -656,7 +685,6 @@ function generatePoses(e? : Event) {
     `
     : '';
   
-
   generatePanelArtwork();
 
   // Figure out how many times we need to loop through to generate all the poses.
