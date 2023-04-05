@@ -14,6 +14,14 @@ header{
   margin: 0 auto;
 }
 
+@media (max-width: 450px){
+  #banner{
+    width: 120vw;
+    max-width: unset;
+    margin-left: -10vw;
+  }
+}
+
 #banner img{
   max-width: 100%;
   height: auto;

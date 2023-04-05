@@ -69,21 +69,21 @@ const daysForNew : number = 14;
 
 // Random animal -------------------------------------------------------------//
 
-// const randomAnimal = document.createElement('img');
-// randomAnimal.classList.add("random-animal");
-// randomAnimal.src = `assets/random-animal/${Math.ceil(Math.random() * 5)}.png`;
-// randomAnimal.width = 110;
+const randomAnimal = document.createElement('img');
+randomAnimal.classList.add("random-animal");
+randomAnimal.src = `assets/random-animal/${Math.ceil(Math.random() * 5)}.png`;
+randomAnimal.width = 110;
 
-// const possibleAnimalLocations = [
-//   '.toggle-heading[associated-panel="background-selector-preview"]',
-//   '.toggle-heading[associated-panel="character-selector-preview"]',
-//   '#canvas-grid-item',
-//   '#social-feed-heading',
-// ]
+const possibleAnimalLocations = [
+  '.toggle-heading[associated-panel="background-selector-preview"]',
+  '.toggle-heading[associated-panel="character-selector-preview"]',
+  '#canvas-grid-item',
+  '#social-feed-heading',
+]
 
-// let randomAnimalHome = document.querySelector(possibleAnimalLocations[Math.floor(Math.random() * possibleAnimalLocations.length)]);
-// randomAnimal.style.right = Math.floor(Math.random() * 70) + '%';
-// randomAnimalHome?.appendChild(randomAnimal);
+let randomAnimalHome = document.querySelector(possibleAnimalLocations[Math.floor(Math.random() * possibleAnimalLocations.length)]);
+randomAnimal.style.right = Math.floor(Math.random() * 70) + '%';
+randomAnimalHome?.appendChild(randomAnimal);
 
 
 // ---------------------------------------------------------------------------//
