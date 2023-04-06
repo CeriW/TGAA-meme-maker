@@ -1,6 +1,5 @@
 body:not([accept-spoilers="true"]) #social-feed-widget{
   filter: blur(25px);
-  overflow: hidden;
 }
 
 #social-feed{
@@ -47,6 +46,7 @@ body[accept-spoilers] #social-feed-spoiler-notice{
   display: none;
 }
 
-.steo{
-  display: none;
+#social-feed-widget{
+  width: calc(100% + 22px);
+  margin-left: -9px;
 }
