@@ -80,6 +80,7 @@ div[class*="icon"]:hover,
 }
 
 
+/* Custom background icon ----------------------------------------------------*/
 
 .location-icon[value="custom"]{
   order: 0;
@@ -95,6 +96,9 @@ div[class*="icon"]:hover,
   z-index: 1;
   border-radius: 50%;
   opacity: 0;
+}
 
+.location-icon[value="custom"] > div{
+  display: none;
 }
 

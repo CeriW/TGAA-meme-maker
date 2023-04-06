@@ -45,7 +45,7 @@ div[class*="icon"]:not(.tb__icon),
 #character,
 #speech-box,
 #character-selector,
-/* #background-selector, */
+#background-selector,
 #speech-tag,
 #credits,
 input[type="radio"]:not(.name-selector-input),
