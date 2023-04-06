@@ -302,6 +302,7 @@ function generateCanvas() {
   newCanvas.classList.add("canvas-container");
 
   backgroundImg = document.createElement("img");
+  backgroundImg.classList.add('background-image')
   newCanvas.appendChild(backgroundImg);
 
   characterImg = characterImg

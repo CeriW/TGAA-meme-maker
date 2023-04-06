@@ -218,6 +218,7 @@ function generateCanvas() {
     let newCanvas = document.createElement("div");
     newCanvas.classList.add("canvas-container");
     backgroundImg = document.createElement("img");
+    backgroundImg.classList.add('background-image');
     newCanvas.appendChild(backgroundImg);
     characterImg = characterImg
         ? characterImg.cloneNode()
