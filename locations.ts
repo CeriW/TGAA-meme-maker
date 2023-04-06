@@ -37,7 +37,7 @@ export const locations: LocationObject[] = [
   {name   : "The Garridebs' room",                   id:"garridebs-room",                                  tags: ['doyle']},
   {name   : "Natsume's Room",                        id:"natsumes-room",                                   tags: ['natsume']},
   {name   : "Windibank's Pawnbrokery",               id:"windibanks",                                      tags: ['doyle', 'ginaLestradeWeek']},
-  {name   : "Windibank's Storeroom",                 id:"windibanks-storeroom",                            tags: ['doyle', 'ginaLestradeWeek'], addedDate: "Apr 08 2023"},
+  {name   : "Windibank's Storeroom",                 id:"windibanks-storeroom",                            tags: ['doyle', 'ginaLestradeWeek'], addedDate: "2023-04-08"},
   {name   : "Forensics Laboratory",                  id:"forensics-laboratory-courtney",                   variant: "Courtney's version", tags: [],},
   {name   : "Forensics Laboratory",                  id:"forensics-laboratory-maria",                      variant:"Maria's version", tags: []},
   {name   : "Room on Fresno Street",                 id:"room-on-fresno-street",                           tags: ['ginaLestradeWeek']},
@@ -50,6 +50,6 @@ export const locations: LocationObject[] = [
   {name   : "Shamspeare's Flat",                     id:"shamspeares-flat",                                tags: []},
   {name   : "Experimentation Stage",                 id:"experimentation-stage",                           tags: []},
   {name   : "Madame Tuspells' Museum of Waxworks",   id:"madame-tuspells",                                 tags: []},
-  {name   : "Great Waterloo Hotel",                  id:"waterloo-hotel",                                  variant: "Foyer", tags: ['homumiko'],    addedDate: "Mar 05 2023"},
+  {name   : "Great Waterloo Hotel",                  id:"waterloo-hotel",                                  variant: "Foyer", tags: ['homumiko'],    addedDate: "2023-03-05"},
 
 ]

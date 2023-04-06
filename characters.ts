@@ -140,7 +140,6 @@ export const characters : CharacterObject[] = [
 {
   name: 'Gina Lestrade',
   id:'lestrade-gina',
-  // variant: 'TGAA2',
   gender: 'female',
   nationality: 'british',
   appearsIn: [false,false,true,false,true,false,false,true,true,true],

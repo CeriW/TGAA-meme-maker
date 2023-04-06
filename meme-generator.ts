@@ -64,7 +64,7 @@ const paths = {
 
 
 // How many days we show 'new' tags for on icons
-const daysForNew : number = 14;
+const daysForNew : number = 20;
 
 
 // Random animal -------------------------------------------------------------//
@@ -77,7 +77,6 @@ randomAnimal.width = 110;
 const possibleAnimalLocations = [
   '.toggle-heading[associated-panel="background-selector-preview"]',
   '.toggle-heading[associated-panel="character-selector-preview"]',
-  '#canvas-grid-item',
   '#social-feed-heading',
 ]
 
@@ -418,6 +417,29 @@ window.addEventListener('resize', determineStickyCanvas)
 
 
 
+function determineOrder(dateModified: string | undefined, tags: string[] = []): string{
+
+  let myDate = dateModified ? new Date(dateModified) : new Date("2000-01-01");
+  console.log(myDate.getTime());
+  
+  let isNew = dateModified && (new Date().getTime() - new Date(dateModified).getTime()) / 86400000 < daysForNew;
+  let matchesTheme = theme.name && tags.includes(theme.name);
+
+  let order = Math.floor(myDate.getTime() / 100000000000);
+  let currentDate = Math.floor(new Date().getTime() / 100000000000);
+
+  if (isNew && matchesTheme){
+    return `-3${order + currentDate}`;
+  } else if (matchesTheme){
+    return `-2${order + currentDate}`;
+  } else if (isNew){
+    return `-1${order}`;
+  };
+
+  return '100';
+}
+
+
 // Generates the character selection window.
 // Note that character-selector is a <select> element
 function generateCharacterInterface() {
@@ -431,10 +453,7 @@ function generateCharacterInterface() {
     let icon = generateLabelledIcon("character", character);
     icon.setAttribute("gender", "gender-" + character.gender); // This is set like this since 'female' contains the string 'male'
     icon.setAttribute("nationality", character.nationality);
-    
-    if (theme.name && character.tags.includes(theme.name)){
-      icon.style.order = '-' + new Date().getTime() * 2; // A crude way of making sure that theme characters take precedence over new characters
-    }
+    icon.style.order = determineOrder(character.lastUpdated ?? undefined, character.tags);
 
     for (let i = 0; i < 10; i++) {
       icon.setAttribute("present-in-case-" + i, String(character.appearsIn[i]));
@@ -479,22 +498,7 @@ function generateLocationInterface() {
     // Generate an icon
     let icon = generateLabelledIcon("location", location);
     backgroundPreview.appendChild(icon);
-    
-    // if (location.tags && theme?.name && location.tags.includes(theme.name)){
-    //   icon.style.order = '-' + new Date().getTime() * 2
-    // }
-
-    let isNew = location.addedDate && (new Date().getTime() - new Date(location.addedDate).getTime()) / 86400000 < daysForNew;
-    let matchesTheme = theme.name && location.tags?.includes(theme.name);
-    let order = new Date(location.addedDate!).getTime() / 10000;
-
-    if (isNew && matchesTheme){
-      icon.style.order = '-10'
-    } else if (matchesTheme){
-      icon.style.order = '-9'
-    } else if (isNew){
-      icon.style.order = '-8'
-    }
+    icon.style.order = determineOrder(location.addedDate ?? undefined, location.tags);
 
     // When the icon is clicked, set the value of the invisible dropdown to match,
     // toggle the location panel off and regenerate our current panel so it can
@@ -569,7 +573,6 @@ function generateLabelledIcon(type: "character" | "location", object: CharacterO
         newIcon.src = "/assets/icons/new-icon.svg"
         newIcon.width = 50;
         icon.appendChild(newIcon)
-        icon.style.order = '-' + new Date(myCharacter.lastUpdated).getTime() / 10000;
       }
 
       if (theme.name && myCharacter.tags.includes(theme.name)){
@@ -588,19 +591,14 @@ function generateLabelledIcon(type: "character" | "location", object: CharacterO
 
       let isNew = myLocation.addedDate && (new Date().getTime() - new Date(myLocation.addedDate).getTime()) / 86400000 < daysForNew;
       let matchesTheme = theme.name && myLocation.tags?.includes(theme.name);
-      let order = new Date(myLocation.addedDate!).getTime() / 10000;
-
-      console.log(
-        'isNew ' + isNew + '    matches theme ' + matchesTheme + '    order' + order
-      ) ;
 
       if (isNew){
-        let newIcon = document.createElement('img')
-        newIcon.classList.add('new-icon')
-        newIcon.src = "/assets/icons/new-icon.svg"
+        let newIcon = document.createElement('img');
+        newIcon.classList.add('new-icon');
+        newIcon.src = "/assets/icons/new-icon.svg";
         newIcon.width = 50;
-        icon.appendChild(newIcon)
-        icon.style.order = !matchesTheme ? '-' + order : '-' + (order - 1000000000000);
+        icon.appendChild(newIcon);
+
       }
 
       if (matchesTheme){
@@ -699,13 +697,13 @@ function generatePoses(e? : Event) {
       && currentCharacter.lastUpdated
       && i > (currentCharacter.images - currentCharacter.posesAddedOnLastUpdate)
       && (new Date().getTime() - new Date(currentCharacter.lastUpdated).getTime()) / (1000 * 60 * 60 * 24) < daysForNew){
-      let newIcon = document.createElement('img')
-      newIcon.classList.add('new-icon')
-      newIcon.src = "/assets/icons/new-icon.svg"
-      newIcon.width = 50;
-      newLabel.style.order = '-' + new Date(currentCharacter.lastUpdated).getTime()/1000;
-      newLabel.appendChild(newIcon);
-    }
+        let newIcon = document.createElement('img')
+        newIcon.classList.add('new-icon')
+        newIcon.src = "/assets/icons/new-icon.svg"
+        newIcon.width = 50;
+        newLabel.style.order = determineOrder(currentCharacter.lastUpdated, currentCharacter.tags);
+        newLabel.appendChild(newIcon);
+      }
 
 
   }

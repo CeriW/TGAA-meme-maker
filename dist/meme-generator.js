@@ -47,7 +47,7 @@ const paths = {
     location: "assets/locations/",
 };
 // How many days we show 'new' tags for on icons
-const daysForNew = 14;
+const daysForNew = 20;
 // Random animal -------------------------------------------------------------//
 const randomAnimal = document.createElement('img');
 randomAnimal.classList.add("random-animal");
@@ -56,7 +56,6 @@ randomAnimal.width = 110;
 const possibleAnimalLocations = [
     '.toggle-heading[associated-panel="background-selector-preview"]',
     '.toggle-heading[associated-panel="character-selector-preview"]',
-    '#canvas-grid-item',
     '#social-feed-heading',
 ];
 let randomAnimalHome = document.querySelector(possibleAnimalLocations[Math.floor(Math.random() * possibleAnimalLocations.length)]);
@@ -324,11 +323,31 @@ function determineStickyCanvas() {
 }
 determineStickyCanvas();
 window.addEventListener('resize', determineStickyCanvas);
+function determineOrder(dateModified, tags = []) {
+    let myDate = dateModified ? new Date(dateModified) : new Date("2000-01-01");
+    console.log(myDate.getTime());
+    let isNew = dateModified && (new Date().getTime() - new Date(dateModified).getTime()) / 86400000 < daysForNew;
+    let matchesTheme = theme.name && tags.includes(theme.name);
+    let order = Math.floor(myDate.getTime() / 100000000000);
+    let currentDate = Math.floor(new Date().getTime() / 100000000000);
+    if (isNew && matchesTheme) {
+        return `-3${order + currentDate}`;
+    }
+    else if (matchesTheme) {
+        return `-2${order + currentDate}`;
+    }
+    else if (isNew) {
+        return `-1${order}`;
+    }
+    ;
+    return '100';
+}
 // Generates the character selection window.
 // Note that character-selector is a <select> element
 function generateCharacterInterface() {
     // Loop through each character and...
     characters.forEach(function (character) {
+        var _a;
         // Generate the new option for this character.
         let newOption = document.createElement("option");
         newOption.value = character.id;
@@ -336,9 +355,7 @@ function generateCharacterInterface() {
         let icon = generateLabelledIcon("character", character);
         icon.setAttribute("gender", "gender-" + character.gender); // This is set like this since 'female' contains the string 'male'
         icon.setAttribute("nationality", character.nationality);
-        if (theme.name && character.tags.includes(theme.name)) {
-            icon.style.order = '-' + new Date().getTime() * 2; // A crude way of making sure that theme characters take precedence over new characters
-        }
+        icon.style.order = determineOrder((_a = character.lastUpdated) !== null && _a !== void 0 ? _a : undefined, character.tags);
         for (let i = 0; i < 10; i++) {
             icon.setAttribute("present-in-case-" + i, String(character.appearsIn[i]));
         }
@@ -374,21 +391,7 @@ function generateLocationInterface() {
         // Generate an icon
         let icon = generateLabelledIcon("location", location);
         backgroundPreview.appendChild(icon);
-        // if (location.tags && theme?.name && location.tags.includes(theme.name)){
-        //   icon.style.order = '-' + new Date().getTime() * 2
-        // }
-        let isNew = location.addedDate && (new Date().getTime() - new Date(location.addedDate).getTime()) / 86400000 < daysForNew;
-        let matchesTheme = theme.name && ((_a = location.tags) === null || _a === void 0 ? void 0 : _a.includes(theme.name));
-        let order = new Date(location.addedDate).getTime() / 10000;
-        if (isNew && matchesTheme) {
-            icon.style.order = '-10';
-        }
-        else if (matchesTheme) {
-            icon.style.order = '-9';
-        }
-        else if (isNew) {
-            icon.style.order = '-8';
-        }
+        icon.style.order = determineOrder((_a = location.addedDate) !== null && _a !== void 0 ? _a : undefined, location.tags);
         // When the icon is clicked, set the value of the invisible dropdown to match,
         // toggle the location panel off and regenerate our current panel so it can
         // have the new location
@@ -450,7 +453,6 @@ function generateLabelledIcon(type, object) {
                 newIcon.src = "/assets/icons/new-icon.svg";
                 newIcon.width = 50;
                 icon.appendChild(newIcon);
-                icon.style.order = '-' + new Date(myCharacter.lastUpdated).getTime() / 10000;
             }
             if (theme.name && myCharacter.tags.includes(theme.name)) {
                 let themeIcon = document.createElement('div');
@@ -463,15 +465,12 @@ function generateLabelledIcon(type, object) {
             iconURL = 'url("assets/locations/thumbnails/' + object.id + '.png")';
             let isNew = myLocation.addedDate && (new Date().getTime() - new Date(myLocation.addedDate).getTime()) / 86400000 < daysForNew;
             let matchesTheme = theme.name && ((_a = myLocation.tags) === null || _a === void 0 ? void 0 : _a.includes(theme.name));
-            let order = new Date(myLocation.addedDate).getTime() / 10000;
-            console.log('isNew ' + isNew + '    matches theme ' + matchesTheme + '    order' + order);
             if (isNew) {
                 let newIcon = document.createElement('img');
                 newIcon.classList.add('new-icon');
                 newIcon.src = "/assets/icons/new-icon.svg";
                 newIcon.width = 50;
                 icon.appendChild(newIcon);
-                icon.style.order = !matchesTheme ? '-' + order : '-' + (order - 1000000000000);
             }
             if (matchesTheme) {
                 let themeIcon = document.createElement('div');
@@ -555,7 +554,7 @@ function generatePoses(e) {
             newIcon.classList.add('new-icon');
             newIcon.src = "/assets/icons/new-icon.svg";
             newIcon.width = 50;
-            newLabel.style.order = '-' + new Date(currentCharacter.lastUpdated).getTime() / 1000;
+            newLabel.style.order = determineOrder(currentCharacter.lastUpdated, currentCharacter.tags);
             newLabel.appendChild(newIcon);
         }
     }
