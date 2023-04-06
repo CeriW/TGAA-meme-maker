@@ -180,7 +180,7 @@ function generateLocations() {
 }
 
 customBackgroundInput.addEventListener('change', () => {
-  if (customBackgroundInput.files){
+  if (customBackgroundInput.files && customBackgroundInput.files.length > 0){
     backgroundSelector.value = 'custom';
     // document.querySelector('#custom-background-icon .location-icon')?.setAttribute("selected", "true");
     generatePanelArtwork();
@@ -512,7 +512,7 @@ function generateLocationInterface() {
     icon.addEventListener("click", function (e) {
 
       let myTarget = (e.target as HTMLDivElement);
-      
+
       let value = myTarget.getAttribute("value");
       if (value){
         backgroundSelector.value = value;
@@ -543,10 +543,10 @@ function generateLocationInterface() {
     });
   });
 
-  // Set the first non-custom one as default selected. This only styles it and doesn't
+  // Set the first one as default selected. This only styles it and doesn't
   // do any actual functionality.
   let icons = document.querySelectorAll('.location-icon');
-  icons[1]!.setAttribute("selected", 'true');
+  icons[0]!.setAttribute("selected", 'true');
 
   document.querySelector('.location-icon[value="custom"]')?.appendChild(customBackgroundInput);
 

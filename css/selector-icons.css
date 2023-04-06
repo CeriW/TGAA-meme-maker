@@ -1,6 +1,6 @@
 /* Icon styling --------------------------------------------------------------*/
 
-div[class*="icon"]:not(.tb__icon),
+div[class*="icon"],
 #pose-selector-preview label{
   width: 140px;
   height: 140px;
@@ -81,8 +81,8 @@ div[class*="icon"]:hover,
 
 
 
-#custom-background-icon{
-  position: relative;
+.location-icon[value="custom"]{
+  order: 0;
 }
 
 #custom-background-input{
@@ -95,5 +95,6 @@ div[class*="icon"]:hover,
   z-index: 1;
   border-radius: 50%;
   opacity: 0;
+
 }
 
