@@ -184,7 +184,6 @@ function generateLocations() {
 customBackgroundInput.addEventListener('change', () => {
   if (customBackgroundInput.files && customBackgroundInput.files.length > 0){
     backgroundSelector.value = 'custom';
-    // document.querySelector('#custom-background-icon .location-icon')?.setAttribute("selected", "true");
     generatePanelArtwork();
   }
 })
