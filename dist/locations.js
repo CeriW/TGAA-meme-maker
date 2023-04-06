@@ -6,6 +6,7 @@
 // addedDate - the date you added this location. Used to generate a 'new' tag on it and bump it to the top of the location list.
 // characterOverlay - the file name of an image to place over the top of the character (for example, prison bars).
 export const locations = [
+    { name: "Custom", id: "custom" },
     { name: "Sholmes' Suite", id: "sholmes-suite", variant: "Fireplace", tags: ['homumiko', 'ryuulock', 'doyle'] },
     { name: "Sholmes' Suite", id: "sholmes-suite-sholmes", variant: "Herlock's side", tags: ['homumiko', 'ryuulock', 'doyle'] },
     { name: "Sholmes' Suite", id: "sholmes-suite-iris", variant: "Iris' side", tags: ['homumiko', 'ryuulock', 'doyle'] },

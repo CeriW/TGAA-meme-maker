@@ -18,6 +18,7 @@ export type LocationObject = {
 }
 
 export const locations: LocationObject[] = [
+  {name   : "Custom", id: "custom"},
   {name   : "Sholmes' Suite",                        id:"sholmes-suite",                                   variant: "Fireplace",                        tags: ['homumiko', 'ryuulock', 'doyle']},
   {name   : "Sholmes' Suite",                        id:"sholmes-suite-sholmes",                           variant:"Herlock's side",            tags: ['homumiko','ryuulock', 'doyle']},
   {name   : "Sholmes' Suite",                        id:"sholmes-suite-iris",                              variant:"Iris' side",        tags: ['homumiko','ryuulock', 'doyle']},

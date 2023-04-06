@@ -71,9 +71,6 @@
 
       <main>
 
-        <input id="custom-background-input" type="file" accept="image/jpeg, image/png, image/jpg">
-
-
         <div id="canvas-grid-item">
 
           <div id="sticky-panel">
@@ -127,7 +124,12 @@
             <span class="material-icons down-arrow">expand_more</span>
           </div>
           <select name="background-selector" id="background-selector"></select>
-          <div id="background-selector-preview"></div>
+          <div id="background-selector-preview">
+            <!-- <div id="custom-background-icon">
+              <input id="custom-background-input" type="file" accept="image/jpeg, image/png, image/jpg">
+              <div class="location-icon" style="background-image: url('assets/icons/upload.svg'); background-size: contain;"><div>Custom<div class="variant-tag">Custom</div></div></div>
+            </div> -->
+          </div>
           
 
           <div>
@@ -450,6 +452,8 @@
 
       </aside>
 
+      <input id="custom-background-input" type="file" accept="image/jpeg, image/png, image/jpg">
+      
       <script type="module" src="dist/characters.js"></script>
       <script type="module" src="dist/locations.js"></script>
       <script type="module" src="dist/themes.js"></script>
@@ -457,5 +461,3 @@
 
 
 
-
-      

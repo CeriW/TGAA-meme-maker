@@ -129,36 +129,25 @@ function generateLocations() {
     backgroundSelector.appendChild(newOption);
 }
 customBackgroundInput.addEventListener('change', () => {
-    // let myBackground = customBackgroundInput.files ? URL.createObjectURL(customBackgroundInput.files[0]) : 'hi';
-    // if (customBackgroundInput.files){
-    //   console.log(URL.createObjectURL(customBackgroundInput.files[0]));
-    // }
     if (customBackgroundInput.files) {
-        let myBackground = URL.createObjectURL(customBackgroundInput.files[0]);
         backgroundSelector.value = 'custom';
+        // document.querySelector('#custom-background-icon .location-icon')?.setAttribute("selected", "true");
         generatePanelArtwork();
-        // console.log(myBackground);
-        // // Set the background image
-        // let backgrounds : NodeListOf<HTMLImageElement> = document.querySelectorAll(
-        //   ".canvas-container img:first-child"
-        // );
-        // backgrounds.forEach(function (background) {
-        //   background.src = myBackground;
-        // });
     }
 });
 // Generates our canvas with the chosen backgrounds, characters and text
 function generatePanelArtwork() {
     // Set the background image
     let backgrounds = document.querySelectorAll(".canvas-container img:first-child");
-    console.log("Value = " + backgroundSelector.value);
-    console.log(backgroundSelector.value.length);
-    console.log(backgroundSelector.value.indexOf('blob'));
-    let myBackground = backgroundSelector.value === "custom" && customBackgroundInput.files ? URL.createObjectURL(customBackgroundInput.files[0]) : `${paths.location}${backgroundSelector.value}.jpg`;
-    console.log(myBackground);
+    let myBackground;
+    if (backgroundSelector.value === "custom" && customBackgroundInput.files && customBackgroundInput.files.length > 0) {
+        myBackground = URL.createObjectURL(customBackgroundInput.files[0]);
+    }
+    else {
+        myBackground = `${paths.location}${backgroundSelector.value}.jpg`;
+    }
     backgrounds.forEach(function (background) {
         background.src = myBackground;
-        // background.src = paths.location + backgroundSelector.value + ".jpg";
     });
     characterOverlay.src = `/assets/locations/${characterOverlayID}.png`;
     let overlays = document.querySelectorAll(".canvas-container img:nth-child(3)");
@@ -399,6 +388,7 @@ function generateCharacterInterface() {
 }
 // Generate the interface for the location selection
 function generateLocationInterface() {
+    var _a;
     // Loop through all the specified locations and...
     locations.forEach(function (location) {
         // Generate an icon
@@ -430,11 +420,17 @@ function generateLocationInterface() {
                 });
             }
             myTarget.setAttribute("selected", 'true');
+            console.log(myTarget);
+            if (myTarget !== customBackgroundInput) {
+                customBackgroundInput.setAttribute('selected', 'false');
+            }
         });
     });
-    // Set the first one as default selected. This only styles it and doesn't
+    // Set the first non-custom one as default selected. This only styles it and doesn't
     // do any actual functionality.
-    document.querySelector(".location-icon").setAttribute("selected", 'true');
+    let icons = document.querySelectorAll('.location-icon');
+    icons[1].setAttribute("selected", 'true');
+    (_a = document.querySelector('.location-icon[value="custom"]')) === null || _a === void 0 ? void 0 : _a.appendChild(customBackgroundInput);
 }
 // Generate a labelled icon. This is used by both the location and character interfaces.
 // type may be either 'character' or 'location'
@@ -587,7 +583,7 @@ function selectPose(e) {
 // be able to apply styling in the CSS.
 function selectItem(e) {
     var _a, _b;
-    let siblings = (_a = e.target.parentNode) === null || _a === void 0 ? void 0 : _a.querySelectorAll("label");
+    let siblings = (_a = e.target.closest('div[id*="selector-preview"]')) === null || _a === void 0 ? void 0 : _a.querySelectorAll("label");
     if (siblings && siblings.length > 0) {
         siblings.forEach(function (sibling) {
             sibling.removeAttribute("selected");

@@ -37,12 +37,15 @@ div[class*="icon"]:hover,
   margin-bottom: 50px;
 }
 
-.location-icon{
+.location-icon,
+#custom-background-input{
   outline: 3px solid transparent;
 }
 
 .location-icon:hover,
-.location-icon[selected="true"]{
+.location-icon[selected="true"],
+#custom-background-input:hover + .location-icon,
+.location-icon:has(#custom-background-input[selected="true"]){
   outline-color: var(--gold);
 }
 
@@ -75,3 +78,22 @@ div[class*="icon"]:hover,
     max-height: 120px;
   }
 }
+
+
+
+#custom-background-icon{
+  position: relative;
+}
+
+#custom-background-input{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  cursor: pointer;
+  z-index: 1;
+  border-radius: 50%;
+  opacity: 0;
+}
+
