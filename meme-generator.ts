@@ -430,9 +430,9 @@ function determineIconOrder(dateModified: string | null, tags: string[] = []): s
   if (isNew && matchesTheme){
     return `-3${order + currentDate}`;
   } else if (matchesTheme){
-    return `-2${order + currentDate}`;
+    return `1`;
   } else if (isNew){
-    return `-1${order}`;
+    return `0`;
   };
 
   return '100';
