@@ -20,7 +20,6 @@ let characterImg;
 let tag;
 let characterOverlay;
 let characterOverlayID = null;
-let speechbox = document.querySelector("#speech-box");
 let credits = document.querySelector("#credits");
 // Name related variables
 const existingNamesInUse = window.localStorage.getItem('alternateNamesInUse');
@@ -47,7 +46,7 @@ const paths = {
     location: "assets/locations/",
 };
 // How many days we show 'new' tags for on icons
-const daysForNew = 20;
+const daysForNew = 14;
 // Random animal -------------------------------------------------------------//
 const randomAnimal = document.createElement('img');
 randomAnimal.classList.add("random-animal");

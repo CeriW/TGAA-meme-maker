@@ -37,7 +37,7 @@ export const locations: LocationObject[] = [
   {name   : "The Garridebs' room",                   id:"garridebs-room",                                  tags: ['doyle'], addedDate: null},
   {name   : "Natsume's Room",                        id:"natsumes-room",                                   tags: ['natsume'], addedDate: null},
   {name   : "Windibank's Pawnbrokery",               id:"windibanks",                                      tags: ['doyle', 'ginaLestradeWeek'], addedDate: null},
-  {name   : "Windibank's Storeroom",                 id:"windibanks-storeroom",                            tags: ['doyle', 'ginaLestradeWeek'], addedDate: "2023-04-08"},
+  // {name   : "Windibank's Storeroom",                 id:"windibanks-storeroom",                            tags: ['doyle', 'ginaLestradeWeek'], addedDate: "2023-04-08"},
   {name   : "Forensics Laboratory",                  id:"forensics-laboratory-courtney",                   variant: "Courtney's version", tags: [], addedDate: null},
   {name   : "Forensics Laboratory",                  id:"forensics-laboratory-maria",                      variant:"Maria's version", tags: [], addedDate: null},
   {name   : "Room on Fresno Street",                 id:"room-on-fresno-street",                           tags: ['ginaLestradeWeek'], addedDate: null},

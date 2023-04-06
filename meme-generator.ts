@@ -28,8 +28,6 @@ let tag                 : HTMLImageElement;
 let characterOverlay    : HTMLImageElement;
 let characterOverlayID  : string | null = null;
 
-
-let speechbox   : HTMLTextAreaElement = document.querySelector("#speech-box") !;
 let credits     : HTMLImageElement = document.querySelector("#credits") !;
 
 // Name related variables
@@ -64,7 +62,7 @@ const paths = {
 
 
 // How many days we show 'new' tags for on icons
-const daysForNew : number = 20;
+const daysForNew : number = 14;
 
 
 // Random animal -------------------------------------------------------------//
