@@ -621,7 +621,8 @@ function download(e) {
             let layersToRender = allCanvases[i].querySelector("textarea").value.length === 0 ? 4 : 6;
             for (let j = 1; j < layersToRender; j++) {
                 let imgToDraw = allCanvases[i].querySelector("img:nth-child(" + j + ")");
-                tempCanvasContext === null || tempCanvasContext === void 0 ? void 0 : tempCanvasContext.drawImage(imgToDraw, 0, 0);
+                imgToDraw.width = 1920;
+                tempCanvasContext === null || tempCanvasContext === void 0 ? void 0 : tempCanvasContext.drawImage(imgToDraw, 0, 0, 1920, 1080);
             }
             var myFont = new FontFace("Toplar", 'url("assets/fonts/Toplar.woff")');
             // Render the text

@@ -800,7 +800,8 @@ function download(e:Event) {
 
       for (let j = 1; j < layersToRender; j++) {
         let imgToDraw : HTMLImageElement = allCanvases[i].querySelector("img:nth-child(" + j + ")") !;
-        tempCanvasContext?.drawImage(imgToDraw , 0, 0);
+        imgToDraw.width = 1920;
+        tempCanvasContext?.drawImage(imgToDraw , 0, 0, 1920, 1080);
       }
 
       var myFont = new FontFace("Toplar", 'url("assets/fonts/Toplar.woff")');
