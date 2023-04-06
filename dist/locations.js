@@ -38,5 +38,5 @@ export const locations = [
     { name: "Experimentation Stage", id: "experimentation-stage", tags: [] },
     { name: "Madame Tuspells' Museum of Waxworks", id: "madame-tuspells", tags: [] },
     { name: "Great Waterloo Hotel", id: "waterloo-hotel", variant: "Foyer", tags: ['homumiko'], addedDate: "Mar 05 2023" },
-    { name: "Custom", id: "custom" }, // styled to be the first one, but must never be the actual first one in this array
+    { name: "Custom", id: "custom", addedDate: "2023-04-30" }, // styled to be the first one, but must never be the actual first one in this array
 ];
