@@ -132,6 +132,7 @@ function generateLocations() {
 customBackgroundInput.addEventListener('change', () => {
     if (customBackgroundInput.files && customBackgroundInput.files.length > 0) {
         backgroundSelector.value = 'custom';
+        characterOverlayID = null;
         generatePanelArtwork();
     }
 });
@@ -153,7 +154,9 @@ function generatePanelArtwork() {
     backgrounds.forEach(function (background) {
         background.src = myBackground;
     });
+    console.log(characterOverlay.src);
     characterOverlay.src = `/assets/locations/${characterOverlayID}.png`;
+    console.log(characterOverlay.src);
     let overlays = document.querySelectorAll(".canvas-container img:nth-child(3)");
     overlays.forEach(function (overlay) {
         overlay.src = characterOverlay.src;
