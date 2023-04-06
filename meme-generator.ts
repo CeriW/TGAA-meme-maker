@@ -210,11 +210,7 @@ function generatePanelArtwork() {
     background.src = myBackground;
   });
 
-
-  console.log(characterOverlay.src)
-
   characterOverlay.src = `/assets/locations/${characterOverlayID}.png`;
-  console.log(characterOverlay.src)
 
   let overlays : NodeListOf<HTMLImageElement> = document.querySelectorAll(
     ".canvas-container img:nth-child(3)"
@@ -545,7 +541,6 @@ function generateLocationInterface() {
 
       }
       myTarget.setAttribute("selected", 'true');
-      console.log(myTarget)
 
       if (myTarget !== customBackgroundInput){
         customBackgroundInput.setAttribute('selected', 'false');
