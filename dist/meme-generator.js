@@ -42,6 +42,7 @@ const customBackgroundInput = document.querySelector('#custom-background-input')
 let characterSelected = false;
 document.body.setAttribute("character-selected", String(characterSelected));
 let charactersInUse = [];
+let customBackground = '';
 // The locations to find certain visual elements
 const paths = {
     character: "assets/characters/",
@@ -142,6 +143,10 @@ function generatePanelArtwork() {
     let myBackground;
     if (backgroundSelector.value === "custom" && customBackgroundInput.files && customBackgroundInput.files.length > 0) {
         myBackground = URL.createObjectURL(customBackgroundInput.files[0]);
+        customBackground = myBackground;
+    }
+    else if (backgroundSelector.value === "custom") {
+        myBackground = customBackground;
     }
     else {
         myBackground = `${paths.location}${backgroundSelector.value}.jpg`;
