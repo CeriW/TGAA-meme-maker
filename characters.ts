@@ -179,7 +179,6 @@ export const characters : CharacterObject[] = [
   posesAddedOnLastUpdate: 7
 },
 
-
 {
   name: 'Yujin Mikotoba',
   id:'mikotoba-yujin-london',
