@@ -16,7 +16,7 @@ export const themes: {[key: string]: Theme} = {
   dgsAnniversary            : {name: "dgsAnniversary", isSpoiler: false, message: '<b>Happy anniversary Dai Gyakuten Saiban!</b> 9th July 2015'},
   doyle                     : {name: "doyle", isSpoiler: false, message: '<b>Happy birthday Sir Arthur<br>Conan Doyle!</b> 22nd May'},
   fathersDay                : {name: "homumiko", isSpoiler: true, message: "Happy Father's Day - 18th Jun"},
-  ginaLestradeWeek          : {name: "ginaLestradeWeek", isSpoiler: false, message: '<b style="color: var(--red)">Happy Gina Lestrade week!</b><br>8-14 April #LestradeWeek23'},
+  ginaLestradeWeek          : {name: "ginaLestradeWeek", isSpoiler: true, message: '<b style="color: var(--red)">Happy Gina Lestrade week!</b><br>8-14 April #LestradeWeek23'},
   herlock                   : {name: "herlock", isSpoiler: false, message: "<b>Happy birthday Sherlock Holmes!</b><br>6th Jan"},
   homumikoWeek              : {name: "homumiko", isSpoiler: true, message: "Happy Homumiko week!"},
   natsume                   : {name: "natsume", isSpoiler: false, message: '<b>Happy birthday Soseki Natsume!</b><br>9th Feb'},
@@ -81,6 +81,7 @@ export function setTheme () {
   
   // My birthday :) - 7th Dec
   if (isDate( {day: 7, month: 12})){myTheme = themes.cherrylestradeBirthday;} 
+
   
   if (myTheme?.message){
     let bannerBottom = document.createElement('div');

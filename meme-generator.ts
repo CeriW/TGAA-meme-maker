@@ -1,5 +1,5 @@
 // Version info
-const versionInfo = '4.2.2 - 2023-04-05';
+const versionInfo = '4.2.3 - 2023-04-06';
 
 import { locations, LocationObject } from "./locations.js";
 import { characters, CharacterObject } from "./characters.js";
@@ -28,8 +28,6 @@ let tag                 : HTMLImageElement;
 let characterOverlay    : HTMLImageElement;
 let characterOverlayID  : string | null = null;
 
-
-let speechbox   : HTMLTextAreaElement = document.querySelector("#speech-box") !;
 let credits     : HTMLImageElement = document.querySelector("#credits") !;
 
 // Name related variables
@@ -80,7 +78,6 @@ randomAnimal.width = 110;
 const possibleAnimalLocations = [
   '.toggle-heading[associated-panel="background-selector-preview"]',
   '.toggle-heading[associated-panel="character-selector-preview"]',
-  '#canvas-grid-item',
   '#social-feed-heading',
 ]
 
@@ -271,8 +268,6 @@ function propagateAlternateNames() {
         image.src = paths.character + currentCharacter.id + tagPath;
       }
     }
-
-
   })
 }
 
@@ -445,6 +440,32 @@ determineStickyCanvas()
 window.addEventListener('resize', determineStickyCanvas)
 
 
+function determineIsNew(dateModified: string | null){
+  return dateModified && (new Date().getTime() - new Date(dateModified).getTime()) / 86400000 < daysForNew;
+}
+
+
+function determineIconOrder(dateModified: string | null, tags: string[] = []): string{
+
+  let myDate = dateModified ? new Date(dateModified) : new Date("2000-01-01");
+
+  let isNew = determineIsNew(dateModified);
+  let matchesTheme = theme.name && tags.includes(theme.name);
+
+  let order = Math.floor(myDate.getTime() / 100000000000);
+  let currentDate = Math.floor(new Date().getTime() / 100000000000);
+
+  if (isNew && matchesTheme){
+    return `-3${order + currentDate}`;
+  } else if (matchesTheme){
+    return `-2${order + currentDate}`;
+  } else if (isNew){
+    return `-1${order}`;
+  };
+
+  return '100';
+}
+
 
 // Generates the character selection window.
 // Note that character-selector is a <select> element
@@ -459,10 +480,7 @@ function generateCharacterInterface() {
     let icon = generateLabelledIcon("character", character);
     icon.setAttribute("gender", "gender-" + character.gender); // This is set like this since 'female' contains the string 'male'
     icon.setAttribute("nationality", character.nationality);
-    
-    if (theme.name && character.tags.includes(theme.name)){
-      icon.style.order = '-' + new Date().getTime() * 2; // A crude way of making sure that theme characters take precedence over new characters
-    }
+    icon.style.order = determineIconOrder(character.lastUpdated ?? null, character.tags);
 
     for (let i = 0; i < 10; i++) {
       icon.setAttribute("present-in-case-" + i, String(character.appearsIn[i]));
@@ -507,10 +525,7 @@ function generateLocationInterface() {
     // Generate an icon
     let icon = generateLabelledIcon("location", location);
     backgroundPreview.appendChild(icon);
-    
-    if (location.tags && theme?.name && location.tags.includes(theme.name)){
-      icon.style.order = '-' + new Date().getTime() * 2
-    }
+    icon.style.order = determineIconOrder(location.addedDate ?? null, location.tags);
 
     // When the icon is clicked, set the value of the invisible dropdown to match,
     // toggle the location panel off and regenerate our current panel so it can
@@ -588,13 +603,12 @@ function generateLabelledIcon(type: "character" | "location", object: CharacterO
         'url("assets/icons/flags/' + myCharacter.nationality + '.svg")';
       icon.appendChild(nationalityIcon);
 
-      if (myCharacter.lastUpdated && (new Date().getTime() - new Date(myCharacter.lastUpdated).getTime()) / 86400000 < daysForNew){
+      if (determineIsNew(myCharacter?.lastUpdated)){
         let newIcon = document.createElement('img')
         newIcon.classList.add('new-icon')
         newIcon.src = "/assets/icons/new-icon.svg"
         newIcon.width = 50;
         icon.appendChild(newIcon)
-        icon.style.order = '-' + new Date(myCharacter.lastUpdated).getTime() / 10000;
       }
 
       if (theme.name && myCharacter.tags.includes(theme.name)){
@@ -603,29 +617,31 @@ function generateLabelledIcon(type: "character" | "location", object: CharacterO
         icon.appendChild(themeIcon);
       }
 
-
       break;
+
     case "location":
 
       const myLocation = object as LocationObject;
 
       iconURL = 'url("assets/locations/thumbnails/' + object.id + '.png")';
-      
-      if (myLocation.addedDate && (new Date().getTime() - new Date(myLocation.addedDate).getTime()) / 86400000 < daysForNew){
-        let newIcon = document.createElement('img')
-        newIcon.classList.add('new-icon')
-        newIcon.src = "/assets/icons/new-icon.svg"
+
+      let isNew = determineIsNew(myLocation.addedDate);
+      let matchesTheme = theme.name && myLocation.tags?.includes(theme.name);
+
+      if (isNew){
+        let newIcon = document.createElement('img');
+        newIcon.classList.add('new-icon');
+        newIcon.src = "/assets/icons/new-icon.svg";
         newIcon.width = 50;
-        icon.appendChild(newIcon)
-        icon.style.order = '-' + new Date(myLocation.addedDate).getTime() / 10000;
+        icon.appendChild(newIcon);
+
       }
 
-      if (theme.name && myLocation.tags?.includes(theme.name)){
+      if (matchesTheme){
         let themeIcon = document.createElement('div');
         themeIcon.classList.add('theme-star');
         icon.appendChild(themeIcon);
       }
-
 
       break;
   }
@@ -715,14 +731,14 @@ function generatePoses(e? : Event) {
       && currentCharacter.posesAddedOnLastUpdate
       && currentCharacter.lastUpdated
       && i > (currentCharacter.images - currentCharacter.posesAddedOnLastUpdate)
-      && (new Date().getTime() - new Date(currentCharacter.lastUpdated).getTime()) / (1000 * 60 * 60 * 24) < daysForNew){
-      let newIcon = document.createElement('img')
-      newIcon.classList.add('new-icon')
-      newIcon.src = "/assets/icons/new-icon.svg"
-      newIcon.width = 50;
-      newLabel.style.order = '-' + new Date(currentCharacter.lastUpdated).getTime()/1000;
-      newLabel.appendChild(newIcon);
-    }
+      && determineIsNew(currentCharacter.lastUpdated)){
+        let newIcon = document.createElement('img')
+        newIcon.classList.add('new-icon')
+        newIcon.src = "/assets/icons/new-icon.svg"
+        newIcon.width = 50;
+        newLabel.style.order = determineIconOrder(currentCharacter.lastUpdated, currentCharacter.tags);
+        newLabel.appendChild(newIcon);
+      }
 
 
   }
