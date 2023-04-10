@@ -51,6 +51,6 @@ export const locations: LocationObject[] = [
   {name   : "Experimentation Stage",                 id:"experimentation-stage",                           tags: [], addedDate: null},
   {name   : "Madame Tuspells' Museum of Waxworks",   id:"madame-tuspells",                                 tags: [], addedDate: null},
   {name   : "Great Waterloo Hotel",                  id:"waterloo-hotel",                                  variant: "Foyer", tags: ['homumiko'],    addedDate: "2023-03-05"},
-  {name   : "Custom", id: "custom", addedDate: "2023-04-30"}, // styled to be the first one, but must never be the actual first one in this array
+  {name   : "Custom", id: "custom", addedDate: "2023-04-30", tags: ["CUSTOM"]}, // styled to be the first one, but must never be the actual first one in this array
 
 ]

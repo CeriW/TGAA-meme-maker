@@ -455,7 +455,9 @@ function determineIconOrder(dateModified: string | null, tags: string[] = []): s
   let order = Math.floor(myDate.getTime() / 100000000000);
   let currentDate = Math.floor(new Date().getTime() / 100000000000);
 
-  if (isNew && matchesTheme){
+  if (tags.includes("CUSTOM")){
+    return `-${new Date().getTime()}`
+  } else if (isNew && matchesTheme){
     return `-3${order + currentDate}`;
   } else if (matchesTheme){
     return `-2${order + currentDate}`;
@@ -515,6 +517,7 @@ function generateCharacterInterface() {
       togglePanel(characterPreview);
       generatePoses();
     });
+    
   });
 }
 
