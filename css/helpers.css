@@ -13,7 +13,8 @@
 .material-icons,
 .toggle-heading,
 #pose-heading,
-#download{
+#download,
+img.speech-box{
   position: relative;
 }
 
