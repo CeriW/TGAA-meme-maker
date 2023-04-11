@@ -162,6 +162,15 @@ input[filter-type="nationality"]{
   top: -1px;
 }
 
+.character-icon-gender-tag[gender="question_mark"]{
+  background: #d1a7ef;
+  color: #111;
+}
+
+.character-icon-gender-tag[gender="question_mark"] .material-icons{
+  transform: scale(0.8);
+}
+
 .case-presence-checkbox input + label{
   background: #fff;
   color: var(--blue);

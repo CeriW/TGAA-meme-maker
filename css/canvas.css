@@ -73,10 +73,6 @@ canvas{
   }
 }
 
-.background-image{
-  aspect-ratio: 16 / 9;
-}
-
 #theme-music{
   margin-top: 40px;
 }

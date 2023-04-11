@@ -17,7 +17,7 @@
   font-size: 1.2em;
 }
 
-.gradient-panel:not(#spoiler-warning):hover{
+.gradient-panel:hover{
   color: var(--blue);
   text-shadow: none;
 }
