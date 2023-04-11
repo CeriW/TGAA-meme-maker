@@ -8,5 +8,7 @@ It is currently hosted on Github Pages at tgaa-meme-maker.com. Beta testing and 
 
 ## Relevant links
 To do list: https://trello.com/b/PbtC68dU/tgaa-meme-makercom
+
 Beta testing site: https://tgaa-meme-maker-beta.netlify.app/
+
 Google Analytics: https://analytics.google.com/analytics/web/#/p352403720/
