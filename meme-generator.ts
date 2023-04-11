@@ -1,74 +1,69 @@
 // Version info
 const versionInfo = '4.2.3 - 2023-04-06';
 
-import { locations, LocationObject } from "./locations.js";
-import { characters, CharacterObject } from "./characters.js";
-import { setTheme, Theme } from "./themes.js";
-import { michaelScott, deadpool } from "./random-quotes.js"
+import { locations, LocationObject } from './locations.js';
+import { characters, CharacterObject } from './characters.js';
+import { setTheme, Theme } from './themes.js';
+import { michaelScott, deadpool } from './random-quotes.js';
 
 const theme: Theme = setTheme();
 console.log(`The Great Ace Attorney Meme Maker by CherryLestrade v${versionInfo} - theme: ${theme.name ?? 'none'}`);
 
 const versionInfoDiv = document.querySelector('#version-info')!;
-versionInfoDiv.innerHTML = `Version ${versionInfo} - theme: none`; 
-
-
+versionInfoDiv.innerHTML = `Version ${versionInfo} - theme: none`;
 
 // ---------------------------------------------------------------------------//
 
 // The current canvas the user is working on. We'll initialise to null and then
 // set it to the first panel the code generates.
-let currentCanvas       : HTMLDivElement;
+let currentCanvas: HTMLDivElement;
 
 // Canvas generating elements
 // Elements we can add various backgrounds to that we'll draw onto the canvas
-let backgroundImg       : HTMLImageElement;
-let characterImg        : HTMLImageElement;
-let tag                 : HTMLImageElement;
-let characterOverlay    : HTMLImageElement;
-let characterOverlayID  : string | null = null;
+let backgroundImg: HTMLImageElement;
+let characterImg: HTMLImageElement;
+let tag: HTMLImageElement;
+let characterOverlay: HTMLImageElement;
+let characterOverlayID: string | null = null;
 
-let credits     : HTMLImageElement = document.querySelector("#credits") !;
+let credits: HTMLImageElement = document.querySelector('#credits')!;
 
 // Name related variables
 
-const existingNamesInUse    = window.localStorage.getItem('alternateNamesInUse');
-let alternateNamesInUse     : { [key: string]: string; }   = existingNamesInUse ? JSON.parse(existingNamesInUse) : {};  // An object storing the alternate names the user has chosen.
-let prefersJapaneseNames    : boolean  = window.localStorage.getItem('prefersJapaneseNames') === "true"; // If this is true, names will default to Japanese for characters that have them.
+const existingNamesInUse = window.localStorage.getItem('alternateNamesInUse');
+let alternateNamesInUse: { [key: string]: string } = existingNamesInUse ? JSON.parse(existingNamesInUse) : {}; // An object storing the alternate names the user has chosen.
+let prefersJapaneseNames: boolean = window.localStorage.getItem('prefersJapaneseNames') === 'true'; // If this is true, names will default to Japanese for characters that have them.
 
 // Interface elements
-const backgroundSelector    : HTMLSelectElement = document.querySelector("#background-selector")!;
-const backgroundPreview     : HTMLDivElement = document.querySelector("#background-selector-preview")!;
-const characterSelector     : HTMLSelectElement = document.querySelector("#character-selector")!; // an invisible select element that stores what character we've selected
-const characterPreview      : HTMLDivElement = document.querySelector("#character-selector-preview")!;
-const poseSelectorPreview   : HTMLDivElement = document.querySelector("#pose-selector-preview")!;
-const downloadButton        : HTMLLinkElement= document.querySelector("#download")!;
-const aboutButton           : HTMLButtonElement= document.querySelector('#about-button')!;
-const modalContent          : HTMLDivElement = document.querySelector('#modal-content')!;
+const backgroundSelector: HTMLSelectElement = document.querySelector('#background-selector')!;
+const backgroundPreview: HTMLDivElement = document.querySelector('#background-selector-preview')!;
+const characterSelector: HTMLSelectElement = document.querySelector('#character-selector')!; // an invisible select element that stores what character we've selected
+const characterPreview: HTMLDivElement = document.querySelector('#character-selector-preview')!;
+const poseSelectorPreview: HTMLDivElement = document.querySelector('#pose-selector-preview')!;
+const downloadButton: HTMLLinkElement = document.querySelector('#download')!;
+const aboutButton: HTMLButtonElement = document.querySelector('#about-button')!;
+const modalContent: HTMLDivElement = document.querySelector('#modal-content')!;
 
 // Store whether the user has deliberately chosen a character yet.
 // This will prevent the default character tag being generated
 // while selecting a location
-let characterSelected : boolean = false;
-document.body.setAttribute("character-selected", String(characterSelected));
-let charactersInUse : any[] = [];
-
+let characterSelected: boolean = false;
+document.body.setAttribute('character-selected', String(characterSelected));
+let charactersInUse: any[] = [];
 
 // The locations to find certain visual elements
 const paths = {
-  character: "assets/characters/",
-  location: "assets/locations/",
+  character: 'assets/characters/',
+  location: 'assets/locations/',
 };
 
-
 // How many days we show 'new' tags for on icons
-const daysForNew : number = 14;
-
+const daysForNew: number = 14;
 
 // Random animal -------------------------------------------------------------//
 
 const randomAnimal = document.createElement('img');
-randomAnimal.classList.add("random-animal");
+randomAnimal.classList.add('random-animal');
 randomAnimal.src = `assets/random-animal/${Math.ceil(Math.random() * 7)}.png`;
 randomAnimal.width = 110;
 
@@ -76,32 +71,31 @@ const possibleAnimalLocations = [
   '.toggle-heading[associated-panel="background-selector-preview"]',
   '.toggle-heading[associated-panel="character-selector-preview"]',
   '#social-feed-heading',
-]
+];
 
-let randomAnimalHome = document.querySelector(possibleAnimalLocations[Math.floor(Math.random() * possibleAnimalLocations.length)]);
+let randomAnimalHome = document.querySelector(
+  possibleAnimalLocations[Math.floor(Math.random() * possibleAnimalLocations.length)]
+);
 randomAnimal.style.right = Math.floor(Math.random() * 70) + '%';
 randomAnimalHome?.appendChild(randomAnimal);
-
 
 // ---------------------------------------------------------------------------//
 
 // Create our first canvas, and set it as the selected one.
 generateCanvas();
-currentCanvas = document.querySelector("canvas-container") !;
+currentCanvas = document.querySelector('canvas-container')!;
 
 // Check whether the user is okay with spoilers or not, either by bringing up
 // the spoiler window or checking whether they've already okayed spoilers
-document.querySelector("#spoilers-okay")!.addEventListener("click", (e) => {
+document.querySelector('#spoilers-okay')!.addEventListener('click', (e) => {
   checkSpoilers(e);
 });
 checkSpoilers();
 
-
 // If the theme isn't a spoiler, change the theme immediately.
-if (theme.name && !theme.isSpoiler){
+if (theme.name && !theme.isSpoiler) {
   document.body.setAttribute('theme', theme.name);
-};
-
+}
 
 // Generate the locations selector panel.
 generateLocations();
@@ -109,30 +103,28 @@ generateLocationInterface();
 
 // Generates the first panel in our meme, and also tells it to update if anything new is chosen from the background or character panels.
 generatePanelArtwork();
-backgroundSelector.addEventListener("change", generatePanelArtwork);
-characterSelector.addEventListener("change", generatePanelArtwork);
+backgroundSelector.addEventListener('change', generatePanelArtwork);
+characterSelector.addEventListener('change', generatePanelArtwork);
 
 // Tell the 'add panel' button to listen for clicks, and generate a new canvas if so.
-document.querySelector("#add-panel")!.addEventListener("click", generateCanvas);
+document.querySelector('#add-panel')!.addEventListener('click', generateCanvas);
 
 // Generate the characters dropdown. When the icons are clicked, generate the
 // poses to go with the matching character.
 generateCharacterInterface();
-characterSelector.addEventListener("change", generatePoses);
+characterSelector.addEventListener('change', generatePoses);
 
 // Make the download button download the meme when clicked.
-downloadButton.addEventListener("click", download);
+downloadButton.addEventListener('click', download);
 
-let toggleHeadings = document.querySelectorAll(".toggle-heading");
+let toggleHeadings = document.querySelectorAll('.toggle-heading');
 toggleHeadings.forEach(function (node) {
-  node.addEventListener("click", function (e) {
-
-
-    let associate : HTMLDivElement | null = document.querySelector(
-      "#" + (e.target as HTMLDivElement).getAttribute("associated-panel")
+  node.addEventListener('click', function (e) {
+    let associate: HTMLDivElement | null = document.querySelector(
+      '#' + (e.target as HTMLDivElement).getAttribute('associated-panel')
     );
 
-    if (associate){
+    if (associate) {
       togglePanel(associate);
     }
   });
@@ -140,32 +132,27 @@ toggleHeadings.forEach(function (node) {
 
 togglePanel(document.querySelector('#filter-form')!);
 document.querySelector('#filter-toggle')!.addEventListener('click', () => {
-  togglePanel(document.querySelector('#filter-form')!)});
-
+  togglePanel(document.querySelector('#filter-form')!);
+});
 
 document.querySelectorAll('#modal .material-symbols-sharp').forEach((button) => {
   button.addEventListener('click', () => {
     togglePanel(document.querySelector('#modal')!);
-  })
-})
-
+  });
+});
 
 document.querySelector('#edit-names-toggle')!.addEventListener('click', () => {
-    togglePanel(document.querySelector('#modal')!);
-    generateNameSelectorWindow();
-  });
-
-
-
+  togglePanel(document.querySelector('#modal')!);
+  generateNameSelectorWindow();
+});
 
 // ---------------------------------------------------------------------------//
 
-
 function generateLocations() {
   locations.forEach(function (location) {
-    let newOption = document.createElement("option");
+    let newOption = document.createElement('option');
     newOption.textContent = location.name;
-    newOption.setAttribute("value", location.id);
+    newOption.setAttribute('value', location.id);
     backgroundSelector.appendChild(newOption);
   });
 }
@@ -173,114 +160,112 @@ function generateLocations() {
 // Generates our canvas with the chosen backgrounds, characters and text
 function generatePanelArtwork() {
   // Set the background image
-  let backgrounds : NodeListOf<HTMLImageElement> = document.querySelectorAll(
-    ".canvas-container img:first-child"
-  );
+  let backgrounds: NodeListOf<HTMLImageElement> = document.querySelectorAll('.canvas-container img:first-child');
   backgrounds.forEach(function (background) {
-    background.src = paths.location + backgroundSelector.value + ".jpg";
+    background.src = paths.location + backgroundSelector.value + '.jpg';
   });
 
   characterOverlay.src = `/assets/locations/${characterOverlayID}.png`;
-  let overlays : NodeListOf<HTMLImageElement> = document.querySelectorAll(
-    ".canvas-container img:nth-child(3)"
-  );
+  let overlays: NodeListOf<HTMLImageElement> = document.querySelectorAll('.canvas-container img:nth-child(3)');
   overlays.forEach(function (overlay) {
     overlay.src = characterOverlay.src;
   });
-  
+
   // If a character has been purposely selected previously then set the character image
   if (characterSelected) {
-    
-
-    let currentCharacter = getCharacterFromID(characterSelector.value)
-    if (currentCharacter){
-      if (currentCharacter.alternateNames){
+    let currentCharacter = getCharacterFromID(characterSelector.value);
+    if (currentCharacter) {
+      if (currentCharacter.alternateNames) {
         generateNameSelectorWindow();
-        tag.setAttribute('character', currentCharacter.alternateNames[0])
+        tag.setAttribute('character', currentCharacter.alternateNames[0]);
       } else {
-        tag.setAttribute('character', currentCharacter.id)
+        tag.setAttribute('character', currentCharacter.id);
       }
     }
-    propagateAlternateNames()
+    propagateAlternateNames();
 
-    getCharactersInUse()
+    getCharactersInUse();
     let charactersInUseHaveAlternateNames = false;
     charactersInUse.forEach((char) => {
-      if (!getCharacterFromID(char)){
-        charactersInUseHaveAlternateNames = true
+      if (!getCharacterFromID(char)) {
+        charactersInUseHaveAlternateNames = true;
       }
-    })
+    });
 
-    if (charactersInUseHaveAlternateNames){
-      document.querySelector('#edit-names-toggle')!.classList.remove('hidden')
-    } else{
-      document.querySelector('#edit-names-toggle')!.classList.add('hidden')
+    if (charactersInUseHaveAlternateNames) {
+      document.querySelector('#edit-names-toggle')!.classList.remove('hidden');
+    } else {
+      document.querySelector('#edit-names-toggle')!.classList.add('hidden');
     }
   }
 }
 
-export function getCharacterFromID(characterID:string ): CharacterObject | undefined{
-  return characters.find((character) => character.id === characterID)
+export function getCharacterFromID(characterID: string): CharacterObject | undefined {
+  return characters.find((character) => character.id === characterID);
 }
 
 // Loop through all of the character tag artwork and update accordingly.
 function propagateAlternateNames() {
-  let tagImages : NodeListOf<HTMLImageElement> = document.querySelectorAll('.tag-image');
+  let tagImages: NodeListOf<HTMLImageElement> = document.querySelectorAll('.tag-image');
   tagImages.forEach((image) => {
-
     let thisCharacter = image.getAttribute('character');
 
-    if (thisCharacter){
-      let currentCharacter = 
-        characters.find((character) => (character.alternateNames ?? []).includes(String(image.getAttribute('character'))))
-        ?? getCharacterFromID(thisCharacter)
+    if (thisCharacter) {
+      let currentCharacter =
+        characters.find((character) =>
+          (character.alternateNames ?? []).includes(String(image.getAttribute('character')))
+        ) ?? getCharacterFromID(thisCharacter);
 
-      let tagPath: string = alternateNamesInUse[thisCharacter] ? ("/tag-" + alternateNamesInUse[thisCharacter] + '.png').toLowerCase() : "/tag-default.png"
-      
-      if (currentCharacter){
+      let tagPath: string = alternateNamesInUse[thisCharacter]
+        ? ('/tag-' + alternateNamesInUse[thisCharacter] + '.png').toLowerCase()
+        : '/tag-default.png';
+
+      if (currentCharacter) {
         image.src = paths.character + currentCharacter.id + tagPath;
       }
     }
-  })
+  });
 }
 
 // Creates a new canvas for us, including delete button and event listeners.
 function generateCanvas() {
   // Create the new canvas
-  let newCanvas = document.createElement("div");
-  newCanvas.classList.add("canvas-container");
+  let newCanvas = document.createElement('div');
+  newCanvas.classList.add('canvas-container');
 
-  backgroundImg = document.createElement("img");
+  backgroundImg = document.createElement('img');
   newCanvas.appendChild(backgroundImg);
 
-  characterImg = characterImg
-    ? characterImg.cloneNode() as HTMLImageElement
-    : document.createElement("img");
+  characterImg = characterImg ? (characterImg.cloneNode() as HTMLImageElement) : document.createElement('img');
   newCanvas.appendChild(characterImg);
-  
-  
-  characterOverlay = characterOverlay ? characterOverlay.cloneNode() as HTMLImageElement : document.createElement("img");
-  characterOverlay.classList.add("character-overlay");
+
+  characterOverlay = characterOverlay
+    ? (characterOverlay.cloneNode() as HTMLImageElement)
+    : document.createElement('img');
+  characterOverlay.classList.add('character-overlay');
   characterOverlay.src = `/assets/locations/${characterOverlayID}.png`;
   newCanvas.appendChild(characterOverlay);
-  
-  tag = tag ? tag.cloneNode() as HTMLImageElement : document.createElement("img");
-  tag.classList.add('tag-image')
-  newCanvas.appendChild(tag)
 
-  let newSpeechbox = document.createElement("img");
+  tag = tag ? (tag.cloneNode() as HTMLImageElement) : document.createElement('img');
+  tag.classList.add('tag-image');
+  newCanvas.appendChild(tag);
+
+  let newSpeechbox = document.createElement('img');
   newSpeechbox.classList.add('speech-box');
-  newSpeechbox.src = "assets/game-elements/speech-box.png";
+  newSpeechbox.src = 'assets/game-elements/speech-box.png';
   newCanvas.appendChild(newSpeechbox);
 
   let textOverlayContainer = document.createElement('div');
   textOverlayContainer.classList.add('text-overlay-container');
 
-  let newTextBox = document.createElement("textarea");
-  newTextBox.classList.add("text-overlay");
-  const placeholderText = document.querySelectorAll('.canvas-container').length % 2 ? "Tip: surround text with *asterisks* to make it turn orange" : "Type your text here...";
+  let newTextBox = document.createElement('textarea');
+  newTextBox.classList.add('text-overlay');
+  const placeholderText =
+    document.querySelectorAll('.canvas-container').length % 2
+      ? 'Tip: surround text with *asterisks* to make it turn orange'
+      : 'Type your text here...';
   newTextBox.setAttribute('placeholder', placeholderText);
-  newTextBox.setAttribute("maxlength", '115');
+  newTextBox.setAttribute('maxlength', '115');
   textOverlayContainer.appendChild(newTextBox);
 
   let previewTextBox = document.createElement('div');
@@ -290,24 +275,25 @@ function generateCanvas() {
   newTextBox.addEventListener('input', (e: Event) => {
     let thisTextBox = e.target as HTMLTextAreaElement;
     let preview = thisTextBox.nextElementSibling;
-    if (preview){
+    if (preview) {
       const regex = /\*([^*]+)\*/g;
       const editedWords = thisTextBox.value.replace(regex, (match, p1) => {
         const words = p1.split(' ');
-        return ' <span style="color: var(--orange);">' + words.join('</span> <span style="color: var(--orange);">') + '</span> ';
-      });  
+        return (
+          ' <span style="color: var(--orange);">' +
+          words.join('</span> <span style="color: var(--orange);">') +
+          '</span> '
+        );
+      });
       preview.innerHTML = editedWords;
-
     }
-
   });
 
   newCanvas.appendChild(textOverlayContainer);
 
-
   let textColourRadios = document.createElement('div');
-  textColourRadios.classList.add("text-colour-selector");
-  let groupCode = Date.now()
+  textColourRadios.classList.add('text-colour-selector');
+  let groupCode = Date.now();
   textColourRadios.innerHTML = `
     <input type="radio" name="group${groupCode}" id="default${groupCode}" value="default" checked></input>
     <label for="default${groupCode}" value="default">
@@ -317,109 +303,107 @@ function generateCanvas() {
     <label for="thought${groupCode}" value="thought">
       <span class="material-symbols-sharp">done</span>
     </label>
-  `
-  newCanvas.appendChild(textColourRadios)
+  `;
+  newCanvas.appendChild(textColourRadios);
 
   textColourRadios.addEventListener('click', (e) => {
-
     const target = e.target as HTMLInputElement;
     const value = target.value;
     const targetTextArea = textColourRadios.parentNode?.querySelector('textarea.text-overlay');
-    if (value && targetTextArea){
-      targetTextArea.setAttribute('type', value)   // previousElementSibling should be the textarea
+    if (value && targetTextArea) {
+      targetTextArea.setAttribute('type', value); // previousElementSibling should be the textarea
     }
-  })
-
+  });
 
   // Generate the delete button and have it run removeCanvas on click.
-  let deleteButton = document.createElement("div");
-  deleteButton.classList.add("delete-panel");
+  let deleteButton = document.createElement('div');
+  deleteButton.classList.add('delete-panel');
   deleteButton.innerHTML =
     '<span class="material-symbols-sharp md-17">delete</span><span class="delete-panel-text"><span class="canvas-button-text">Delete panel</span></span>';
-  deleteButton.addEventListener("click", removeCanvas);
+  deleteButton.addEventListener('click', removeCanvas);
   newCanvas.appendChild(deleteButton);
 
   // When the canvas is clicked, make it the active one.
-  newCanvas.addEventListener("click", function () {
+  newCanvas.addEventListener('click', function () {
     changeActiveCanvas(newCanvas);
   });
 
   // Add the canvas onto the page, make it the active one and put artwork in it.
-  document.querySelector("#canvas-grid-item > div > div")?.appendChild(newCanvas);
+  document.querySelector('#canvas-grid-item > div > div')?.appendChild(newCanvas);
   changeActiveCanvas(newCanvas);
   generatePanelArtwork();
 
   // Check whether we still want the canvas to be sticky, based on the height of the canvases total
-  determineStickyCanvas()
+  determineStickyCanvas();
 }
 
 // Make the specified canvas/panel the active one. This could be the result of a click on a canvas, or deleting an adjacent canvas.
 // The activeCanvas parameter should be a <canvas> element and not a container.
 function changeActiveCanvas(activeCanvas: HTMLDivElement) {
   currentCanvas = activeCanvas;
-  backgroundImg = activeCanvas.querySelector("img:nth-child(1)")!;
-  characterImg = activeCanvas.querySelector("img:nth-child(2)")!;
-  characterOverlay = activeCanvas.querySelector("img:nth-child(3)")!;
-  tag = activeCanvas.querySelector("img:nth-child(4)")!;
+  backgroundImg = activeCanvas.querySelector('img:nth-child(1)')!;
+  characterImg = activeCanvas.querySelector('img:nth-child(2)')!;
+  characterOverlay = activeCanvas.querySelector('img:nth-child(3)')!;
+  tag = activeCanvas.querySelector('img:nth-child(4)')!;
 
-  let allCanvases = document.querySelectorAll(".canvas-container");
+  let allCanvases = document.querySelectorAll('.canvas-container');
   allCanvases.forEach(function (node) {
     if (node === activeCanvas) {
-      node.classList.add("active-canvas");
+      node.classList.add('active-canvas');
     } else {
-      node.classList.remove("active-canvas");
+      node.classList.remove('active-canvas');
     }
   });
 }
 
 // Remove a canvas/panel from the page.
-function removeCanvas(e:Event) {
+function removeCanvas(e: Event) {
   e.stopPropagation();
-  let deadCanvas: HTMLDivElement | null = (e.target as HTMLDivElement).closest(".canvas-container");
+  let deadCanvas: HTMLDivElement | null = (e.target as HTMLDivElement).closest('.canvas-container');
 
-  if (deadCanvas){
-    if (deadCanvas.previousElementSibling && deadCanvas.previousElementSibling.id !== "download") {
+  if (deadCanvas) {
+    if (deadCanvas.previousElementSibling && deadCanvas.previousElementSibling.id !== 'download') {
       // If the panel has one before it, make that the active one.
-      changeActiveCanvas((deadCanvas.previousElementSibling as HTMLDivElement));
+      changeActiveCanvas(deadCanvas.previousElementSibling as HTMLDivElement);
     } else if (deadCanvas.nextElementSibling) {
       // If no previous one but there's a next one, make the next one the active one.
-      changeActiveCanvas((deadCanvas.nextElementSibling as HTMLDivElement));
+      changeActiveCanvas(deadCanvas.nextElementSibling as HTMLDivElement);
     } else {
       // If this function results in there being no panel at all, generate a fresh one.
       generateCanvas();
     }
 
     // Run a nice animation, then delete the panel.
-    deadCanvas.style.animation = "shrink 0.5s both";
+    deadCanvas.style.animation = 'shrink 0.5s both';
     window.setTimeout(function () {
       deadCanvas!.remove();
       // Check whether we still want the canvas to be sticky, based on the height of the canvases total
       determineStickyCanvas();
-
     }, 500);
   }
 }
 
-function determineStickyCanvas () {
-  if (window.innerWidth > 1450 && (document.querySelector("#canvas-grid-item > div") as HTMLDivElement)?.offsetHeight < window.innerHeight - (document.querySelector("#info-bar")?.clientHeight!) + 100) {
-    document.querySelector("#sticky-panel")?.classList.add('sticky-canvas')
-  } else{
-    document.querySelector("#sticky-panel")?.classList.remove('sticky-canvas')
+function determineStickyCanvas() {
+  if (
+    window.innerWidth > 1450 &&
+    (document.querySelector('#canvas-grid-item > div') as HTMLDivElement)?.offsetHeight <
+      window.innerHeight - document.querySelector('#info-bar')?.clientHeight! + 100
+  ) {
+    document.querySelector('#sticky-panel')?.classList.add('sticky-canvas');
+  } else {
+    document.querySelector('#sticky-panel')?.classList.remove('sticky-canvas');
   }
 }
 
-determineStickyCanvas()
-window.addEventListener('resize', determineStickyCanvas)
+determineStickyCanvas();
+window.addEventListener('resize', determineStickyCanvas);
 
-
-function determineIsNew(dateModified: string | null){
+function determineIsNew(dateModified: string | null) {
   return dateModified && (new Date().getTime() - new Date(dateModified).getTime()) / 86400000 < daysForNew;
 }
 
-
-function determineIconOrder(dateModified: string | null, tags: string[] = []): string{
-
-  let myDate = dateModified ? new Date(dateModified) : new Date("2000-01-01");
+function determineIconOrder(dateModified: string | null, tags: string[] = []): string {
+  let myDate = dateModified ? new Date(dateModified) : new Date('2000-01-01');
 
   let isNew = determineIsNew(dateModified);
   let matchesTheme = theme.name && tags.includes(theme.name);
@@ -427,17 +411,16 @@ function determineIconOrder(dateModified: string | null, tags: string[] = []): s
   let order = Math.floor(myDate.getTime() / 100000000000);
   let currentDate = Math.floor(new Date().getTime() / 100000000000);
 
-  if (isNew && matchesTheme){
+  if (isNew && matchesTheme) {
     return `-3${order + currentDate}`;
-  } else if (matchesTheme){
+  } else if (matchesTheme) {
     return `-2${order + currentDate}`;
-  } else if (isNew){
+  } else if (isNew) {
     return `-1${order}`;
-  };
+  }
 
   return '100';
 }
-
 
 // Generates the character selection window.
 // Note that character-selector is a <select> element
@@ -445,40 +428,37 @@ function generateCharacterInterface() {
   // Loop through each character and...
   characters.forEach(function (character) {
     // Generate the new option for this character.
-    let newOption = document.createElement("option");
+    let newOption = document.createElement('option');
     newOption.value = character.id;
     characterSelector.appendChild(newOption);
 
-    let icon = generateLabelledIcon("character", character);
-    icon.setAttribute("gender", "gender-" + character.gender); // This is set like this since 'female' contains the string 'male'
-    icon.setAttribute("nationality", character.nationality);
+    let icon = generateLabelledIcon('character', character);
+    icon.setAttribute('gender', 'gender-' + character.gender); // This is set like this since 'female' contains the string 'male'
+    icon.setAttribute('nationality', character.nationality);
     icon.style.order = determineIconOrder(character.lastUpdated ?? null, character.tags);
 
     for (let i = 0; i < 10; i++) {
-      icon.setAttribute("present-in-case-" + i, String(character.appearsIn[i]));
+      icon.setAttribute('present-in-case-' + i, String(character.appearsIn[i]));
     }
 
     characterPreview.appendChild(icon);
 
     // If this icon is clicked....
-    icon.addEventListener("click", function (e) {
+    icon.addEventListener('click', function (e) {
       // Set an attribute on the icons to allow for selected styling.
-      [].forEach.call(
-        document.querySelectorAll(".character-icon"),
-        function (node: HTMLDivElement) {
-          node.setAttribute("selected", 'false');
-        }
-      );
-      (e.target as HTMLDivElement).setAttribute("selected", 'true');
+      [].forEach.call(document.querySelectorAll('.character-icon'), function (node: HTMLDivElement) {
+        node.setAttribute('selected', 'false');
+      });
+      (e.target as HTMLDivElement).setAttribute('selected', 'true');
 
       // Set the value on the invisible dropdown
-      let value = (e.target as HTMLDivElement).getAttribute("value");
-      if (value){
+      let value = (e.target as HTMLDivElement).getAttribute('value');
+      if (value) {
         characterSelector.value = value;
       }
 
       // If the user has not used this character before and has indicated they like the Japanese names, store their new name in the alternate names object.
-      if (character.alternateNames && !alternateNamesInUse[character.alternateNames[0]] && prefersJapaneseNames){
+      if (character.alternateNames && !alternateNamesInUse[character.alternateNames[0]] && prefersJapaneseNames) {
         alternateNamesInUse[character.alternateNames[0]] = character.alternateNames[1];
         window.localStorage.setItem('alternateNamesInUse', JSON.stringify(alternateNamesInUse));
       }
@@ -495,20 +475,20 @@ function generateLocationInterface() {
   // Loop through all the specified locations and...
   locations.forEach(function (location: LocationObject) {
     // Generate an icon
-    let icon = generateLabelledIcon("location", location);
+    let icon = generateLabelledIcon('location', location);
     backgroundPreview.appendChild(icon);
     icon.style.order = determineIconOrder(location.addedDate ?? null, location.tags);
 
     // When the icon is clicked, set the value of the invisible dropdown to match,
     // toggle the location panel off and regenerate our current panel so it can
     // have the new location
-    icon.addEventListener("click", function (e) {
-
-      let myTarget = (e.target as HTMLDivElement);
-      let value = myTarget.getAttribute("value");
-      if (value){
+    icon.addEventListener('click', function (e) {
+      let myTarget = e.target as HTMLDivElement;
+      let value = myTarget.getAttribute('value');
+      if (value) {
         backgroundSelector.value = value;
-        characterOverlayID = locations.find((location) => location.id === backgroundSelector.value)?.characterOverlay ?? null;
+        characterOverlayID =
+          locations.find((location) => location.id === backgroundSelector.value)?.characterOverlay ?? null;
       }
 
       togglePanel(backgroundPreview);
@@ -518,63 +498,61 @@ function generateLocationInterface() {
       // toggles closed on click, this ensures you can tell which one is selected
       // if you choose to reopen it.
 
-      let icons = document.querySelectorAll(".location-icon");
-      if (icons.length > 0){
-
+      let icons = document.querySelectorAll('.location-icon');
+      if (icons.length > 0) {
         icons.forEach((icon) => {
-          icon.setAttribute("selected", 'false');
+          icon.setAttribute('selected', 'false');
         });
-
       }
-      myTarget.setAttribute("selected", 'true');
+      myTarget.setAttribute('selected', 'true');
     });
   });
 
   // Set the first one as default selected. This only styles it and doesn't
   // do any actual functionality.
-  document.querySelector(".location-icon")!.setAttribute("selected", 'true');
+  document.querySelector('.location-icon')!.setAttribute('selected', 'true');
 }
 
 // Generate a labelled icon. This is used by both the location and character interfaces.
 // type may be either 'character' or 'location'
 // object should be the object we're using from either the characters or locations array.
-function generateLabelledIcon(type: "character" | "location", object: CharacterObject | LocationObject): HTMLDivElement {
-  let icon = document.createElement("div");
-  icon.classList.add(type + "-icon");
-  icon.setAttribute("value", object.id);
+function generateLabelledIcon(
+  type: 'character' | 'location',
+  object: CharacterObject | LocationObject
+): HTMLDivElement {
+  let icon = document.createElement('div');
+  icon.classList.add(type + '-icon');
+  icon.setAttribute('value', object.id);
 
   // Figure out what the  image for the icon should be.
-  let iconURL = "";
+  let iconURL = '';
   switch (type) {
-    case "character":
-
+    case 'character':
       const myCharacter = object as CharacterObject;
 
       // This is set to 1.png so it will use the first image of the character as the preview.
       iconURL = 'url("assets/characters/' + object.id + '/thumbnails/1.png")';
 
-      let genderIcon = document.createElement("span");
-      genderIcon.classList.add("character-icon-gender-tag");
-      genderIcon.setAttribute("gender", myCharacter.gender);
-      genderIcon.innerHTML =
-        '<span class="gender-icon material-icons">' + myCharacter.gender + "</span>";
+      let genderIcon = document.createElement('span');
+      genderIcon.classList.add('character-icon-gender-tag');
+      genderIcon.setAttribute('gender', myCharacter.gender);
+      genderIcon.innerHTML = '<span class="gender-icon material-icons">' + myCharacter.gender + '</span>';
       icon.appendChild(genderIcon);
 
-      let nationalityIcon = document.createElement("span");
-      nationalityIcon.classList.add("character-icon-nationality-tag");
-      nationalityIcon.style.backgroundImage =
-        'url("assets/icons/flags/' + myCharacter.nationality + '.svg")';
+      let nationalityIcon = document.createElement('span');
+      nationalityIcon.classList.add('character-icon-nationality-tag');
+      nationalityIcon.style.backgroundImage = 'url("assets/icons/flags/' + myCharacter.nationality + '.svg")';
       icon.appendChild(nationalityIcon);
 
-      if (determineIsNew(myCharacter?.lastUpdated)){
-        let newIcon = document.createElement('img')
-        newIcon.classList.add('new-icon')
-        newIcon.src = "/assets/icons/new-icon.svg"
+      if (determineIsNew(myCharacter?.lastUpdated)) {
+        let newIcon = document.createElement('img');
+        newIcon.classList.add('new-icon');
+        newIcon.src = '/assets/icons/new-icon.svg';
         newIcon.width = 50;
-        icon.appendChild(newIcon)
+        icon.appendChild(newIcon);
       }
 
-      if (theme.name && myCharacter.tags.includes(theme.name)){
+      if (theme.name && myCharacter.tags.includes(theme.name)) {
         let themeIcon = document.createElement('div');
         themeIcon.classList.add('theme-star');
         icon.appendChild(themeIcon);
@@ -582,8 +560,7 @@ function generateLabelledIcon(type: "character" | "location", object: CharacterO
 
       break;
 
-    case "location":
-
+    case 'location':
       const myLocation = object as LocationObject;
 
       iconURL = 'url("assets/locations/thumbnails/' + object.id + '.png")';
@@ -591,16 +568,15 @@ function generateLabelledIcon(type: "character" | "location", object: CharacterO
       let isNew = determineIsNew(myLocation.addedDate);
       let matchesTheme = theme.name && myLocation.tags?.includes(theme.name);
 
-      if (isNew){
+      if (isNew) {
         let newIcon = document.createElement('img');
         newIcon.classList.add('new-icon');
-        newIcon.src = "/assets/icons/new-icon.svg";
+        newIcon.src = '/assets/icons/new-icon.svg';
         newIcon.width = 50;
         icon.appendChild(newIcon);
-
       }
 
-      if (matchesTheme){
+      if (matchesTheme) {
         let themeIcon = document.createElement('div');
         themeIcon.classList.add('theme-star');
         icon.appendChild(themeIcon);
@@ -611,12 +587,12 @@ function generateLabelledIcon(type: "character" | "location", object: CharacterO
 
   icon.style.backgroundImage = iconURL;
 
-  let label = document.createElement("div");
+  let label = document.createElement('div');
   label.textContent += object.name;
 
   if (object.variant) {
-    let variantTag = document.createElement("div");
-    variantTag.classList.add("variant-tag");
+    let variantTag = document.createElement('div');
+    variantTag.classList.add('variant-tag');
     variantTag.textContent = object.variant;
     label.appendChild(variantTag);
   }
@@ -626,35 +602,33 @@ function generateLabelledIcon(type: "character" | "location", object: CharacterO
 }
 
 // Generate the poses for the desired character.
-function generatePoses(e? : Event) {
+function generatePoses(e?: Event) {
   // This initialises to false. We set this to true to confirm that the user
   // has deliberately chose a character and we're okay to go ahead with it.
   characterSelected = true;
-  document.body.setAttribute("character-selected", 'characterSelected');
+  document.body.setAttribute('character-selected', 'characterSelected');
 
   // Figure out if this has been run from an icon click or elsewhere.
   let chosenCharacter = e ? (e.target as HTMLSelectElement).value : characterSelector.value;
 
   // Reset the character if we're choosing a new one
-  characterImg.src = paths.character + chosenCharacter + "/1.png";
+  characterImg.src = paths.character + chosenCharacter + '/1.png';
 
-  characterImg.classList.add('character-img')
+  characterImg.classList.add('character-img');
   characterImg.setAttribute('character', chosenCharacter);
 
-  let currentCharacter: CharacterObject | undefined = getCharacterFromID(chosenCharacter)
-  if (currentCharacter?.alternateNames && !alternateNamesInUse[currentCharacter.alternateNames[0]]){
+  let currentCharacter: CharacterObject | undefined = getCharacterFromID(chosenCharacter);
+  if (currentCharacter?.alternateNames && !alternateNamesInUse[currentCharacter.alternateNames[0]]) {
     alternateNamesInUse[currentCharacter.alternateNames[0]] = currentCharacter.alternateNames[0] ?? 'default';
     window.localStorage.setItem('alternateNamesInUse', JSON.stringify(alternateNamesInUse));
   }
-  
-  document.querySelector('#theme-music')!.innerHTML = 
-  currentCharacter?.theme 
+
+  document.querySelector('#theme-music')!.innerHTML = currentCharacter?.theme
     ? `<iframe style="border-radius:12px" src="
     ${currentCharacter.theme ?? ''}
     &theme=0" width="100%" height="100" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     `
     : '';
-  
 
   generatePanelArtwork();
 
@@ -671,54 +645,44 @@ function generatePoses(e? : Event) {
 
   // Generate each icon.
   for (let i = 1; i <= imageAmount; i++) {
-    let newRadio = document.createElement("input");
-    newRadio.setAttribute("type", "radio");
-    newRadio.setAttribute("id", String(i));
-    newRadio.setAttribute("name", "pose");
-    newRadio.setAttribute("character", chosenCharacter);
+    let newRadio = document.createElement('input');
+    newRadio.setAttribute('type', 'radio');
+    newRadio.setAttribute('id', String(i));
+    newRadio.setAttribute('name', 'pose');
+    newRadio.setAttribute('character', chosenCharacter);
     newRadio.value = String(i);
-    newRadio.addEventListener("click", selectPose);
+    newRadio.addEventListener('click', selectPose);
     poseSelectorPreview.appendChild(newRadio);
 
-    let newLabel = document.createElement("label");
-    newLabel.setAttribute("for", String(i));
-    newLabel.style.backgroundImage =
-      'url("assets/characters/' +
-      chosenCharacter +
-      "/thumbnails/" +
-      i +
-      '.png")';
+    let newLabel = document.createElement('label');
+    newLabel.setAttribute('for', String(i));
+    newLabel.style.backgroundImage = 'url("assets/characters/' + chosenCharacter + '/thumbnails/' + i + '.png")';
     poseSelectorPreview.appendChild(newLabel);
 
     if (
-      currentCharacter
-      && currentCharacter.posesAddedOnLastUpdate
-      && currentCharacter.lastUpdated
-      && i > (currentCharacter.images - currentCharacter.posesAddedOnLastUpdate)
-      && determineIsNew(currentCharacter.lastUpdated)){
-        let newIcon = document.createElement('img')
-        newIcon.classList.add('new-icon')
-        newIcon.src = "/assets/icons/new-icon.svg"
-        newIcon.width = 50;
-        newLabel.style.order = determineIconOrder(currentCharacter.lastUpdated, currentCharacter.tags);
-        newLabel.appendChild(newIcon);
-      }
-
-
+      currentCharacter &&
+      currentCharacter.posesAddedOnLastUpdate &&
+      currentCharacter.lastUpdated &&
+      i > currentCharacter.images - currentCharacter.posesAddedOnLastUpdate &&
+      determineIsNew(currentCharacter.lastUpdated)
+    ) {
+      let newIcon = document.createElement('img');
+      newIcon.classList.add('new-icon');
+      newIcon.src = '/assets/icons/new-icon.svg';
+      newIcon.width = 50;
+      newLabel.style.order = determineIconOrder(currentCharacter.lastUpdated, currentCharacter.tags);
+      newLabel.appendChild(newIcon);
+    }
   }
 
-  poseSelectorPreview.querySelector("label")?.setAttribute("selected", "");
+  poseSelectorPreview.querySelector('label')?.setAttribute('selected', '');
 }
 
 // When a pose is clicked, put that onto the canvas and mark it as selected.
 function selectPose(e: Event) {
-
   let myTarget = e.target as HTMLInputElement;
-  let url = myTarget.getAttribute("character");
-  characterImg.setAttribute(
-    "src",
-    paths.character + url + "/" + myTarget.value + ".png"
-  );
+  let url = myTarget.getAttribute('character');
+  characterImg.setAttribute('src', paths.character + url + '/' + myTarget.value + '.png');
   generatePanelArtwork();
   selectItem(e);
 }
@@ -726,58 +690,56 @@ function selectPose(e: Event) {
 // Put appropriate attributes on the specified event target and its siblings to
 // be able to apply styling in the CSS.
 function selectItem(e: Event) {
-  let siblings = (e.target as HTMLInputElement).parentNode?.querySelectorAll("label");
-  if (siblings && siblings.length > 0){
+  let siblings = (e.target as HTMLInputElement).parentNode?.querySelectorAll('label');
+  if (siblings && siblings.length > 0) {
     siblings.forEach(function (sibling: HTMLLabelElement) {
-      sibling.removeAttribute("selected");
+      sibling.removeAttribute('selected');
     });
   }
 
-  (e.target as HTMLInputElement).nextElementSibling?.setAttribute("selected", "");
+  (e.target as HTMLInputElement).nextElementSibling?.setAttribute('selected', '');
 }
 
 // Recreate the meme as an image file and download it.
-function download(e:Event) {
-
+function download(e: Event) {
   e.preventDefault();
 
   // Generate a temporary canvas that we'll combine all of our individual canvases onto for download
-  let downloadableCanvas = document.createElement("canvas");
-  downloadableCanvas.classList.add("temp-canvas");
-  downloadableCanvas.setAttribute("width", '1920');
-  downloadableCanvas.setAttribute("height", '1080');
+  let downloadableCanvas = document.createElement('canvas');
+  downloadableCanvas.classList.add('temp-canvas');
+  downloadableCanvas.setAttribute('width', '1920');
+  downloadableCanvas.setAttribute('height', '1080');
   // document.body.appendChild(downloadableCanvas);
 
   // Get a list of all the canvases, and set the height of our temporary one to their combined heights.
   //let allCanvases = document.querySelectorAll('canvas:not(.temp-canvas)')
-  let allCanvases: NodeListOf<HTMLDivElement> = document.querySelectorAll(".canvas-container");
-  downloadableCanvas.setAttribute("height", String(1080 * allCanvases.length));
+  let allCanvases: NodeListOf<HTMLDivElement> = document.querySelectorAll('.canvas-container');
+  downloadableCanvas.setAttribute('height', String(1080 * allCanvases.length));
 
   // Render the text on each one of our individual canvases, and add it onto
   // our temporary one.
-  let downloadableCanvasContext : RenderingContext = downloadableCanvas.getContext("2d") !;
+  let downloadableCanvasContext: RenderingContext = downloadableCanvas.getContext('2d')!;
 
-  if (allCanvases.length > 0){
+  if (allCanvases.length > 0) {
     for (let i = 0; i < allCanvases.length; i++) {
-      let tempCanvas =  document.createElement("canvas");
+      let tempCanvas = document.createElement('canvas');
       tempCanvas.width = 1920;
       tempCanvas.height = 1080;
-      let tempCanvasContext = tempCanvas.getContext("2d") !;
+      let tempCanvasContext = tempCanvas.getContext('2d')!;
 
-      
       // If there is no text in the textarea, we don't render the final two layers
       // of the canvas, which display the text box artwork
-      let layersToRender = allCanvases[i].querySelector("textarea")!.value.length === 0 ? 4 : 6
+      let layersToRender = allCanvases[i].querySelector('textarea')!.value.length === 0 ? 4 : 6;
 
       for (let j = 1; j < layersToRender; j++) {
-        let imgToDraw : HTMLImageElement = allCanvases[i].querySelector("img:nth-child(" + j + ")") !;
-        tempCanvasContext?.drawImage(imgToDraw , 0, 0);
+        let imgToDraw: HTMLImageElement = allCanvases[i].querySelector('img:nth-child(' + j + ')')!;
+        tempCanvasContext?.drawImage(imgToDraw, 0, 0);
       }
 
-      var myFont = new FontFace("Toplar", 'url("assets/fonts/Toplar.woff")');
+      var myFont = new FontFace('Toplar', 'url("assets/fonts/Toplar.woff")');
 
       // Render the text
-      let textBoxText = allCanvases[i].querySelector("textarea")!.value;
+      let textBoxText = allCanvases[i].querySelector('textarea')!.value;
 
       myFont.load().then(function (font) {
         document.fonts.add(font);
@@ -785,57 +747,59 @@ function download(e:Event) {
 
       let fontSize = 50;
       tempCanvasContext.font = `${fontSize}px Toplar`;
-      let desiredTextColour = allCanvases[i].querySelector("textarea")!.getAttribute('type') === "thought" ? "#07bff0" : "#fff";
-      tempCanvasContext.fillStyle = allCanvases[i].querySelector("textarea")!.getAttribute('type') === "thought" ? "#07bff0" : "#fff";
+      let desiredTextColour =
+        allCanvases[i].querySelector('textarea')!.getAttribute('type') === 'thought' ? '#07bff0' : '#fff';
+      tempCanvasContext.fillStyle =
+        allCanvases[i].querySelector('textarea')!.getAttribute('type') === 'thought' ? '#07bff0' : '#fff';
       wrapText(tempCanvasContext, textBoxText, 365, 882, 1200);
       downloadableCanvasContext.drawImage(tempCanvas, 0, i * 1080);
-      
+
       function wrapText(context: CanvasRenderingContext2D, text: string, x: number, y: number, maxWidth: number) {
         const regex = /\*([^*]+)\*/g;
         const editedWords = text.replace(regex, (match, p1) => {
           const words = p1.split(' ');
           return ' |' + words.join('| |') + '| ';
-        });       
-        let words = editedWords.split(" ");
-        words = words.filter(element => element !== "")
-      
-        let line = "";
-      
+        });
+        let words = editedWords.split(' ');
+        words = words.filter((element) => element !== '');
+
+        let line = '';
+
         function outputLine(line: string, x: number, y: number, context: CanvasRenderingContext2D) {
-          let words = line.split(" ");
+          let words = line.split(' ');
           let wordX = x;
           for (let i = 0; i < words.length; i++) {
             let color = determineColour(words[i]);
-            let myWord = words[i].replace(/\|/g, "");
+            let myWord = words[i].replace(/\|/g, '');
             context.fillStyle = color;
             context.fillText(myWord, wordX, y);
-            let nextWord = words[i + 1] ? words[i + 1].replace(/\|/g, "") : "";
+            let nextWord = words[i + 1] ? words[i + 1].replace(/\|/g, '') : '';
             let spacingCharacter = /^[^\w\s]+$/.test(nextWord) ? '' : ' ';
-      
+
             // Calculate the width of the word without the pipes
             let wordWidth = context.measureText(myWord).width;
-      
+
             // Add the width of the spacing character
             wordWidth += context.measureText(spacingCharacter).width;
-      
+
             wordX += wordWidth;
           }
         }
-      
+
         for (let n = 0; n < words.length; n++) {
-          let testLine = line + words[n] + " ";
+          let testLine = line + words[n] + ' ';
           let metrics = context.measureText(testLine);
           let testWidth = metrics.width;
           if (testWidth > maxWidth && n > 0) {
             outputLine(line, x, y, context);
-            line = words[n] + " ";
+            line = words[n] + ' ';
             y += fontSize * 1.25;
           } else {
             line = testLine;
           }
         }
         outputLine(line, x, y, context);
-      
+
         function determineColour(word: string) {
           if (/^\|+.*$/.test(word)) {
             return '#f1671a';
@@ -843,132 +807,122 @@ function download(e:Event) {
             return desiredTextColour;
           }
         }
-      }      
-    }
-  
-
-  // Add the credits onto the end.
-  downloadableCanvasContext.drawImage(
-    credits,
-    0,
-    (allCanvases.length - 1) * 1080
-  );
-
-  // Download the image, then remove the temporary canvas.
-
-  let date = new Date()
-  let formattedDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate() + " " +  date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
-
-
-  downloadableCanvas.toBlob((blob) => {
-
-    if (!blob){
-      return;
+      }
     }
 
-    const newImg = document.createElement('img');
-    const url = URL.createObjectURL(blob);
-    const downloadLink = document.createElement('a')
-    
+    // Add the credits onto the end.
+    downloadableCanvasContext.drawImage(credits, 0, (allCanvases.length - 1) * 1080);
 
-    newImg.onload = () => {
-      // no longer need to read the blob so it's revoked
-      downloadLink.href = url;
-      downloadLink.target = "_blank";
-      downloadLink.download = `tgaa-meme-maker - ${formattedDate} - #tgaaMemeMaker.png`;
-      downloadLink.click();
-      URL.revokeObjectURL(url);
-    };
-  
-    newImg.src = url;
-    newImg.style.display = 'none';
-    document.body.appendChild(newImg);
-    document.body.appendChild(downloadLink);
+    // Download the image, then remove the temporary canvas.
 
-    downloadLink.remove();
-    newImg.remove();
-    downloadableCanvas.remove();
-  })
+    let date = new Date();
+    let formattedDate =
+      date.getFullYear() +
+      '-' +
+      (date.getMonth() + 1) +
+      '-' +
+      date.getDate() +
+      ' ' +
+      date.getHours() +
+      ':' +
+      date.getMinutes() +
+      ':' +
+      date.getSeconds();
+
+    downloadableCanvas.toBlob((blob) => {
+      if (!blob) {
+        return;
+      }
+
+      const newImg = document.createElement('img');
+      const url = URL.createObjectURL(blob);
+      const downloadLink = document.createElement('a');
+
+      newImg.onload = () => {
+        // no longer need to read the blob so it's revoked
+        downloadLink.href = url;
+        downloadLink.target = '_blank';
+        downloadLink.download = `tgaa-meme-maker - ${formattedDate} - #tgaaMemeMaker.png`;
+        downloadLink.click();
+        URL.revokeObjectURL(url);
+      };
+
+      newImg.src = url;
+      newImg.style.display = 'none';
+      document.body.appendChild(newImg);
+      document.body.appendChild(downloadLink);
+
+      downloadLink.remove();
+      newImg.remove();
+      downloadableCanvas.remove();
+    });
+  }
 }
-}
-
 
 // Simply takes a panel and toggles a 'hidden' attribute.
 function togglePanel(associate: HTMLDivElement) {
-  associate.classList.toggle("hidden");
+  associate.classList.toggle('hidden');
 }
 
-let filterButtons = document.querySelectorAll(".filter");
+let filterButtons = document.querySelectorAll('.filter');
 filterButtons.forEach(function (filter) {
-  filter.addEventListener("click", function (e) {
-
+  filter.addEventListener('click', function (e) {
     let myTarget = e.target as HTMLDivElement;
 
-    let filterType = myTarget.getAttribute("filter-type") ?? '';
-    let filterValue = myTarget.getAttribute("filter-value") ?? '';
+    let filterType = myTarget.getAttribute('filter-type') ?? '';
+    let filterValue = myTarget.getAttribute('filter-value') ?? '';
     let panel = myTarget.closest('div[id*="selector"]');
     let icons = panel?.querySelectorAll('div[class*="icon"]');
 
-    if (filterType && filterValue !== "all" && icons) {
+    if (filterType && filterValue !== 'all' && icons) {
       icons.forEach(function (icon) {
         //icon.classList.remove('toggled-off')
         if (icon.getAttribute(filterType) == filterValue) {
-          icon.setAttribute("toggled", "on");
+          icon.setAttribute('toggled', 'on');
         } else {
-          icon.setAttribute("toggled", "off");
+          icon.setAttribute('toggled', 'off');
         }
       });
-    } else if (filterValue == "all" && icons) {
+    } else if (filterValue == 'all' && icons) {
       icons.forEach(function (icon) {
-        icon.setAttribute("toggled", "on");
+        icon.setAttribute('toggled', 'on');
       });
     }
   });
 });
 
-
-document.querySelector("#filter-form")!.addEventListener("click", filterItems);
+document.querySelector('#filter-form')!.addEventListener('click', filterItems);
 
 function filterItems(e: Event) {
-  let panel = (e.target as HTMLDivElement).closest("#filter-form") !;
+  let panel = (e.target as HTMLDivElement).closest('#filter-form')!;
 
-  let chosenFilterNodes : NodeListOf<HTMLInputElement> = panel.querySelectorAll('[checked="checked"]');
+  let chosenFilterNodes: NodeListOf<HTMLInputElement> = panel.querySelectorAll('[checked="checked"]');
 
   let acceptableGenders: string[] = [];
   chosenFilterNodes.forEach(function (node) {
-    if (
-      node.getAttribute("checked") == "checked" &&
-      node.getAttribute("filter-type") == "gender"
-    ) {
+    if (node.getAttribute('checked') == 'checked' && node.getAttribute('filter-type') == 'gender') {
       acceptableGenders.push(node.value);
     }
   });
 
-
-  let acceptableNationalities : string[] = [];
+  let acceptableNationalities: string[] = [];
   chosenFilterNodes.forEach(function (node) {
-    if (
-      node.getAttribute("checked") == "checked" &&
-      node.getAttribute("filter-type") == "nationality"
-    ) {
+    if (node.getAttribute('checked') == 'checked' && node.getAttribute('filter-type') == 'nationality') {
       acceptableNationalities.push(node.value);
     }
   });
 
-  let acceptableCases : string[] = [];
+  let acceptableCases: string[] = [];
 
   chosenFilterNodes.forEach(function (node) {
-    if (
-      node.getAttribute("checked") == "checked" &&
-      node.getAttribute("filter-type") == "present-in"
-    ) {
+    if (node.getAttribute('checked') == 'checked' && node.getAttribute('filter-type') == 'present-in') {
       acceptableCases.push(node.value);
     }
   });
 
-  let icons : NodeListOf<HTMLDivElement> = panel.parentNode!.querySelectorAll('div[class*="icon"]');
+  let icons: NodeListOf<HTMLDivElement> = panel.parentNode!.querySelectorAll('div[class*="icon"]');
   icons.forEach(function (icon) {
-    icon.setAttribute("toggled", "false");
+    icon.setAttribute('toggled', 'false');
 
     let genderMatch = false;
     let nationalityMatch = false;
@@ -981,11 +935,7 @@ function filterItems(e: Event) {
     });
 
     acceptableNationalities.forEach(function (nationality) {
-      if (
-        nationality == "other" &&
-        icon.outerHTML.indexOf("british") < 0 &&
-        icon.outerHTML.indexOf("japanese") < 0
-      ) {
+      if (nationality == 'other' && icon.outerHTML.indexOf('british') < 0 && icon.outerHTML.indexOf('japanese') < 0) {
         nationalityMatch = true;
       }
 
@@ -995,57 +945,54 @@ function filterItems(e: Event) {
     });
 
     acceptableCases.forEach(function (gamecase) {
-      if (
-        icon.outerHTML.indexOf("present-in-case-" + gamecase + '="true"') > 0
-      ) {
+      if (icon.outerHTML.indexOf('present-in-case-' + gamecase + '="true"') > 0) {
         caseMatch = true;
       }
     });
 
     if (genderMatch && nationalityMatch && caseMatch) {
-      icon.setAttribute("toggled", "on");
+      icon.setAttribute('toggled', 'on');
     }
   });
 }
 
-document
-  .querySelector(".reset-filters")!.addEventListener("click", function (e) {
-    e.stopPropagation();
-    let checkboxes: NodeListOf<HTMLInputElement> = (e.target as HTMLButtonElement)
-      .closest("#filter-form")!
-      .querySelectorAll('input[type="checkbox"]');
+document.querySelector('.reset-filters')!.addEventListener('click', function (e) {
+  e.stopPropagation();
+  let checkboxes: NodeListOf<HTMLInputElement> = (e.target as HTMLButtonElement)
+    .closest('#filter-form')!
+    .querySelectorAll('input[type="checkbox"]');
 
-    checkboxes.forEach(function (checkbox) {
-      checkbox.setAttribute("checked", "checked");
-      checkbox.checked = true;
-    });
-    filterItems(e);
+  checkboxes.forEach(function (checkbox) {
+    checkbox.setAttribute('checked', 'checked');
+    checkbox.checked = true;
   });
+  filterItems(e);
+});
 
 let checkboxes: NodeListOf<HTMLInputElement> = document.querySelectorAll('input[type="checkbox"]');
 checkboxes.forEach(function (node) {
-  node.addEventListener("click", function (e) {
-    if ((e.target as HTMLInputElement).getAttribute("checked") == "checked") {
-      (e.target as HTMLInputElement).setAttribute("checked", "false");
+  node.addEventListener('click', function (e) {
+    if ((e.target as HTMLInputElement).getAttribute('checked') == 'checked') {
+      (e.target as HTMLInputElement).setAttribute('checked', 'false');
     } else {
-      (e.target as HTMLInputElement).setAttribute("checked", "checked");
+      (e.target as HTMLInputElement).setAttribute('checked', 'checked');
     }
   });
 });
 
 function checkSpoilers(e?: Event) {
-  let spoilerWarning = document.querySelector("#spoiler-warning");
+  let spoilerWarning = document.querySelector('#spoiler-warning');
 
   if (
-    (document.querySelector("#remember-spoilers-okay") as HTMLInputElement)!.checked ||
-    window.localStorage.getItem("reveal-spoilers")
+    (document.querySelector('#remember-spoilers-okay') as HTMLInputElement)!.checked ||
+    window.localStorage.getItem('reveal-spoilers')
   ) {
-    window.localStorage.setItem("reveal-spoilers", 'true');
+    window.localStorage.setItem('reveal-spoilers', 'true');
     spoilerWarning!.remove();
     document.body.setAttribute('accept-spoilers', 'true');
 
-    if(theme.name){
-      document.body.setAttribute('theme', theme.name)
+    if (theme.name) {
+      document.body.setAttribute('theme', theme.name);
     }
   }
 
@@ -1053,181 +1000,162 @@ function checkSpoilers(e?: Event) {
   // button has been clicked, therefore close the spoiler window.
   if (e && spoilerWarning) {
     spoilerWarning.remove();
-    document.body.setAttribute('accept-spoilers', 'true')
-    if(theme.name){
-      document.body.setAttribute('theme', theme.name)
+    document.body.setAttribute('accept-spoilers', 'true');
+    if (theme.name) {
+      document.body.setAttribute('theme', theme.name);
     }
   }
 }
 
 async function displayWeather() {
-
-
   let myPromises = [
     fetch(
       'https://api.openweathermap.org/data/2.5/weather?units=metric&lat=51.5200&lon=-0.1566&appid=05b8bf4b22e67da44ad9672eef66e607'
     ), // London weather
-    fetch(
-      "https://worldtimeapi.org/api/timezone/Europe/London"
-    ), // London time
+    fetch('https://worldtimeapi.org/api/timezone/Europe/London'), // London time
     fetch(
       'https://api.openweathermap.org/data/2.5/weather?units=metric&lat=35.6762&lon=-139.6503&appid=05b8bf4b22e67da44ad9672eef66e607'
     ), // Tokyo weather
-    fetch(
-      "https://worldtimeapi.org/api/timezone/Asia/Tokyo"
-    ), // Tokyo time
-  ] // returns array of promises
+    fetch('https://worldtimeapi.org/api/timezone/Asia/Tokyo'), // Tokyo time
+  ]; // returns array of promises
 
-  const promiseData = Promise.all(myPromises)
+  const promiseData = Promise.all(myPromises);
 
   promiseData
     .then((responses) => {
-      const jsonResponsePromises = responses.map(r => r.json()) // make the responses into promises with their json values inside
+      const jsonResponsePromises = responses.map((r) => r.json()); // make the responses into promises with their json values inside
       return jsonResponsePromises;
     })
     .then((data) => {
-      
-      Promise.all(data)
-      .then((info) => {
-        displayData(info)
-        
+      Promise.all(data).then((info) => {
+        displayData(info);
+
         // Update the time every 5 seconds. This is a tradeoff between wanting to
         // keep the time up to date, but not having to keep checking too often
-        window.setInterval(updateTime, 5000)
-        
-        window.addEventListener('resize', updateTime)
-      })
-    })
-    .catch(failure => console.log(failure)) // array of responses
+        window.setInterval(updateTime, 5000);
 
+        window.addEventListener('resize', updateTime);
+      });
+    })
+    .catch((failure) => console.log(failure)); // array of responses
 
   async function updateTime() {
-    
-    const localTime = new Date()
+    const localTime = new Date();
     const britishTimeDisplay: HTMLDivElement = document.querySelector('.british-time')!;
     const japaneseTimeDisplay: HTMLDivElement = document.querySelector('.japanese-time')!;
-    const displayedMinutes = britishTimeDisplay.textContent ? britishTimeDisplay.textContent.slice(3,5) : '';
+    const displayedMinutes = britishTimeDisplay.textContent ? britishTimeDisplay.textContent.slice(3, 5) : '';
 
-    if (britishTimeDisplay?.textContent === ''){
+    if (britishTimeDisplay?.textContent === '') {
       // The time may be blank as a result of a previous failed API call.
       //  If so, we'll try again
-      getNewTime()
+      getNewTime();
 
       // If the minutes we're displaying aren't the same as the real life minutes past the hour
-    } else if (localTime.getMinutes().toString() !== displayedMinutes){
-  
+    } else if (localTime.getMinutes().toString() !== displayedMinutes) {
       // If we're in a new hour, get a new time from the API. This will ensure we
       // are displaying the correct time if daylight savings is happening, rather
       // than us just incrementing the hour.
-      if (localTime.getMinutes() === 0){
-        getNewTime()
-      } else{
-        britishTimeDisplay.textContent = britishTimeDisplay.textContent ? britishTimeDisplay.textContent.slice(0, 2) + ':' + localTime.getMinutes().toString().padStart(2, '0') : '';
-        japaneseTimeDisplay.textContent = japaneseTimeDisplay.textContent ? japaneseTimeDisplay.textContent.slice(0, 2) + ':' + localTime.getMinutes().toString().padStart(2, '0') : '';
+      if (localTime.getMinutes() === 0) {
+        getNewTime();
+      } else {
+        britishTimeDisplay.textContent = britishTimeDisplay.textContent
+          ? britishTimeDisplay.textContent.slice(0, 2) + ':' + localTime.getMinutes().toString().padStart(2, '0')
+          : '';
+        japaneseTimeDisplay.textContent = japaneseTimeDisplay.textContent
+          ? japaneseTimeDisplay.textContent.slice(0, 2) + ':' + localTime.getMinutes().toString().padStart(2, '0')
+          : '';
       }
     }
 
-
     // If the minutes are the same, we don't need to update anything.
 
-
-
-
-    async function getNewTime(){
-
+    async function getNewTime() {
       let myPromises = [
-        fetch(
-          "https://worldtimeapi.org/api/timezone/Europe/London"
-        ), // London time
-        fetch(
-          "https://worldtimeapi.org/api/timezone/Asia/Tokyo"
-        ), // Tokyo time
-      ] // returns array of promises
+        fetch('https://worldtimeapi.org/api/timezone/Europe/London'), // London time
+        fetch('https://worldtimeapi.org/api/timezone/Asia/Tokyo'), // Tokyo time
+      ]; // returns array of promises
 
-      const promiseData = Promise.all(myPromises)
+      const promiseData = Promise.all(myPromises);
 
       promiseData
         .then((responses) => {
-          const jsonResponsePromises = responses.map(r => r.json()) // make the responses into promises with their json values inside
+          const jsonResponsePromises = responses.map((r) => r.json()); // make the responses into promises with their json values inside
           return jsonResponsePromises;
         })
         .then((data) => {
-          
-          Promise.all(data)
-          .then((info) => {
-            britishTimeDisplay.textContent = info[0].datetime.slice(11,16);
-            japaneseTimeDisplay.textContent = info[1].datetime.slice(11,16);
-
-          })
+          Promise.all(data).then((info) => {
+            britishTimeDisplay.textContent = info[0].datetime.slice(11, 16);
+            japaneseTimeDisplay.textContent = info[1].datetime.slice(11, 16);
+          });
         })
-        .catch(failure => {
-            console.log('failed to update time')
-            console.log(failure)
+        .catch((failure) => {
+          console.log('failed to update time');
+          console.log(failure);
 
-            britishTimeDisplay.textContent = ''
-            japaneseTimeDisplay.textContent = ''
-          }
-        )
-
-
+          britishTimeDisplay.textContent = '';
+          japaneseTimeDisplay.textContent = '';
+        });
     }
   }
-  
 
-  function displayData(data: any[]){
-    let weatherArea: HTMLDivElement = document.querySelector("#weather-bar")!;
+  function displayData(data: any[]) {
+    let weatherArea: HTMLDivElement = document.querySelector('#weather-bar')!;
     weatherArea.innerHTML = '';
-    displayPanel(data[0], data[1], 'London, Great Britain',)
-    displayPanel(data[2], data[3], 'Tokyo, Japan')
+    displayPanel(data[0], data[1], 'London, Great Britain');
+    displayPanel(data[2], data[3], 'Tokyo, Japan');
 
-
-    function displayPanel(weather: {main: {temp: number;}, weather: [{description: string; icon: string;},]}, time: {datetime: string;}, city: string){
-      let panel = document.createElement('div')
-
+    function displayPanel(
+      weather: {
+        main: { temp: number };
+        weather: [{ description: string; icon: string }];
+      },
+      time: { datetime: string },
+      city: string
+    ) {
+      let panel = document.createElement('div');
 
       panel.innerHTML = `
           <img class="weather-bar-flag" src="assets/icons/flags/${
-              city === "London, Great Britain" ? "british" : "japanese"
+            city === 'London, Great Britain' ? 'british' : 'japanese'
           }.svg" width=32>
           <div class="weather-bar-details">
             ${city}<br>
-            <span class=${city === "London, Great Britain" ? "british" : "japanese"}-time>${(time.datetime).slice(11,16)}</span>
+            <span class=${city === 'London, Great Britain' ? 'british' : 'japanese'}-time>${time.datetime.slice(
+        11,
+        16
+      )}</span>
             <span>${Math.round(weather.main.temp)}&deg;C</span>
             <span>${weather.weather[0].description} <br></span>
           </div>
         <img src="https://openweathermap.org/img/wn/${weather.weather[0].icon}.png">
-      `
+      `;
 
-      weatherArea.appendChild(panel)
+      weatherArea.appendChild(panel);
     }
-    
   }
 }
 
-
-
 displayWeather();
-
 
 /* About section -------------------------------------------------------------*/
 
 aboutButton.addEventListener('click', () => {
-  document.body.classList.toggle('show-about')
-})
-
+  document.body.classList.toggle('show-about');
+});
 
 /* Random quotes -------------------------------------------------------------*/
 
 // url is the address to fetch
 // assuming the response returns a json object, the propName is the property we are looking to use.
 // If the response is expected to be an array, we put 'array' as the propName
-const quoteData : {
+const quoteData: {
   [key: string]: {
     url: string;
     options?: any;
     propName: string;
     innerPropName?: string;
-}} = {
+  };
+} = {
   kanye: {
     url: 'https://api.kanye.rest/',
     propName: 'quote',
@@ -1236,97 +1164,89 @@ const quoteData : {
     url: 'https://icanhazdadjoke.com/',
     options: {
       headers: {
-        Accept: "application/json"
-      }
+        Accept: 'application/json',
+      },
     },
-    propName: 'joke'
+    propName: 'joke',
   },
-  ronSwanson:{
+  ronSwanson: {
     url: 'https://ron-swanson-quotes.herokuapp.com/v2/quotes',
-    propName: 'array'
+    propName: 'array',
   },
   advice: {
     url: 'https://api.adviceslip.com/advice',
     propName: 'slip',
-    innerPropName: 'advice'
-  }
-}
+    innerPropName: 'advice',
+  },
+};
 
-
-function pasteQuote(type: string){
-
+function pasteQuote(type: string) {
   fetch(quoteData[type].url, quoteData[type].options)
     .then((response) => response.json())
     .then((data) => {
-      let property = quoteData[type].propName
-      let innerProperty = quoteData[type].innerPropName
+      let property = quoteData[type].propName;
+      let innerProperty = quoteData[type].innerPropName;
 
-      let text
+      let text;
 
-      if (property === 'array'){
-        text = data[0]
-      } else if (innerProperty){
-        text = data[property][innerProperty]
-      } else{
-        text = data[property]
+      if (property === 'array') {
+        text = data[0];
+      } else if (innerProperty) {
+        text = data[property][innerProperty];
+      } else {
+        text = data[property];
       }
-
 
       // If the quote is too long, get a new one.
       // Otherwise go ahead and use it.
-      if (text.length > 115 || text.indexOf('fuck') > -1){
-        pasteQuote(type)
-      } else{
+      if (text.length > 115 || text.indexOf('fuck') > -1) {
+        pasteQuote(type);
+      } else {
         (document.querySelector('.active-canvas textarea') as HTMLTextAreaElement).value = text;
       }
     })
-    .catch(failure => {
-      console.log(failure)
-    }
-  )
-};
+    .catch((failure) => {
+      console.log(failure);
+    });
+}
 
-function pasteQuoteFromArray(type: string){
-
+function pasteQuoteFromArray(type: string) {
   let array;
-  if (type === "michaelScott"){
-    array = michaelScott
-  } else if (type === "deadpool"){
+  if (type === 'michaelScott') {
+    array = michaelScott;
+  } else if (type === 'deadpool') {
     array = deadpool;
   }
 
-  if (!array){
+  if (!array) {
     return;
   }
 
-  let text = array[Math.floor((Math.random() * array.length))];
+  let text = array[Math.floor(Math.random() * array.length)];
 
   // If the quote is too long, get a new one.
   // Otherwise go ahead and use it.
-  if (text.length < 115 && text.indexOf('fuck') === -1){
+  if (text.length < 115 && text.indexOf('fuck') === -1) {
     (document.querySelector('.active-canvas textarea') as HTMLTextAreaElement).value = text;
   }
 }
 
-
 ['kanye', 'dadJoke', 'ronSwanson', 'advice'].forEach((type: string) => {
   document.querySelector(`.quote-button[type="${type}"]`)!.addEventListener('click', () => {
-    pasteQuote(type)
-  })
+    pasteQuote(type);
+  });
 });
-
 
 ['michaelScott', 'deadpool'].forEach((type: string) => {
   document.querySelector(`.quote-button[type="${type}"]`)!.addEventListener('click', () => {
-    pasteQuoteFromArray(type)
-  })
-})
-
+    pasteQuoteFromArray(type);
+  });
+});
 
 /* Name selectors ------------------------------------------------------------*/
 
 // Generate the modal content for the name selector
-function generateNameSelectorWindow () {
+function generateNameSelectorWindow() {
   modalContent.innerHTML = `
     <h2>Alternate names</h2>
     <div id="name-selector-choices"></div>
@@ -1342,11 +1262,10 @@ function generateNameSelectorWindow () {
 
   document.querySelectorAll('.name-language-selector-container').forEach((sel) => {
     sel.addEventListener('click', updateNamesLanguage);
-  })
+  });
 
   // Update all characters to their English or Japanese names.
-  function updateNamesLanguage(e: Event){
-
+  function updateNamesLanguage(e: Event) {
     let clickedButton = (e.target as HTMLElement).closest('[language]');
 
     // Figure out what language we're wanting to change to.
@@ -1356,75 +1275,75 @@ function generateNameSelectorWindow () {
     window.localStorage.setItem('prefersJapaneseNames', String(language === 'japanese'));
 
     Object.keys(alternateNamesInUse).forEach((altName) => {
-
       // Get the character object so we can reference it
-      let character: CharacterObject | undefined = characters.find((character) => (character.alternateNames ?? []).includes(altName));
+      let character: CharacterObject | undefined = characters.find((character) =>
+        (character.alternateNames ?? []).includes(altName)
+      );
 
-      if (character && character.alternateNames){
+      if (character && character.alternateNames) {
         // The first name in the alternate names property should be the English name, the second should be the Japanese name
-        let nameIndex = language === "english" ? 0 : 1;
+        let nameIndex = language === 'english' ? 0 : 1;
         alternateNamesInUse[altName] = character.alternateNames[nameIndex];
         window.localStorage.setItem('alternateNamesInUse', JSON.stringify(alternateNamesInUse));
 
-
         // Make all of the appropriate radio buttons checked.
-        let radioButtons: NodeListOf<HTMLInputElement> = document.querySelectorAll(`.name-selector-form[for=${character.alternateNames[0]}] input[type="radio"]`)
+        let radioButtons: NodeListOf<HTMLInputElement> = document.querySelectorAll(
+          `.name-selector-form[for=${character.alternateNames[0]}] input[type="radio"]`
+        );
         radioButtons.forEach((btn) => {
-          btn.removeAttribute('checked')
+          btn.removeAttribute('checked');
           let buttonValue = btn.getAttribute('value');
-          if (alternateNamesInUse[altName] == buttonValue){
+          if (alternateNamesInUse[altName] == buttonValue) {
             btn.setAttribute('checked', 'true');
             btn.click();
           }
-        })
+        });
       }
-    })
-
+    });
 
     propagateAlternateNames();
-
   }
 
   getCharactersInUse();
 
-  
   for (const [key] of Object.entries(alternateNamesInUse)) {
+    let myCharacter: CharacterObject | undefined = characters.find((character) =>
+      (character.alternateNames ?? []).includes(key)
+    );
+    let characterId = myCharacter?.id;
 
-    let myCharacter : CharacterObject | undefined = characters.find((character) => (character.alternateNames ?? []).includes(key));
-    let characterId = myCharacter?.id
-
-    if (myCharacter
-      && characterId
-      && myCharacter.alternateNames
-      && charactersInUse.length > 0
-      && (charactersInUse.includes(myCharacter.id) || charactersInUse.includes(myCharacter?.alternateNames[0]))){
-      modalContent.querySelector('#name-selector-choices')!.appendChild(generateCharacterNameListInterface(characterId))
+    if (
+      myCharacter &&
+      characterId &&
+      myCharacter.alternateNames &&
+      charactersInUse.length > 0 &&
+      (charactersInUse.includes(myCharacter.id) || charactersInUse.includes(myCharacter?.alternateNames[0]))
+    ) {
+      modalContent
+        .querySelector('#name-selector-choices')!
+        .appendChild(generateCharacterNameListInterface(characterId));
     }
   }
 }
 
-function getCharactersInUse() { 
+function getCharactersInUse() {
   charactersInUse = [];
   document.querySelectorAll('img.tag-image').forEach((img) => charactersInUse.push(img.getAttribute('character')));
-};
+}
 
 // Generate the names interface for each individual character.
-function generateCharacterNameListInterface (characterID: string) {
-
-  let myCharacter: CharacterObject | undefined = getCharacterFromID(characterID)
+function generateCharacterNameListInterface(characterID: string) {
+  let myCharacter: CharacterObject | undefined = getCharacterFromID(characterID);
   const namePanel = document.createElement('fieldset');
-  namePanel.classList.add("name-selector-form");
+  namePanel.classList.add('name-selector-form');
 
-  
-  if (!myCharacter){
+  if (!myCharacter) {
     return namePanel;
   }
 
   const alternateNames = myCharacter.alternateNames ?? [];
 
-
-
-  namePanel.setAttribute('for', alternateNames[0])
+  namePanel.setAttribute('for', alternateNames[0]);
 
   const characterIcon = document.createElement('img');
   characterIcon.src = `assets/characters/${myCharacter.id}/thumbnails/1.png`;
@@ -1436,20 +1355,20 @@ function generateCharacterNameListInterface (characterID: string) {
     input.innerHTML = `
       <input type="radio" id="${altName}" name="${alternateNames[0]}" value="${altName}" class="name-selector-input">
       <label for="${altName}">${altName}</label>
-    `
-    
-    namePanel.appendChild(input)
-    
+    `;
+
+    namePanel.appendChild(input);
+
     input.addEventListener('click', () => {
       alternateNamesInUse[alternateNames[0]] = altName;
       window.localStorage.setItem('alternateNamesInUse', JSON.stringify(alternateNamesInUse));
       propagateAlternateNames();
-    })
-  })
+    });
+  });
 
-  if (alternateNames.length > 0){
-    let selectedName = alternateNamesInUse[alternateNames[0] ?? myCharacter.id]
-    namePanel.querySelector(`input[value="${selectedName}"]`)!.setAttribute('checked', 'true')
+  if (alternateNames.length > 0) {
+    let selectedName = alternateNamesInUse[alternateNames[0] ?? myCharacter.id];
+    namePanel.querySelector(`input[value="${selectedName}"]`)!.setAttribute('checked', 'true');
   }
 
   return namePanel;
