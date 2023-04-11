@@ -773,6 +773,8 @@ function download(e: Event) {
       for (let j = 1; j < layersToRender; j++) {
         let imgToDraw: HTMLImageElement | null = allCanvases[i].querySelector('img:nth-child(' + j + ')');
         if (imgToDraw) {
+          imgToDraw.width = 1920;
+          imgToDraw.height = 1080;
           tempCanvasContext?.drawImage(imgToDraw, 0, 0, 1920, 1080);
         }
       }
