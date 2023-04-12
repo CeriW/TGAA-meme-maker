@@ -644,7 +644,14 @@ function download(e) {
                 if (imgToDraw) {
                     imgToDraw.width = 1920;
                     imgToDraw.height = 1080;
-                    tempCanvasContext.drawImage(imgToDraw, 0, 0);
+                    try {
+                        tempCanvasContext.drawImage(imgToDraw, 0, 0, 1920, 1080);
+                        console.log('Rendered fine');
+                    }
+                    catch (_a) {
+                        tempCanvasContext.drawImage(imgToDraw, 0, 0);
+                        console.log('Problem');
+                    }
                 }
             }
             var myFont = new FontFace('Toplar', 'url("assets/fonts/Toplar.woff")');
