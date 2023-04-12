@@ -73,6 +73,14 @@ canvas{
   .canvas-container img.speech-box{
     opacity: 0;
   }
+
+  .canvas-container img:not(.speech-box){
+    height: calc(100% - 80px);
+  }
+
+  .canvas-container{
+    padding-bottom: 80px;
+  }
 }
 
 #theme-music{
