@@ -775,7 +775,7 @@ function download(e: Event) {
         if (imgToDraw) {
           imgToDraw.width = 1920;
           imgToDraw.height = 1080;
-          tempCanvasContext?.drawImage(imgToDraw, 0, 0, 1920, 1080);
+          tempCanvasContext.drawImage(imgToDraw, 0, 0, 1920, 1080);
         }
       }
 
