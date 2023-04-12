@@ -642,8 +642,6 @@ function download(e) {
             for (let j = 1; j < layersToRender; j++) {
                 let imgToDraw = allCanvases[i].querySelector('img:nth-child(' + j + ')');
                 if (imgToDraw) {
-                    imgToDraw.width = 1920;
-                    imgToDraw.height = 1080;
                     try {
                         tempCanvasContext.drawImage(imgToDraw, 0, 0, 1920, 1080);
                         console.log('Rendered fine');
