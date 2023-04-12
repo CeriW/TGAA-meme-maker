@@ -641,10 +641,10 @@ function download(e) {
             let layersToRender = allCanvases[i].querySelector('textarea').value.length === 0 ? 4 : 6;
             for (let j = 1; j < layersToRender; j++) {
                 let imgToDraw = allCanvases[i].querySelector('img:nth-child(' + j + ')');
-                // Older versions of Safari frequently fail to drawImage when the width and height are set.
-                // This is a way of telling it to fall back to the non-specified version of drawImage if it fails the first one.
-                // This may result in custom backgrounds being rendered in a less than ideal fashion, but better than no download at all.
                 if (imgToDraw) {
+                    // Older versions of Safari frequently fail to drawImage when the width and height are set.
+                    // This is a way of telling it to fall back to the non-specified version of drawImage if it fails the first one.
+                    // This may result in custom backgrounds being rendered in a less than ideal fashion, but better than no download at all.
                     try {
                         tempCanvasContext.drawImage(imgToDraw, 0, 0, 1920, 1080);
                     }
