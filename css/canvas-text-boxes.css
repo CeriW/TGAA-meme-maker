@@ -74,4 +74,8 @@
     margin: 0;
     font-size: 19px;
   }
+
+  .text-overlay-preview{
+    opacity: 0;
+  }
 }
