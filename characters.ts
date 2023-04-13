@@ -39,6 +39,18 @@ export const characters: CharacterObject[] = [
     lastUpdated: null,
     posesAddedOnLastUpdate: 0,
   },
+  // {
+  //   name: 'Ryunosuke Naruhodo',
+  //   id: 'naruhodo-ryunosuke',
+  //   gender: 'male',
+  //   nationality: 'japanese',
+  //   appearsIn: [true, true, true, true, true, false, true, true, true, true],
+  //   images: 10,
+  //   theme: 'https://open.spotify.com/embed/track/6t74To2T8PUd6k1dbSu10D?utm_source=generator',
+  //   tags: ['ryuulock', 'baroasoryuu'],
+  //   lastUpdated: '2023-04-17',
+  //   posesAddedOnLastUpdate: 2,
+  // },
   {
     name: 'Herlock Sholmes',
     id: 'sholmes-herlock-default',
@@ -53,6 +65,22 @@ export const characters: CharacterObject[] = [
     posesAddedOnLastUpdate: 0,
     alternateNames: ['Sholmes', 'Holmes'],
   },
+
+  // {
+  //   name: 'Herlock Sholmes',
+  //   id: 'sholmes-herlock-default',
+  //   gender: 'male',
+  //   nationality: 'british',
+  //   appearsIn: [false, true, true, true, true, false, true, true, true, true],
+  //   images: 20,
+  //   variant: 'default outfit',
+  //   theme: 'https://open.spotify.com/embed/track/1QUX7xOPs80O5tiQb3MPqd?utm_source=generator',
+  //   tags: ['homumiko', 'ryuulock', 'doyle', 'herlock'],
+  //   lastUpdated: '2023-04-17',
+  //   posesAddedOnLastUpdate: 4,
+  //   alternateNames: ['Sholmes', 'Holmes'],
+  // },
+
   {
     name: 'Herlock Sholmes',
     id: 'sholmes-herlock-casual',
@@ -82,6 +110,21 @@ export const characters: CharacterObject[] = [
     posesAddedOnLastUpdate: 13,
     alternateNames: ['Sholmes', 'Holmes'],
   },
+
+  // {
+  //   name: 'Herlock Sholmes',
+  //   id: 'sholmes-herlock-j-jumble',
+  //   gender: 'male',
+  //   nationality: 'british',
+  //   appearsIn: [false, true, true, true, true, false, true, true, true, true],
+  //   images: 14,
+  //   variant: 'Japanese Jumble',
+  //   theme: 'https://open.spotify.com/embed/track/0EFqdvTgJMPd02XUUCsHnI?utm_source=generator',
+  //   tags: ['homumiko', 'ryuulock', 'doyle', 'herlock'],
+  //   lastUpdated: '2023-04-17',
+  //   posesAddedOnLastUpdate: 1,
+  //   alternateNames: ['Sholmes', 'Holmes'],
+  // },
 
   {
     name: 'Susato Mikotoba',
