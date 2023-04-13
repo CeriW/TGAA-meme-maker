@@ -842,7 +842,7 @@ function download(e: Event) {
         // no longer need to read the blob so it's revoked
         downloadLink.href = url;
         downloadLink.target = '_blank';
-        downloadLink.download = `tgaa-meme-maker - ${formattedDate} - #tgaaMemeMaker.jpg`;
+        downloadLink.download = `tgaa-meme-maker - ${formattedDate} - #tgaaMemeMaker.png`;
         downloadLink.click();
         URL.revokeObjectURL(url);
       };
