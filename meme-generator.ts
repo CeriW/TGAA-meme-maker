@@ -714,7 +714,7 @@ function download(e: Event) {
   // Get a list of all the canvases, and set the height of our temporary one to their combined heights.
   //let allCanvases = document.querySelectorAll('canvas:not(.temp-canvas)')
   let allCanvases: NodeListOf<HTMLDivElement> = document.querySelectorAll('.canvas-container');
-  downloadableCanvas.setAttribute('height', String(1080 * allCanvases.length));
+  downloadableCanvas.setAttribute('height', String(1080 * allCanvases.length + 30));
 
   // Render the text on each one of our individual canvases, and add it onto
   // our temporary one.
@@ -811,7 +811,7 @@ function download(e: Event) {
     }
 
     // Add the credits onto the end.
-    downloadableCanvasContext.drawImage(credits, 0, (allCanvases.length - 1) * 1080);
+    downloadableCanvasContext.drawImage(credits, 0, (allCanvases.length - 1) * 1080 + 30);
 
     // Download the image, then remove the temporary canvas.
 
