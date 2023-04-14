@@ -163,6 +163,8 @@ function generatePanelArtwork() {
   let backgrounds: NodeListOf<HTMLImageElement> = document.querySelectorAll('.canvas-container img:first-child');
   backgrounds.forEach(function (background) {
     background.src = paths.location + backgroundSelector.value + '.jpg';
+    background.srcset = `${paths.location}800/${backgroundSelector.value}.jpg 800w`;
+    background.sizes = '(min-width: 800px) 800px';
   });
 
   characterOverlay.src = `/assets/locations/${characterOverlayID}.png`;
