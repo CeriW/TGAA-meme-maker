@@ -135,7 +135,7 @@ function generatePanelArtwork() {
         [500, 800].forEach((size) => {
             let source = document.createElement('source');
             background.appendChild(source);
-            source.outerHTML = `<source media="(min-width:${size}px)" srcset="${paths.location + size + '/' + backgroundSelector.value + '.jpg'}">`;
+            source.outerHTML = `<source media="(max-width:${size}px)" srcset="${paths.location + size + '/' + backgroundSelector.value + '.jpg'}">`;
         });
         // background.srcset = `${paths.location}800/${backgroundSelector.value}.jpg 800w`;
         // background.sizes = '(min-width: 800px) 800px';
