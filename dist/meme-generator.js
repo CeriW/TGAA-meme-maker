@@ -123,11 +123,22 @@ function generateLocations() {
 // Generates our canvas with the chosen backgrounds, characters and text
 function generatePanelArtwork() {
     // Set the background image
-    let backgrounds = document.querySelectorAll('.canvas-container img:first-child');
+    let backgrounds = document.querySelectorAll('.canvas-container picture:first-child');
     backgrounds.forEach(function (background) {
-        background.src = paths.location + backgroundSelector.value + '.jpg';
-        background.srcset = `${paths.location}800/${backgroundSelector.value}.jpg 800w`;
-        background.sizes = '(min-width: 800px) 800px';
+        var _a;
+        background.querySelector('img').src = paths.location + backgroundSelector.value + '.jpg';
+        let children = background.childNodes;
+        for (let i = 1; i < children.length; i++) {
+            (_a = children[i].parentNode) === null || _a === void 0 ? void 0 : _a.removeChild(children[i]);
+            console.log(children[i]);
+        }
+        [500, 800].forEach((size) => {
+            let source = document.createElement('source');
+            background.appendChild(source);
+            source.outerHTML = `<source media="(min-width:${size}px)" srcset="${paths.location + size + '/' + backgroundSelector.value + '.jpg'}">`;
+        });
+        // background.srcset = `${paths.location}800/${backgroundSelector.value}.jpg 800w`;
+        // background.sizes = '(min-width: 800px) 800px';
     });
     characterOverlay.src = `/assets/locations/${characterOverlayID}.png`;
     let overlays = document.querySelectorAll('.canvas-container img:nth-child(3)');
@@ -188,8 +199,10 @@ function generateCanvas() {
     // Create the new canvas
     let newCanvas = document.createElement('div');
     newCanvas.classList.add('canvas-container');
+    let myPicture = document.createElement('picture');
     backgroundImg = document.createElement('img');
-    newCanvas.appendChild(backgroundImg);
+    myPicture.appendChild(backgroundImg);
+    newCanvas.appendChild(myPicture);
     characterImg = characterImg ? characterImg.cloneNode() : document.createElement('img');
     newCanvas.appendChild(characterImg);
     characterOverlay = characterOverlay
