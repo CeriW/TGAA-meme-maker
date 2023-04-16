@@ -35,7 +35,7 @@ export const themes = {
     ryuulockWeek: {
         name: 'ryuulock',
         isSpoiler: false,
-        message: '<b style="color: var(--gold)">Happy Ryuulock week!</b><br>17-23 April #ryuulockweek2023',
+        message: '<b style="color: var(--gold)">Happy Ryulock week!</b><br>17-23 April #ryulockweek2023',
     },
     takumi: { name: 'takumi', isSpoiler: false, message: 'Happy birthday Shu Takumi!' },
     tgaaAnniversary: {
