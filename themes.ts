@@ -134,8 +134,6 @@ export function setTheme() {
     myTheme = themes.cherrylestradeBirthday;
   }
 
-  myTheme = themes.ryuulockWeek;
-
   if (myTheme?.message) {
     let bannerBottom = document.createElement('div');
     bannerBottom.innerHTML = `
