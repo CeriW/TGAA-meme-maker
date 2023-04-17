@@ -4,7 +4,7 @@
 // gender - the gender of the character, for filtering purposes
 // nationality - for filtering purposes
 // appearsIn - for filtering purposes. For those unfamiliar with TGAA, the game is split into two parts, each part being split up into 5 individual cases making 10 in total. This array is made up of ten values containing true or false to indicate whether this character was present in that case.
-//             Cases are commonly referred to the fans by the number of the game they appear in, then the order of that case. For example, case 9 is usually called 2-4 because it's the 4th part of the 2nd game.
+//             Cases are commonly referred to by the fans as the number of the game they appear in, then the order of that case. For example, case 9 is usually called 2-4 because it's the 4th part of the 2nd game.
 // images - the number of images in the folder to go with this character. The code depends on them being named sequentially beginning at 1 and can't work if there are any numbers missing.
 // tags - used during themed time periods. Will be used to place these characters at the top of the list. The tags should correspond to theme names
 // lastUpdated - a date string of the last time this character was updated. Will be used to generate a 'new' image tag for a set number of days.

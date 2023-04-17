@@ -43,70 +43,39 @@ export function setTheme() {
   let myTheme = null;
 
   // ONE OFF EVENTS
-  if (isBetweenDates('2023-04-08', '2023-04-14')) {
-    myTheme = themes.ginaLestradeWeek;
-  }
-  if (isBetweenDates('2023-04-17', '2023-04-23')) {
-    myTheme = themes.ryuulockWeek;
-  }
-  if (isBetweenDates('2023-05-01', '2023-05-07')) {
-    myTheme = themes.baroasoryuuWeek;
-  }
-  if (isBetweenDates('2023-05-28', '2023-06-03')) {
-    myTheme = themes.asobaroWeek;
-  }
-  if (isBetweenDates('2023-06-18', '2023-06-18')) {
-    myTheme = themes.fathersDay;
-  }
+  if (isBetweenDates('2023-04-08', '2023-04-14')) {myTheme = themes.ginaLestradeWeek;}
+  if (isBetweenDates('2023-04-17', '2023-04-23')) {myTheme = themes.ryuulockWeek;}
+  if (isBetweenDates('2023-05-01', '2023-05-07')) {myTheme = themes.baroasoryuuWeek;}
+  if (isBetweenDates('2023-05-28', '2023-06-03')) {myTheme = themes.asobaroWeek;}
+  if (isBetweenDates('2023-06-18', '2023-06-18')) {myTheme = themes.fathersDay;}
 
   // ANNUALLY RECURRING EVENTS
 
   // Sherlock Holmes' birthday - 6th Jan
-  if (isDate({ day: 6, month: 1 })) {
-    myTheme = themes.herlock;
-  }
-
-  // Soseki Natsume's birthday - 9th Feb
-  if (isDate({ day: 9, month: 2 })) {
-    myTheme = themes.natsume;
-  }
-
-  // April Fool's Day - 1st April
-  if (isDate({ day: 1, month: 4 })) {
-    initialiseCumberbatchTheme();
-    myTheme = themes.cumberbatch;
+  if (isDate({ day: 6, month: 1 })) {  myTheme = themes.herlock;} // Soseki Natsume's birthday - 9th Feb
+  if (isDate({ day: 9, month: 2 })) {  myTheme = themes.natsume;} // April Fool's Day - 1st April
+  if (isDate({ day: 1, month: 4 })) {    initialiseCumberbatchTheme();  myTheme = themes.cumberbatch;
   }
 
   // Shu Takumi's birthday - 2nd May
-  if (isDate({ day: 2, month: 5 })) {
-    myTheme = themes.takumi;
-  }
+  if (isDate({ day: 2, month: 5 })) {myTheme = themes.takumi;}
 
   // Sir Arthur Conan Doyle's birthday - 22nd May
-  if (isDate({ day: 22, month: 5 })) {
-    myTheme = themes.doyle;
-  }
+  if (isDate({ day: 22, month: 5 })) {myTheme = themes.doyle;}
 
   // Japanese release anniversary - 9th July
-  if (isDate({ day: 9, month: 7 })) {
-    myTheme = themes.dgsAnniversary;
-  }
+  if (isDate({ day: 9, month: 7 })) {myTheme = themes.dgsAnniversary;}
 
   // Localised release anniversary - 26th July
-  if (isDate({ day: 26, month: 7 })) {
-    myTheme = themes.tgaaAnniversary;
-  }
+  if (isDate({ day: 26, month: 7 })) {myTheme = themes.tgaaAnniversary;}
 
   // Watson's birthday - 26th July
-  if (isDate({ day: 7, month: 8 })) {
-    myTheme = themes.watson;
-  }
+  if (isDate({ day: 7, month: 8 })) {myTheme = themes.watson;}
 
   // My birthday :) - 7th Dec
-  if (isDate({ day: 7, month: 12 })) {
-    myTheme = themes.cherrylestradeBirthday;
-  }
+  if (isDate({ day: 7, month: 12 })) {myTheme = themes.cherrylestradeBirthday;}
 
+  
   if (myTheme?.message) {
     let bannerBottom = document.createElement('div');
     bannerBottom.innerHTML = `
