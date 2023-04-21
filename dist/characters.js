@@ -4,7 +4,7 @@
 // gender - the gender of the character, for filtering purposes
 // nationality - for filtering purposes
 // appearsIn - for filtering purposes. For those unfamiliar with TGAA, the game is split into two parts, each part being split up into 5 individual cases making 10 in total. This array is made up of ten values containing true or false to indicate whether this character was present in that case.
-//             Cases are commonly referred to the fans by the number of the game they appear in, then the order of that case. For example, case 9 is usually called 2-4 because it's the 4th part of the 2nd game.
+//             Cases are commonly referred to by the fans as the number of the game they appear in, then the order of that case. For example, case 9 is usually called 2-4 because it's the 4th part of the 2nd game.
 // images - the number of images in the folder to go with this character. The code depends on them being named sequentially beginning at 1 and can't work if there are any numbers missing.
 // tags - used during themed time periods. Will be used to place these characters at the top of the list. The tags should correspond to theme names
 // lastUpdated - a date string of the last time this character was updated. Will be used to generate a 'new' image tag for a set number of days.
@@ -17,11 +17,11 @@ export const characters = [
         gender: 'male',
         nationality: 'japanese',
         appearsIn: [true, true, true, true, true, false, true, true, true, true],
-        images: 8,
+        images: 10,
         theme: 'https://open.spotify.com/embed/track/6t74To2T8PUd6k1dbSu10D?utm_source=generator',
         tags: ['ryuulock', 'baroasoryuu'],
-        lastUpdated: null,
-        posesAddedOnLastUpdate: 0,
+        lastUpdated: '2023-04-17',
+        posesAddedOnLastUpdate: 2,
     },
     {
         name: 'Herlock Sholmes',
@@ -29,13 +29,13 @@ export const characters = [
         gender: 'male',
         nationality: 'british',
         appearsIn: [false, true, true, true, true, false, true, true, true, true],
-        images: 16,
+        images: 20,
         variant: 'default outfit',
         theme: 'https://open.spotify.com/embed/track/1QUX7xOPs80O5tiQb3MPqd?utm_source=generator',
         tags: ['homumiko', 'ryuulock', 'doyle', 'herlock'],
-        lastUpdated: null,
-        posesAddedOnLastUpdate: 0,
-        alternateNames: ['Sholmes', 'Holmes']
+        lastUpdated: '2023-04-17',
+        posesAddedOnLastUpdate: 4,
+        alternateNames: ['Sholmes', 'Holmes'],
     },
     {
         name: 'Herlock Sholmes',
@@ -57,13 +57,13 @@ export const characters = [
         gender: 'male',
         nationality: 'british',
         appearsIn: [false, true, true, true, true, false, true, true, true, true],
-        images: 13,
+        images: 14,
         variant: 'Japanese Jumble',
         theme: 'https://open.spotify.com/embed/track/0EFqdvTgJMPd02XUUCsHnI?utm_source=generator',
         tags: ['homumiko', 'ryuulock', 'doyle', 'herlock'],
-        lastUpdated: "Sat Mar 04 2023",
-        posesAddedOnLastUpdate: 13,
-        alternateNames: ['Sholmes', 'Holmes']
+        lastUpdated: '2023-04-17',
+        posesAddedOnLastUpdate: 1,
+        alternateNames: ['Sholmes', 'Holmes'],
     },
     {
         name: 'Susato Mikotoba',
@@ -74,7 +74,7 @@ export const characters = [
         images: 16,
         theme: 'https://open.spotify.com/embed/track/09pXZRySXfq6Z17YiVnOJC?utm_source=generator',
         tags: [],
-        lastUpdated: "2023-03-10",
+        lastUpdated: '2023-03-10',
         posesAddedOnLastUpdate: 1,
     },
     {
@@ -123,7 +123,7 @@ export const characters = [
         images: 9,
         theme: 'https://open.spotify.com/embed/track/582mS91YcS5PHaTx5LUPn4?utm_source=generator',
         tags: ['doyle', 'ginaLestradeWeek'],
-        lastUpdated: "2023-04-08",
+        lastUpdated: '2023-04-08',
         posesAddedOnLastUpdate: 9,
     },
     {
@@ -136,7 +136,7 @@ export const characters = [
         images: 13,
         theme: 'https://open.spotify.com/embed/track/582mS91YcS5PHaTx5LUPn4?utm_source=generator',
         tags: ['doyle', 'ginaLestradeWeek'],
-        lastUpdated: "2023-04-08",
+        lastUpdated: '2023-04-08',
         posesAddedOnLastUpdate: 8,
     },
     {
@@ -149,8 +149,8 @@ export const characters = [
         variant: 'Japan outfit',
         theme: 'https://open.spotify.com/embed/track/7rePNo1I17JmU49JX6rbnE?utm_source=generator',
         tags: ['homumiko', 'watson'],
-        lastUpdated: "Sat Mar 04 2023",
-        posesAddedOnLastUpdate: 7
+        lastUpdated: 'Sat Mar 04 2023',
+        posesAddedOnLastUpdate: 7,
     },
     {
         name: 'Yujin Mikotoba',
@@ -162,7 +162,7 @@ export const characters = [
         variant: 'London outfit',
         theme: 'https://open.spotify.com/embed/track/7rePNo1I17JmU49JX6rbnE?utm_source=generator',
         tags: ['homumiko', 'watson'],
-        lastUpdated: "Sat Mar 04 2023",
+        lastUpdated: 'Sat Mar 04 2023',
         posesAddedOnLastUpdate: 8,
     },
     {
@@ -174,7 +174,7 @@ export const characters = [
         images: 4,
         theme: 'https://open.spotify.com/embed/track/4qiFdo2jEF4AcZzj8LxPUP?utm_source=generator',
         tags: ['asobaro', 'baroasoryuu'],
-        lastUpdated: "Fri Mar 03 2023",
+        lastUpdated: 'Fri Mar 03 2023',
         posesAddedOnLastUpdate: 3,
     },
     {
@@ -204,7 +204,7 @@ export const characters = [
     {
         name: 'Wagahai',
         id: 'wagahai',
-        gender: 'male',
+        gender: 'question_mark',
         nationality: 'british',
         appearsIn: [false, false, false, true, true, false, true, false, false, false],
         images: 3,
@@ -223,7 +223,7 @@ export const characters = [
         tags: [],
         lastUpdated: null,
         posesAddedOnLastUpdate: 0,
-        alternateNames: ['Tusspells', 'Rozaic']
+        alternateNames: ['Tusspells', 'Rozaic'],
     },
     {
         name: 'Courtney Sithe',
@@ -247,7 +247,7 @@ export const characters = [
         tags: [],
         lastUpdated: null,
         posesAddedOnLastUpdate: 0,
-        alternateNames: ['Gorey', 'Goulloyne']
+        alternateNames: ['Gorey', 'Goulloyne'],
     },
     {
         name: 'Magnus McGuilded',
@@ -258,7 +258,7 @@ export const characters = [
         images: 2,
         tags: [],
         alternateNames: ['McGuilded', 'Megundal'],
-        lastUpdated: "2023-03-10",
+        lastUpdated: '2023-03-10',
         posesAddedOnLastUpdate: 1,
     },
     {
@@ -296,7 +296,7 @@ export const characters = [
         images: 12,
         alternateNames: ['Rei', 'Haori'],
         tags: [],
-        lastUpdated: "2023-03-22",
+        lastUpdated: '2023-03-22',
         posesAddedOnLastUpdate: 9,
     },
     {
@@ -308,7 +308,7 @@ export const characters = [
         images: 5,
         tags: [],
         alternateNames: ['Graydon', 'Chrogray', 'Benedict', 'Egg'],
-        lastUpdated: "2023-03-11",
+        lastUpdated: '2023-03-11',
         posesAddedOnLastUpdate: 5,
-    }
+    },
 ];
