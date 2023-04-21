@@ -1,5 +1,5 @@
 // Version info
-const versionInfo = '4.3.3 - 2023-04-06';
+const versionInfo = '4.3.0 - 2023-04-21';
 
 import { locations, LocationObject } from './locations.js';
 import { characters, CharacterObject } from './characters.js';
@@ -43,6 +43,7 @@ const poseSelectorPreview: HTMLDivElement = document.querySelector('#pose-select
 const downloadButton: HTMLLinkElement = document.querySelector('#download')!;
 const aboutButton: HTMLButtonElement = document.querySelector('#about-button')!;
 const modalContent: HTMLDivElement = document.querySelector('#modal-content')!;
+const customBackgroundInput: HTMLInputElement = document.querySelector('#custom-background-input')!;
 
 // Store whether the user has deliberately chosen a character yet.
 // This will prevent the default character tag being generated
@@ -50,6 +51,8 @@ const modalContent: HTMLDivElement = document.querySelector('#modal-content')!;
 let characterSelected: boolean = false;
 document.body.setAttribute('character-selected', String(characterSelected));
 let charactersInUse: any[] = [];
+
+let customBackground = '';
 
 // The locations to find certain visual elements
 const paths = {
@@ -155,17 +158,42 @@ function generateLocations() {
     newOption.setAttribute('value', location.id);
     backgroundSelector.appendChild(newOption);
   });
+
+  let newOption = document.createElement('option');
+  newOption.textContent = 'custom';
+  newOption.setAttribute('value', 'custom');
+  backgroundSelector.appendChild(newOption);
 }
+
+customBackgroundInput.addEventListener('change', () => {
+  if (customBackgroundInput.files && customBackgroundInput.files.length > 0) {
+    backgroundSelector.value = 'custom';
+    characterOverlayID = null;
+    generatePanelArtwork();
+  }
+});
 
 // Generates our canvas with the chosen backgrounds, characters and text
 function generatePanelArtwork() {
   // Set the background image
   let backgrounds: NodeListOf<HTMLImageElement> = document.querySelectorAll('.canvas-container img:first-child');
+
+  let myBackground: string;
+  if (backgroundSelector.value === 'custom' && customBackgroundInput.files && customBackgroundInput.files.length > 0) {
+    myBackground = URL.createObjectURL(customBackgroundInput.files[0]);
+    customBackground = myBackground;
+  } else if (backgroundSelector.value === 'custom') {
+    myBackground = customBackground;
+  } else {
+    myBackground = `${paths.location}${backgroundSelector.value}.jpg`;
+  }
+
   backgrounds.forEach(function (background) {
-    background.src = paths.location + backgroundSelector.value + '.jpg';
+    background.src = myBackground;
   });
 
   characterOverlay.src = `/assets/locations/${characterOverlayID}.png`;
+
   let overlays: NodeListOf<HTMLImageElement> = document.querySelectorAll('.canvas-container img:nth-child(3)');
   overlays.forEach(function (overlay) {
     overlay.src = characterOverlay.src;
@@ -234,6 +262,7 @@ function generateCanvas() {
   newCanvas.classList.add('canvas-container');
 
   backgroundImg = document.createElement('img');
+  backgroundImg.classList.add('background-image');
   newCanvas.appendChild(backgroundImg);
 
   characterImg = characterImg ? (characterImg.cloneNode() as HTMLImageElement) : document.createElement('img');
@@ -411,7 +440,9 @@ function determineIconOrder(dateModified: string | null, tags: string[] = []): s
   let order = Math.floor(myDate.getTime() / 100000000000);
   let currentDate = Math.floor(new Date().getTime() / 100000000000);
 
-  if (isNew && matchesTheme) {
+  if (tags.includes('CUSTOM')) {
+    return `-${new Date().getTime()}`;
+  } else if (isNew && matchesTheme) {
     return `-3${order + currentDate}`;
   } else if (matchesTheme) {
     return `-2${order + currentDate}`;
@@ -484,6 +515,7 @@ function generateLocationInterface() {
     // have the new location
     icon.addEventListener('click', function (e) {
       let myTarget = e.target as HTMLDivElement;
+
       let value = myTarget.getAttribute('value');
       if (value) {
         backgroundSelector.value = value;
@@ -505,12 +537,19 @@ function generateLocationInterface() {
         });
       }
       myTarget.setAttribute('selected', 'true');
+
+      if (myTarget !== customBackgroundInput) {
+        customBackgroundInput.setAttribute('selected', 'false');
+      }
     });
   });
 
   // Set the first one as default selected. This only styles it and doesn't
   // do any actual functionality.
-  document.querySelector('.location-icon')!.setAttribute('selected', 'true');
+  let icons = document.querySelectorAll('.location-icon');
+  icons[0]!.setAttribute('selected', 'true');
+
+  document.querySelector('.location-icon[value="custom"]')?.appendChild(customBackgroundInput);
 }
 
 // Generate a labelled icon. This is used by both the location and character interfaces.
@@ -690,7 +729,7 @@ function selectPose(e: Event) {
 // Put appropriate attributes on the specified event target and its siblings to
 // be able to apply styling in the CSS.
 function selectItem(e: Event) {
-  let siblings = (e.target as HTMLInputElement).parentNode?.querySelectorAll('label');
+  let siblings = (e.target as HTMLInputElement).closest('div[id*="selector-preview"]')?.querySelectorAll('label');
   if (siblings && siblings.length > 0) {
     siblings.forEach(function (sibling: HTMLLabelElement) {
       sibling.removeAttribute('selected');
@@ -732,8 +771,17 @@ function download(e: Event) {
       let layersToRender = allCanvases[i].querySelector('textarea')!.value.length === 0 ? 4 : 6;
 
       for (let j = 1; j < layersToRender; j++) {
-        let imgToDraw: HTMLImageElement = allCanvases[i].querySelector('img:nth-child(' + j + ')')!;
-        tempCanvasContext?.drawImage(imgToDraw, 0, 0);
+        let imgToDraw: HTMLImageElement | null = allCanvases[i].querySelector('img:nth-child(' + j + ')');
+        if (imgToDraw) {
+          // Older versions of Safari frequently fail to drawImage when the width and height are set.
+          // This is a way of telling it to fall back to the non-specified version of drawImage if it fails the first one.
+          // This may result in custom backgrounds being rendered in a less than ideal fashion, but better than no download at all.
+          try {
+            tempCanvasContext.drawImage(imgToDraw, 0, 0, 1920, 1080);
+          } catch {
+            tempCanvasContext.drawImage(imgToDraw, 0, 0);
+          }
+        }
       }
 
       var myFont = new FontFace('Toplar', 'url("assets/fonts/Toplar.woff")');
@@ -1105,10 +1153,7 @@ async function displayWeather() {
     displayPanel(data[2], data[3], 'Tokyo, Japan');
 
     function displayPanel(
-      weather: {
-        main: { temp: number };
-        weather: [{ description: string; icon: string }];
-      },
+      weather: { main: { temp: number }; weather: [{ description: string; icon: string }] },
       time: { datetime: string },
       city: string
     ) {

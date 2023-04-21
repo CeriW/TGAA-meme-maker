@@ -13,7 +13,8 @@
 .material-icons,
 .toggle-heading,
 #pose-heading,
-#download{
+#download,
+img.speech-box{
   position: relative;
 }
 
@@ -33,7 +34,8 @@ div[class*="icon"]:not(.tb__icon),
 #edit-names-toggle,
 .name-selector-form > span,
 .name-selector-form > span *,
-.name-language-selector{
+.name-language-selector,
+#custom-background-input{
   cursor: pointer;
 }
 

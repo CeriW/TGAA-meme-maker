@@ -67,6 +67,15 @@ div[class*="icon"]:hover,
   left: -10px;
 }
 
+#custom-background-input{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0;
+}
+
 
 @media (max-width: 1000px){
   div[class*="icon"],

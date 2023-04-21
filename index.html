@@ -65,11 +65,12 @@
       </aside>
       <header>
         <div id="banner">
-          <img src="assets/misc/banner.png" alt="The Great Ace Attorney meme maker">          
+          <img src="assets/misc/banner.png">          
         </div>
       </header>
 
       <main>
+
         <div id="canvas-grid-item">
 
           <div id="sticky-panel">
@@ -82,7 +83,7 @@
               </div>
               
               <a id="download">
-                <img width="100%" src="assets/misc/download.png" alt="Download my meme">
+                <img width="100%" src="assets/misc/download.png">
                 <div class="gradient-panel"><span class="material-icons md-17">download</span>Download my meme</span></div>
               </a>
 
@@ -96,8 +97,8 @@
   
         </div>
             
-        <img id="speech-box" src="assets/game-elements/speech-box.png" alt="">
-        <img id="credits" src="assets/misc/credits.png" alt="">
+        <img id="speech-box" src="assets/game-elements/speech-box.png" width="1920" height="1080">
+        <img id="credits" src="assets/misc/credits.png" width="1920" height="1080">
 
 
         <div id="options">
@@ -123,7 +124,12 @@
             <span class="material-icons down-arrow">expand_more</span>
           </div>
           <select name="background-selector" id="background-selector"></select>
-          <div id="background-selector-preview"></div>
+          <div id="background-selector-preview">
+            <!-- <div id="custom-background-icon">
+              <input id="custom-background-input" type="file" accept="image/jpeg, image/png, image/jpg">
+              <div class="location-icon" style="background-image: url('assets/icons/upload.svg'); background-size: contain;"><div>Custom<div class="variant-tag">Custom</div></div></div>
+            </div> -->
+          </div>
           
 
           <div>
@@ -327,7 +333,7 @@
             <details>
               <summary>About me</summary>
                 <div id="about-me">
-                  <img src="assets/misc/me.jpg" width="150" alt="Photo of CherryLestrade in a Gina Lestrade TGAA2 cosplay">
+                  <img src="assets/misc/me.jpg" width="150">
                   <div>
                     <p>I am Ceri (pronounced "Kerry"), a software engineer in Devon, UK, although many people in the TGAA community will know me as CherryLestrade on Youtube, Twitter and Reddit. I am OBSESSED with The Great Ace Attorney Chronicles.</p>
                     <p>At the time I started this project I was a web designer and front end developer. I got to do little fun bits like this here and there but never anything on this scale. I started this project both as a way to build my skills and portfolio in the hope that I would land myself a job doing this kind of thing, and fuel my TGAA addiction while I was at it. I am pleased to report that:</p>
@@ -446,6 +452,8 @@
 
       </aside>
 
+      <input id="custom-background-input" type="file" accept="image/jpeg, image/png, image/jpg">
+      
       <script type="module" src="dist/characters.js"></script>
       <script type="module" src="dist/locations.js"></script>
       <script type="module" src="dist/themes.js"></script>
@@ -453,5 +461,3 @@
 
 
 
-
-      

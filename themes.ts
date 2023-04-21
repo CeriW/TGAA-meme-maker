@@ -30,16 +30,17 @@ export const themes: { [key: string]: Theme } = {
 function isBetweenDates(startDate: string, endDate: string) {
   const currentDate = new Date();
   const myEndDate = new Date(endDate).getTime() + 24 * 60 * 60 * 1000; // Set it to the end of the date to make it easier
-  return currentDate >= new Date(startDate) && currentDate <= new Date(myEndDate);
+  return (currentDate >= new Date(startDate) && currentDate <= new Date(myEndDate));
 }
 
-type dateCheck = { day: number; month: number };
-function isDate({ day, month }: dateCheck) {
+type dateCheck = {day: number, month: number}
+function isDate ({ day, month }: dateCheck) {
   let today = new Date();
-  return today.getDate() === day && today.getMonth() === month - 1;
+  return today.getDate() === day && today.getMonth() ===  month - 1;
 }
 
-export function setTheme() {
+
+export function setTheme () {  
   let myTheme = null;
 
   // ONE OFF EVENTS
@@ -84,12 +85,25 @@ export function setTheme() {
         <div class="theme-star"></div>
         <div class="theme-star"></div>
       </div>
-    `;
-    document.querySelector('#banner')!.appendChild(bannerBottom);
+    `
+    document.querySelector('#banner')!.appendChild(bannerBottom)
   }
 
   return myTheme ?? themes.default;
+
+  
+
 }
+
+
+
+
+
+
+
+
+
+
 
 /* APRIL FOOLS 2023 - BENEDICT CUMBERBATCH THEME -----------------------------*/
 

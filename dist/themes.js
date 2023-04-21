@@ -76,12 +76,10 @@ export function setTheme() {
     // Sherlock Holmes' birthday - 6th Jan
     if (isDate({ day: 6, month: 1 })) {
         myTheme = themes.herlock;
-    }
-    // Soseki Natsume's birthday - 9th Feb
+    } // Soseki Natsume's birthday - 9th Feb
     if (isDate({ day: 9, month: 2 })) {
         myTheme = themes.natsume;
-    }
-    // April Fool's Day - 1st April
+    } // April Fool's Day - 1st April
     if (isDate({ day: 1, month: 4 })) {
         initialiseCumberbatchTheme();
         myTheme = themes.cumberbatch;
