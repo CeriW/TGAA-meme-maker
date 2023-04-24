@@ -601,14 +601,14 @@ function generatePoses(e) {
 }
 // Generate a card featuring character mugshot, info etc.
 function generateCharacterDescriptionCard(character) {
-    var _a, _b;
+    var _a, _b, _c;
     let spotify = character.music
         ? `<iframe style="border-radius:12px" src="
   ${(_a = character.music) !== null && _a !== void 0 ? _a : ''}
   &theme=0" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
   `
         : null;
-    let japaneseName = character.alternateNames ? `Japanese name: ${character.alternateNames[1]}` : '';
+    let japaneseName = (_b = character.japaneseName) !== null && _b !== void 0 ? _b : '';
     let firstAppearanceCaseNumber = character.appearsIn.indexOf(true);
     return `
     <div class="character-description-card">
@@ -619,14 +619,17 @@ function generateCharacterDescriptionCard(character) {
           </div>
         </div>
       </div>
-      <span class="character-name">${character.name} (${(_b = character.age) !== null && _b !== void 0 ? _b : '?'})</span>
+      <span class="character-name">${character.name} (${(_c = character.age) !== null && _c !== void 0 ? _c : '?'})</span>
       <div class="character-description-card-divider"></div>
       <img class="character-nationality" src="assets/icons/flags/${character.nationality}.svg" width=30>
       <span class="character-name-japanese">${japaneseName}</span>
       <div class="first-appearance">First appearance: ${cases[firstAppearanceCaseNumber].commonName} - ${cases[firstAppearanceCaseNumber].name}</div>
       
       <span class="gender-icon material-icons" gender="${character.gender}">${character.gender}</span>
-
+      <a class="wiki-link" target="_blank" href="${character.wiki}">
+        <span class="material-icons md-32">import_contacts</span>
+        Wiki
+        </a>
       ${spotify}
     </div>
     `;

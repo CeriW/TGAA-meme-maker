@@ -8,13 +8,13 @@
 
   display: grid;
   grid-template:
-    'mugshot name nationality gender' auto
-    'mugshot divider divider divider' auto
-    'mugshot japanese-name japanese-name japanese-name' auto
-    'mugshot first-appearance first-appearance first-appearance'
-    'spotify spotify spotify spotify'
+    'mugshot name nationality gender wiki' min-content
+    'mugshot japanese-name nationality gender wiki' min-content
+    'mugshot divider divider divider divider' min-content
+    'mugshot first-appearance first-appearance first-appearance first-appearance' min-content
+    'spotify spotify spotify spotify spotify' min-content
     / auto 1fr;
-    align-items: center;
+    align-items: start;
     gap: 0 10px;
 }
 
@@ -24,6 +24,7 @@
   font-weight: bold;
   font-size: 1.25em;
   grid-area: name;
+  align-self: center;
 }
 
 .character-description-card-divider{
@@ -75,6 +76,26 @@
   padding: 2px;
 }
 
+.character-name-japanese{
+  grid-area: japanese-name;
+  font-size: 0.9em;
+}
+
+a.wiki-link{
+  background: linear-gradient(to bottom, var(--gradient-top), var(--gradient-bottom));
+  color: var(--gradient-text-colour);
+  font-weight: normal;
+  grid-area: wiki;
+  padding: 0 3px;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.wiki-link .material-icons{
+  position: unset;
+}
+
 .first-appearance{grid-area: first-appearance;}
 .character-nationality{grid-area: nationality;}
-.character-name-japanese{grid-area: japanese-name;}
+

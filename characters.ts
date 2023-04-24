@@ -26,6 +26,7 @@ export type CharacterObject = {
   alternateNames?: string[];
   wiki?: string;
   age?: number;
+  japaneseName?: string;
 };
 
 export const characters: CharacterObject[] = [
@@ -354,6 +355,7 @@ export const characters: CharacterObject[] = [
     posesAddedOnLastUpdate: 9,
     wiki: 'https://aceattorney.fandom.com/wiki/Pop_Windibank',
     age: 48,
+    japaneseName: 'ハッチ・ウィンデバンク (Hatch Windibank)',
   },
 
   {

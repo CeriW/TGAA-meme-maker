@@ -734,7 +734,7 @@ function generateCharacterDescriptionCard(character: CharacterObject) {
   `
     : null;
 
-  let japaneseName = character.alternateNames ? `Japanese name: ${character.alternateNames[1]}` : '';
+  let japaneseName = character.japaneseName ?? '';
 
   let firstAppearanceCaseNumber = character.appearsIn.indexOf(true);
 
@@ -756,7 +756,10 @@ function generateCharacterDescriptionCard(character: CharacterObject) {
   }</div>
       
       <span class="gender-icon material-icons" gender="${character.gender}">${character.gender}</span>
-
+      <a class="wiki-link" target="_blank" href="${character.wiki}">
+        <span class="material-icons md-32">import_contacts</span>
+        Wiki
+        </a>
       ${spotify}
     </div>
     `;

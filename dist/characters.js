@@ -313,6 +313,7 @@ export const characters = [
         posesAddedOnLastUpdate: 9,
         wiki: 'https://aceattorney.fandom.com/wiki/Pop_Windibank',
         age: 48,
+        japaneseName: 'ハッチ・ウィンデバンク (Hatch Windibank)',
     },
     {
         name: 'Ashley Graydon',
