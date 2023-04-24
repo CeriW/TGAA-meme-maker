@@ -550,6 +550,9 @@ function generatePoses(e) {
         alternateNamesInUse[currentCharacter.alternateNames[0]] = (_a = currentCharacter.alternateNames[0]) !== null && _a !== void 0 ? _a : 'default';
         window.localStorage.setItem('alternateNamesInUse', JSON.stringify(alternateNamesInUse));
     }
+    if (currentCharacter) {
+        document.querySelector('#theme-music').innerHTML = generateCharacterDescriptionCard(currentCharacter);
+    }
     // document.querySelector('#theme-music')!.innerHTML = currentCharacter?.music
     //   ? `<iframe style="border-radius:12px" src="
     //   ${currentCharacter.music ?? ''}
@@ -589,16 +592,16 @@ function generatePoses(e) {
         }
     }
     (_d = poseSelectorPreview.querySelector('label')) === null || _d === void 0 ? void 0 : _d.setAttribute('selected', '');
-    let characterDescCard = document.createElement('div');
-    let myCharacter = getCharacterFromID(chosenCharacter);
-    if (myCharacter) {
-        characterDescCard.innerHTML = generateCharacterDescriptionCard(myCharacter);
-    }
-    poseSelectorPreview.appendChild(characterDescCard);
+    // let characterDescCard = document.createElement('div');
+    // let myCharacter = getCharacterFromID(chosenCharacter);
+    // if (myCharacter) {
+    //   characterDescCard.innerHTML = generateCharacterDescriptionCard(myCharacter);
+    // }
+    // poseSelectorPreview.appendChild(characterDescCard);
 }
 // Generate a card featuring character mugshot, info etc.
 function generateCharacterDescriptionCard(character) {
-    var _a;
+    var _a, _b;
     let spotify = character.music
         ? `<iframe style="border-radius:12px" src="
   ${(_a = character.music) !== null && _a !== void 0 ? _a : ''}
@@ -616,7 +619,7 @@ function generateCharacterDescriptionCard(character) {
           </div>
         </div>
       </div>
-      <span class="character-name">${character.name} (${character.age})</span>
+      <span class="character-name">${character.name} (${(_b = character.age) !== null && _b !== void 0 ? _b : '?'})</span>
       <div class="character-description-card-divider"></div>
       <img class="character-nationality" src="assets/icons/flags/${character.nationality}.svg" width=30>
       <span class="character-name-japanese">${japaneseName}</span>

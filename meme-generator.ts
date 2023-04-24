@@ -664,6 +664,10 @@ function generatePoses(e?: Event) {
     window.localStorage.setItem('alternateNamesInUse', JSON.stringify(alternateNamesInUse));
   }
 
+  if (currentCharacter) {
+    document.querySelector('#theme-music')!.innerHTML = generateCharacterDescriptionCard(currentCharacter);
+  }
+
   // document.querySelector('#theme-music')!.innerHTML = currentCharacter?.music
   //   ? `<iframe style="border-radius:12px" src="
   //   ${currentCharacter.music ?? ''}
@@ -713,12 +717,12 @@ function generatePoses(e?: Event) {
 
   poseSelectorPreview.querySelector('label')?.setAttribute('selected', '');
 
-  let characterDescCard = document.createElement('div');
-  let myCharacter = getCharacterFromID(chosenCharacter);
-  if (myCharacter) {
-    characterDescCard.innerHTML = generateCharacterDescriptionCard(myCharacter);
-  }
-  poseSelectorPreview.appendChild(characterDescCard);
+  // let characterDescCard = document.createElement('div');
+  // let myCharacter = getCharacterFromID(chosenCharacter);
+  // if (myCharacter) {
+  //   characterDescCard.innerHTML = generateCharacterDescriptionCard(myCharacter);
+  // }
+  // poseSelectorPreview.appendChild(characterDescCard);
 }
 
 // Generate a card featuring character mugshot, info etc.
@@ -743,11 +747,13 @@ function generateCharacterDescriptionCard(character: CharacterObject) {
           </div>
         </div>
       </div>
-      <span class="character-name">${character.name} (${character.age})</span>
+      <span class="character-name">${character.name} (${character.age ?? '?'})</span>
       <div class="character-description-card-divider"></div>
       <img class="character-nationality" src="assets/icons/flags/${character.nationality}.svg" width=30>
       <span class="character-name-japanese">${japaneseName}</span>
-      <div class="first-appearance">First appearance: ${cases[firstAppearanceCaseNumber].commonName} - ${cases[firstAppearanceCaseNumber].name}</div>
+      <div class="first-appearance">First appearance: ${cases[firstAppearanceCaseNumber].commonName} - ${
+    cases[firstAppearanceCaseNumber].name
+  }</div>
       
       <span class="gender-icon material-icons" gender="${character.gender}">${character.gender}</span>
 
