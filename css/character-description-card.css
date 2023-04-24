@@ -104,7 +104,7 @@ a.wiki-link{
 .character-height{
   grid-area: height;
   text-align: right;
-
+  margin-top: -2px;
 }
 
 .first-appearance{grid-area: first-appearance;}

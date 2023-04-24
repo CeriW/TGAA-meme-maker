@@ -665,10 +665,10 @@ function generatePoses(e?: Event) {
   }
 
   if (currentCharacter) {
-    document.querySelector('#theme-music')!.innerHTML = generateCharacterDescriptionCard(currentCharacter);
+    document.querySelector('#description-card')!.innerHTML = generateCharacterDescriptionCard(currentCharacter);
   }
 
-  // document.querySelector('#theme-music')!.innerHTML = currentCharacter?.music
+  // document.querySelector('#description-card')!.innerHTML = currentCharacter?.music
   //   ? `<iframe style="border-radius:12px" src="
   //   ${currentCharacter.music ?? ''}
   //   &theme=0" width="100%" height="100" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
@@ -725,7 +725,7 @@ function generatePoses(e?: Event) {
   // poseSelectorPreview.appendChild(characterDescCard);
 }
 
-// Generate a card featuring character mugshot, info etc.
+// Generate a card featuring character mugshot, info etc.theme-mus
 function generateCharacterDescriptionCard(character: CharacterObject) {
   let spotify = character.music
     ? `<iframe style="border-radius:12px" src="

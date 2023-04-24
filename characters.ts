@@ -227,6 +227,7 @@ export const characters: CharacterObject[] = [
     wiki: 'https://aceattorney.fandom.com/wiki/Yujin_Mikotoba',
     age: 43,
     japaneseName: '御琴羽 悠仁 (Yūjin Mikotoba)',
+    height: 168,
   },
 
   {
@@ -244,6 +245,7 @@ export const characters: CharacterObject[] = [
     wiki: 'https://aceattorney.fandom.com/wiki/Yujin_Mikotoba',
     age: 43,
     japaneseName: '御琴羽 悠仁 (Yūjin Mikotoba)',
+    height: 168,
   },
 
   {
