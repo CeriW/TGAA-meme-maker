@@ -10,6 +10,10 @@
 // lastUpdated - a date string of the last time this character was updated. Will be used to generate a 'new' image tag for a set number of days.
 // posesAddedOnLastUpdate - will tag the specified poses as new for a set number of days.
 // alternate names - some characters have alternative names that users might want to toggle between (eg. Herlock Sholmes was callled Sherlock Holmes in the Japanese version)
+// wiki - a link to the Ace Attorney wiki page to link to within the character description card
+// age: - the character's age
+// japanese name - the character's name in Japanese
+// height - the character's height in cm
 
 export type CharacterObject = {
   name: string;
@@ -24,9 +28,10 @@ export type CharacterObject = {
   lastUpdated: string | null;
   posesAddedOnLastUpdate: number;
   alternateNames?: string[];
-  wiki?: string;
+  wiki: string;
   age?: number;
-  japaneseName?: string;
+  japaneseName: string;
+  height?: number;
 };
 
 export const characters: CharacterObject[] = [
@@ -41,6 +46,10 @@ export const characters: CharacterObject[] = [
     tags: ['ryuulock', 'baroasoryuu'],
     lastUpdated: '2023-04-17',
     posesAddedOnLastUpdate: 2,
+    wiki: 'https://aceattorney.fandom.com/wiki/Ryunosuke_Naruhodo',
+    age: 23,
+    japaneseName: '成歩堂 龍ノ介 (Ryūnosuke Naruhodō)',
+    height: 168,
   },
 
   {
@@ -56,6 +65,10 @@ export const characters: CharacterObject[] = [
     lastUpdated: '2023-04-17',
     posesAddedOnLastUpdate: 4,
     alternateNames: ['Sholmes', 'Holmes'],
+    wiki: 'https://aceattorney.fandom.com/wiki/Herlock_Sholmes',
+    age: 34,
+    japaneseName: 'シャーロック・ホームズ (Sherlock Holmes)',
+    height: 183,
   },
 
   {
@@ -71,6 +84,10 @@ export const characters: CharacterObject[] = [
     tags: ['homumiko', 'ryuulock', 'doyle', 'herlock'],
     lastUpdated: null,
     posesAddedOnLastUpdate: 0,
+    wiki: 'https://aceattorney.fandom.com/wiki/Herlock_Sholmes',
+    age: 34,
+    japaneseName: 'シャーロック・ホームズ (Sherlock Holmes)',
+    height: 183,
   },
 
   {
@@ -86,6 +103,10 @@ export const characters: CharacterObject[] = [
     lastUpdated: '2023-04-17',
     posesAddedOnLastUpdate: 1,
     alternateNames: ['Sholmes', 'Holmes'],
+    wiki: 'https://aceattorney.fandom.com/wiki/Herlock_Sholmes',
+    age: 34,
+    japaneseName: 'シャーロック・ホームズ (Sherlock Holmes)',
+    height: 183,
   },
 
   {
@@ -99,6 +120,10 @@ export const characters: CharacterObject[] = [
     tags: [],
     lastUpdated: '2023-03-10',
     posesAddedOnLastUpdate: 1,
+    wiki: 'https://aceattorney.fandom.com/wiki/Susato_Mikotoba',
+    age: 16,
+    japaneseName: '御琴羽 寿沙都 (Susato Mikotoba)',
+    height: 153,
   },
 
   {
@@ -112,6 +137,10 @@ export const characters: CharacterObject[] = [
     tags: ['asobaro', 'baroasoryuu'],
     lastUpdated: null,
     posesAddedOnLastUpdate: 0,
+    wiki: 'https://aceattorney.fandom.com/wiki/Barok_van_Zieks',
+    age: 33,
+    japaneseName: 'バロック・バンジークス (Barokku Banjīkusu)',
+    height: 192,
   },
 
   {
@@ -125,6 +154,10 @@ export const characters: CharacterObject[] = [
     tags: ['doyle', 'watson'],
     lastUpdated: null,
     posesAddedOnLastUpdate: 0,
+    wiki: 'https://aceattorney.fandom.com/wiki/Iris_Wilson',
+    age: 10,
+    japaneseName: 'アイリス・ワトソン (Iris Watson)',
+    height: 120,
   },
 
   {
@@ -138,6 +171,9 @@ export const characters: CharacterObject[] = [
     tags: ['doyle'],
     lastUpdated: null,
     posesAddedOnLastUpdate: 0,
+    wiki: 'https://aceattorney.fandom.com/wiki/Tobias_Gregson',
+    age: 45,
+    japaneseName: 'トバイアス・グレグソン (Tobias Gregson)',
   },
 
   {
@@ -152,6 +188,10 @@ export const characters: CharacterObject[] = [
     tags: ['doyle', 'ginaLestradeWeek'],
     lastUpdated: '2023-04-08',
     posesAddedOnLastUpdate: 9,
+    wiki: 'https://aceattorney.fandom.com/wiki/Gina_Lestrade',
+    age: 17,
+    japaneseName: 'ジーナ・レストレード (Gina Lestrade)',
+    height: 160,
   },
 
   {
@@ -166,6 +206,10 @@ export const characters: CharacterObject[] = [
     tags: ['doyle', 'ginaLestradeWeek'],
     lastUpdated: '2023-04-08',
     posesAddedOnLastUpdate: 8,
+    wiki: 'https://aceattorney.fandom.com/wiki/Gina_Lestrade',
+    age: 18,
+    japaneseName: 'ジーナ・レストレード (Gina Lestrade)',
+    height: 160,
   },
 
   {
@@ -180,6 +224,9 @@ export const characters: CharacterObject[] = [
     tags: ['homumiko', 'watson'],
     lastUpdated: 'Sat Mar 04 2023',
     posesAddedOnLastUpdate: 7,
+    wiki: 'https://aceattorney.fandom.com/wiki/Yujin_Mikotoba',
+    age: 43,
+    japaneseName: '御琴羽 悠仁 (Yūjin Mikotoba)',
   },
 
   {
@@ -194,6 +241,9 @@ export const characters: CharacterObject[] = [
     tags: ['homumiko', 'watson'],
     lastUpdated: 'Sat Mar 04 2023',
     posesAddedOnLastUpdate: 8,
+    wiki: 'https://aceattorney.fandom.com/wiki/Yujin_Mikotoba',
+    age: 43,
+    japaneseName: '御琴羽 悠仁 (Yūjin Mikotoba)',
   },
 
   {
@@ -207,6 +257,10 @@ export const characters: CharacterObject[] = [
     tags: ['asobaro', 'baroasoryuu'],
     lastUpdated: 'Fri Mar 03 2023',
     posesAddedOnLastUpdate: 3,
+    wiki: 'https://aceattorney.fandom.com/wiki/Kazuma_Asogi',
+    age: 24,
+    japaneseName: '亜双義 一真 (Kazuma Asōgi)',
+    height: 174,
   },
 
   {
@@ -220,6 +274,9 @@ export const characters: CharacterObject[] = [
     tags: ['natsume'],
     lastUpdated: null,
     posesAddedOnLastUpdate: 0,
+    wiki: 'https://aceattorney.fandom.com/wiki/Soseki_Natsume',
+    age: 33,
+    japaneseName: '夏目 漱石 (Natsume Sōseki)',
   },
 
   {
@@ -233,6 +290,9 @@ export const characters: CharacterObject[] = [
     tags: ['doyle'],
     lastUpdated: null,
     posesAddedOnLastUpdate: 0,
+    wiki: 'https://aceattorney.fandom.com/wiki/Enoch_Drebber',
+    age: 35,
+    japaneseName: 'イーノック・ドレッバー (Enoch Drebber)',
   },
 
   {
@@ -245,6 +305,8 @@ export const characters: CharacterObject[] = [
     tags: ['natsume'],
     lastUpdated: null,
     posesAddedOnLastUpdate: 0,
+    wiki: 'https://aceattorney.fandom.com/wiki/Wagahai',
+    japaneseName: 'ワガハイ (Wagahai)',
   },
 
   {
@@ -259,6 +321,9 @@ export const characters: CharacterObject[] = [
     lastUpdated: null,
     posesAddedOnLastUpdate: 0,
     alternateNames: ['Tusspells', 'Rozaic'],
+    wiki: 'https://aceattorney.fandom.com/wiki/Esmeralda_Tusspells',
+    age: 26,
+    japaneseName: 'コネット・ローザイク (Connette Rozaic)',
   },
 
   {
@@ -272,6 +337,9 @@ export const characters: CharacterObject[] = [
     tags: [],
     lastUpdated: null,
     posesAddedOnLastUpdate: 0,
+    wiki: 'https://aceattorney.fandom.com/wiki/Courtney_Sithe',
+    age: 39,
+    japaneseName: 'コートニー・シス (Courtney Sithe)',
   },
 
   {
@@ -285,6 +353,9 @@ export const characters: CharacterObject[] = [
     lastUpdated: null,
     posesAddedOnLastUpdate: 0,
     alternateNames: ['Gorey', 'Goulloyne'],
+    wiki: 'https://aceattorney.fandom.com/wiki/Maria_Gorey',
+    age: 19,
+    japaneseName: 'マリア・グーロイネ (Maria Goulloyne)',
   },
 
   {
@@ -298,6 +369,10 @@ export const characters: CharacterObject[] = [
     alternateNames: ['McGuilded', 'Megundal'],
     lastUpdated: '2023-03-10',
     posesAddedOnLastUpdate: 1,
+    wiki: 'https://aceattorney.fandom.com/wiki/Magnus_McGilded',
+    age: 48,
+    japaneseName: 'コゼニー・メグンダル (Cosney Megundal)',
+    height: 153,
   },
 
   {
@@ -312,6 +387,9 @@ export const characters: CharacterObject[] = [
     alternateNames: ['Pavlova', 'Borschevic'],
     lastUpdated: null,
     posesAddedOnLastUpdate: 0,
+    wiki: 'https://aceattorney.fandom.com/wiki/Nikolina_Pavlova',
+    age: 15,
+    japaneseName: 'ニコミナ・ボルシビッチ (Nicomina Borchevic)',
   },
 
   {
@@ -326,6 +404,10 @@ export const characters: CharacterObject[] = [
     alternateNames: ['Stronghart', 'Vortex'],
     lastUpdated: null,
     posesAddedOnLastUpdate: 0,
+    wiki: 'https://aceattorney.fandom.com/wiki/Mael_Stronghart',
+    age: 53,
+    japaneseName: '',
+    height: 196,
   },
 
   {
@@ -339,6 +421,9 @@ export const characters: CharacterObject[] = [
     tags: [],
     lastUpdated: '2023-03-22',
     posesAddedOnLastUpdate: 9,
+    wiki: 'https://aceattorney.fandom.com/wiki/Rei_Membami',
+    age: 16,
+    japaneseName: '村雨 葉織 (Haori Murasame)',
   },
 
   {
@@ -369,5 +454,8 @@ export const characters: CharacterObject[] = [
     alternateNames: ['Graydon', 'Chrogray', 'Benedict', 'Egg'],
     lastUpdated: '2023-03-11',
     posesAddedOnLastUpdate: 5,
+    wiki: 'https://aceattorney.fandom.com/wiki/Ashley_Graydon',
+    age: 27,
+    japaneseName: 'ルバート・クログレイ (Rubato Chrogray)',
   },
 ];

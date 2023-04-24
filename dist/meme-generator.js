@@ -615,7 +615,7 @@ function generateCharacterDescriptionCard(character) {
       <div class="mugshot">
         <div class="mugshot-inner">
           <div class="mugshot-img-container">
-            <img src="assets/characters/${character.id}/mugshot.jpg" width="100">
+            <img src="assets/characters/${character.id}/mugshot.webp" width="100">
           </div>
         </div>
       </div>
