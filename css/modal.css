@@ -51,7 +51,7 @@
   padding: 0;
 }
 
-.name-selector-form img{
+.name-selector-character-icon{
   width: 100px;
   background: rgba(255,255,255,0.5);
   border-radius: 50%;
@@ -92,4 +92,13 @@
 .name-reset{
   width: 100%;
   text-align: right;
+}
+
+.alternate-name-flag{
+  width: 25px;
+  margin-left: 10px;
+}
+
+.name-selector-form > span{
+  margin-bottom: 5px;
 }

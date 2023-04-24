@@ -1392,14 +1392,24 @@ function generateCharacterNameListInterface(characterID: string) {
 
   const characterIcon = document.createElement('img');
   characterIcon.src = `assets/characters/${myCharacter.id}/thumbnails/1.png`;
+  characterIcon.classList.add('name-selector-character-icon');
 
   namePanel.appendChild(characterIcon);
-  alternateNames.forEach((altName) => {
+  alternateNames.forEach((altName, index) => {
     const input = document.createElement('span');
+
+    let flag = null;
+    if (index === 0) {
+      flag = '<img src="assets/icons/flags/british.svg" class="alternate-name-flag">';
+    } else if (index === 1) {
+      flag = '<img src="assets/icons/flags/japanese.svg" class="alternate-name-flag">';
+    } else {
+      flag = '';
+    }
 
     input.innerHTML = `
       <input type="radio" id="${altName}" name="${alternateNames[0]}" value="${altName}" class="name-selector-input">
-      <label for="${altName}">${altName}</label>
+      <label for="${altName}">${altName}${flag}</label>
     `;
 
     namePanel.appendChild(input);
