@@ -437,8 +437,8 @@ function determineIconOrder(dateModified: string | null, tags: string[] = []): s
   let isNew = determineIsNew(dateModified);
   let matchesTheme = theme.name && tags.includes(theme.name);
 
-  let order = Math.floor(myDate.getTime() / 100000000000);
-  let currentDate = Math.floor(new Date().getTime() / 100000000000);
+  let order = Math.floor(myDate.getTime() / 10000);
+  let currentDate = Math.floor(new Date().getTime() / 10000);
 
   if (tags.includes('CUSTOM')) {
     return `-${new Date().getTime()}`;

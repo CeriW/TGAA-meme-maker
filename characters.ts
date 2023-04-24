@@ -339,6 +339,19 @@ export const characters: CharacterObject[] = [
   },
 
   {
+    name: 'Pop Windibank',
+    id: 'windibank-pop',
+    gender: 'male',
+    nationality: 'british',
+    appearsIn: [false, false, false, false, true, false, false, false, false, false],
+    images: 9,
+    tags: ['doyle'],
+    alternateNames: ['Windbank', 'Hatch'],
+    lastUpdated: '2023-04-24',
+    posesAddedOnLastUpdate: 9,
+  },
+
+  {
     name: 'Ashley Graydon',
     id: 'graydon-ashley',
     gender: 'male',
