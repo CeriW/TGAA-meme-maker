@@ -734,8 +734,6 @@ function generateCharacterDescriptionCard(character: CharacterObject) {
   `
     : null;
 
-  let japaneseName = character.japaneseName ?? '';
-
   let firstAppearanceCaseNumber = character.appearsIn.indexOf(true);
 
   let height = character.height
@@ -751,7 +749,7 @@ function generateCharacterDescriptionCard(character: CharacterObject) {
       <div class="mugshot">
         <div class="mugshot-inner">
           <div class="mugshot-img-container">
-            <img src="assets/characters/${character.id}/mugshot.webp" width="100">
+            <img src="assets/characters/${character.id}/mugshot.webp">
           </div>
         </div>
       </div>
@@ -761,9 +759,9 @@ function generateCharacterDescriptionCard(character: CharacterObject) {
       
       <div class="character-height">${height}</div>
       
-      <span class="character-name-japanese">${japaneseName}</span>
+      <span class="character-name-japanese">${character.japaneseName.replace(/\s(?=[^ ]*$)/, '&nbsp;')}</span>
       <div class="first-appearance">
-        First appearance: ${cases[firstAppearanceCaseNumber].commonName} -
+        First appearance: ${cases[firstAppearanceCaseNumber].commonName} 
         <a href="${cases[firstAppearanceCaseNumber].wiki}" target="_blank">
           ${cases[firstAppearanceCaseNumber].name}
         </a>

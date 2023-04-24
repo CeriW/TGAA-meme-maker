@@ -601,14 +601,13 @@ function generatePoses(e) {
 }
 // Generate a card featuring character mugshot, info etc.theme-mus
 function generateCharacterDescriptionCard(character) {
-    var _a, _b, _c;
+    var _a, _b;
     let spotify = character.music
         ? `<iframe style="border-radius:12px" src="
   ${(_a = character.music) !== null && _a !== void 0 ? _a : ''}
   &theme=0" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
   `
         : null;
-    let japaneseName = (_b = character.japaneseName) !== null && _b !== void 0 ? _b : '';
     let firstAppearanceCaseNumber = character.appearsIn.indexOf(true);
     let height = character.height
         ? ` Height:
@@ -622,19 +621,19 @@ function generateCharacterDescriptionCard(character) {
       <div class="mugshot">
         <div class="mugshot-inner">
           <div class="mugshot-img-container">
-            <img src="assets/characters/${character.id}/mugshot.webp" width="100">
+            <img src="assets/characters/${character.id}/mugshot.webp">
           </div>
         </div>
       </div>
-      <span class="character-name">${character.name} (${(_c = character.age) !== null && _c !== void 0 ? _c : '?'})</span>
+      <span class="character-name">${character.name} (${(_b = character.age) !== null && _b !== void 0 ? _b : '?'})</span>
       <div class="character-description-card-divider"></div>
       <img class="character-nationality" src="assets/icons/flags/${character.nationality}.svg" width=30>
       
       <div class="character-height">${height}</div>
       
-      <span class="character-name-japanese">${japaneseName}</span>
+      <span class="character-name-japanese">${character.japaneseName.replace(/\s(?=[^ ]*$)/, '&nbsp;')}</span>
       <div class="first-appearance">
-        First appearance: ${cases[firstAppearanceCaseNumber].commonName} -
+        First appearance: ${cases[firstAppearanceCaseNumber].commonName} 
         <a href="${cases[firstAppearanceCaseNumber].wiki}" target="_blank">
           ${cases[firstAppearanceCaseNumber].name}
         </a>
