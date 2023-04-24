@@ -9,6 +9,7 @@ const theme = setTheme();
 console.log(`The Great Ace Attorney Meme Maker by CherryLestrade v${versionInfo} - theme: ${(_a = theme.name) !== null && _a !== void 0 ? _a : 'none'}`);
 const versionInfoDiv = document.querySelector('#version-info');
 versionInfoDiv.innerHTML = `Version ${versionInfo} - theme: none`;
+import cases from './cases.js';
 // ---------------------------------------------------------------------------//
 // The current canvas the user is working on. We'll initialise to null and then
 // set it to the first panel the code generates.
@@ -533,7 +534,7 @@ function generateLabelledIcon(type, object) {
 }
 // Generate the poses for the desired character.
 function generatePoses(e) {
-    var _a, _b, _c;
+    var _a, _b, _c, _d;
     // This initialises to false. We set this to true to confirm that the user
     // has deliberately chose a character and we're okay to go ahead with it.
     characterSelected = true;
@@ -549,20 +550,14 @@ function generatePoses(e) {
         alternateNamesInUse[currentCharacter.alternateNames[0]] = (_a = currentCharacter.alternateNames[0]) !== null && _a !== void 0 ? _a : 'default';
         window.localStorage.setItem('alternateNamesInUse', JSON.stringify(alternateNamesInUse));
     }
-    document.querySelector('#theme-music').innerHTML = (currentCharacter === null || currentCharacter === void 0 ? void 0 : currentCharacter.theme)
-        ? `<iframe style="border-radius:12px" src="
-    ${(_b = currentCharacter.theme) !== null && _b !== void 0 ? _b : ''}
-    &theme=0" width="100%" height="100" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    `
-        : '';
+    // document.querySelector('#theme-music')!.innerHTML = currentCharacter?.music
+    //   ? `<iframe style="border-radius:12px" src="
+    //   ${currentCharacter.music ?? ''}
+    //   &theme=0" width="100%" height="100" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    //   `
+    //   : '';
     generatePanelArtwork();
-    // Figure out how many times we need to loop through to generate all the poses.
-    let imageAmount = 1;
-    characters.forEach(function (character) {
-        if (chosenCharacter == character.id) {
-            imageAmount = character.images;
-        }
-    });
+    let imageAmount = (_c = (_b = getCharacterFromID(chosenCharacter)) === null || _b === void 0 ? void 0 : _b.images) !== null && _c !== void 0 ? _c : 0;
     // Clear the pose selector.
     poseSelectorPreview.innerHTML = '';
     // Generate each icon.
@@ -579,6 +574,7 @@ function generatePoses(e) {
         newLabel.setAttribute('for', String(i));
         newLabel.style.backgroundImage = 'url("assets/characters/' + chosenCharacter + '/thumbnails/' + i + '.png")';
         poseSelectorPreview.appendChild(newLabel);
+        // Figure out if we want to display a 'new' icon on this one
         if (currentCharacter &&
             currentCharacter.posesAddedOnLastUpdate &&
             currentCharacter.lastUpdated &&
@@ -592,7 +588,41 @@ function generatePoses(e) {
             newLabel.appendChild(newIcon);
         }
     }
-    (_c = poseSelectorPreview.querySelector('label')) === null || _c === void 0 ? void 0 : _c.setAttribute('selected', '');
+    (_d = poseSelectorPreview.querySelector('label')) === null || _d === void 0 ? void 0 : _d.setAttribute('selected', '');
+    let characterDescCard = document.createElement('div');
+    let myCharacter = getCharacterFromID(chosenCharacter);
+    if (myCharacter) {
+        characterDescCard.innerHTML = generateCharacterDescriptionCard(myCharacter);
+    }
+    poseSelectorPreview.appendChild(characterDescCard);
+}
+// Generate a card featuring character mugshot, info etc.
+function generateCharacterDescriptionCard(character) {
+    var _a;
+    let spotify = character.music
+        ? `<iframe style="border-radius:12px" src="
+  ${(_a = character.music) !== null && _a !== void 0 ? _a : ''}
+  &theme=0" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+  `
+        : null;
+    let japaneseName = character.alternateNames ? `Japanese name: ${character.alternateNames[1]}` : '';
+    let firstAppearanceCaseNumber = character.appearsIn.indexOf(true);
+    return `
+    <div class="character-description-card">
+      <div class="mugshot">
+        <img src="assets/characters/${character.id}/mugshot.jpg" width="100">
+      </div>
+      <span class="character-name">${character.name} (${character.age})</span>
+      <div class="character-description-card-divider"></div>
+      <img class="character-nationality" src="assets/icons/flags/${character.nationality}.svg" width=30>
+      <span class="character-name-japanese">${japaneseName}</span>
+      <div class="first-appearance">First appearance: ${cases[firstAppearanceCaseNumber].commonName} - ${cases[firstAppearanceCaseNumber].name}</div>
+      
+      <span class="gender-icon material-icons" gender="${character.gender}">${character.gender}</span>
+
+      ${spotify}
+    </div>
+    `;
 }
 // When a pose is clicked, put that onto the canvas and mark it as selected.
 function selectPose(e) {

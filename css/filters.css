@@ -145,7 +145,8 @@ input[filter-type="nationality"]{
 }
 
 .character-icon-gender-tag[gender="female"],
-#gender-checkbox-female + label span{
+#gender-checkbox-female + label span,
+.gender-icon[gender="female"]{
   background: pink;
   color: var(--blue);
   font-weight: bold;
@@ -154,7 +155,8 @@ input[filter-type="nationality"]{
 }
 
 .character-icon-gender-tag[gender="male"],
-#gender-checkbox-male + label span{
+#gender-checkbox-male + label span,
+.gender-icon[gender="male"]{
   background: #75D2EF;
   color: var(--blue);
   font-weight: bold;

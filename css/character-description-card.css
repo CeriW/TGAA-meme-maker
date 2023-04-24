@@ -1,0 +1,67 @@
+
+.character-description-card{
+  background: #dfd8bb;
+  color: #2b2408;
+  padding: 10px;
+  line-height: 1;
+  clip-path: polygon(10px 0%, calc(100% - 10px) 0%, 100% 10px, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0% calc(100% - 10px), 0% 10px);
+
+  display: grid;
+  grid-template:
+    'mugshot name nationality gender' auto
+    'mugshot divider divider divider' auto
+    'mugshot japanese-name japanese-name japanese-name' auto
+    'mugshot first-appearance first-appearance first-appearance'
+    'spotify spotify spotify spotify'
+    / auto 1fr;
+    align-items: center;
+    gap: 0 10px;
+}
+
+.character-description-card .character-name{
+  font-family: Epigrafica, Toplar, serif;
+  line-height: 1;
+  font-weight: bold;
+  font-size: 1.25em;
+  grid-area: name;
+}
+
+.character-description-card-divider{
+  height: 3px;
+  background: linear-gradient(to right, #5e4e18, #9f9150, #5e4e18);
+  grid-area: divider;
+}
+
+.character-description-card .gender-icon .material-icons{
+  padding: 0 5px;
+  margin: 0;
+}
+
+.character-description-card iframe{
+  grid-area: spotify;
+  margin-top: 20px;
+}
+
+.character-description-card .gender-icon{
+  grid-area: gender;
+  font-weight: normal;
+  padding: 0;
+  position: unset;
+}
+
+.mugshot{
+  grid-area: mugshot;
+  padding: 5px;
+  background: #bfb178;
+  display: flex;
+  margin-right: 10px;
+}
+
+.mugshot,
+.mugshot img{
+  clip-path: polygon(10% 0%, 90% 0%, 100% 10%, 100% 90%, 90% 100%, 10% 100%, 0% 90%, 0% 10%);
+}
+
+.first-appearance{grid-area: first-appearance;}
+.character-nationality{grid-area: nationality;}
+.character-name-japanese{grid-area: japanese-name;}

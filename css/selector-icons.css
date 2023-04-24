@@ -1,6 +1,6 @@
 /* Icon styling --------------------------------------------------------------*/
 
-div[class*="icon"]:not(.tb__icon),
+div[class*="icon"]:not(.tb__icon, .gender-icon),
 #pose-selector-preview label{
   width: 140px;
   height: 140px;
@@ -15,7 +15,7 @@ div[class*="icon"]:not(.tb__icon),
   order: 3;
 }
 
-div[class*="icon"][selected="true"]{
+div[class*="icon"]:not(.tb__icon, .gender-icon)[selected="true"]{
   background-color: var(--gold) !important;
 }
 
@@ -23,7 +23,7 @@ div[class*="icon"][selected="true"]{
   margin: 15px;
 }
 
-div[class*="icon"]:hover,
+div[class*="icon"]:not(.tb__icon, .gender-icon):hover,
 #pose-selector-preview label:hover{
   background-color: rgba(255,255,255,0.1);
 }
@@ -78,7 +78,7 @@ div[class*="icon"]:hover,
 
 
 @media (max-width: 1000px){
-  div[class*="icon"],
+  div[class*="icon"]:not(.gender-icon),
   #pose-selector-preview label{
     max-width: 120px;
     max-height: 120px;

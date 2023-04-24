@@ -12,6 +12,8 @@ console.log(`The Great Ace Attorney Meme Maker by CherryLestrade v${versionInfo}
 const versionInfoDiv = document.querySelector('#version-info')!;
 versionInfoDiv.innerHTML = `Version ${versionInfo} - theme: none`;
 
+import cases from './cases.js';
+
 // ---------------------------------------------------------------------------//
 
 // The current canvas the user is working on. We'll initialise to null and then
@@ -662,22 +664,16 @@ function generatePoses(e?: Event) {
     window.localStorage.setItem('alternateNamesInUse', JSON.stringify(alternateNamesInUse));
   }
 
-  document.querySelector('#theme-music')!.innerHTML = currentCharacter?.theme
-    ? `<iframe style="border-radius:12px" src="
-    ${currentCharacter.theme ?? ''}
-    &theme=0" width="100%" height="100" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    `
-    : '';
+  // document.querySelector('#theme-music')!.innerHTML = currentCharacter?.music
+  //   ? `<iframe style="border-radius:12px" src="
+  //   ${currentCharacter.music ?? ''}
+  //   &theme=0" width="100%" height="100" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+  //   `
+  //   : '';
 
   generatePanelArtwork();
 
-  // Figure out how many times we need to loop through to generate all the poses.
-  let imageAmount = 1;
-  characters.forEach(function (character) {
-    if (chosenCharacter == character.id) {
-      imageAmount = character.images;
-    }
-  });
+  let imageAmount = getCharacterFromID(chosenCharacter)?.images ?? 0;
 
   // Clear the pose selector.
   poseSelectorPreview.innerHTML = '';
@@ -698,6 +694,7 @@ function generatePoses(e?: Event) {
     newLabel.style.backgroundImage = 'url("assets/characters/' + chosenCharacter + '/thumbnails/' + i + '.png")';
     poseSelectorPreview.appendChild(newLabel);
 
+    // Figure out if we want to display a 'new' icon on this one
     if (
       currentCharacter &&
       currentCharacter.posesAddedOnLastUpdate &&
@@ -715,6 +712,44 @@ function generatePoses(e?: Event) {
   }
 
   poseSelectorPreview.querySelector('label')?.setAttribute('selected', '');
+
+  let characterDescCard = document.createElement('div');
+  let myCharacter = getCharacterFromID(chosenCharacter);
+  if (myCharacter) {
+    characterDescCard.innerHTML = generateCharacterDescriptionCard(myCharacter);
+  }
+  poseSelectorPreview.appendChild(characterDescCard);
+}
+
+// Generate a card featuring character mugshot, info etc.
+function generateCharacterDescriptionCard(character: CharacterObject) {
+  let spotify = character.music
+    ? `<iframe style="border-radius:12px" src="
+  ${character.music ?? ''}
+  &theme=0" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+  `
+    : null;
+
+  let japaneseName = character.alternateNames ? `Japanese name: ${character.alternateNames[1]}` : '';
+
+  let firstAppearanceCaseNumber = character.appearsIn.indexOf(true);
+
+  return `
+    <div class="character-description-card">
+      <div class="mugshot">
+        <img src="assets/characters/${character.id}/mugshot.jpg" width="100">
+      </div>
+      <span class="character-name">${character.name} (${character.age})</span>
+      <div class="character-description-card-divider"></div>
+      <img class="character-nationality" src="assets/icons/flags/${character.nationality}.svg" width=30>
+      <span class="character-name-japanese">${japaneseName}</span>
+      <div class="first-appearance">First appearance: ${cases[firstAppearanceCaseNumber].commonName} - ${cases[firstAppearanceCaseNumber].name}</div>
+      
+      <span class="gender-icon material-icons" gender="${character.gender}">${character.gender}</span>
+
+      ${spotify}
+    </div>
+    `;
 }
 
 // When a pose is clicked, put that onto the canvas and mark it as selected.
