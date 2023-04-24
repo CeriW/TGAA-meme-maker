@@ -164,7 +164,8 @@ input[filter-type="nationality"]{
   top: -1px;
 }
 
-.character-icon-gender-tag[gender="question_mark"]{
+.character-icon-gender-tag[gender="question_mark"],
+.gender-icon[gender="question-mark"]{
   background: #d1a7ef;
   color: #111;
 }

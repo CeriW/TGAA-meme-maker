@@ -738,6 +738,14 @@ function generateCharacterDescriptionCard(character: CharacterObject) {
 
   let firstAppearanceCaseNumber = character.appearsIn.indexOf(true);
 
+  let height = character.height
+    ? ` Height:
+        ${Math.floor(character.height / 2.54 / 12)}' 
+        ${Math.floor((character.height / 2.54) % 12)}"
+        (${character.height}cm)
+      `
+    : '';
+
   return `
     <div class="character-description-card">
       <div class="mugshot">
@@ -750,17 +758,22 @@ function generateCharacterDescriptionCard(character: CharacterObject) {
       <span class="character-name">${character.name} (${character.age ?? '?'})</span>
       <div class="character-description-card-divider"></div>
       <img class="character-nationality" src="assets/icons/flags/${character.nationality}.svg" width=30>
-      <span class="character-name-japanese">${japaneseName}</span>
-      <div class="first-appearance">First appearance: ${cases[firstAppearanceCaseNumber].commonName} - ${
-    cases[firstAppearanceCaseNumber].name
-  }</div>
       
+      <div class="character-height">${height}</div>
+      
+      <span class="character-name-japanese">${japaneseName}</span>
+      <div class="first-appearance">
+        First appearance: ${cases[firstAppearanceCaseNumber].commonName} -
+        <a href="${cases[firstAppearanceCaseNumber].wiki}" target="_blank">
+          ${cases[firstAppearanceCaseNumber].name}
+        </a>
+      </div>
       <span class="gender-icon material-icons" gender="${character.gender}">${character.gender}</span>
       <a class="wiki-link" target="_blank" href="${character.wiki}">
         <span class="material-icons md-32">import_contacts</span>
         Wiki
         </a>
-      ${spotify}
+      ${spotify ?? ''}
     </div>
     `;
 }

@@ -9,7 +9,7 @@
   display: grid;
   grid-template:
     'mugshot name nationality gender wiki' min-content
-    'mugshot japanese-name nationality gender wiki' min-content
+    'mugshot japanese-name height height height' min-content
     'mugshot divider divider divider divider' min-content
     'mugshot first-appearance first-appearance first-appearance first-appearance' min-content
     'spotify spotify spotify spotify spotify' min-content
@@ -79,6 +79,7 @@
 .character-name-japanese{
   grid-area: japanese-name;
   font-size: 0.9em;
+  font-family: sans-serif;
 }
 
 a.wiki-link{
@@ -96,6 +97,17 @@ a.wiki-link{
   position: unset;
 }
 
+.first-appearance a{
+  color: inherit;
+}
+
+.character-height{
+  grid-area: height;
+  text-align: right;
+
+}
+
 .first-appearance{grid-area: first-appearance;}
 .character-nationality{grid-area: nationality;}
+
 
