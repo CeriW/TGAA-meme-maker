@@ -610,7 +610,11 @@ function generateCharacterDescriptionCard(character) {
     return `
     <div class="character-description-card">
       <div class="mugshot">
-        <img src="assets/characters/${character.id}/mugshot.jpg" width="100">
+        <div class="mugshot-inner">
+          <div class="mugshot-img-container">
+            <img src="assets/characters/${character.id}/mugshot.jpg" width="100">
+          </div>
+        </div>
       </div>
       <span class="character-name">${character.name} (${character.age})</span>
       <div class="character-description-card-divider"></div>
