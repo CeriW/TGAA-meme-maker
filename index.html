@@ -12,453 +12,66 @@
       gtag('config', 'G-579D4360B5');
     </script>
 
-    <!-- Hotjar Tracking Code for my site -->
-    <script>
-      (function(h,o,t,j,a,r){
-          h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
-          h._hjSettings={hjid:3394243,hjsv:6};
-          a=o.getElementsByTagName('head')[0];
-          r=o.createElement('script');r.async=1;
-          r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
-          a.appendChild(r);
-      })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
-    </script>
+    <title>TGAA meme maker</title>
 
+    <style>
 
-    <title>TGAA meme maker - The Great Ace Attorney</title>
-    <meta name="description" content="A tool for creating memes and screenshots based on the Great Ace Attorney Chronicles">
-    <link rel="stylesheet" type="text/css" href="style.css"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+      @font-face {
+        font-family: Toplar;
+        src: url(../assets/fonts/Toplar.woff);
+      }
 
+      @font-face {
+        font-family: Epigrafica;
+        src: url(../assets/fonts/Epigrafica.woff);
+      }
 
-    <link rel="apple-touch-icon" sizes="144x144" href="favicons/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
-    <meta name="msapplication-TileColor" content="#fff">
-    <meta name="theme-color" content="#ffffff">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+      html{
+        font-size: 18px;
+        scroll-behavior: smooth;
+      }
 
-    <meta property="og:image" content="https://tgaa-meme-maker.com/assets/misc/social-sharing.jpg">
-    <meta property="og:image:type" content="image/jpeg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="680">
-    
+      body{
+        width: 100vw;
+        min-height: 100vh;
+        background: #0D1725;
+        color: #fff;
+        font-family: Toplar, 'Libre Baskerville', Georgia, serif; /* Yes, I chose 'Libre Baskerville' on purpose. Congrats, you found an easter egg */
+        padding: 30px;
+        margin: 0;
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+      }
+
+      a, h1{
+        color: #9E9150;
+      }
+
+      img{
+        max-width: 120px;
+        border-radius: 50%;
+      }
+
+      p{
+        max-width: 700px;
+      }
+
+    </style>
 
     </head>
 
     <body>
 
-      <div id="fb-root"></div>
-      <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v16.0" nonce="CIiXsY1X"></script>
-
-      <aside id="modal" class="hidden">
-        <div class="gradient-panel">
-          <span class="material-symbols-sharp">close</span>
-          <div id="modal-content">
-            
-          </div>
-        </div>
-      </aside>
-      <header>
-        <div id="banner">
-          <img src="assets/misc/banner.png">          
-        </div>
-      </header>
-
-      <main>
-
-        <div id="canvas-grid-item">
-
-          <div id="sticky-panel">
-            <div id="canvases-container">
-
-              
-              <div id="edit-names-toggle" class="hidden">
-                <span class="material-symbols-sharp">edit_square</span>
-                <span class="canvas-button-text">edit names</span>
-              </div>
-              
-              <a id="download">
-                <img width="100%" src="assets/misc/download.png">
-                <div class="gradient-panel"><span class="material-icons md-17">download</span>Download my meme</span></div>
-              </a>
-
-
-            </div>
-            <span id="add-panel"><span class="material-symbols-sharp">add</span><span class="canvas-button-text">Add panel</span></span>
-            
-          </div>
-        </div>
-        
-            
-        <img id="speech-box" src="assets/game-elements/speech-box.png" width="1920" height="1080">
-        <img id="credits" src="assets/misc/credits.png" width="1920" height="1080">
-
-
-        <div id="options">
-
-          <div id="spoiler-warning" class="gradient-panel">
-            <h2 class="heading-text">Spoiler warning</h2>
-            <p>The content within contains spoilers for the entirety of The Great Ace Attorney Chronicles</p>
-            <button id="spoilers-okay">
-              <span style="font-weight: bold;">I'm okay with this,</span>
-              <br>take me to the meme maker
-            </button>
-
-            <div id="remember-spoilers-container">
-              <input name="remember-spoilers-okay" id="remember-spoilers-okay" type="checkbox"></input>
-              <label for="remember-spoilers-okay">Remember my choice</label>
-            </div>
-            
-          </div>
-
-          <div class="toggle-heading gradient-panel" associated-panel="background-selector-preview">
-            <span class="material-icons">edit_location</span>
-            Select your location
-            <span class="material-icons down-arrow">expand_more</span>
-          </div>
-          <select name="background-selector" id="background-selector"></select>
-          <div id="background-selector-preview">
-            <!-- <div id="custom-background-icon">
-              <input id="custom-background-input" type="file" accept="image/jpeg, image/png, image/jpg">
-              <div class="location-icon" style="background-image: url('assets/icons/upload.svg'); background-size: contain;"><div>Custom<div class="variant-tag">Custom</div></div></div>
-            </div> -->
-          </div>
-          
-
-          <div>
-            <div class="toggle-heading gradient-panel" associated-panel="character-selector-preview">
-              <span class="material-icons">person_add</span>
-              Select your character
-              <span class="material-icons down-arrow">expand_more</span>
-            </div>
-            <select name="character-selector" id="character-selector"></select>
-
-            <div id="character-selector-preview">
-              
-
-              <div id="filter-toggle">
-                Filters<span class="material-symbols-sharp">filter_alt</span>
-              </div>
-
-              <div id="filter-form">
-                <div class="gender-checkbox">
-                  <label for="gender-checkbox">Gender</label>
-                  <div class="checkbox-group">
-                    <div class="gender-checkbox-container">
-                      <input class="gender" name="gender-checkbox" filter-type="gender" id="gender-checkbox-male" value="gender-male" type="checkbox" checked="checked">
-                      <label for="gender-checkbox-male"><span class="gender-icon material-icons">male</span>Male</label>
-                    </div>
-                    <div class="gender-checkbox-container">
-                      <input class="gender" name="gender-checkbox" filter-type="gender" id="gender-checkbox-female" value="gender-female" type="checkbox" checked="checked">
-                      <label for="gender-checkbox-female"><span class="gender-icon material-icons">female</span>Female</label>
-                    </div>
-                  </div>
-                </div>
-
-
-                <div class="nationality-checkbox">
-                    <label for="nationality-checkbox" class="formbuilder-checkbox-group-label">Nationality</label>
-                    <div class="checkbox-group">
-                        
-
-                      <div class="nationality-checkbox-container">  
-                        <input name="nationality-checkbox" filter-type="nationality" id="nationality-checkbox-british" value="british" type="checkbox" checked="checked">
-                          <label for="nationality-checkbox-british">
-                            <span class="flag-icon" style="background-image:url('assets/icons/flags/british.svg')"></span>
-                            British
-                          </label>
-                        </div>
-
-                        <div class="nationality-checkbox-container">
-                          <input name="nationality-checkbox" filter-type="nationality" id="nationality-checkbox-japanese" value="japanese" type="checkbox" checked="checked">
-                          <label for="nationality-checkbox-japanese">
-                            <span class="flag-icon" style="background-image:url('assets/icons/flags/japanese.svg')"></span>
-                            Japanese
-                          </label>
-                        </div>
-
-
-                        <div class="nationality-checkbox-container">  
-                          <input name="nationality-checkbox" filter-type="nationality" id="nationality-checkbox-other" value="other" type="checkbox" checked="checked">
-                            <label for="nationality-checkbox-other">
-                              <span class="flag-icon" style="background-image:url('assets/icons/flags/world.svg')"></span>
-                              Other
-                            </label>
-                          </div>
-  
-
-
-                    </div>
-                </div>
-
-                <div class="case-presence-checkbox">
-                  <label for="case-presence-checkbox" class="formbuilder-checkbox-group-label">Present in</label>
-                  <div class="checkbox-group">
-                      
-                    <div class="present-in-checkbox-container">
-                      <input name="present-in-checkbox" filter-type="present-in" id="present-in-0" value="0" type="checkbox" checked="checked">
-                      <label for="present-in-0">1-1</label>
-                    </div> 
-                    <div class="present-in-checkbox-container">
-                      <input name="present-in-checkbox" filter-type="present-in" id="present-in-1" value="1" type="checkbox" checked="checked">
-                      <label for="present-in-1">1-2</label>
-                    </div>
-                    <div class="present-in-checkbox-container">
-                      <input name="present-in-checkbox" filter-type="present-in" id="present-in-2" value="2" type="checkbox" checked="checked">
-                      <label for="present-in-2">1-3</label>
-                    </div>
-                    <div class="present-in-checkbox-container">
-                      <input name="present-in-checkbox" filter-type="present-in" id="present-in-3" value="3" type="checkbox" checked="checked">
-                      <label for="present-in-3">1-4</label>
-                    </div>
-                    <div class="present-in-checkbox-container">
-                      <input name="present-in-checkbox" filter-type="present-in" id="present-in-4" value="4" type="checkbox" checked="checked">
-                      <label for="present-in-4">1-5</label>
-                    </div>
-
-
-                    <div class="present-in-checkbox-container">
-                      <input name="present-in-checkbox" filter-type="present-in" id="present-in-5" value="5" type="checkbox" checked="checked">
-                      <label for="present-in-5">2-1</label>
-                    </div>
-                    <div class="present-in-checkbox-container">
-                      <input name="present-in-checkbox" filter-type="present-in" id="present-in-6" value="6" type="checkbox" checked="checked">
-                      <label for="present-in-6">2-2</label>
-                    </div>
-                    <div class="present-in-checkbox-container">
-                      <input name="present-in-checkbox" filter-type="present-in" id="present-in-7" value="7" type="checkbox" checked="checked">
-                      <label for="present-in-7">2-3</label>
-                    </div>
-                    <div class="present-in-checkbox-container">
-                      <input name="present-in-checkbox" filter-type="present-in" id="present-in-8" value="8" type="checkbox" checked="checked">
-                      <label for="present-in-8">2-4</label>
-                    </div>
-                    <div class="present-in-checkbox-container">
-                      <input name="present-in-checkbox" filter-type="present-in" id="present-in-9" value="9" type="checkbox" checked="checked">
-                      <label for="present-in-9">2-5</label>
-                    </div>
-
-
-                  </div>
-              </div>
-
-                <button class="reset-filters">
-                  <span class="material-icons">restart_alt</span>Reset filters
-                </button>
-            </div>
-
-            </div>
-
-            <div id="pose-heading" class="gradient-panel">
-              <span class="material-icons">sentiment_very_satisfied</span>
-              Select your pose
-            </div>
-            <div id="pose-selector-preview">
-            </div>
-          </div>
-
-        
-        </div>
-        <div id="description-card"></div>
-
-      </main>
-
-      <aside id="info-bar">
-        <div id="inspiration-bar">
-          <span class="heading-text">Need inspiration?</span>
-          <div class="button-bar">
-            <button class="quote-button" type="michaelScott">Add a random Michael Scott quote</button>
-            <button class="quote-button" type="deadpool">Add a random Deadpool quote</button>
-            <button class="quote-button" type="kanye">Add a random Kanye quote</button>
-            <button class="quote-button" type="dadJoke">Add a random dad joke</button>
-            <button class="quote-button" type="ronSwanson">Add a random Ron Swanson quote</button>
-            <button class="quote-button" type="advice">Add a random piece of advice</button>
-            <!-- <button class="quote-button" type="animeQuote">Add a random anime quote<span class="material-icons">autorenew</span>
-              </span></button> -->
-          </div>
-
-
-        </div>
-        <div id="weather-bar"></div>
-      </aside>
-
-      <div id="function-buttons">
-        <div id="share-buttons">
-          <div id="kofi-button">
-            <script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Support this site on Ko-fi', '#29abe0', 'C0C8EAVYX');kofiwidget2.draw();</script> 
-          </div>
-        </div>
-        
-        <button id="about-button">
-          <div state="unopened">
-            <span class="material-icons">help</span>
-            <span class="about-button-text">ABOUT</span>
-          </div>
-          <div state="opened">
-            <span class="material-icons">close</span>
-            <span class="about-button-text">CLOSE</span>
-          </div>
-        </button>
-      </div>
-
-      
-
-      <div id="social-feed">
-        <div id="social-feed-heading" class="gradient-panel">
-          <span>Tweet your creations using <b style="color: #0D1725; text-shadow: none;">#tgaaMemeMaker</b> and appear here! </span>
-          <a href="https://twitter.com/intent/tweet?button_hashtag=tgaaMemeMaker&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-show-count="false">Tweet #tgaaMemeMaker</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-          <a id="back-to-top" href="#top"><span class="material-symbols-sharp">
-            keyboard_double_arrow_up
-          </span>Back to top</a>
-        </div>
-        <div id="nsfw-warning" style="text-align: center; margin-bottom: 10px;">Warning - may contain spoilers, swears and NSFW content. If you see something you think should be taken down, please <a href="mailto:report@tgaa-meme-maker.com">report it</a>.</div>
-  
-        <div id="social-feed-spoiler-notice">Please accept spoilers above to see all of the wonderful creations below!</div>
-        <div id="social-feed-widget">
-          <div data-name="onstipe" class="wbctA" style="width:100%;height:100%;overflow:hidden;"><script defer src="https://onstipe.com/web/js/webembed.js" type="text/javascript"></script><div class="wbctB" data-val="wqf64"></div></div>
-        </div>
-        <!-- <div class="taggbox" style="width:100%;height:100%" data-widget-id="122803" data-tags="false" ></div><script src="https://widget.taggbox.com/embed-lite.min.js" type="text/javascript"></script>    </div> -->
-        <!-- <div class="taggbox" style="width:100%;height:100%" data-widget-id="125487" data-tags="false" ></div><script src="https://widget.taggbox.com/embed-lite.min.js" type="text/javascript"></script>       -->
-      <aside id="about">
-
-        <div>
-
-          <h2>About</h2>
-            <details>
-              <summary>About me</summary>
-                <div id="about-me">
-                  <img src="assets/misc/me.jpg" width="150">
-                  <div>
-                    <p>I am Ceri (pronounced "Kerry"), a software engineer in Devon, UK, although many people in the TGAA community will know me as CherryLestrade on Youtube, Twitter and Reddit. I am OBSESSED with The Great Ace Attorney Chronicles.</p>
-                    <p>At the time I started this project I was a web designer and front end developer. I got to do little fun bits like this here and there but never anything on this scale. I started this project both as a way to build my skills and portfolio in the hope that I would land myself a job doing this kind of thing, and fuel my TGAA addiction while I was at it. I am pleased to report that:</p>
-                    <ul>
-                      <li>It worked! I have a new job doing this kind of thing. I even included this project on my CV.</li>
-                      <li>The addiction is still going strong.</li>
-                    </ul>
-                    <p>The takeaway here is that TGAA made my life better, and it can make your life better too!</p>
-                    <p>I would sincerely love to see any memes you create with this. Do tag me on Reddit or Twitter if you share them! Use #tgaaMemeMaker</p>
-                </div>
-            </details>
-
-
-            <details>
-              <summary>Technical details</summary>
-              <p>This project was built using HTML, CSS and old-school Javascript, which was all I knew at the time I started this project. Since then I've grown in knowledge and skills, as well has having become familiar with React, Handlebars, Typescript and more. The urge to do a massive rewrite is strong. However, I've decided to leave it as it is to show that in this age of endless libraries and frameworks, you can still achieve it all in vanilla JS. </p>
-              <p>This project is hosted on Github Pages, which I'd not used before but highly recommend. </p>
-              <ul>
-                <li>Weather information from <a href="https://openweathermap.org/" target="_blank">openweathermap.org</a></li>
-                <li>Time information from <a href="https://worldtimeapi.org/" target="_blank">worldtimeapi.org</a></li>
-                <li>Kanye West quotes from <a href="https://kanye.rest/" target="_blank">kanye.rest</a></li>
-                <li>Dad jokes from <a href="https://icanhazdadjoke.com/" target="_blank">icanhazdadjoke.com</a></li>
-                <li>Ron Swanson quotes from <a href="https://github.com/jamesseanwright/ron-swanson-quotes" target="_blank">jamesseanwright on Github</a></li>
-                <li>Random advice from <a href="https://adviceslip.com/" target="_blank">adviceslip.com</a></li>
-                <li>Twitter feed from<a href="https://onstipe.com/" target="_blank">onstipe.com</a></li>                
-              </ul>
-              
-            </details>
-
-            <details>
-              <summary>More about 'The Great Ace Attorney Chronicles'</summary>
-              <p>'The Great Ace Attorney Chronicles' is a two part visual novel game by Capcom, who own the rights to all character, location and interface artwork on this page. It is honestly the best game I have ever played and I am obsessed with it despite the fact I finished it over a year ago.</p>
-              <ul>
-                <li>The Great Ace Attorney on <a href="https://www.ace-attorney.com/great1-2/" target="_blank">Capcom's website</a></li>
-                <li>The Great Ace Attorney on <a href="https://store.steampowered.com/app/1158850/The_Great_Ace_Attorney_Chronicles/" target="_blank">Steam</a></li>
-              </ul>
-            </details>
-
-
-            <h2>Useful links</h3>
-            
-            <details>
-              <summary>Fun stuff</summary>
-              <li>Find me on my dedicated TGAA Youtube channel - <a href="https://www.youtube.com/channel/UCvipAZa7cTAKBmPaNmdbJZw/" target="_blank">CherryLestrade</a></li>
-              <li>Find me on my dedicated TGAA Twitter - <a href="https://twitter.com/c_lestrade" target="_blank">@c_lestrade</a></li>
-              <li>Find me on Reddit - <a href="https://www.reddit.com/user/CherryLestrade" target="_blank">u/cherrylestrade</a></li>
-            </details>
-            
-            <details>
-              <summary>Professional stuff</summary>
-              <li>Find me on <a href="https://github.com/CeriW" target="_blank">Github</a></li>
-              <li>Find me on <a href="https://codepen.io/Ceri" target="_blank">Codepen</a></li>
-            </details>
-
-          
-
-
-          <h2>Contribute</h2>
-            <details>
-              <summary>Content</summary>
-              <p>All of the character and location graphics are ones I have gathered along my long journey with my Youtube channel, and I am aware that there is a lot that's missing. I wish I had the talent to extract them all from the game, but alas I'm not. If YOU do, I'd love to hear from you!</p>
-              <p>Even help with just adding a little bit would be greatly appreciated.</p>
-            </details>
-            
-            <details>
-              <summary>Keep this site running</summary>
-              <p>As well as this website, I also regularly produce content on my Youtube and Twitter. Believe it or not, I spend actual money on the tools I use to create these, as well as the running costs to keep this online.</p>
-              <p>If you would like to help keep this project online, you can make a small donation on my <a href="https://ko-fi.com/cherrylestrade" target="_blank">Ko-fi page</a></p>
-            </details>
-            <br><script type='text/javascript' src='https://storage.ko-fi.com/cdn/widget/Widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Support this project on Ko-fi', '#29abe0', 'C0C8EAVYX');kofiwidget2.draw();</script> 
-            
-          <h2>Get in touch</h2>
-          <details>
-            <summary>Contact details</summary>
-              <li>Email me at <a href="mailto:hello@tgaa-meme-maker.com">hello@tgaa-meme-maker.com</a></li>
-              <li>Find me on Twitter - <a href="https://twitter.com/c_lestrade" target="_blank">@c_lestrade</a></li>
-              <li>Find me on Reddit - <a href="https://www.reddit.com/user/CherryLestrade" target="_blank">u/cherrylestrade</a></li>
-          </details>
-
-          <h2>Wonderful people</h2>
-          <details>
-            <summary>who deserve lots of love</summary>
-              <li>My sister for nitpicking this thing to within an inch of its life every time I asked, without whom this would have been released a lot earlier </li>
-              <li>Rhythm who has been a massive help in the editing involved to get new poses added to the site. You can show her some love on her <a href="https://twitter.com/LawRhy" target="_blank">Twitter</a> and <a href="https://www.youtube.com/channel/UChEp746qqVC74vNm5oqMcpw">Youtube</a></li>
-              <li>Becca for showing me how to obtain new sprites, which will be a big help to me, this meme maker and my Youtube channel. Find her at <a href="https://twitter.com/owlistic_" target="_blank">@owlistic_ on Twitter</a></li>
-              <li>All of the wonderful people who volunteered to beta test new features</li>
-          </details>
-          
-
-
-        </div>
-
-        <div id="change-log">
-          <h2>Interesting changes log</h2>
-          <ul>
-            <li>24th April 2023 - added ability to upload your own background</li>
-            <li>30th Mar 2023 - text surrounded by asterisks *like this* will be orange in the downloaded file</li>
-            <li>24th Mar 2023 - Added buttons for random Michael Scott and Deadpool quotes</li>
-            <li>23rd Mar 2023 - Added British and Japanese witness stands to the list of locations</li>
-            <li>22nd Mar 2023 - Added a bunch of new poses for Rei (thank you <a href="https://twitter.com/LawRhy" target="_blank">Rhythm</a> for your help with this!). Also tweaked the code that tags new characters, poses and locations so the most recent ones will appear at the front.</li>
-            <li>10th Mar 2023 - Added ability to switch between English, Japanese and other versions of character names. Also added Ashley Graydon, and new poses for Susato, McGuilded and Gina. New and updated characters, locations and poses will now automatically jump to the top of the list (although will be behind any that have been set to match a current theme)</li>
-            <li>5th Mar 2023 - HOMUMIKO WEEK IS HERE! Added Yujin's Japan outfit, Herlock's Japanese Jumble outfit, new poses for Yujin's London outfit, the Great Waterloo Hotel foyer, and a nice (temporary) Homumiko theme.</li>
-            <li>2nd Mar 2023 - Added new Kazuma poses. New poses and locations will have a "new" tag on them 14 days after they've been added.</li>
-            <li>24th Feb 2023 - Added ability to place people inside the prison cell</li>
-            <li>20th Feb 2023 - Added Rei Membani as an available character</li>
-            <li>16th Feb 2023 - Added a twitter feed which shows all tweets with #tgaaMemeMaker</li>
-            <li>14th Feb 2023 - Added a new Gregson pose</li>
-            <li>12th Feb 2023 - Added ability to make blue thought text. Also added new poses for Susato and Ryunosuke</li>
-            <li>11th Feb 2023 - Added new poses for Iris and Sholmes</li>
-            <li>10th Feb 2023 - tgaa-meme-maker.com went live!</li>
-          </ul>
-
-          I also broadcast this information on my Twitter using #tgaaMemeMakerUpdate
-          <div id="version-info"></div>
-        </div>
-
-        </div>
-
-      </aside>
-
-      <input id="custom-background-input" type="file" accept="image/jpeg, image/png, image/jpg">
-      
-      <script type="module" src="dist/characters.js"></script>
-      <script type="module" src="dist/locations.js"></script>
-      <script type="module" src="dist/themes.js"></script>
-      <script type="module" src="dist/meme-generator.js"></script>
-
-
-
+      <h1>The TGAA Meme Maker is no more</h1>
+      <p>Sadly, Capcom's legal team have been in touch. Believe it or not, memes had got back to them, and they weren't entirely cool with what they saw. They were nice enough, but long story short they asked me to remove all TGAA stuff from this website.</p>
+      <p>I originally started this project as a way to improve my coding skills and career. I have achieved that and so much more. I am still committed to learning and hope to do more fun, non-TGAA coding projects in the future.</p>
+      <p>I'd like to thank everyone who made and shared memes with the meme maker - it genuinely made my day every time I saw them. I never even intended originally to put this on the internet, and I am blown away by how big it became.</p>
+      <p>If you'd like to keep in touch, follow me on <a href="https://twitter.com/c_lestrade">Twitter</a></p>
+      <p>Love,<br>CherryLestrade</p>
+      <img src="/assets/misc/me.jpg">
+    </body>
+</html>

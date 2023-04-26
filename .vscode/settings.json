@@ -1,4 +1,4 @@
 {
-  "window.title": "${dirty}${activeEditorShort}${separator}${rootName}${separator}${profileName}${separator}${appName} ${separator} [Branch: add-wiki-links]",
+  "window.title": "${dirty}${activeEditorShort}${separator}${rootName}${separator}${profileName}${separator}${appName} ${separator} [Branch: takedown]",
   "compile-hero.disable-compile-files-on-did-save-code": true
 }
